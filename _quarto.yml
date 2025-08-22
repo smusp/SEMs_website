@@ -6,8 +6,8 @@ execute:
   freeze: auto 
 
 website: 
-  site-url: "" 
-  repo-url: https://github.com/smusp 
+  site-url: "https://smusp.github.io/SEMs_website/"
+  repo-url: https://github.com/smusp/SEMs_website 
   bread-crumbs: true
 
   page-footer:
@@ -20,8 +20,8 @@ website:
     align: right
     tools: 
       - icon: github
-        href: https://github.com/smusp
-        text: "Bits and Pieces"
+        href: https://github.com/smusp/SEMs_website
+        text: "SEMs_website"
        
     style: "docked"
     search: false
