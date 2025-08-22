@@ -1,0 +1,7 @@
+*.svg linguist-documentation
+*.js linguist-documentation
+*.html linguist-documentation
+*.md linguist-documentation
+*.qmd linguist-documentation
+*.css linguist-documentation
+*.scss linguist-documentation

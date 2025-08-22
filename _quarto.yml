@@ -1,0 +1,69 @@
+project: 
+  type: website
+  output-dir: docs
+
+execute:
+  freeze: auto 
+
+website: 
+  site-url: "" 
+  repo-url: https://github.com/smusp 
+  bread-crumbs: true
+
+  page-footer:
+    left:
+      <img src="/images/Scales-of-Justice.svg" width=20> <span style="margin-left:5px">Licensed under [Creative-Commons CC0](https://creativecommons.org/publicdomain/zero/1.0/)</span>
+
+  sidebar:
+    foreground: "#CB6015"
+    pinned: true
+    align: right
+    tools: 
+      - icon: github
+        href: https://github.com/smusp
+        text: "Bits and Pieces"
+       
+    style: "docked"
+    search: false
+    collapse-level: 1
+    contents:
+      - href: index.qmd
+        text: Welcome
+
+      - section: SEMs_with_lavaan/index.qmd
+        text: "SEMs with lavaan"
+        contents: 
+          - href: "SEMs_with_lavaan/Jose_2013/Jose_2013.qmd"
+            text: "Mediation I"
+#          - href: "SEMs_with_lavaan/Kurbanoglu_2021/Kurbanoglu_2021.qmd"
+#            text: "Mediation II"
+#          - SEMs_with_lavaan/Little_2006/Little_2006.qmd
+#          - section: SEMs_with_lavaan/Green_2023/index.qmd
+#            text: "Means"
+#            contents:
+#              - SEMs_with_lavaan/Green_2023/one_way_ANOVA.qmd
+#              - SEMs_with_lavaan/Green_2023/one_way_ANCOVA.qmd
+#              - SEMs_with_lavaan/Green_2023/two_way_ANOVA.qmd
+#              - SEMs_with_lavaan/Green_2023/one_way_MANOVA.qmd
+#              - href: "SEMs_with_lavaan/Green_2023/one_way_LATENT.qmd"
+#                text: "One-Way LATENT"
+
+#      - href: SEMs_with_OpenMx/index.qmd
+#        text: "SEMs with OpenMx"
+
+#      - href: Drawing_SEMs/index.qmd
+#        text: "Drawing SEMs"
+        
+#      - href: Data_from_PDFs/index.qmd
+#        text: "Data from PDFs"
+        
+        
+format:
+  html:
+    theme: styles.scss
+    code-copy: true
+    code-overflow: wrap
+    toc: false
+
+
+
