@@ -1,3 +1,6 @@
+---
+title: "SEMs with lavaan"
+---
 
 :::: {layout="[60, 40]" layout-valign="center"}
 
