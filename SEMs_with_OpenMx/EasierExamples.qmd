@@ -1,0 +1,83 @@
+---
+title: "Methods of scaling applied to easier examples"
+format: 
+  html:
+    css: styles.css
+    code-fold: true
+    embed-resources: true
+
+execute:
+  eval: false
+  echo: true
+
+highlight-style: solarized
+---
+
+<h4>A one-factor model.</h4>
+
+<details>
+  <summary>Model for Reference-Group Method</summary>
+  <img src="../Drawing_SEMs/Little_2006/OneFactor1.svg">  
+</details> 
+
+<details>
+  <summary>Model for Marker-Variable Method</summary>
+  <img src="../Drawing_SEMs/Little_2006/OneFactor2.svg">  
+</details> 
+
+<details>
+  <summary>Model for Effects-Scaling Method</summary>
+  <img src="../Drawing_SEMs/Little_2006/OneFactor3.svg">  
+</details> 
+
+```{r}
+#| code-summary: "OneFactor.r"
+#| file: "Little_2006/OneFactor.r"
+```  
+
+
+<h4>A two-factor model</h4>
+
+<details>
+  <summary>Model for Reference-Group Method</summary>
+  <img src="../Drawing_SEMs/Little_2006/TwoFactor1.svg">  
+</details> 
+
+<details>
+  <summary>Model for Marker-Variable Method</summary>
+  <img src="../Drawing_SEMs/Little_2006/TwoFactor2.svg">  
+</details> 
+
+<details>
+  <summary>Model for Effects-Scaling Method</summary>
+  <img src="../Drawing_SEMs//Little_2006/TwoFactor3.svg">  
+</details> 
+
+```{r}
+#| code-summary: "TwoFactor.r"
+#| file: "Little_2006/TwoFactor.r"
+```  
+
+
+<h4>A one-factor two-group model</h4>
+
+<details>
+  <summary>Model for Reference-Group Method</summary>
+    <img src="../Drawing_SEMs/Little_2006/OneFactorTwoGroups1.svg">  
+</details> 
+
+<details>
+  <summary>Model for Marker-Variable Method</summary>
+    <img src="../Drawing_SEMs/Little_2006/OneFactorTwoGroups2.svg">  
+</details> 
+
+<details>
+  <summary>Model for Effects-Scaling Method</summary>
+    <img src="../Drawing_SEMs/Little_2006/OneFactorTwoGroups3.svg">  
+</details> 
+
+```{r}
+#| code-summary: "OneFactorTwoGroup.r"
+#| file: "Little_2006/OneFactorTwoGroup.r"
+```  
+

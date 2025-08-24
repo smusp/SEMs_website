@@ -1,0 +1,15 @@
+
+:::: {layout="[60, 40]" layout-valign="center"}
+
+::: {#leftcolumn}
+<h2 style = "margin: 0px;"> Getting data out of PDF files into R</h2>
+:::
+
+::: {#rightcolumn}
+  <img style = "margin: 0px; padding: 0px;" src="logo/logo.svg">
+:::
+
+::::
+
+This post presents **R** scripts to get data out of PDF files into **R**.
+

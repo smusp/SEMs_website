@@ -47,16 +47,15 @@ website:
               - href: "SEMs_with_lavaan/Green_2023/one_way_LATENT.qmd"
                 text: "One-Way LATENT"
 
-#      - href: SEMs_with_OpenMx/index.qmd
-#        text: "SEMs with OpenMx"
+      - href: SEMs_with_OpenMx/index.qmd
+        text: "SEMs with OpenMx"
 
-#      - href: Drawing_SEMs/index.qmd
-#        text: "Drawing SEMs"
+      - href: Drawing_SEMs/index.qmd
+        text: "Drawing SEMs"
         
-#      - href: Data_from_PDFs/index.qmd
-#        text: "Data from PDFs"
-        
-        
+      - href: Data_from_PDFs/index.qmd
+        text: "Data from PDFs"
+               
 format:
   html:
     theme: styles.scss

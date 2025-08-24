@@ -1,0 +1,154 @@
+---
+highlight-style: solarized
+embed-resources: true
+css: styles.css
+code-fold: true
+
+execute:
+  eval: false
+---
+
+:::: {layout="[60, 40]" layout-valign="center"}
+
+::: {#leftcolumn}
+<h2 style = "margin: 0px;"> Reproducing published Structural Equation Models with OpenMx </h2>
+:::
+
+::: {#rightcolumn}
+  <img style = "margin: 0px; padding: 0px;" src="logo/logo.svg">
+:::
+
+::::
+
+This post presents **R** scripts to reproduce published Structural Equation Modeling analyses using **OpenMx**. 
+
+Click on the **R** file to see the R script.
+Click on the model to see a diagram of the model.
+
+#### The publications
+
+- Jose, P. (2013). *Doing statistical mediation and moderation*. New York, NY: Guilford Press. <br/> A basic three-variable mediation analysis (See Chapter 3).
+
+<details class="image-fold">
+  <summary>Mediation model</summary>
+  <img src="../Drawing_SEMs/Jose_2013/Jose_2013.svg">  
+</details> 
+
+```{r}
+#| code-summary: "Jose_2013.r"
+#| file: "Jose_2013/Jose_2013.r"
+```  
+
+<br/>
+
+- Kurbanoglu, N. & Takunyaci, M. (2021). A structural equation modeling on relationship between self-efficacy, physics laboratory anxiety and attitudes. *Journal of Family, Counseling and Education*, 6(1), 47-56. <br/> A basic three-variable mediation analysis using summary data.
+
+<details class="image-fold">
+  <summary>Mediation model</summary>
+  <img src="../Drawing_SEMs/Kurbanoglu_2021/Kurbanoglu_2021.svg">  
+</details> 
+
+```{r}
+#| code-summary: "Kurbanoglu_2021.r"
+#| file: "Kurbanoglu_2021/Kurbanoglu_2021.r"
+```  
+
+<br/>
+ 
+- Little, T., Slegers, D., & Card, N. (2006). A non-arbitrary method of identifying and scaling latent variables in SEM and MACS models. *Structural Equation Modeling*, *13*(1), 59-72. <br/> Three methods of scaling (reference group, marker variable, and effects scaling) in a two-factor, two-group model. Some easier examples (one-factor model, two-factor model, one-factor two-group model) are shown [here](EasierExamples.qmd).
+
+<details class="image-fold">
+  <summary>Model for Reference-Group Method</summary>
+  <img src="../Drawing_SEMs/Little_2006/Scaling1.svg">  
+</details> 
+
+<details class="image-fold">
+  <summary>Model for Marker-Variable Method</summary>
+  <img src="../Drawing_SEMs/Little_2006/Scaling2.svg">  
+</details> 
+
+<details class="image-fold">
+  <summary>Model for Effects-Scaling Method</summary>
+  <img src="../Drawing_SEMs/Little_2006/scaling3.svg">  
+</details> 
+
+```{r}
+#| code-summary: "Little_Scaling.r"
+#| file: "Little_2006/Little_Scaling.r"
+```  
+
+<br/> 
+
+- Thompson, M., Lie, Y. & Green, S. (2023). Flexible structural equation modeling approaches for analyzing means. In R. Hoyle (Ed.), *Handbook of structural equation modeling* (2nd ed., pp. 385-408). New York, NY: Guilford Press. <br/>
+SEMs approaches for ANOVA and MANOVA type models.
+
+<h5>The Models</h5>
+
+<details>
+  <summary>one-way ANOVA model</summary>
+  <img src="../Drawing_SEMs/Green_2023/one_way_ANOVA.svg">  
+</details> 
+
+<details>
+  <summary>one-way ANCOVA model</summary>
+  <img src="../Drawing_SEMs/Green_2023/one_way_ANCOVA.svg">  
+</details> 
+
+<details>
+  <summary>two-way ANOVA model</summary>
+  <img src="../Drawing_SEMs/Green_2023/two_way_ANOVA.svg">  
+</details> 
+
+<details>
+  <summary>one-way MANOVA model</summary>
+  <img src="../Drawing_SEMs/Green_2023/one_way_MANOVA.svg">  
+</details>
+ 
+<details>
+  <summary>one-way LATENT model</summary>
+  <img src="../Drawing_SEMs/Green_2023/one_way_LATENT.svg">  
+</details> 
+
+<h5>The Data</h5>
+
+```{r}
+#| code-summary: "satisfactionI.r"
+#| file: "Green_2023/satisfactionI.r"
+```
+
+```{r}
+#| code-summary: "ANOVA_data.r"
+#| file: "Green_2023/ANOVA_data.r"
+```
+
+```{r}
+#| code-summary: "satisfactionII.r"
+#| file: "Green_2023/satisfactionII.r"
+```
+
+<h5>R Scripts</h5>
+
+```{r}
+#| code-summary: "one_way_ANOVA.r"
+#| file: "Green_2023/one_way_ANOVA.r"
+```
+
+```{r}
+#| code-summary: "one_way_ANCOVA.r"
+#| file: "Green_2023/one_way_ANCOVA.r"
+```
+
+```{r}
+#| code-summary: "two_way_ANOVA.r"
+#| file: "Green_2023/two_way_ANOVA.r"
+```
+
+```{r}
+#| code-summary: "one_way_MANOVA.r"
+#| file: "Green_2023/one_way_MANOVA.r"
+```
+
+```{r}
+#| code-summary: "one_way_LATENT.r"
+#| file: "Green_2023/one_way_LATENT.r"
+```
