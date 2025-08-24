@@ -1,6 +1,5 @@
 project: 
   type: website
-  output-dir: docs
 
 execute:
   freeze: auto 
@@ -35,8 +34,8 @@ website:
         contents: 
           - href: "SEMs_with_lavaan/Jose_2013/Jose_2013.qmd"
             text: "Mediation I"
-          - href: "SEMs_with_lavaan/Kurbanoglu_2021/Kurbanoglu_2021.qmd"
-            text: "Mediation II"
+#          - href: "SEMs_with_lavaan/Kurbanoglu_2021/Kurbanoglu_2021.qmd"
+#            text: "Mediation II"
 #          - SEMs_with_lavaan/Little_2006/Little_2006.qmd
 #          - section: SEMs_with_lavaan/Green_2023/index.qmd
 #            text: "Means"
