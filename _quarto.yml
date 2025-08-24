@@ -37,15 +37,15 @@ website:
           - href: "SEMs_with_lavaan/Kurbanoglu_2021/Kurbanoglu_2021.qmd"
             text: "Mediation II"
           - SEMs_with_lavaan/Little_2006/Little_2006.qmd
-#          - section: SEMs_with_lavaan/Green_2023/index.qmd
-#            text: "Means"
-#            contents:
-#              - SEMs_with_lavaan/Green_2023/one_way_ANOVA.qmd
-#              - SEMs_with_lavaan/Green_2023/one_way_ANCOVA.qmd
-#              - SEMs_with_lavaan/Green_2023/two_way_ANOVA.qmd
-#              - SEMs_with_lavaan/Green_2023/one_way_MANOVA.qmd
-#              - href: "SEMs_with_lavaan/Green_2023/one_way_LATENT.qmd"
-#                text: "One-Way LATENT"
+          - section: SEMs_with_lavaan/Green_2023/index.qmd
+            text: "Means"
+            contents:
+              - SEMs_with_lavaan/Green_2023/one_way_ANOVA.qmd
+              - SEMs_with_lavaan/Green_2023/one_way_ANCOVA.qmd
+              - SEMs_with_lavaan/Green_2023/two_way_ANOVA.qmd
+              - SEMs_with_lavaan/Green_2023/one_way_MANOVA.qmd
+              - href: "SEMs_with_lavaan/Green_2023/one_way_LATENT.qmd"
+                text: "One-Way LATENT"
 
 #      - href: SEMs_with_OpenMx/index.qmd
 #        text: "SEMs with OpenMx"
