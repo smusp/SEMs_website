@@ -1,0 +1,15 @@
+
+:::: {layout="[60, 40]" layout-valign="center"}
+
+::: {#leftcolumn}
+<h2 style = "margin: 0px;"> Drawing Structural Equation Models with Ti*k*Z </h2>
+:::
+
+::: {#rightcolumn}
+  <img style = "margin: 0px; padding: 0px;" src="logo/logo.svg">
+:::
+
+::::
+
+This post presents **Ti*k*Z** scripts to draw diagrams of Structural Equation Models.
+
