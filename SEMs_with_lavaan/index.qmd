@@ -1,5 +1,6 @@
 ---
-title: SEMs with lavaan
+title: "SEMs with lavaan"
+subtitle: ""
 ---
 
 :::: {layout="[60, 40]" layout-valign="center"}

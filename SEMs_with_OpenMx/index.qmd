@@ -1,5 +1,7 @@
 ---
-title: "SEMs with OpenMx"  
+title: "SEMs with OpenMx" 
+subtitle: ""
+
 highlight-style: solarized
 embed-resources: true
 css: styles.css
