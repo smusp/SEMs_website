@@ -1,4 +1,6 @@
 ---
+pagetitle: "SEMs with OpenMx"
+
 highlight-style: solarized
 embed-resources: true
 css: styles.css
