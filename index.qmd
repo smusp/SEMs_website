@@ -1,5 +1,5 @@
 ---
-title: "Mostly Useless Bits and Pieces"
+title: "Bits and Pieces"
 subtitle: "R and Tikz"
 ---
 
