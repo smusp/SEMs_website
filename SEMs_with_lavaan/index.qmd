@@ -1,3 +1,9 @@
+---
+format:
+  html:
+    include-in-header:
+      - file: _head.html
+---
 
 :::: {layout="[60, 40]" layout-valign="center"}
 
