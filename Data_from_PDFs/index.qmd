@@ -1,4 +1,3 @@
-
 ---
 pagetitle: "Data from PDFs"
 ---
