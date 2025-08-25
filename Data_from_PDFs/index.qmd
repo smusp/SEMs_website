@@ -1,3 +1,6 @@
+---
+pagetitle: "Data from PDFs"
+---
 
 :::: {layout="[60, 40]" layout-valign="center"}
 
