@@ -4,7 +4,7 @@
    height="165.918pt"
    viewBox="0 0 146.626 165.918"
    version="1.1"
-   id="svg3762"
+   id="svg3764"
    sodipodi:docname="logo.pdf"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -12,7 +12,7 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
-     id="namedview3762"
+     id="namedview3764"
      pagecolor="#ffffff"
      bordercolor="#000000"
      borderopacity="0.25"
@@ -19609,25 +19609,31 @@
      d="M 5.100905 -0.00063625 L 0.643874 1.679051 L 2.104811 -0.00063625 L 0.643874 -1.680324 Z M 5.100905 -0.00063625 "
      transform="matrix(1, 0, 0, -1, 106.13347, 88.62827)"
      id="path3744" />
-  <g
-     fill="rgb(0%, 0%, 0%)"
+  <path
+     fill-rule="nonzero"
+     fill="rgb(79.606628%, 37.644958%, 8.233643%)"
      fill-opacity="1"
-     id="g3744">
-    <use
-       xlink:href="#glyph-1-0"
-       x="69.314"
-       y="86.436"
-       id="use3744" />
-  </g>
+     d="M 67.320312 101.578125 L 79.304688 101.578125 L 79.304688 88.828125 L 67.320312 88.828125 Z M 67.320312 101.578125 "
+     id="path3745" />
   <g
      fill="rgb(0%, 0%, 0%)"
      fill-opacity="1"
      id="g3745">
     <use
+       xlink:href="#glyph-1-0"
+       x="69.314"
+       y="99.586"
+       id="use3745" />
+  </g>
+  <g
+     fill="rgb(0%, 0%, 0%)"
+     fill-opacity="1"
+     id="g3746">
+    <use
        xlink:href="#glyph-2-0"
        x="74.517"
-       y="82.098"
-       id="use3745" />
+       y="95.248"
+       id="use3746" />
   </g>
   <path
      fill="none"
@@ -19639,7 +19645,7 @@
      stroke-miterlimit="10"
      d="M -44.121594 1.61525 L -34.699719 10.755875 "
      transform="matrix(1, 0, 0, -1, 73.313, 82.959)"
-     id="path3745" />
+     id="path3746" />
   <path
      fill="none"
      stroke-width="0.3985"
@@ -19650,7 +19656,7 @@
      stroke-miterlimit="10"
      d="M -0.184094 39.486344 L 40.577625 4.642594 "
      transform="matrix(1, 0, 0, -1, 73.313, 82.959)"
-     id="path3746" />
+     id="path3747" />
   <path
      fill-rule="nonzero"
      fill="rgb(0%, 0%, 0%)"
@@ -19663,16 +19669,22 @@
      stroke-miterlimit="10"
      d="M 5.104182 -0.000376506 L 0.64177 1.678959 L 2.106391 0.0015891 L 0.644821 -1.679421 Z M 5.104182 -0.000376506 "
      transform="matrix(0.7601, 0.64972, 0.64972, -0.7601, 112.36665, 77.01155)"
-     id="path3747" />
+     id="path3748" />
+  <path
+     fill-rule="nonzero"
+     fill="rgb(79.606628%, 37.644958%, 8.233643%)"
+     fill-opacity="1"
+     d="M 95.480469 62.207031 L 105.472656 62.207031 L 105.472656 49.921875 L 95.480469 49.921875 Z M 95.480469 62.207031 "
+     id="path3749" />
   <g
      fill="rgb(0%, 0%, 0%)"
      fill-opacity="1"
-     id="g3747">
+     id="g3749">
     <use
        xlink:href="#glyph-1-1"
        x="97.473"
        y="60.216"
-       id="use3747" />
+       id="use3749" />
   </g>
   <path
      fill="none"
@@ -19683,30 +19695,6 @@
      stroke-opacity="1"
      stroke-miterlimit="10"
      d="M 61.144031 10.517594 L 56.960437 5.259781 "
-     transform="matrix(1, 0, 0, -1, 73.313, 82.959)"
-     id="path3748" />
-  <path
-     fill-rule="nonzero"
-     fill="rgb(0%, 0%, 0%)"
-     fill-opacity="1"
-     stroke-width="0.3985"
-     stroke-linecap="butt"
-     stroke-linejoin="miter"
-     stroke="rgb(0%, 0%, 0%)"
-     stroke-opacity="1"
-     stroke-miterlimit="10"
-     d="M 5.101161 -0.00216175 L 0.643435 1.676698 L 2.107455 0.00106964 L 0.643641 -1.6788 Z M 5.101161 -0.00216175 "
-     transform="matrix(-0.62286, 0.78226, 0.78226, 0.62286, 131.52275, 76.1281)"
-     id="path3749" />
-  <path
-     fill="none"
-     stroke-width="0.3985"
-     stroke-linecap="butt"
-     stroke-linejoin="miter"
-     stroke="rgb(0%, 0%, 0%)"
-     stroke-opacity="1"
-     stroke-miterlimit="10"
-     d="M 11.538562 62.959 L 7.354969 57.701188 "
      transform="matrix(1, 0, 0, -1, 73.313, 82.959)"
      id="path3750" />
   <path
@@ -19719,81 +19707,105 @@
      stroke="rgb(0%, 0%, 0%)"
      stroke-opacity="1"
      stroke-miterlimit="10"
+     d="M 5.101161 -0.00216175 L 0.643435 1.676698 L 2.107455 0.00106964 L 0.643641 -1.6788 Z M 5.101161 -0.00216175 "
+     transform="matrix(-0.62286, 0.78226, 0.78226, 0.62286, 131.52275, 76.1281)"
+     id="path3751" />
+  <path
+     fill="none"
+     stroke-width="0.3985"
+     stroke-linecap="butt"
+     stroke-linejoin="miter"
+     stroke="rgb(0%, 0%, 0%)"
+     stroke-opacity="1"
+     stroke-miterlimit="10"
+     d="M 11.538562 62.959 L 7.354969 57.701188 "
+     transform="matrix(1, 0, 0, -1, 73.313, 82.959)"
+     id="path3752" />
+  <path
+     fill-rule="nonzero"
+     fill="rgb(0%, 0%, 0%)"
+     fill-opacity="1"
+     stroke-width="0.3985"
+     stroke-linecap="butt"
+     stroke-linejoin="miter"
+     stroke="rgb(0%, 0%, 0%)"
+     stroke-opacity="1"
+     stroke-miterlimit="10"
      d="M 5.103264 0.00132977 L 0.642482 1.677756 L 2.106502 0.00212783 L 0.642688 -1.677742 Z M 5.103264 0.00132977 "
      transform="matrix(-0.62286, 0.78226, 0.78226, 0.62286, 81.91586, 23.68678)"
-     id="path3751" />
+     id="path3753" />
   <g
      fill="rgb(100%, 100%, 100%)"
      fill-opacity="1"
-     id="g3753">
+     id="g3755">
     <use
        xlink:href="#glyph-3-0"
        x="32.718"
        y="117.129"
-       id="use3751" />
+       id="use3753" />
     <use
        xlink:href="#glyph-3-1"
        x="42.215211"
        y="117.129"
-       id="use3752" />
+       id="use3754" />
     <use
        xlink:href="#glyph-3-2"
        x="46.664936"
        y="117.129"
-       id="use3753" />
+       id="use3755" />
   </g>
   <g
      fill="rgb(100%, 100%, 100%)"
      fill-opacity="1"
-     id="g3757">
+     id="g3759">
     <use
        xlink:href="#glyph-3-3"
        x="52.58276"
        y="117.129"
-       id="use3754" />
+       id="use3756" />
     <use
        xlink:href="#glyph-3-4"
        x="61.482211"
        y="117.129"
-       id="use3755" />
+       id="use3757" />
     <use
        xlink:href="#glyph-3-5"
        x="64.53796"
        y="117.129"
-       id="use3756" />
+       id="use3758" />
     <use
        xlink:href="#glyph-3-6"
        x="71.246023"
        y="117.129"
-       id="use3757" />
+       id="use3759" />
   </g>
   <g
      fill="rgb(100%, 100%, 100%)"
      fill-opacity="1"
-     id="g3761">
+     id="g3763">
     <use
        xlink:href="#glyph-3-7"
        x="82.196986"
        y="117.129"
-       id="use3758" />
+       id="use3760" />
     <use
        xlink:href="#glyph-3-8"
        x="89.502809"
        y="117.129"
-       id="use3759" />
+       id="use3761" />
     <use
        xlink:href="#glyph-3-9"
        x="97.174461"
        y="117.129"
-       id="use3760" />
+       id="use3762" />
     <use
        xlink:href="#glyph-3-10"
        x="108.864255"
        y="117.129"
-       id="use3761" />
+       id="use3763" />
   </g>
   <use
      xlink:href="#source-5"
      transform="matrix(1, 0, 0, 1, 36, 41)"
-     id="use3762" />
+     id="use3764" />
 </svg>
