@@ -5,12 +5,13 @@
 \begin{document}
 \begin{tikzpicture}
 
-%% pos manifests
+%% Manifest
+%  pos
 \node [manifest] (pos1) {$pos_1$};
 \node [manifest] (pos2) [right = 1.6cm of pos1] {$pos_2$};
 \node [manifest] (pos3) [right = 1.5cm of pos2] {$pos_3$};
 
-%% neg manifests
+%  neg
 \node [manifest] (neg1) [right = 3cm of pos3] {$neg_1$};
 \node [manifest] (neg2) [right = 1.5cm of neg1] {$neg_2$};
 \node [manifest] (neg3) [right = 1.6cm of neg2] {$neg_3$};
@@ -30,8 +31,10 @@
 
 %% Latent variances and covariance
 \path [covariance] (POS.35) edge ["$\upphi_{12}$", bend left = 40] (NEG.145);
-\path [variance] (POS.120) edge ["$\upphi_{11}$", above, outer sep = 1pt, bend left = 110, looseness = 3] (POS.60);
-\path [variance] (NEG.120) edge ["$\upphi_{22}$", above, outer sep = 1pt, bend left = 110, looseness = 3] (NEG.60);
+\path [variance] (POS.120) edge ["$\upphi_{11}$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (POS.60);
+\path [variance] (NEG.120) edge ["$\upphi_{22}$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (NEG.60);
 
 %% Residuals
 \node [residual2] (e1) [above left = .65cm of pos1, xshift = 1mm] {};

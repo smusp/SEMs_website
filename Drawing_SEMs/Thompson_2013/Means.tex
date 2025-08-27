@@ -5,12 +5,12 @@
 \begin{document}
 \begin{tikzpicture}
 
-%% Academic manifests
+%% Academic manifest
 \node [manifest] (V1) {V1};
 \node [manifest] (V2) [right = 1.6cm of V1] {V2};
 \node [manifest] (V3) [right = 1.5cm of V2] {V3};
 
-%% Social manifests
+%% Social manifest
 \node [manifest] (V4) [right = 3cm of V3] {V4};
 \node [manifest] (V5) [right = 1.5cm of V4] {V5};
 \node [manifest] (V6) [right = 1.6cm of V5] {V6};
@@ -30,8 +30,10 @@
 
 %% Latent variances ans covariance
 \path [covariance] (F1.35) edge ["c$_{F1F2}$", bend left = 40] (F2.145);
-\path [variance] (F1.120) edge ["c$_{F1}$", above, outer sep = 1pt, bend left = 110, looseness = 3] (F1.60);
-\path [variance] (F2.120) edge ["c$_{F2}$", above, outer sep = 1pt, bend left = 110, looseness = 3] (F2.60);
+\path [variance] (F1.120) edge ["c$_{F1}$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (F1.60);
+\path [variance] (F2.120) edge ["c$_{F2}$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (F2.60);
 
 %% Residuals
 \node [residual2] (e1) [above left = .65cm of V1, xshift = 1mm] {};

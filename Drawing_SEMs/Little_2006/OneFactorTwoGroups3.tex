@@ -1,13 +1,13 @@
 \documentclass[tikz, border = 10pt]{standalone}
 
-\input{SEMstyles.tex}
+\input{../SEMstyles.tex}
 \usetikzlibrary{matrix}
 
 \begin{document}
 \begin{tikzpicture}
 
 %%%% Grade 7
-%% pos manifests
+%% pos manifest
 \node [manifest] (pos11) {$pos_1$};
 \node [manifest] (pos21) [right = 1.6cm of pos11] {$pos_2$};
 \node [manifest] (pos31) [right = 1.5cm of pos21] {$pos_3$};
@@ -21,7 +21,8 @@
 \path [regression] (POS1) edge ["$\uplambda_3$"] (pos31.90);
 
 %% Latent variance
-\path [variance] (POS1.120) edge ["$\upphi_7$", above, outer sep = 1pt, bend left = 110, looseness = 3] (POS1.60);
+\path [variance] (POS1.120) edge ["$\upphi_7$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (POS1.60);
 
 %% Residuals
 \node [residual2] (e11) [above left = .65cm of pos11, xshift = -1mm] {};
@@ -33,7 +34,7 @@
 \node [residual2] (e31) [above left = .65cm of pos31, xshift = -1mm] {};
 \path [regression] (e31) edge ["$\uptheta_{7,3}$", pos = 0] (pos31.north west);
 
-%% latent means
+%% Latent means
 \node [constant, black!30] (M11) [right = 2cm of POS1] {1};
 \node [constant, black!30] (M21) [below = 2cm of pos21] {1};
 \path [regression, black!30] (M11) edge ["$\upkappa_7$"] (POS1);
@@ -45,7 +46,7 @@
 
 
 %%%% Grade 8
-%% pos manifests
+%% pos manifest
 \node [manifest] (pos12) [right = 3cm of pos31] {$pos_1$};
 \node [manifest] (pos22) [right = 1.6cm of pos12] {$pos_2$};
 \node [manifest] (pos32) [right = 1.5cm of pos22] {$pos_3$};
@@ -59,7 +60,8 @@
 \path [regression] (POS2) edge ["$\uplambda_3$"] (pos32.90);
 
 %% Latent variance
-\path [variance] (POS2.120) edge ["$\upphi_8$", above, outer sep = 1pt, bend left = 110, looseness = 3] (POS2.60);
+\path [variance] (POS2.120) edge ["$\upphi_8$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (POS2.60);
 
 %% Residuals
 \node [residual2] (e12) [above left = .65cm of pos12, xshift = -1mm] {};
@@ -71,7 +73,7 @@
 \node [residual2] (e32) [above left = .65cm of pos32, xshift = -1mm] {};
 \path [regression] (e32) edge ["$\uptheta_{8,3}$", pos = 0] (pos32.north west);
 
-%% latent means
+%% Latent means
 \node [constant, black!30] (M12) [right = 2cm of POS2] {1};
 \node [constant, black!30] (M22) [below = 2cm of pos22] {1};
 \path [regression, black!30] (M12) edge ["$\upkappa_8$"] (POS2);
@@ -81,8 +83,7 @@
 \path [regression, black!30] (M22.90) edge ["$\uptau_2$"] (pos22.270);
 \path [regression, black!30] (M22.70) edge ["$\uptau_3$", pos = 0.55] (pos32.270);
 
-
-%%%% Groups
+%% Grades
 \node (gp1) [above = 1.5cm of POS1] {Grade 7};
 \node (gp2) [above = 1.5cm of POS2] {Grade 8};
 
@@ -90,8 +91,7 @@
 \node (C2) at ($(M21)!0.5!(M22)$) {};
 \draw[dashed, thick] ($(C1)!1.25cm!(C2)$) -- ($(C2)!-0.25cm!(C1)$);
 
-
-%%%% Constraints
+%% Constraints
 \matrix [matrix of nodes, draw] at (C1) {
    \bf{Constraints}\\
    $\uplambda_1 + \uplambda_2 + \uplambda_3 = 3$ \\

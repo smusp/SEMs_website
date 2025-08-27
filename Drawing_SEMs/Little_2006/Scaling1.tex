@@ -6,12 +6,12 @@
 \begin{tikzpicture}
 
 %%%% Grade 7
-%% pos manifests
+%% pos manifest
 \node [manifest] (pos71) {$pos_1$};
 \node [manifest] (pos72) [right = 1.6cm of pos71] {$pos_2$};
 \node [manifest] (pos73) [right = 1.5cm of pos72] {$pos_3$};
 
-%% neg manifests
+%% neg manifest
 \node [manifest] (neg71) [right = 3cm of pos73] {$neg_1$};
 \node [manifest] (neg72) [right = 1.5cm of neg71] {$neg_2$};
 \node [manifest] (neg73) [right = 1.6cm of neg72] {$neg_3$};
@@ -31,8 +31,10 @@
 
 %% Latent variances and covariance
 \path [covariance] (POS7.35) edge ["$\upphi_{7,12}$", bend left = 40] (NEG7.145);
-\path [variance] (POS7.120) edge ["$\upphi_{7,11}\!=\!1$", above, outer sep = 1pt, bend left = 110, looseness = 3] (POS7.60);
-\path [variance] (NEG7.120) edge ["$\upphi_{7,22}\!=\!1$", above, outer sep = 1pt, bend left = 110, looseness = 3] (NEG7.60);
+\path [variance] (POS7.120) edge ["$\upphi_{7,11}\!=\!1$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (POS7.60);
+\path [variance] (NEG7.120) edge ["$\upphi_{7,22}\!=\!1$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (NEG7.60);
 
 %% Residuals
 \node [residual2] (e71) [above left = .65cm of pos71, xshift = 1mm] {};
@@ -53,7 +55,7 @@
 \node [residual2] (e76) [above right = .65cm of neg73, xshift = -1mm] {};
 \path [regression] (e76) edge ["$\uptheta_{7,6}$", pos = 0] (neg73.north east);
 
-%% latent means
+%% Latent means
 \node [constant, black!30] (M7) [below = 1.5cm of $(pos73)!0.5!(neg71)$] {1};
 \path [regression, black!30] (M7) edge ["$\upkappa_{7,1}\!=\!0$", pos = .6] (POS7);
 \path [regression, black!30] (M7) edge ["$\upkappa_{7,2}\!=\!0$", pos = .6] (NEG7);
@@ -68,7 +70,7 @@
 \path [regression, black!30] (M7.5) edge ["$\uptau_6$"] (neg73.south west);
 
 
-%%%% Grade 8 %%%%%%%%%%%
+%%%% Grade 8
 %% pos manifests
 \node [manifest] (pos81) [below = 7.5cm of pos71] {$pos_1$};
 \node [manifest] (pos82) [right = 1.6cm of pos81] {$pos_2$};
@@ -94,8 +96,10 @@
 
 %% Latent variances and covariance
 \path [covariance] (POS8.35) edge ["$\upphi_{8,12}$", bend left = 40] (NEG8.145);
-\path [variance] (POS8.120) edge ["$\upphi_{8,11}$", above, outer sep = 1pt, bend left = 110, looseness = 3] (POS8.60);
-\path [variance] (NEG8.120) edge ["$\upphi_{8,22}$", above, outer sep = 1pt, bend left = 110, looseness = 3] (NEG8.60);
+\path [variance] (POS8.120) edge ["$\upphi_{8,11}$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (POS8.60);
+\path [variance] (NEG8.120) edge ["$\upphi_{8,22}$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (NEG8.60);
 
 %% Residuals
 \node [residual2] (e81) [above left = .65cm of pos81, xshift = 1mm] {};
@@ -130,7 +134,7 @@
 \path [regression, black!30] (M8) edge ["$\uptau_5$"] (neg82.south west);
 \path [regression, black!30] (M8.5) edge ["$\uptau_6$"] (neg83.south west);
 
-
+%% Grades
 \node (gp1) at (0,-1.75) {Grade 7};
 \node (gp2) [below = 1.5cm of gp1] {Grade 8};
 

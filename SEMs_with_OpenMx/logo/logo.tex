@@ -17,7 +17,8 @@ regression/.style = {-{Stealth[length = 2mm]}, shorten > = 1pt, inner sep = 2pt}
 }
 
 %% Hexagon
-\node (hexagon) [draw, color = black!35, fill = orange, line width = 2pt, regular polygon, regular polygon sides = 6, rotate = 30, minimum size=5.08cm] {};
+\node (hexagon) [draw, color = black!35, fill = orange, line width = 2pt,
+   regular polygon, regular polygon sides = 6, rotate = 30, minimum size = 5.08cm] {};
 
 %% SEM
 % Manifest
@@ -25,12 +26,12 @@ regression/.style = {-{Stealth[length = 2mm]}, shorten > = 1pt, inner sep = 2pt}
 \node at (1.65, -0.2) [manifest] (Y) {Y};
 \node at (-.1, 1.65) [manifest] (M) {M};
 
-% The regressions
+% Regressions
 \path [regression] (X) edge ["\large{c$'$}", below] (Y);
 \path [regression] (X.70) edge ["\large{a}", above left] (M.250);
 \path [regression] (M.290) edge ["\large{b}", above right] (Y.110);
 
-% The residuals
+% Residuals
 \node [residual] (e2) [above right = 2.5mm and 2.5mm of Y] {};
 \node [residual] (e1) [above right = 2.5mm and 2.5mm of M] {};
 \path [regression] (e2) edge (Y.north east);

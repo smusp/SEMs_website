@@ -4,17 +4,17 @@
 \begin{document}
 \begin{tikzpicture}
 
-%% The manifest variables
+%% Manifest
 \node [manifest, align = center] (Anx) {Self\\Efficacy};
 \node [manifest] (SE) [right = 5cm of Anx] {Anxiety};
 \node [manifest] (Att) [above = 4.33cm of $(Anx.north) !0.5! (SE.north)$] {Attitude};
 
-%% The regressions
+%% Regressions
 \path [regression] (Anx) edge ["c$'$"] (SE);
 \path [regression] (Anx.70) edge ["a"] (Att.250);
 \path [regression] (Att.290) edge ["b"] (SE.110);
 
-%% The residuals and their variances
+%% Residuals
 \node [residual1] (e2) [above right = 4mm and 4mm of SE] {e$_2$};
 \node [residual1] (e1) [above right = 4mm and 4mm of Att] {e$_1$};
 \path [regression] (e2) edge (SE.north east);

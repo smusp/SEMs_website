@@ -1,12 +1,12 @@
 \documentclass[tikz, border = 10pt]{standalone}
 
-\input{SEMstyles.tex}
+\input{../SEMstyles.tex}
 
 \begin{document}
 \begin{tikzpicture}
 
 %%%% Grade 7
-%% pos manifests
+%% pos manifest
 \node [manifest] (pos11) {$pos_1$};
 \node [manifest] (pos21) [right = 1.6cm of pos11] {$pos_2$};
 \node [manifest] (pos31) [right = 1.5cm of pos21] {$pos_3$};
@@ -20,7 +20,8 @@
 \path [regression] (POS1) edge ["$\uplambda_3\!=\!1$"] (pos31.90);
 
 %% Latent variance
-\path [variance] (POS1.120) edge ["$\upphi_7$", above, outer sep = 1pt, bend left = 110, looseness = 3] (POS1.60);
+\path [variance] (POS1.120) edge ["$\upphi_7$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (POS1.60);
 
 %% Residuals
 \node [residual2] (e11) [above left = .65cm of pos11, xshift = -1mm] {};
@@ -58,7 +59,8 @@
 \path [regression] (POS2) edge ["$\uplambda_3\!=\!1$"] (pos32.90);
 
 %% Latent variance
-\path [variance] (POS2.120) edge ["$\upphi_8$", above, outer sep = 1pt, bend left = 110, looseness = 3] (POS2.60);
+\path [variance] (POS2.120) edge ["$\upphi_8$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (POS2.60);
 
 %% Residuals
 \node [residual2] (e12) [above left = .65cm of pos12, xshift = -1mm] {};

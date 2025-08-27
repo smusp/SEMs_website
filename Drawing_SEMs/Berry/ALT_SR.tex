@@ -4,7 +4,7 @@
 \begin{document}
 \begin{tikzpicture}
 
-%% The manifest variables
+%% Manifest
 \node [manifest] (x1) {PD 10};
 \node [manifest] (x2) [right = 3cm of x1] {PD 11};
 \node [manifest] (x3) [right = 3cm of x2] {PD 12};
@@ -47,10 +47,13 @@
 \path [regression] (abs.80) edge ["3", pos = 0.25] (y4.220); 
 
 %% Their variances - intercept variances freely estimated, slope variances constrained to zero
-\path [variance, black!30] (pdi.160) edge [above left, bend left = 120, looseness = 3] (pdi.130);
+\path [variance, black!30] (pdi.160) edge [above left, bend left = 120, 
+   looseness = 3] (pdi.130);
 \path [variance, black!30] (pds.160) edge ["0", above left, bend left = 120, looseness = 3] (pds.130);
-\path [variance, black!30] (abi.230) edge [below left, bend left = 120, looseness = 3] (abi.200);
-\path [variance, black!30] (abs.230) edge ["0", below left, bend left = 120, looseness = 3] (abs.200);
+\path [variance, black!30] (abi.230) edge [below left, bend left = 120, 
+   looseness = 3] (abi.200);
+\path [variance, black!30] (abs.230) edge ["0", below left, bend left = 120,
+   looseness = 3] (abs.200);
 
 % Their means
 \node [constant] (const1) at ($(pdi)!0.5!(pds)$) {1};

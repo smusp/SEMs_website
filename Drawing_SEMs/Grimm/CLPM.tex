@@ -4,7 +4,7 @@
 \begin{document}
 \begin{tikzpicture}
 
-%% The manifest variables
+%% Manifest
 \node [manifest] (x1) {read$_3$};
 \node [manifest] (x2) [right = 3cm of x1] {read$_4$};
 \node [manifest] (x3) [right = 3cm of x2] {read$_5$};
@@ -26,7 +26,6 @@
 \path [regression, red] (x4) edge ["$\upbeta_{10}$", pos = 0.6] (x5); 
 \path [regression, red] (x5) edge ["$\upbeta_{10}$", pos = 0.6] (x6); 
 
-
 \path [regression, red] (y1) edge ["$\upbeta_{11}$", pos = 0.6] (y2); 
 \path [regression, red] (y2) edge ["$\upbeta_{11}$", pos = 0.6] (y3); 
 \path [regression, red] (y3) edge ["$\upbeta_{11}$", pos = 0.6] (y4); 
@@ -47,9 +46,12 @@
 \path [regression, blue] (y5.15) edge ["$\upbeta_{20}$", pos = 0.7] (x6.195); 
 
 %% Exogenous variances and covariance
-\path [variance, black!30] (x1.105) edge ["$\upsigma_{r3}^2$", above, bend left = 120, looseness = 6] (x1.75);
-\path [variance, black!30] (y1.285) edge ["$\upsigma_{m3}^2$", below, bend left = 120, looseness = 6] (y1.255);
-\path [covariance, black!30] (x1.180) edge ["$\upsigma_{r3,m3}$", bend right = 80, looseness = 0.5] (y1.180);
+\path [variance, black!30] (x1.105) edge ["$\upsigma_{r3}^2$", above,
+   bend left = 120, looseness = 6] (x1.75);
+\path [variance, black!30] (y1.285) edge ["$\upsigma_{m3}^2$", below,
+   bend left = 120, looseness = 6] (y1.255);
+\path [covariance, black!30] (x1.180) edge ["$\upsigma_{r3,m3}$",
+   bend right = 80, looseness = 0.5] (y1.180);
 
 %% Residuals ...
 \node [residual1, minimum size = 7mm, black!30] (e2) [below = 5mm of x2] {u$_{r4}$};
@@ -75,25 +77,40 @@
 \path [regression, black!30] (e12) edge (y6);
 
 %% their variances, ...
-\path [variance, black!30] (e2.210) edge ["$\upsigma_{er}^2$", below, outer sep = 1.5pt, bend right = 120, looseness = 6] (e2.250);
-\path [variance, black!30] (e3.210) edge ["$\upsigma_{er}^2$", below, outer sep = 1.5pt, bend right = 120, looseness = 6] (e3.250);
-\path [variance, black!30] (e4.210) edge ["$\upsigma_{er}^2$", below, outer sep = 1.5pt, bend right = 120, looseness = 6] (e4.250);
-\path [variance, black!30] (e5.210) edge ["$\upsigma_{er}^2$", below, outer sep = 1.5pt, bend right = 120, looseness = 6] (e5.250);
-\path [variance, black!30] (e6.210) edge ["$\upsigma_{er}^2$", below, outer sep = 1.5pt, bend right = 120, looseness = 6] (e6.250);
+\path [variance, black!30] (e2.210) edge ["$\upsigma_{er}^2$", below, 
+   outer sep = 1.5pt, bend right = 120, looseness = 6] (e2.250);
+\path [variance, black!30] (e3.210) edge ["$\upsigma_{er}^2$", below, 
+   outer sep = 1.5pt, bend right = 120, looseness = 6] (e3.250);
+\path [variance, black!30] (e4.210) edge ["$\upsigma_{er}^2$", below, 
+   outer sep = 1.5pt, bend right = 120, looseness = 6] (e4.250);
+\path [variance, black!30] (e5.210) edge ["$\upsigma_{er}^2$", below, 
+   outer sep = 1.5pt, bend right = 120, looseness = 6] (e5.250);
+\path [variance, black!30] (e6.210) edge ["$\upsigma_{er}^2$", below, 
+   outer sep = 1.5pt, bend right = 120, looseness = 6] (e6.250);
 
-\path [variance, black!30] (e8.110) edge ["$\upsigma_{em}^2$", above, outer sep = 1.5pt, bend right = 120, looseness = 6] (e8.150);
-\path [variance, black!30] (e9.110) edge ["$\upsigma_{em}^2$", above, outer sep = 1.5pt, bend right = 120, looseness = 6] (e9.150);
-\path [variance, black!30] (e10.110) edge ["$\upsigma_{em}^2$", above, outer sep = 1.5pt, bend right = 120, looseness = 6] (e10.150);
-\path [variance, black!30] (e11.110) edge ["$\upsigma_{em}^2$", above, outer sep = 1.5pt, bend right = 120, looseness = 6] (e11.150);
-\path [variance, black!30] (e12.110) edge ["$\upsigma_{em}^2$", above, outer sep = 1.5pt, bend right = 120, looseness = 6] (e12.150);
+\path [variance, black!30] (e8.110) edge ["$\upsigma_{em}^2$", above, 
+   outer sep = 1.5pt, bend right = 120, looseness = 6] (e8.150);
+\path [variance, black!30] (e9.110) edge ["$\upsigma_{em}^2$", above, 
+   outer sep = 1.5pt, bend right = 120, looseness = 6] (e9.150);
+\path [variance, black!30] (e10.110) edge ["$\upsigma_{em}^2$", above, 
+   outer sep = 1.5pt, bend right = 120, looseness = 6] (e10.150);
+\path [variance, black!30] (e11.110) edge ["$\upsigma_{em}^2$", above, 
+   outer sep = 1.5pt, bend right = 120, looseness = 6] (e11.150);
+\path [variance, black!30] (e12.110) edge ["$\upsigma_{em}^2$", above, 
+   outer sep = 1.5pt, bend right = 120, looseness = 6] (e12.150);
 
 %% and their covariances
 \begin{scope}[on background layer]
-\path [covariance, black!30] (e2.320) edge ["$\upsigma_{er,em}$", bend left = 40] (e8.40);
-\path [covariance, black!30] (e3.320) edge ["$\upsigma_{er,em}$", bend left = 40] (e9.50);
-\path [covariance, black!30] (e4.320) edge ["$\upsigma_{er,em}$", bend left = 40] (e10.50);
-\path [covariance, black!30] (e5.320) edge ["$\upsigma_{er,em}$", bend left = 40] (e11.50);
-\path [covariance, black!30] (e6.320) edge ["$\upsigma_{er,em}$", bend left = 40] (e12.50);
+\path [covariance, black!30] (e2.320) edge ["$\upsigma_{er,em}$", 
+   bend left = 40] (e8.40);
+\path [covariance, black!30] (e3.320) edge ["$\upsigma_{er,em}$", 
+   bend left = 40] (e9.50);
+\path [covariance, black!30] (e4.320) edge ["$\upsigma_{er,em}$", 
+   bend left = 40] (e10.50);
+\path [covariance, black!30] (e5.320) edge ["$\upsigma_{er,em}$", 
+   bend left = 40] (e11.50);
+\path [covariance, black!30] (e6.320) edge ["$\upsigma_{er,em}$", 
+   bend left = 40] (e12.50);
 \end{scope}
 
 \end{tikzpicture}

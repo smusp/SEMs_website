@@ -6,12 +6,12 @@
 \begin{tikzpicture}
 
 %%%% Day-care
-%% Academic manifests
+%% Academic manifest
 \node [manifest] (V11) {V1};
 \node [manifest] (V12) [right = 1.6cm of V11] {V2};
 \node [manifest] (V13) [right = 1.5cm of V12] {V3};
 
-%% Social manifests
+%% Social manifest
 \node [manifest] (V14) [right = 3cm of V13] {V4};
 \node [manifest] (V15) [right = 1.5cm of V14] {V5};
 \node [manifest] (V16) [right = 1.6cm of V15] {V6};
@@ -31,8 +31,10 @@
 
 %% Latent variances ans covariance
 \path [covariance] (F11.35) edge ["c$_{F1,F2}$", bend left = 40] (F12.145);
-\path [variance] (F11.120) edge ["c$_{F1}$", above, outer sep = 1pt, bend left = 110, looseness = 3] (F11.60);
-\path [variance] (F12.120) edge ["c$_{F2}$", above, outer sep = 1pt, bend left = 110, looseness = 3] (F12.60);
+\path [variance] (F11.120) edge ["c$_{F1}$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (F11.60);
+\path [variance] (F12.120) edge ["c$_{F2}$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (F12.60);
 
 %% Residuals
 \node [residual2] (e71) [above left = .65cm of V11, xshift = 1mm] {};
@@ -67,13 +69,13 @@
 \path [regression, black!30] (M7) edge ["a$_{V5}$"] (V15.south west);
 \path [regression, black!30] (M7.5) edge ["a$_{V6}$"] (V16.south west);
 
-%%%% Home-care %%%%%%%%%%%
-%% Academic manifests
+%%%% Home-care
+%% Academic manifest
 \node [manifest] (V21) [below = 8.0cm of V11] {V1};
 \node [manifest] (V22) [right = 1.6cm of V21] {V2};
 \node [manifest] (V23) [right = 1.5cm of V22] {V3};
 
-%% Social manifests
+%% Social manifest
 \node [manifest] (V24) [right = 3cm of V23] {V4};
 \node [manifest] (V25) [right = 1.5cm of V24] {V5};
 \node [manifest] (V26) [right = 1.6cm of V25] {V6};
@@ -93,8 +95,10 @@
 
 %% Latent variances ans covariance
 \path [covariance] (F21.35) edge ["c$_{F1,F2}$", bend left = 40] (F22.145);
-\path [variance] (F21.120) edge ["c$_{F1}$", above, outer sep = 1pt, bend left = 110, looseness = 3] (F21.60);
-\path [variance] (F22.120) edge ["c$_{F2}$", above, outer sep = 1pt, bend left = 110, looseness = 3] (F22.60);
+\path [variance] (F21.120) edge ["c$_{F1}$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (F21.60);
+\path [variance] (F22.120) edge ["c$_{F2}$", above, outer sep = 1pt,
+   bend left = 110, looseness = 3] (F22.60);
 
 %% Residuals
 \node [residual2] (e81) [above left = .65cm of V21, xshift = 1mm] {};
@@ -129,7 +133,7 @@
 \path [regression, black!30] (M8) edge ["a$_{V5}$"] (V25.south west);
 \path [regression, black!30] (M8.5) edge ["a$_{V6}$"] (V26.south west);
 
-
+%% Groups
 \node (gp1) at (0,-1.75) {Day-care};
 \node (gp2) [below = 1.5cm of gp1] {Home-care};
 
