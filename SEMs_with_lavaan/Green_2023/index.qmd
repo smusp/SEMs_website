@@ -7,10 +7,10 @@ Thompson, M., Lie, Y. & Green, S. (2023). Flexible structural equation modeling 
 
 Thompson, Liu & Green (TLG) show an ordinary least squares (OLS) regression approach and a structural equation modeling (SEM) approach to:
 
- 1. One-way ANOVA
- 2. One-way ANCOVA
- 3. Two-way ANOVA
- 4. One-way MANOVA
- 5. One-way ANOVA of a latent variable
+ 1. [One-way ANOVA](one_way_ANOVA.qmd)
+ 2. [One-way ANCOVA](one_way_ANCOVA.qmd)
+ 3. [Two-way ANOVA](two_way_ANOVA.qmd)
+ 4. [One-way MANOVA](one_way_MANOVA.qmd)
+ 5. [One-way ANOVA of a latent variable](one_way_LATENT.qmd)
 
 These examples show the SEM approaches only.
