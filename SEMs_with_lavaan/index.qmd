@@ -20,7 +20,7 @@ This post presents **R** scripts to reproduce published Structural Equation Mode
 #### The publications
 
 - Jose, P. (2013). *Doing statistical mediation and moderation*. New York, NY: Guilford Press. <br/> 
-A basic three-variable mediation analysis.
+[Mediation I](Jose_2013/Jose_2013.qmd) A basic three-variable mediation analysis.
 
 - Kurbanoglu, N. & Takunyaci, M. (2021). A structural equation modeling on relationship between self-efficacy, physics laboratory anxiety and attitudes. *Journal of Family, Counseling and Education*, *6*(1), 47-56. <br/> 
 A basic three-variable mediation analysis using summary data.
