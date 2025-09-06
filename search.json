@@ -95,6 +95,16 @@
     ]
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Replicating Published SEMs",
+    "section": "",
+    "text": "It is possible to replicate the findings of published atricles when authors make their data available. Sometimes authors make the raw data available; sometimes authors publish summary data in the form of correlations (or variances and covariances), means and standard deviations. Either way, it doesn’t matter. Standard SEM software can use either raw data or summary data to run analyses. This site shows how to replicate published findings (or not as the case may be) using lavaan and OpenMx.\nCopying correlations, covariances, means, and standard deviations can be a tedious and error-prone process, especially when the model contains a large number of variables. A section of this site shows how to extract data from PDF files using the R packages pdftools and tabulapdf\nAll the analyses presented here show a diagram of the model. There are R packages that will draw SEM models gven the model, and there are various packages that can be used to draw diagrams, but I like the precision and control afforded by TikZ, a \\(\\mathsf{\\LaTeX}\\) package. A section of this website presents scripts to draw the diagrams.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
     "objectID": "SEMs_with_lavaan/Little_2006/Little_2006.html",
     "href": "SEMs_with_lavaan/Little_2006/Little_2006.html",
     "title": "Scaling",
