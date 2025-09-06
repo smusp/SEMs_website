@@ -1,7 +1,11 @@
 ---
-title: "Bits and Pieces"
-subtitle: "R and Tikz"
+title: "Replicating Published SEMs"
+subtitle: "Using lavaan and OpenMx"
 ---
 
-## Welcome
+It is possible to replicate the findings of published atricles when authors make their data available. Sometimes authors make the raw data available; sometimes authors publish summary data in the form of correlations (or variances and covariances), means and standard deviations. Either way, it doesn't matter. Standard SEM software can use either raw data or summary data to run analyses. This site shows how to replicate published findings (or not as the case may be) using [lavaan](https://www.lavaan.ugent.be/) and [OpenMx](https://openmx.ssri.psu.edu/).
+
+Copying correlations, covariances, means, and standard deviations can be a tedious and error-prone process, especially when the model contains a large number of variables. A section of this site shows how to extract data from PDF files using the **R** packages [pdftools](https://docs.ropensci.org/pdftools/) and [tabulapdf](https://docs.ropensci.org/tabulapdf/index.html)
+
+All the analyses presented here show a diagram of the model. There are **R** packages that will draw SEM models gven the model, and there are various packages that can be used to draw diagrams, but I like the precision and control afforded by [Ti*k*Z](https://tikz.dev/), a $\mathsf{\LaTeX}$ package. A section of this website presents scripts to draw the diagrams.
 
