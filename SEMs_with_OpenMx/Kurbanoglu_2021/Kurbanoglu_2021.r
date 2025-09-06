@@ -5,7 +5,7 @@
 
 ## This example shows a basic three-variable mediation
 ## analysis, and how to use summary data (correlations, 
-## standard deviations, and means) when the raw sample
+## standard deviations, and means) when the raw data
 ## are not available.
 
 ## Load package
@@ -74,7 +74,7 @@ medModel <- mxModel(model = "Mediation",
    means, 
    indirect, total)	
 
-## Run the model and get summary
+## Run the model and get the summary
 fit <- mxRun(medModel)
 summary(fit)
 

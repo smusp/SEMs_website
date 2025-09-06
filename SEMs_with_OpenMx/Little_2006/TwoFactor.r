@@ -130,7 +130,7 @@ m1 <- "
   # Latent variances and covariance - constrain variances to 1
   POS ~~ 1*phi11*POS
   NEG ~~ 1*phi22*NEG
-  POS ~~ phi12*NEG
+  POS ~ phi12*NEG
 
   # Latent means - constrain means to 0
   POS ~ 0*kappa1*1
