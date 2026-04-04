@@ -17,3 +17,5 @@ aux/
 .Ruserdata
 
 .DS_Store
+
+**/*.quarto_ipynb
