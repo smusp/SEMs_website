@@ -11,16 +11,16 @@ execute:
 ```{r echo = FALSE}
 ## One-way ANOVA
 ##
-## Thompson, M., Lie, Y. & Green, S. (2023). Flexible structural equation modeling
+## Thompson, M., Liu, Y. & Green, S. (2023). Flexible structural equation modeling
 ## approaches for analyzing means. In R. Hoyle (Ed.), Handbook of structural
 ## equation modeling (2nd ed., pp. 385-408). New York, NY: Guilford Press.
 ```
 
-Thompson, M., Lie, Y. & Green, S. (2023). Flexible structural equation modeling approaches for analyzing means. In R. Hoyle (Ed.), *Handbook of structural equation modeling* (2nd ed., pp. 385-408). New York, NY: Guilford Press.
+Thompson, M., Liu, Y. & Green, S. (2023). Flexible structural equation modeling approaches for analyzing means. In R. Hoyle (Ed.), *Handbook of structural equation modeling* (2nd ed., pp. 385-408). New York, NY: Guilford Press.
 
 This example shows the SEM approach to a one-way ANOVA. Results are reported in Table 21.1 (p. 389).
 
-The data are described at the top of page 388. Thompson, Lie & Green (TLG) claim that the data are available in supplementary materials but I'm unable to locate it. However, the data are available in Mplus data files in supplementary materials for the 1st edition. I've collected the data into a more convenient format (see the next section for getting the data), but it is in a "long" format. It needs to be rearranged from "long" to "wide".
+The data are described at the top of page 388. TLG claim that the data are available in supplementary materials but I'm unable to locate it. However, the data are available in Mplus data files in supplementary materials for the 1st edition. I've collected the data into a more convenient format (see the next section for getting the data), but it is in a "long" format. It needs to be rearranged from "long" to "wide".
 
 
 #### Load package and get the data
@@ -48,7 +48,7 @@ The variables used in this example are:
 
 #### The models
 
-The SEM model for one-way ANOVA is shown in Fig 21.1 (p. 391), and is reproduced below. The diagram shows the "Less Constrained" model - the three means, represented by the labels on the arrows connecting the "1" to the dependent variable, differ. To be consistent with the ANOVA assumption of homogeneity of variances, the residual variances are constrained to be equal.
+The model path diagram for one-way ANOVA is shown in Fig 21.1 (p. 391), and is reproduced below. The diagram shows the "Less Constrained" model - the three means, represented by the labels on the arrows connecting the "1" to the dependent variable, differ. To be consistent with the ANOVA assumption of homogeneity of variances, the residual variances are constrained to be equal.
 
 ![](../../Drawing_SEMs/Green_2023/one_way_ANOVA.svg){fig-align="center"}
 
