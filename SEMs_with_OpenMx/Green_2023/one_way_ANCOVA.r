@@ -1,7 +1,7 @@
 
 ## One-Way ANCOVA
 ##
-## Thompson, M., Lie, Y. & Green, S. (2023). Flexible structural equation modeling
+## Thompson, M., Liu, Y. & Green, S. (2023). Flexible structural equation modeling
 ## approaches for analyzing means. In R. Hoyle (Ed.), Handbook of structural
 ## equation modeling (2nd ed., pp. 385-408). New York, NY: Guilford Press.
 
@@ -40,6 +40,7 @@ head(df)
 # and homogeneity of regression slopes,
 # the residual variances and regression slopes are constrained to equality
 # across the groups.
+# But either or both assumptions can be relaxed.
 
 ## Get data into OpenMx format for each group
 dataA <- mxData(observed = df[df$x == "a", c("x","y", "preC")], type = "raw")
@@ -105,9 +106,8 @@ slopeLC <- coef(fitLC)["b"]; slopeLC
 C1 <- mxConstraint(a1 == a2)
 C2 <- mxConstraint(a2 == a3)
 
-## Add them to "Less Constrained" model
-modelMC <- mxModel(modelLC, C1, C2)
-modelMC <- mxModel(modelMC, name = "MC")       # Change its name 
+## Add them to "Less Constrained" model and change its name
+modelMC <- mxModel(modelLC, C1, C2, name = "MC")
 
 ## Run the MC model and get the summary
 fitMC <- mxRun(modelMC)
@@ -127,4 +127,4 @@ anova(fitMC, fitLC)
 
 ## Get R square and compare with result given on page 394.
 ## R square formula given in Equation 21.9 (p. 394).
-Rsquare <- (thetaMC - thetaLC)/thetaMC; Rsquare
+Rsquare <- (thetaMC - thetaLC)/thetaMC; unname(Rsquare)

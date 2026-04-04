@@ -28,16 +28,16 @@ names <- c("Att", "SE", "Anx")
 
 ## Get the co/variance matrix
 # First, get full correlation matrix
-mcor = matrix( , 3, 3)                           # Empty matrix
-mcor[upper.tri(mcor, diag = TRUE)] <- vcor       # Fill the upper triangle
-mcor = pmax(mcor, t(mcor), na.rm = TRUE)         # Fill the lower triangle
+mcor <- matrix( , 3, 3)                           # Empty matrix
+mcor[upper.tri(mcor, diag = TRUE)] <- vcor        # Fill the upper triangle
+mcor <- pmax(mcor, t(mcor), na.rm = TRUE)         # Fill the lower triangle
 
 # Get co/variances
 mcov <- outer(vsd, vsd) * mcor
 
 # Name the rows and columns
 dimnames(mcov) <- list(names, names); mcov
-names(vmean) = names   # OpenMx requires the means be named
+names(vmean) <- names   # OpenMx requires the means be named
 
 ## The model is shown in Fig 1 (p. 51); or see the model diagram above.
 
@@ -46,11 +46,12 @@ names(vmean) = names   # OpenMx requires the means be named
 dataCov <- mxData(observed = mcov, type = "cov", means = vmean, numObs = n)
 
 ## Regressions
-regPaths1 <- mxPath(from = c("SE", "Att"), to = "Anx",
-   arrows = 1, values = 0.5, labels = c("cprime", "b"))
 
-regPaths2 <- mxPath(from = "SE", to = "Att",
+regPaths1 <- mxPath(from = "SE", to = "Att",
    arrows = 1, values = 0.5, labels = "a")
+   
+regPaths2 <- mxPath(from = c("SE", "Att"), to = "Anx",
+   arrows = 1, values = 0.5, labels = c("cprime", "b"))
 
 ## Variances
 varPaths <- mxPath(from = names, 
@@ -102,22 +103,22 @@ estZ
 # Compare with R squares given in Fig 1.
 
 # Get correlations (with names) and standardised regression coefficients
-dimnames(mcor) = list(names, names); mcor
+dimnames(mcor) <- list(names, names); mcor
 estZ
 
 # R Squared for SE predicting Att:
 # Correlation between Att and SE, and
 # "a" standardised regression coefficient
-RsqAtt = mcor["Att", "SE"] * estZ["a"]
+RsqAtt <- mcor["Att", "SE"] * estZ["a"]
 
 # R Squared for SE and Att predicting Anx
 # Correlations between Anx and SE, and Anx and Att
 # "b" and "cprime" standardised regression coefficients
-RsqAnx =  matrix(mcor["Anx", c("Att", "SE")], 1)  %*%
+RsqAnx <- matrix(mcor["Anx", c("Att", "SE")], 1)  %*%
    matrix(estZ[c("b", "cprime")], 2)
 
 # Combine them
-Rsq = matrix(c(RsqAtt, RsqAnx), 
+Rsq <- matrix(c(RsqAtt, RsqAnx), 
   dimnames = list(c("Att", "Anx"), "R Square"),
   2)
 Rsq

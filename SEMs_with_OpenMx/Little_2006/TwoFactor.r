@@ -23,7 +23,8 @@
 library(OpenMx)
 
 ## Get data
-# Vectors of correlations (row-by-row), standard deviations, and means, and sample size.
+# Vectors of correlations (row-by-row), standard deviations, and means,
+# and sample size.
 vcor <- c(
    1.00000,
    0.75854,  1.00000,
@@ -62,7 +63,7 @@ data <- mxData(observed = mcov, type = "cov", means = vmean, numObs = n)
 ## Constrain latent means to 0
 
 ## Collect the bits and pieces needed by OpenMx
-# Factor loadings
+# Loadings
 loadings1 <- mxPath(from = "POS", to = c("pos1", "pos2", "pos3"), arrows = 1,
    free = TRUE, values = 0.5,
    labels = c("lambda1", "lambda2", "lambda3"))
@@ -71,12 +72,13 @@ loadings2 <- mxPath(from = "NEG", to = c("neg1", "neg2", "neg3"), arrows = 1,
    free = TRUE, values = 0.5,
    labels = c("lambda4", "lambda5", "lambda6"))
 
-# Factor variances and covariance - constrain variances to 1
-varFac <- mxPath(from = c("POS", "NEG"), arrows = 2, connect = "unique.pairs",
+# Latent variances and covariance - constrain variances to 1
+varLatent <- mxPath(from = c("POS", "NEG"), arrows = 2, 
+   connect = "unique.pairs",
    free = c(FALSE, TRUE, FALSE), values = 1,
    labels = c("phi11", "phi12", "phi22"))
 
-# Factor means - constrain means to 0
+# Latent means - constrain means to 0
 means <- mxPath(from = "one", to = c("POS", "NEG"), arrows = 1,
    free = FALSE, values = 0,
    labels = c("kappa1", "kappa2"))
@@ -94,7 +96,7 @@ intercepts <- mxPath(from = "one", to = names, arrows = 1,
 ## Setup the model
 model1 <- mxModel("Two Factor Model", type = "RAM",
    manifestVars = names, latentVars = c("POS", "NEG"),
-   data, loadings1, loadings2, varFac, means, varRes, intercepts)
+   data, loadings1, loadings2, varLatent, means, varRes, intercepts)
 
 ## Run the model and get summary
 fit1 <- mxRun(model1)
@@ -164,13 +166,12 @@ cbind(OpenMx, lavaan)
 ########################
 
 
-
 ### Method 2: Marker-Variable Method
 ## Constrain 3rd loading for POS and 1st loading for NEG to 1
 ## Constrain 3rd intercept for POS and 1st intercept for NEG to 0
 
 ## Collect the bits and pieces needed by OpenMx
-# Factor loadings - Constrain 3rd loading for POS & 1st loading for NEG to 1
+# Loadings - Constrain 3rd loading for POS & 1st loading for NEG to 1
 loadings1 <- mxPath(from = "POS", to = c("pos1", "pos2", "pos3"), arrows = 1,
    free = c(TRUE, TRUE, FALSE), values = c(0.5, 0.5, 1),
    labels = c("lambda1", "lambda2", "lambda3"))
@@ -179,12 +180,13 @@ loadings2 <- mxPath(from = "NEG", to = c("neg1", "neg2", "neg3"), arrows = 1,
    free = c(FALSE, TRUE, TRUE), values = c(1, 0.5, 0.5),
    labels = c("lambda4", "lambda5", "lambda6"))
 
-# Factor variances and covariance
-varFac <- mxPath(from = c("POS", "NEG"), arrows = 2, connect = "unique.pairs",
+# Latent variances and covariance
+varLatent <- mxPath(from = c("POS", "NEG"), arrows = 2, 
+   connect = "unique.pairs",
    free = TRUE, values = c(1, 0.5, 1),
    labels = c("phi11", "phi12", "phi22"))
 
-# Factor means
+# Latent means
 means <- mxPath(from = "one", to = c("POS", "NEG"), arrows = 1,
    free = TRUE, values = 1,
    labels = c("kappa1", "kappa2"))
@@ -203,7 +205,7 @@ intercepts <- mxPath(from = "one", to = names, arrows = 1,
 ## Setup the model
 model2 <- mxModel("Two Factor Model", type = "RAM",
    manifestVars = names, latentVars = c("POS", "NEG"),
-   data, loadings1, loadings2, varFac, means, varRes, intercepts)
+   data, loadings1, loadings2, varLatent, means, varRes, intercepts)
 
 ## Run the model and get summary
 fit2 <- mxRun(model2)
@@ -260,7 +262,7 @@ cbind(OpenMx, lavaan)
 ## Constrain sum of intercepts to equal 0
 
 ## Collect the bits and pieces needed by OpenMx
-# Factor loadings
+# Loadings
 loadings1 <- mxPath(from = "POS", to = c("pos1", "pos2", "pos3"), arrows = 1,
    free = TRUE, values = 0.5,
    labels = c("lambda1", "lambda2", "lambda3"))
@@ -269,11 +271,12 @@ loadings2 <- mxPath(from = "NEG", to = c("neg1", "neg2", "neg3"), arrows = 1,
    free = TRUE, values = 0.5,
    labels = c("lambda4", "lambda5", "lambda6"))
 
-# Factor variances and covariance
-varFac <- mxPath(from = c("POS", "NEG"), arrows = 2, connect = "unique.pairs",
+# Latent variances and covariance
+varFac <- mxPath(from = c("POS", "NEG"), arrows = 2, 
+   connect = "unique.pairs",
    free = TRUE, values = 1, labels = c("phi11", "phi12", "phi22"))
 
-# Factor means
+# Latent means
 means <- mxPath(from = "one", to = c("POS", "NEG"), arrows = 1,
    free = TRUE, values = 1,
    labels = c("kappa1", "kappa2"))
@@ -297,7 +300,7 @@ conInterNEG <- mxConstraint(tau4 + tau5 + tau6 == 0)
 ## Setup the model
 model3 <- mxModel("Two Factor Model", type = "RAM",
    manifestVars = names, latentVars = c("POS", "NEG"),
-   data, loadings1, loadings2, varFac, means, varRes, intercepts,
+   data, loadings1, loadings2, varLatent, means, varRes, intercepts,
    conLoadPOS, conLoadNEG, conInterPOS, conInterNEG)
 
 ## Run the model and get summary

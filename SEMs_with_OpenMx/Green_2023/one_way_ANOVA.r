@@ -1,7 +1,7 @@
 
 ## One-Way ANOVA
 ##
-## Thompson, M., Lie, Y. & Green, S. (2023). Flexible structural equation modeling
+## Thompson, M., Liu, Y. & Green, S. (2023). Flexible structural equation modeling
 ## approaches for analyzing means. In R. Hoyle (Ed.), Handbook of structural
 ## equation modeling (2nd ed., pp. 385-408). New York, NY: Guilford Press.
 
@@ -32,6 +32,7 @@ head(df)
 # "More Constrained" model - means constrained to equality across the groups.
 # To be consistent with ANOVA's assumption of homogeneity of variances, 
 # the residual variances are constrained to equality across the groups.
+# But the assumption can be relaxed - see below.
 
 ## Get data into OpenMx format for each group
 dataA <- mxData(observed = df[df$x == "a", c("x","y")], type = "raw")
@@ -75,9 +76,8 @@ thetaLC <- coef(fitLC)["e"]; thetaLC
 C1 <- mxConstraint(a1 == a2)
 C2 <- mxConstraint(a2 == a3)
 
-## Add them to "Less Constrained" model
-modelMC <- mxModel(modelLC, C1, C2)
-modelMC <- mxModel(modelMC, name = "MC")       # Change its name 
+## Add them to "Less Constrained" model and change its name
+modelMC <- mxModel(modelLC, C1, C2, name = "MC")
 
 ## Run the MC model and get the summary
 fitMC <- mxRun(modelMC)
@@ -94,7 +94,7 @@ anova(fitMC, fitLC)
 
 ## Get R square and compare with result given on page 390.
 ## R square formula given in Equation 21.4 (p. 390).
-Rsquare <- (thetaMC - thetaLC)/thetaMC; Rsquare
+Rsquare <- (thetaMC - thetaLC)/thetaMC; unname(Rsquare)
 
 ## The warning message at the bottom of the summary might be disconcerting for some. 
 # One way to avoid the message is not to run the reference models.
@@ -162,7 +162,7 @@ varB <- mxPath(from = "y", arrows = 2,
 varC <- mxPath(from = "y", arrows = 2,
    free = TRUE, values = 1, label = "e3")
 
-## Everythiing else stays the same
+## Everything else stays the same
 
 ## Setup the group models
 modA <- mxModel("GrA", type = "RAM",
@@ -194,9 +194,8 @@ thetaLC <- coef(fitLC)[c("e1", "e2", "e3")]; thetaLC
 ## Constraints - same as before
 C1; C2
 
-## Add them to "Less Constrained" model
-modelMC <- mxModel(modelLC, C1, C2)
-modelMC <- mxModel(modelMC, name = "MC")       # Change its name 
+## Add them to "Less Constrained" model and change its name
+modelMC <- mxModel(modelLC, C1, C2, name = "MC")
 
 ## Run the MC model and get the summary
 fitMC <- mxRun(modelMC)

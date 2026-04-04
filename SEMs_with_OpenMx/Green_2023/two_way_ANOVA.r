@@ -1,7 +1,7 @@
 
 ## Two-Way ANOVA
 ##
-## Thompson, M., Lie, Y. & Green, S. (2023). Flexible structural equation modeling
+## Thompson, M., Liu Y. & Green, S. (2023). Flexible structural equation modeling
 ## approaches for analyzing means. In R. Hoyle (Ed.), Handbook of structural
 ## equation modeling (2nd ed., pp. 385-408). New York, NY: Guilford Press.
 
@@ -31,7 +31,7 @@ source("ANOVA_data.r")
 head(df)
 
 ## Code to get the  prelimnary results presented Table 21.3 (p. 395) 
-## is not shown here
+## is not shown here.
 
 ## Two-way ANOVA
 # There are six groups in the model, and thus there are six means.
@@ -47,11 +47,12 @@ head(df)
 
 # To be consistent with ANOVA's assumption of homogeneity of variances,
 # the variances are constrained to equality aross the groups.
+# But the assumption can be relaxed.
 
 # Table 21.4 (p. 396) shows the results for the test of the
 # "Coping Strategy" main effect for weighted means.
-# Here, tests for both main effects and the interaction
-# for weighted and unweighted means are shown.
+# Here, tests for both main effects for weighted and unweighted means
+# and the interaction are shown.
 
 ## Get data into OpenMx format for each group
 dataAM <- mxData(observed = df[df$sg == "am", c("sg","y")], type = "raw")
@@ -116,9 +117,8 @@ thetaLC <- coef(fitLC)["e"]; thetaLC
 ## Constraint
 conGU <- mxConstraint(af + bf + cf == am + bm + cm)
 
-## Add it to "Less Constrained" model
-modelGU <- mxModel(modelLC, conGU)
-modelGU <- mxModel(modelGU, name = "Gender Unweighted")       # Change its name 
+## Add it to "Less Constrained" model and change its name
+modelGU <- mxModel(modelLC, conGU, name = "Gender Unweighted")
 
 ## Run the MC model and get the summary
 fitGU <- mxRun(modelGU)
@@ -144,9 +144,8 @@ anova(fitGU, fitLC)
 conCU1 <- mxConstraint(af + am == bf + bm)
 conCU2 <- mxConstraint(af + am == cf + cm)
 
-## Add them to "Less Constrained" model
-modelCU <- mxModel(modelLC, conCU1, conCU2)
-modelCU <- mxModel(modelCU, name = "Coping Unweighted")       # Change its name 
+## Add them to "Less Constrained" model and change its name
+modelCU <- mxModel(modelLC, conCU1, conCU2, name = "Coping Unweighted")
 
 ## Run the MC model and get the summary
 fitCU <- mxRun(modelCU)
@@ -168,9 +167,8 @@ anova(fitCU, fitLC)
 freq <- table(df$g, df$x); freq      # cell frequencies
 conGW <- mxConstraint((3*af + 3*bf + 6*cf)/12 == (6*am + 3*bm + 3*cm)/12)
 
-## Add it to "Less Constrained" model
-modelGW <- mxModel(modelLC, conGW)
-modelGW <- mxModel(modelGW, name = "Gender Weighted")       # Change its name
+## Add it to "Less Constrained" model and change its name
+modelGW <- mxModel(modelLC, conGW, name = "Gender Weighted")
 
 ## Run the MC model and get the summary
 fitGW <- mxRun(modelGW)
@@ -192,8 +190,7 @@ conCW1 <- mxConstraint((3*af + 6*am)/9 == (3*bf + 3*bm)/6 )
 conCW2 <- mxConstraint((3*bf + 3*bm)/6 == (6*cf + 3*cm)/9)
 
 ## Add them to "Less Constrained" model
-modelCW <- mxModel(modelLC, conCW1, conCW2)
-modelCW <- mxModel(modelCW, name = "Coping Weighted")       # Change its name
+modelCW <- mxModel(modelLC, conCW1, conCW2, name = "Coping Weighted")
 
 ## Run the MC model and get the summary
 fitCW <- mxRun(modelCW)
@@ -222,9 +219,8 @@ anova(fitCW, fitLC)
 conI1 <- mxConstraint((af - am) == (bf - bm))
 conI2 <- mxConstraint((bf - bm) == (cf - cm))
 
-## Add them to "Less Constrained" model
-modelI <- mxModel(modelLC, conI1, conI2)
-modelI <- mxModel(modelI, name = "Interaction")       # Change its name
+## Add them to "Less Constrained" model and change its name
+modelI <- mxModel(modelLC, conI1, conI2, name = "Interaction")
 
 ## Run the MC model and get the summary
 fitI <- mxRun(modelI)

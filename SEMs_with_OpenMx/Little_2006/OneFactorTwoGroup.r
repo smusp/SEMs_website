@@ -4,7 +4,8 @@
 ## Some easier examples.
 ## Demonstrates three methods of scaling in one-factor, two-group model:
 ## 1. Reference-Group Method - Constrain latent variable's variance and mean;
-## 2. Marker-Variable Method - Constrain one loading and that indicator's intercept;
+## 2. Marker-Variable Method - Constrain one loading and that indicator's
+##    intercept;
 ## 3. Effects-Scaling Method - Constrain sums of loadings and intercepts.
 
 ## Following Little et al's lead, assume strong metric invariance:
@@ -24,7 +25,8 @@
 library(OpenMx)
 
 ## Get data
-# Vectors of correlations (row-by-row), standard deviations, and means, and sample size.
+# Vectors of correlations (row-by-row), standard deviations, and means,
+# and sample size.
 # 7th grade
 vcor7 <- c(
    1.00000,
@@ -85,19 +87,19 @@ data8 <- mxData(observed = mcov8, type = "cov", means = vmean8, numObs = n8)
 ## These constraints apply to Grade 7 only.
 
 ## Collect the bits and pieces needed by OpenMx
-# Factor loadings
+# Loadings
 loadings <- mxPath(from = "POS", to = names, arrows = 1,
    free = TRUE, values = 0.5,
    labels = c("lambda1", "lambda2", "lambda3"))
 
-# Factor variances - Constrain Grade 7 variance to 1
-varFac7 <- mxPath(from = "POS", arrows = 2,
+# Latent variances - Constrain Grade 7 variance to 1
+varLatent7 <- mxPath(from = "POS", arrows = 2,
    free = FALSE, values = 1, labels = "phi7")
 
-varFac8 <- mxPath(from = "POS", arrows = 2,
+varLatent8 <- mxPath(from = "POS", arrows = 2,
    free = TRUE, values = 1, labels = "phi8")
 
-# Factor means - Constrain Grade 7 mean to 0
+# Latent means - Constrain Grade 7 mean to 0
 means7 <- mxPath(from = "one", to = "POS", arrows = 1,
    free = FALSE, values = 0, labels = "kappa7")
 
@@ -121,13 +123,13 @@ intercepts <- mxPath(from = "one", to = names, arrows = 1,
 ## Setup models for each Grade
 modGr7 <- mxModel("Grade7", type = "RAM",
    manifestVars = names, latentVars = "POS",
-   data7, loadings, varFac7, means7, varRes7, intercepts)
+   data7, loadings, varLatent7, means7, varRes7, intercepts)
 
 modGr8 <- mxModel("Grade8", type = "RAM",
    manifestVars = names, latentVars = "POS",
-   data8, loadings, varFac8, means8, varRes8, intercepts)
+   data8, loadings, varLatent8, means8, varRes8, intercepts)
 
-## Combine the two models
+## Combine the two models using "mxFitFunctionMultigroup()"
 fun <- mxFitFunctionMultigroup(c("Grade7.fitfunction", "Grade8.fitfunction"))
 model1 <- mxModel("One Factor Two Group Model", modGr7, modGr8, fun)
 
@@ -136,7 +138,7 @@ fit1 <- mxRun(model1)
 summary(fit1)
 
 # Number of variables: 3
-# Number of pices of information in co/variance matrix: (3 X 4) / 2 = 6
+# Number of pieces of information in co/variance matrix: (3 X 4) / 2 = 6
 # plus 3 means = 9 pieces of information for each group;
 # that is, 18 for the model
 
@@ -199,19 +201,19 @@ cbind(OpenMx, lavaan)
 ## these constraints apply to both Grades.
 
 ## Collect the bits and pieces needed by OpenMx
-# Factor loadings - Constrain 3rd loading to 1
+# Loadings - Constrain 3rd loading to 1
 loadings <- mxPath(from = "POS", to = names, arrows = 1,
    free = c(TRUE, TRUE, FALSE), values = c(0.5, 0.5, 1),
    labels = c("lambda1", "lambda2", "lambda3"))
 
-# Factor variances
-varFac7 <- mxPath(from = "POS", arrows = 2,
+# Latent variances
+varLatent7 <- mxPath(from = "POS", arrows = 2,
    free = TRUE, values = 1, labels = "phi7")
 
-varFac8 <- mxPath(from = "POS", arrows = 2,
+varLatent8 <- mxPath(from = "POS", arrows = 2,
    free = TRUE, values = 1, labels = "phi8")
 
-# Factor means
+# Latent means
 means7 <- mxPath(from = "one", to = "POS", arrows = 1,
    free = TRUE, values = 1, labels = "kappa7")
 
@@ -235,11 +237,11 @@ intercepts <- mxPath(from = "one", to = names, arrows = 1,
 ## Setup models for each Grade
 modGr7 <- mxModel("Grade7", type = "RAM",
    manifestVars = names, latentVars = "POS",
-   data7, loadings, varFac7, means7, varRes7, intercepts)
+   data7, loadings, varLatent7, means7, varRes7, intercepts)
 
 modGr8 <- mxModel("Grade8", type = "RAM",
    manifestVars = names, latentVars = "POS",
-   data8, loadings, varFac8, means8, varRes8, intercepts)
+   data8, loadings, varLatent8, means8, varRes8, intercepts)
 
 ## Combine the two models using "mxFitFunctionMultigroup()"
 fun <- mxFitFunctionMultigroup(c("Grade7.fitfunction", "Grade8.fitfunction"))
@@ -293,19 +295,19 @@ cbind(OpenMx, lavaan)
 ## these constraints apply to both Grades.
 
 ## Collect the bits and pieces needed by OpenMx
-# Factor loadings
+# Loadings
 loadings <- mxPath(from = "POS", to = names, arrows = 1,
    free = TRUE, values = 0.5,
    labels = c("lambda1", "lambda2", "lambda3"))
 
-# Factor variances
-varFac7 <- mxPath(from = "POS", arrows = 2,
+# Latent variances
+varLatent7 <- mxPath(from = "POS", arrows = 2,
    free = TRUE, values = 1, labels = "phi7")
 
-varFac8 <- mxPath(from = "POS", arrows = 2,
+varLatent8 <- mxPath(from = "POS", arrows = 2,
    free = TRUE, values = 1, labels = "phi8")
 
-# Factor means
+# Latent means
 means7 <- mxPath(from = "one", to = "POS", arrows = 1,
    free = TRUE, values = 0, labels = "kappa7")
 
@@ -329,24 +331,25 @@ intercepts <- mxPath(from = "one", to = names, arrows = 1,
 ## Setup models for each Grade
 modGr7 <- mxModel("Grade7", type = "RAM",
    manifestVars = names, latentVars = "POS",
-   data7, loadings, varFac7, means7, varRes7, intercepts)
+   data7, loadings, varLatent7, means7, varRes7, intercepts)
 
 modGr8 <- mxModel("Grade8", type = "RAM",
    manifestVars = names, latentVars = "POS",
-   data8, loadings, varFac8, means8, varRes8, intercepts)
+   data8, loadings, varLatent8, means8, varRes8, intercepts)
 
 ## Constraints
 conLoad <- mxConstraint(lambda1 + lambda2 + lambda3 == 3)
 conInter <- mxConstraint(tau1 + tau2 + tau3 == 0)
 
-## Combine the two models
+## Combine the two models using "mxFitFunctionMultigroup()"
 fun <- mxFitFunctionMultigroup(c("Grade7.fitfunction", "Grade8.fitfunction"))
 model3 <- mxModel("One Factor Two Group Model", modGr7, modGr8,
    conLoad, conInter, fun)
 
-# Note: Constraints are added to final model, not to each of the Grade7 and Grade 8 models;
-# otherwise, OpenMx will count them as 4 constraints, accounting for 4 degrees of freedom,
-# instead of 2.
+# Note: Constraints are added to final model, 
+# not to each of the Grade 7 and Grade 8 models;
+# otherwise, OpenMx will count them as 4 constraints, 
+# accounting for 4 degrees of freedom, instead of 2.
 
 ## Run the model and get summary
 fit3 <- mxRun(model3)

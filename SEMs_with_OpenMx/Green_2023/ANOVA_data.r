@@ -5,8 +5,8 @@
 tab <- 0.5 * table(df$x)  # in each condition
 df$id <- c(rep(1:tab[1], 2), rep(1:tab[2], 2), rep(1:tab[3], 2))  # id variable 
 
-df <- reshape(df, timevar = "c", idvar = c("id", "x", "g"), varying = c("pre", "y"), 
-   direction = "wide")
+df <- reshape(df, timevar = "c", idvar = c("id", "x", "g"), 
+   varying = c("pre", "y"), direction = "wide")
 
 df <- within(df, {
 ## Grand mean centered "pre" - the before scores

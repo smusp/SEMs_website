@@ -1,7 +1,7 @@
 
 ## One-way ANOVA of latent variable
 ##
-## Thompson, M., Lie, Y. & Green, S. (2023). Flexible structural equation modeling
+## Thompson, M., Liu, Y. & Green, S. (2023). Flexible structural equation modeling
 ## approaches for analyzing means. In R. Hoyle (Ed.), Handbook of structural
 ## equation modeling (2nd ed., pp. 385-408). New York, NY: Guilford Press.
 
@@ -22,7 +22,7 @@ source("satisfactionII.r")
 head(df)
 
 ## Comparisons of latent means assume some level of measurement invariance.
-# Thompson, Lie, and Green (TLG) assume strict measurement invariance:
+# Thompson, Liu, and Green (TLG) assume strict measurement invariance:
 # loadings, intercepts, and residual variances and covariances are constrainted
 # to equality across the groups (covariances are zero, and thus they are equal).
 # TLG also constrain the latent error variance to equality across the groups.
@@ -44,14 +44,15 @@ dataB <- mxData(observed = df[df$x == "b", c("x", "y1", "y2", "y3", "y4")], type
 dataC <- mxData(observed = df[df$x == "c", c("x", "y1", "y2", "y3", "y4")], type = "raw")
 
 ### "Less Constrained" model
-# Factor loadings - equal across groups
+# Loadings - equal across groups, 
+#            but first loading constrained to 1.
 manifest <- c("y1", "y2", "y3", "y4")
 loadings <- mxPath(from = "LS", to = manifest, arrows = 1,
-   free = c(FALSE, TRUE, TRUE, TRUE), values = 1,   # First loading constrained to 1
+   free = c(FALSE, TRUE, TRUE, TRUE), values = 1,
    labels = c("l1", "l2", "l3", "l4"))
 
-## Factor variances - equal across groups
-varFac <- mxPath(from = "LS", arrows = 2,
+## Latent variances - equal across groups
+varLatent <- mxPath(from = "LS", arrows = 2,
    free = TRUE, values = 1, labels = "d")
 
 ## Residual variances - equal across groups
@@ -64,9 +65,10 @@ intercepts <- mxPath(from = "one", to = manifest, arrows = 1,
    free = TRUE, values = 1,
    labels = c("t1", "t2", "t3", "t4"))
 
-## Factor means - differs across the groups
+## Latent means - differ across the groups,
+#                 but mean for first group constrained to 0.
 meanA <- mxPath(from = "one", to = "LS", arrows = 1,
-   free = FALSE, values = 0, labels = "a1")
+   free = FALSE, values = 0, labels = "a1") 
 meanB <- mxPath(from = "one", to = "LS", arrows = 1,
    free = TRUE, values = 1, labels = "a2")
 meanC <- mxPath(from = "one", to = "LS", arrows = 1,
@@ -75,18 +77,18 @@ meanC <- mxPath(from = "one", to = "LS", arrows = 1,
 ## Setup the group models
 modA <- mxModel("GrA", type = "RAM",
    manifestVars = manifest, latentVars = "LS",
-   dataA, loadings, varFac, varRes, intercepts, meanA)
+   dataA, loadings, varLatent, varRes, intercepts, meanA)
 
 modB <- mxModel("GrB", type = "RAM",
    manifestVars = manifest, latentVars = "LS",
-   dataB, loadings, varFac, varRes, intercepts, meanB)
+   dataB, loadings, varLatent, varRes, intercepts, meanB)
 
 modC <- mxModel("GrC", type = "RAM",
    manifestVars = manifest, latentVars = "LS",
-   dataC, loadings, varFac, varRes, intercepts, meanC)
+   dataC, loadings, varLatent, varRes, intercepts, meanC)
 
 ## Combine the three models
-fun <- mxFitFunctionMultigroup(c("GrA", "GrB", "GrC"))
+fun <- mxFitFunctionMultigroup(c("GrA.fitfunction", "GrB.fitfunction", "GrC.fitfunction"))
 modelLC <- mxModel("LC", modA, modB, modC, fun)
 
 ## Run the LC model and get the summary
@@ -102,20 +104,18 @@ fitLC <- mxRun(modelLC)
 summary(fitLC, refModels = mxRefModels(fitLC, run = TRUE))
 ## All good
 
-## Get latent means and variance, and compare with "All measures" row in Table 21.6
-estimates <- coef(fitLC)
-
-latentMeans = coef(fitLC)[c("a2", "a3")]; latentMeans
-latentVar = coef(fitLC)["d"]; latentVar
+## Get latent means and variance, 
+#  and compare with "All measures" row in Table 21.6
+latentMeans <- coef(fitLC)[c("a2", "a3")]; latentMeans
+latentVar <- coef(fitLC)["d"]; latentVar
 
 ### "More Constrained" model
 ## Constraints
 C1 <- mxConstraint(a2 == 0)
 C2 <- mxConstraint(a3 == 0)
 
-## Add them to "Less Constrained" model
-modelMC <- mxModel(modelLC, C1, C2)
-modelMC <- mxModel(modelMC, name = "MC")       # Change its name 
+## Add them to "Less Constrained" model, and change its name
+modelMC <- mxModel(modelLC, C1, C2, name = "MC")
 
 ## Run the MC model and get the summary
 fitMC <- mxRun(modelMC)
@@ -123,6 +123,7 @@ summary(fitMC, refModels = mxRefModels(fitMC, run = TRUE))
 
 ## Contrast the two models, and campare with chi sq test in Table 21.6
 anova(fitLC, fitMC)
+
 
 ## Effect sizes, and compare with values on p. 405
 # Cut-and-paste means and variances to get effect sizes

@@ -6,12 +6,15 @@
 ## Methods of Scaling and Identification
 
 ## Demonstrates three methods of scaling in two-factor, two-group model:
-## 1. Reference-group method - Constrain both latent variables' variances and means;
-## 2. Marker-variable method - Constrain one loading and that indicator's intercept in both factors;
-## 3. Effect-scaling method - Constrain sums of loadings and intercepts for both factors.
+## 1. Reference-group method - Constrain both latent variables' variances 
+#     and means;
+## 2. Marker-variable method - Constrain one loading and that indicator's
+#     intercept in both factors;
+## 3. Effect-scaling method - Constrain sums of loadings and intercepts
+#     for both factors.
 
 ## Little et al assume strong metric invariance:
-## Corresponding loadings and intercepts constrained to equality across groups
+## Corresponding loadings and intercepts constrained to equality across groups.
 
 ## Compare with results given in Table 2 (pp. 64-65)
 ## Little et al show results for three versions of Method 2.
@@ -82,7 +85,7 @@ data8 <- mxData(observed = mcov8, type = "cov", means = mean8, numObs = n8)
 ## These constraints apply to Grade 7 only.
 
 ## Collect the bits and pieces needed by OpenMx
-# Factor loadings
+# Loadings
 loadings1 <- mxPath(from = "POS", to = c("pos1", "pos2", "pos3"), arrows = 1,
    free = TRUE, values = 0.5,
    labels = c("lambda1", "lambda2", "lambda3"))
@@ -91,16 +94,18 @@ loadings2 <- mxPath(from = "NEG", to = c("neg1", "neg2", "neg3"), arrows = 1,
    free = TRUE, values = 0.5,
    labels = c("lambda4", "lambda5", "lambda6"))
 
-# Factor variances and covariance - constrain variances to 1 for Grade 7 only
-varFac7 <- mxPath(from = c("POS", "NEG"), arrows = 2, connect = "unique.pairs",
+# Latent variances and covariance - constrain variances to 1 for Grade 7 only
+varLatent7 <- mxPath(from = c("POS", "NEG"), arrows = 2, 
+   connect = "unique.pairs",
    free = c(FALSE, TRUE, FALSE), values = 1,
    labels = c("phi7_11", "phi7_12", "phi7_22"))
  
-varFac8 <- mxPath(from = c("POS", "NEG"), arrows = 2, connect = "unique.pairs",
+varLatent8 <- mxPath(from = c("POS", "NEG"), arrows = 2, 
+   connect = "unique.pairs",
    free = TRUE, values = 1,
    labels = c("phi8_11", "phi8_12", "phi8_22"))
 
-# Factor means - constrain means to 0 for Grade 7 only
+# Latent means - constrain means to 0 for Grade 7 only
 means7 <- mxPath(from = "one", to = c("POS", "NEG"), arrows = 1,
    free = FALSE, values = 0,
    labels = c("kappa7_1", "kappa7_2"))
@@ -112,11 +117,13 @@ means8 <- mxPath(from = "one", to = c("POS", "NEG"), arrows = 1,
 # Residual variances
 varRes7 <- mxPath(from = names, arrows = 2,
    free = TRUE, values = 1,
-   labels = c("theta7_1", "theta7_2", "theta7_3", "theta7_4", "theta7_5", "theta7_6"))
+   labels = c("theta7_1", "theta7_2", "theta7_3", 
+              "theta7_4", "theta7_5", "theta7_6"))
 
 varRes8 <- mxPath(from = names, arrows = 2,
    free = TRUE, values = 1,
-   labels = c("theta8_1", "theta8_2", "theta8_3", "theta8_4", "theta8_5", "theta8_6"))
+   labels = c("theta8_1", "theta8_2", "theta8_3", 
+              "theta8_4", "theta8_5", "theta8_6"))
 
 # Intercepts
 intercepts <- mxPath(from = "one", to = names, arrows = 1,
@@ -126,11 +133,11 @@ intercepts <- mxPath(from = "one", to = names, arrows = 1,
 ## Setup models for each Grade
 modGr7 <- mxModel("Grade7", type = "RAM",
    manifestVars = names, latentVars = c("POS", "NEG"),
-   data7, loadings1, loadings2, varFac7, means7, varRes7, intercepts)
+   data7, loadings1, loadings2, varLatent7, means7, varRes7, intercepts)
 
 modGr8 <- mxModel("Grade8", type = "RAM",
    manifestVars = names, latentVars = c("POS", "NEG"),
-   data8, loadings1, loadings2, varFac8, means8, varRes8, intercepts)
+   data8, loadings1, loadings2, varLatent8, means8, varRes8, intercepts)
 
 ## Combine the two models
 fun <- mxFitFunctionMultigroup(c("Grade7.fitfunction", "Grade8.fitfunction"))
@@ -150,8 +157,8 @@ summary1
 ## Constrain 1st intercept in NEG to 0 in both groups
 
 ## Collect the bits and pieces needed by OpenMx
-# Factor loadings - 3rd loading for POS constrained to 1
-#                 - 1st loading for NEG constrained to 1
+# Loadings - 3rd loading for POS constrained to 1
+#          - 1st loading for NEG constrained to 1
 loadings1 <- mxPath(from = "POS", to = c("pos1", "pos2", "pos3"), arrows = 1,
    free = c(TRUE, TRUE, FALSE), values = c(0.5, 0.5, 1),
    labels = c("lambda1", "lambda2", "lambda3"))
@@ -160,16 +167,18 @@ loadings2 <- mxPath(from = "NEG", to = c("neg1", "neg2", "neg3"), arrows = 1,
    free = c(FALSE, TRUE, TRUE), values = c(1, 0.5, 0.5),
    labels = c("lambda4", "lambda5", "lambda6"))
 
-# Factor variances and covariance
-varFac7 <- mxPath(from = c("POS", "NEG"), arrows = 2, connect = "unique.pairs",
+# Latent variances and covariance
+varLatent7 <- mxPath(from = c("POS", "NEG"), arrows = 2, 
+   connect = "unique.pairs",
    free = TRUE, values = 1, 
    labels = c("phi7_11", "phi7_12", "phi7_22"))
 
-varFac8 <- mxPath(from = c("POS", "NEG"), arrows = 2, connect = "unique.pairs",
+varLatent8 <- mxPath(from = c("POS", "NEG"), arrows = 2, 
+   connect = "unique.pairs",
    free = TRUE, values = 1,
    labels = c("phi8_11", "phi8_12", "phi8_22"))
 
-# Factor means
+# Latent means
 means7 <- mxPath(from = "one", to = c("POS", "NEG"), arrows = 1,
    free = TRUE, values = 1,
    labels = c("kappa7_1", "kappa7_2"))
@@ -181,25 +190,28 @@ means8 <- mxPath(from = "one", to = c("POS", "NEG"), arrows = 1,
 # Residual variances
 varRes7 <- mxPath(from = names, arrows = 2,
    free = TRUE, values = 1,
-   labels = c("theta7_1", "theta7_2", "theta7_3", "theta7_4", "theta7_5", "theta7_6"))
+   labels = c("theta7_1", "theta7_2", "theta7_3",
+              "theta7_4", "theta7_5", "theta7_6"))
 
 varRes8 <- mxPath(from = names, arrows = 2,
    free = TRUE, values = 1, 
-   labels = c("theta8_1", "theta8_2", "theta8_3", "theta8_4", "theta8_5", "theta8_6"))
+   labels = c("theta8_1", "theta8_2", "theta8_3", 
+              "theta8_4", "theta8_5", "theta8_6"))
 
 # Intercepts - 3rd intercept for POS & 1st intercept for NEG constrained to 0
 intercepts <- mxPath(from = "one", to = names, arrows = 1,
-   free = c(TRUE, TRUE, FALSE, FALSE, TRUE, TRUE), values = c(1, 1, 0, 0, 1, 1),
+   free = c(TRUE, TRUE, FALSE, FALSE, TRUE, TRUE), 
+   values = c(1, 1, 0, 0, 1, 1),
    labels = c("tau1", "tau2", "tau3", "tau4", "tau5", "tau6"))
 
 ## Setup models for each Grade
 modGr7 <- mxModel("Grade7", type = "RAM",
    manifestVars = names, latentVars = c("POS", "NEG"),
-   data7, loadings1, loadings2, varFac7, means7, varRes7, intercepts)
+   data7, loadings1, loadings2, varLatent7, means7, varRes7, intercepts)
 
 modGr8 <- mxModel("Grade8", type = "RAM",
    manifestVars = names, latentVars = c("POS", "NEG"),
-   data8, loadings1, loadings2, varFac8, means8, varRes8, intercepts)
+   data8, loadings1, loadings2, varLatent8, means8, varRes8, intercepts)
 
 ## Combine the two models
 fun <- mxFitFunctionMultigroup(c("Grade7.fitfunction", "Grade8.fitfunction"))
@@ -217,7 +229,7 @@ summary2
 ## Constrain intercepts to add to 0 in both factors for both Grades
 
 ## Collect the bits and pieces needed by OpenMx
-# Factor loadings
+# Loadings
 loadings1 <- mxPath(from = "POS", to = c("pos1", "pos2", "pos3"), arrows = 1,
    free = TRUE, values = 0.5,
    labels = c("lambda1", "lambda2", "lambda3"))
@@ -226,16 +238,18 @@ loadings2 <- mxPath(from = "NEG", to = c("neg1", "neg2", "neg3"), arrows = 1,
    free = TRUE, values = 0.5,
    labels = c("lambda4", "lambda5", "lambda6"))
 
-# Factor variances and covariance
-varFac7 <- mxPath(from = c("POS", "NEG"), arrows = 2, connect = "unique.pairs",
+# Latent variances and covariance
+varLatent7 <- mxPath(from = c("POS", "NEG"), arrows = 2, 
+   connect = "unique.pairs",
    free = TRUE, values = 1, 
    labels = c("phi7_11", "phi7_12", "phi7_22"))
 
-varFac8 <- mxPath(from = c("POS", "NEG"), arrows = 2, connect = "unique.pairs",
+varLatent8 <- mxPath(from = c("POS", "NEG"), arrows = 2, 
+   connect = "unique.pairs",
    free = TRUE, values = 1,
    labels = c("phi8_11", "phi8_12", "phi8_22"))
 
-# Factor means
+# Latent means
 means7 <- mxPath(from = "one", to = c("POS", "NEG"), arrows = 1,
    free = TRUE, values = 1,
    labels = c("kappa7_1", "kappa7_2"))
@@ -247,11 +261,13 @@ means8 <- mxPath(from = "one", to = c("POS", "NEG"), arrows = 1,
 # Residual variances
 varRes7 <- mxPath(from = names, arrows = 2,
    free = TRUE, values = 1,
-   labels = c("theta7_1", "theta7_2", "theta7_3", "theta7_4", "theta7_5", "theta7_6"))
+   labels = c("theta7_1", "theta7_2", "theta7_3", 
+              "theta7_4", "theta7_5", "theta7_6"))
 
 varRes8 <- mxPath(from = names, arrows = 2,
    free = TRUE, values = 1,
-   labels = c("theta8_1", "theta8_2", "theta8_3", "theta8_4", "theta8_5", "theta8_6"))
+   labels = c("theta8_1", "theta8_2", "theta8_3", 
+              "theta8_4", "theta8_5", "theta8_6"))
 
 # Intercepts
 intercepts <- mxPath(from = "one", to = names, arrows = 1,
@@ -261,11 +277,11 @@ intercepts <- mxPath(from = "one", to = names, arrows = 1,
 ## Setup models for each Grade
 modGr7 <- mxModel("Grade7", type = "RAM",
    manifestVars = names, latentVars = c("POS", "NEG"),
-   data7, loadings1, loadings2, varFac7, means7, varRes7, intercepts)
+   data7, loadings1, loadings2, varLatent7, means7, varRes7, intercepts)
 
 modGr8 <- mxModel("Grade8", type = "RAM",
    manifestVars = names, latentVars = c("POS", "NEG"),
-   data8, loadings1, loadings2, varFac8, means8, varRes8, intercepts)
+   data8, loadings1, loadings2, varLatent8, means8, varRes8, intercepts)
 
 ## Constraints
 conLoad1  <- mxConstraint(lambda1 + lambda2 + lambda3 == 3)
@@ -291,7 +307,7 @@ models <- list(
    "Method 2" = summary2,
    "Method 3" = summary3)
 
-measures = c("Chi", "ChiDoF", "p", "CFI", "TLI", "RMSEA")
+measures <- c("Chi", "ChiDoF", "p", "CFI", "TLI", "RMSEA")
 
 fit1 <- do.call(rbind, lapply(models, `[`, measures))
 fit2 <- do.call(rbind, lapply(models, `[[`, "RMSEACI"))
@@ -309,7 +325,7 @@ cbind(fit1, fit2)
 #  RMSEA = sqrt((ChiSq/df - 1) / n)
 
 #  Substitute values from above;
-#  gives 'unadjusted RMSEA' as obtained by OpneMx.
+#  gives 'unadjusted RMSEA' as obtained by OpenMx.
 sqrt((58.60023/24 - 1) / 759)
 
 #  Steiger (1998, p. 417) states that 'adjusted RMSEA' can be obtained

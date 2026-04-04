@@ -1,7 +1,7 @@
 
 ## One-way MANOVA
 ##
-## Thompson, M., Lie, Y. & Green, S. (2023). Flexible structural equation modeling
+## Thompson, M., Liu, Y. & Green, S. (2023). Flexible structural equation modeling
 ## approaches for analyzing means. In R. Hoyle (Ed.), Handbook of structural
 ## equation modeling (2nd ed., pp. 385-408). New York, NY: Guilford Press.
 
@@ -26,6 +26,7 @@ head(df)
 # "Less Constrained" model - means allowed to differ across the groups;
 # "More Constrained" model - means constrained to equality across the groups.
 # Variances and covariances are constrained to equality across the groups.
+# But the constraints can be relaxed - see below.
 
 ## Get data into OpenMx format for each group
 dataA <- mxData(observed = df[df$x == "a", c("x", "y1", "y2", "y3", "y4")], type = "raw")
@@ -45,7 +46,8 @@ meanC <- mxPath(from = "one", to = manifest , arrows = 1,
    values = 0.5, label = c("a3y1", "a3y2", "a3y3", "a3y4"))
 
 ## Residual variances/covariances - Constrained to equality across the groups
-var <- mxPath(from = manifest, to = manifest, connect = "unique.pairs", arrows = 2,
+var <- mxPath(from = manifest, to = manifest, 
+   connect = "unique.pairs", arrows = 2,
    values = c(
    1, 0.5, 0.5, 0.5,
    1, 0.5, 0.5,
@@ -103,9 +105,8 @@ C6 <- mxConstraint(a2y3 == a3y3)
 C7 <- mxConstraint(a1y4 == a2y4)
 C8 <- mxConstraint(a2y4 == a3y4)
 
-## Add them to "Less Constrained" model
-modelMC <- mxModel(modelLC, C1, C2, C3, C4, C5, C6, C7, C8)
-modelMC <- mxModel(modelMC, name = "MC")       # Change its name 
+## Add them to "Less Constrained" model and change its name
+modelMC <- mxModel(modelLC, C1, C2, C3, C4, C5, C6, C7, C8, name = "MC")
 
 ## Run the MC model and get the summary
 fitMC <- mxRun(modelMC)
@@ -134,7 +135,8 @@ anova(fitLC, fitMC)
 ### ANOVA/MANOVA Designs Using SEM" (pp. 389-401)
 ### "Less Constrained" model
 # Variance and covariances - differ across the groups
-varA <- mxPath(from = manifest, to = manifest, connect = "unique.pairs", arrows = 2,
+varA <- mxPath(from = manifest, to = manifest, 
+   connect = "unique.pairs", arrows = 2,
    values = c(
    1, 0.5, 0.5, 0.5,
         1, 0.5, 0.5,
@@ -146,7 +148,8 @@ varA <- mxPath(from = manifest, to = manifest, connect = "unique.pairs", arrows 
 	                  "e33a1", "e34a1",
 	                           "e44a1"))
 
-varB <- mxPath(from = manifest, to = manifest, connect = "unique.pairs", arrows = 2,
+varB <- mxPath(from = manifest, to = manifest, 
+   connect = "unique.pairs", arrows = 2,
    values = c(
    1, 0.5, 0.5, 0.5,
    1, 0.5, 0.5,
@@ -158,7 +161,8 @@ varB <- mxPath(from = manifest, to = manifest, connect = "unique.pairs", arrows 
 	"e33a2", "e34a2",
 	"e44a2"))
 
-varC <- mxPath(from = manifest, to = manifest, connect = "unique.pairs", arrows = 2,
+varC <- mxPath(from = manifest, to = manifest, 
+   connect = "unique.pairs", arrows = 2,
    values = c(
    1, 0.5, 0.5, 0.5,
    1, 0.5, 0.5,
@@ -201,9 +205,8 @@ thetaLC = coef(fitLC)[grepl("^e", names(coef(fitLC)))]; thetaLC
 ## Constraints - same as before
 C1; C2; C3; C4; C5; C6; C7; C8
 
-## Add them to less constrained model
-modelMC <- mxModel(modelLC, C1, C2, C3, C4, C5, C6, C7, C8)
-modelMC <- mxModel(modelMC, name = "MC")       # Change its name 
+## Add them to less constrained model and change its name
+modelMC <- mxModel(modelLC, C1, C2, C3, C4, C5, C6, C7, C8, name = "MC")
 
 ## Run the MC model and get the summary
 fitMC <- mxRun(modelMC)

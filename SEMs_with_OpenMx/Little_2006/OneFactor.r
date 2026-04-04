@@ -4,7 +4,8 @@
 ## Some easier examples.
 ## Demonstrates three methods of scaling in a one-factor model:
 ## 1. Reference-Group Method - Constrain latent variable's variance and mean;
-## 2. Marker-Variable Method - Constrain one loading and that indicator's intercept;
+## 2. Marker-Variable Method - Constrain one loading and that indicator's
+##    intercept;
 ## 3. Effects-Scaling Method - Constrain sums of loadings and intercepts.
 
 ## Compare results with lavaan's results
@@ -21,7 +22,8 @@
 library(OpenMx)
 
 ## Get data
-# Vectors of correlations (row-by-row), standard deviations, and means, and sample size.
+# Vectors of correlations (row-by-row), standard deviations, and means, 
+# and sample size.
 vcor <- c(
    1.00000,
    0.75854,  1.00000,
@@ -56,17 +58,17 @@ data <- mxData(observed = mcov, type = "cov", means = vmean, numObs = n)
 ## Constrain latent mean to 0
 
 ## Collect the bits and pieces needed by OpenMx
-# Factor loadings
+# Loadings
 loadings <- mxPath(from = "POS", to = names, arrows = 1,
    free = TRUE, values = 0.5,
    labels = c("lambda1", "lambda2", "lambda3"))
 
-# Factor variance - Constrain variance to 1
-varFac <- mxPath(from = "POS", arrows = 2,
+# Latent variance - Constrain variance to 1
+varLatent <- mxPath(from = "POS", arrows = 2,
    free = FALSE, values = 1,
    labels = "phi")
 
-# Factor mean - Constrain mean to 0
+# Latent mean - Constrain mean to 0
 means <- mxPath(from = "one", to = "POS", arrows = 1,
    free = FALSE, values = 0,
    labels = "kappa")
@@ -84,7 +86,7 @@ intercepts <- mxPath(from = "one", to = names, arrows = 1,
 ## Setup the model
 model1 <- mxModel("One Factor Model", type = "RAM",
    manifestVars = names, latentVars = "POS",
-   data, loadings, varFac, means, varRes, intercepts)
+   data, loadings, varLatent, means, varRes, intercepts)
 
 ## Run the model and get summary
 fit1 <- mxRun(model1)
@@ -92,7 +94,8 @@ summary(fit1)
 
 # These models are just-identified.
 # Number of variables is 3;
-# Therefore, number of pieces of information in co/variance matrix: (3 X 4) / 2 = 6
+# Therefore, number of pieces of information in 
+# co/variance matrix: (3 X 4) / 2 = 6
 # plus 3 means = 9 pieces of information.
 # Number of parameters:
 #   3 loadings
@@ -100,12 +103,13 @@ summary(fit1)
 #   3 intercepts
 #   Total of 9 parameters
 
-# Therefore, degrees of freedom is zero,
-# chi square is 0,
+# Therefore, degrees of freedom = 0,
+# chi square = 0,
 # and other fit indices are either 1 or 0.
 # There is a small discrepancy - chi sq is not quite 0.
 # Note: the log likelihoods for the model and the saturated model differ.
-# OpenMx needs to estimate reference (saturated and independence) models.
+# OpenMx needs to be told to estimate reference 
+# (saturated and independence) models.
 
 summary(fit1, refModels = mxRefModels(fit1, run = TRUE))
 coef(fit1)
@@ -150,17 +154,17 @@ cbind(OpenMx, lavaan)
 ## Constrain third intercept to 0
 
 ## Collect the bits and pieces needed by OpenMx
-# Factor loadings - Constrain 3rd loading to 1
+# Loadings - Constrain 3rd loading to 1
 loadings <- mxPath(from = "POS", to = names, arrows = 1,
    free = c(TRUE, TRUE, FALSE), values = c(0.5, 0.5, 1),
    labels = c("lambda1", "lambda2", "lambda3"))
 
-# Factor variance
-varFac <- mxPath(from = "POS", arrows = 2,
+# Latent variance
+varLatent <- mxPath(from = "POS", arrows = 2,
    free = TRUE, values = 1,
    labels = "phi")
 
-# Factor mean
+# Latent mean
 means <- mxPath(from = "one", to = "POS", arrows = 1,
    free = TRUE, values = 1,
    labels = "kappa")
@@ -178,7 +182,7 @@ intercepts <- mxPath(from = "one", to = names, arrows = 1,
 ## Setup the model
 model2 <- mxModel("One Factor Model", type = "RAM",
    manifestVars = names, latentVars = "POS",
-   data, loadings, varFac, means, varRes, intercepts)
+   data, loadings, varLatent, means, varRes, intercepts)
 
 ## Run the model and get summary
 fit2 <- mxRun(model2)
@@ -225,17 +229,17 @@ cbind(OpenMx, lavaan)
 ## Constrain sum of intercepts to equal 0
 
 ## Collect the bits and pieces needed by OpenMx
-# Factor loadings
+# Loadings
 loadings <- mxPath(from = "POS", to = names, arrows = 1,
    free = TRUE, values = 0.5,
    labels = c("lambda1", "lambda2", "lambda3"))
 
-# Factor variance
-varFac <- mxPath(from = "POS", arrows = 2,
+# Latent variance
+varLatent <- mxPath(from = "POS", arrows = 2,
    free = TRUE, values = 1,
    labels = "phi")
 
-# Factor mean
+# Latent mean
 means <- mxPath(from = "one", to = "POS", arrows = 1,
    free = TRUE, values = 1,
    labels = "kappa")
@@ -257,7 +261,7 @@ conInter <- mxConstraint(tau1 + tau2 + tau3 == 0)
 ## Setup the model
 model3 <- mxModel("One Factor Model", type = "RAM",
    manifestVars = names, latentVars = "POS",
-   data, loadings, means, varFac, varRes, intercepts,
+   data, loadings, means, varLatent, varRes, intercepts,
    conLoad, conInter)
 
 ## Run the model and get summary

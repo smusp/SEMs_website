@@ -31,29 +31,29 @@ manifest <- names(df)
 dataRaw <- mxData(observed = df, type = "raw")
 
 ## Regressions
+#  - Arrow from "ple" to "grat".
+#  - Arrow is single headed - arrow head at "grat".
+#  - Starting value is 0.5.
+#  - Label is "a".
+regPaths1 <- mxPath(from = "ple", to = "grat",
+   arrows = 1, values = 0.5,
+   labels = "a")
+ 
 #  - Arrows from "ple" and "grat" to "shs".
 #  - Arrows are single headed - arrow head at "shs".
 #  - Starting values are 0.5.  When they are the same,
 #    they need to be listed once only.
 #  - Labels are "cprime" for arrow "ple" to "shs";
 #    and "b" for arrow "grat" to "shs".
-regPaths1 <- mxPath(from = c("ple", "grat"), to = "shs",
+regPaths2 <- mxPath(from = c("ple", "grat"), to = "shs",
    arrows = 1, values = 0.5,
    labels = c("cprime", "b"))
-
-#  - Arrow from "ple" to "grat".
-#  - Arrow is single headed - arrow head at "grat".
-#  - Starting value is 0.5.
-#  - Label is "a".
-regPaths2 <- mxPath(from = "ple", to = "grat",
-   arrows = 1, values = 0.5,
-   labels = "a")
 
 ## Variances
 ## Exogenous variables ("ple") have variances;
 ## Endogenous variables ("grat" and "shs") have residual or error variances.
-## Variance for exogenous variable is not shown in the model diagram.
 ## The distinction does not matter to OpenMx, but I distinguish in the labels.
+## Variance for exogenous variable is not shown in the model diagram.
 
 #  - Arrows are from manifest variables to manifest variables
 #    (when "arrows = 2", the "to" argument can be omitted); 
@@ -69,8 +69,8 @@ varPaths <- mxPath(from = manifest,
 ## Exogenous variables ("ple") have means;
 ## Endogenous variables ("grat" and "shs") have intercepts.
 ## Regress variables on a constant - in OpenMx, "one".
-## Means and intercepts are not shown in the model diagram.
 ## The distinction does not matter to OpenMx, but I distinguish in the labels.
+## Means and intercepts are not shown in the model diagram.
 
 #  - Arrows from "one" to the manifest variables;
 #    ie, from "one" to "ple"; from "one" to "grat"; from "one" to "shs".
@@ -90,8 +90,8 @@ medModel <- mxModel(model = "Mediation",
    type = "RAM",
    data = dataRaw,
    manifestVars = manifest,
-   varPaths,
    regPaths1, regPaths2,
+   varPaths,
    means, 
    indirect, total)
 
