@@ -55,7 +55,7 @@ The names for the three variables are:
 
 #### The model
 
-The model is given in Figure 3.3 (p. 46), reproduced below.
+The model path diagram is given in Figure 3.3 (p. 46), reproduced below.
 
 ![](../../Drawing_SEMs/Jose_2013/Jose_2013.svg){fig-align="center"}
 
