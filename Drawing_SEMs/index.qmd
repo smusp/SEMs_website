@@ -117,7 +117,7 @@ The scripts are rendered as pdf files, then converted to svg files using [inksca
 
 <details class="image-fold">
   <summary>Model diagram for Effects-Scaling Method</summary>
-  <img src="Little_2006/scaling3.svg">  
+  <img src="Little_2006/Scaling3.svg">  
 </details> 
 
 ```{tikz}
