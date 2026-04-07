@@ -71,7 +71,7 @@ Click on the model to see a diagram of the model.
 
 <details class="image-fold">
   <summary>Model for Effects-Scaling Method</summary>
-  <img src="../Drawing_SEMs/Little_2006/scaling3.svg">  
+  <img src="../Drawing_SEMs/Little_2006/Scaling3.svg">  
 </details> 
 
 ```{r}
