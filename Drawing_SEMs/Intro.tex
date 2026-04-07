@@ -1,0 +1,29 @@
+\documentclass[tikz, border = 10pt]{standalone}
+\input{SEMstyles.tex}
+
+\begin{document}
+\begin{tikzpicture}[every node/.style = {scale = 1.0}]
+
+\path [regression] (-0.5, -1) edge (0.5, -1);
+\path [covariance] (-0.5, -2) edge [bend left = 90, looseness = 1.5] (0.5, -2);
+\path [variance] (-0.1, -3.1) edge [bend left = 130, looseness = 8] (0.1, -3.1);
+\node [manifest, minimum height = 0.7cm] (m1) at (0, -4) {};
+\node [latent, minimum height = 0.7cm] (l1) at (0, -5) {};
+\node [constant, inner sep = 0pt] (c1) at (0, -6) {1};
+
+\path [regression] (-0.5, -7.3) edge (0.5, -7.3);
+\path [interaction] (0, -6.5) edge (0, -7.3);
+
+\node [anchor = west] at (-0.5, 0) {\textbf{Symbols}};
+
+\node [anchor = west] at (1, -1) {Directional relationship (regression)};
+\node [anchor = west] at (1, -2) {Non-directional relationship (covariance)};
+\node [anchor = west] at (1, -3) {Variance};
+\node [anchor = west] at (1, -4) {Manifest (observed) variable};
+\node [anchor = west] at (1, -5) {Reflective latent (unobserved) variable};
+\node [anchor = west] at (1, -6) {Constant (intercept or mean)};
+\node [anchor = west] at (1, -7) {Interaction};
+
+\end{tikzpicture}
+\end{document}
+
