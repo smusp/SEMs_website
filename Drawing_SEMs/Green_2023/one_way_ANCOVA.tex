@@ -1,18 +1,20 @@
-\documentclass[tikz, border = 10pt]{standalone}
+\documentclass[border = 10pt]{standalone}
 \input{../SEMstyles.tex}
 
 \begin{document}
 \begin{tikzpicture}
 
-\def \gap {4}            % separation between Dependents
+\def \gap {2cm}                     % separation between dependents
+\def \dep {Life\\Satisfaction}      % Dependent variable
 \def \groups {1/No strategy, 2/Discussion, 3/Exercise}
 
-\foreach \i/\j in \groups {
-   %% Dependent
-   \tikzmath{\x = \gap * (\i - 1);}        % x-coord for Dependents
-   \node [manifest] (y\i) at (\x, 0) {Life\\Satisfaction};
+%% Dependents
+\node [manifest] (y1) {\dep};
+\node [manifest] (y2) [right = \gap of y1] {\dep};
+\node [manifest] (y3) [right = \gap of y2] {\dep};
 
-   %% Covariates
+\foreach \i/\j [remember = \i as \lasti (initially 0)] in \groups {
+  %% Covariates
    \node [manifest] (pre\i) [below = 1.5cm of y\i] {pre$_C$};
    \path [regression] (pre\i) edge ["b"] (y\i);
 
@@ -26,13 +28,15 @@
 
    %% Groups
    \node [group] (gp\i) [above = 0.5cm of const\i] {Group \i:\\\j};
-}
-
-%% Separators
-\foreach \i in {1,2} {
-   \tikzmath{\j = int(\i + 1);}
-   \coordinate (M) at ($(y\i) !0.5! (y\j)$);
-   \draw [densely dashed] ($(M) !4.2cm!270: (y\i)$) -- ($(M) !3cm!90: (y\i)$);
+   
+   %% Separators
+   \ifnum \i = 1 
+      % do nothing
+   \else
+      \coordinate (m1) at ($(pre\i.south) !0.5! (pre\lasti.south)$);
+      \coordinate (m2) at ($(gp\i.north) !0.5! (gp\lasti.north)$);      
+      \draw [densely dashed] ($(m1) !0.2cm!270: (y\i)$) -- ($(m2) !0.2cm!90: (gp\i)$);
+  \fi
 }
 
 \end{tikzpicture}

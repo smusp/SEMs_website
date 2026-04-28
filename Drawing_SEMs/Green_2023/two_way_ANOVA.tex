@@ -4,15 +4,17 @@
 \begin{document}
 \begin{tikzpicture}
 
-\def \gap {2.5}            % separation between dependents
+\def \gap {2cm}            % separation between dependents
 \def \strat {{"No strategy", "Discussion", "Exercise"}}
 \def \gend {{"Male", "Female"}}
 
-\foreach \i in {1,...,6} {
-   %% Dependent
-   \tikzmath{\x = \gap * (\i - 1);}        % x-coord for Dependents
-   \node [manifest] (y\i) at (\x, 0) {y};
+%% Dependents
+\node [manifest] (y1) {y};
+\foreach \i [remember = \i as \lasti (initially 1)] in {2,...,6} {
+    \node [manifest] (y\i) [right = \gap of y\lasti] {y};
+}
 
+\foreach \i [remember = \i as \lasti (initially 0)] in {1,...,6} {
    %% Residuals
    \node [residual2] (e\i) [below right = 4mm of y\i] {e};
    \path [regression] (e\i) edge (y\i.south east) ;
@@ -24,13 +26,13 @@
    %% Groups
    \tikzmath{\firstrow = \strat[mod((\i-1), 3)]; \secondrow = \gend[int((\i-1)/3)];}
    \node [group] (gp\i) [above = 0.5cm of const\i] {Group \i:\\\firstrow\\\secondrow};
-}
-
-%% Separators
-\foreach \i in {1,...,5} {
-   \tikzmath{\j = int(\i+1);}
-   \coordinate (M) at ($(y\i) !0.5! (y\j)$);
-   \draw [densely dashed] ($(M) !4.6cm!270: (y\i)$) -- ($(M) !1.25cm!90: (y\i)$);
+   
+   %% Separators
+   \ifnum \i > 1 
+      \coordinate (m1) at ($(y\i.south) !0.5! (y\lasti.south)$);
+      \coordinate (m2) at ($(gp\i.north) !0.5! (gp\lasti.north)$);      
+      \draw [densely dashed] ($(m1) !0.6cm!270: (y\i)$) -- ($(m2) !0.2cm!90: (gp\i)$);
+  \fi
 }
 
 \end{tikzpicture}
