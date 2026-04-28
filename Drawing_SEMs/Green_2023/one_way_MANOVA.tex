@@ -46,7 +46,7 @@
 \foreach \i in {4,8} {
    \tikzmath{\j = int(\i + 1);}
    \coordinate (M) at ($(y\i)!0.5!(y\j)$);
-   \draw [style = densely dashed, thin] ($(M)!5.3cm!270:(y\i)$) -- ($(M)!1.8cm!90:(y\i)$);
+   \draw [densely dashed] ($(M)!5.3cm!270:(y\i)$) -- ($(M)!1.8cm!90:(y\i)$);
 }
 
 \end{tikzpicture}

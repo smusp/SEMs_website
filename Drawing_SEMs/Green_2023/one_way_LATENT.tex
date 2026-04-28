@@ -15,7 +15,9 @@
 }
 
 %% Latent
-\foreach \i/\j in {1/No strategy, 2/Discussion, 3/Exercise} {
+\def\list{1/No strategy, 2/Discussion, 3/Exercise}
+
+\foreach \i/\j in \list {
    \tikzmath{\x = int(4*\i);}
    \node [latent] (latent\i) [above = 3cm of y\x] {LS};
 
@@ -47,7 +49,7 @@
 \foreach \i in {4,8} {
    \tikzmath{\j = int(\i + 1);}
    \coordinate (M) at ($(y\i)!0.5!(y\j)$);
-   \draw [style = densely dashed, thin] ($(M)!5.3cm!270:(y\i)$) -- ($(M)!1.3cm!90:(y\i)$);
+   \draw [densely dashed] ($(M)!5.3cm!270:(y\i)$) -- ($(M)!1.3cm!90:(y\i)$);
 }
 
 \end{tikzpicture}

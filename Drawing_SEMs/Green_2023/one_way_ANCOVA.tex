@@ -4,12 +4,12 @@
 \begin{document}
 \begin{tikzpicture}
 
-\newcommand\gap{2}            % separation between Dependents
-\def\list{1/No strategy, 2/Discussion, 3/Exercise}
+\def \gap {4}            % separation between Dependents
+\def \groups {1/No strategy, 2/Discussion, 3/Exercise}
 
-\foreach \i/\j in \list {
+\foreach \i/\j in \groups {
    %% Dependent
-   \tikzmath{\x = (2 + \gap) * (\i - 1);}        % x-coord for Dependents
+   \tikzmath{\x = \gap * (\i - 1);}        % x-coord for Dependents
    \node [manifest] (y\i) at (\x, 0) {Life\\Satisfaction};
 
    %% Covariates
@@ -17,7 +17,7 @@
    \path [regression] (pre\i) edge ["b"] (y\i);
 
    %% Residuals
-   \node [residual2] (e\i) [below right = 4mm and 4mm of y\i] {e};
+   \node [residual2] (e\i) [below right = 4mm of y\i] {e};
    \path [regression] (e\i) edge (y\i.south east);
 
    %% Means
@@ -31,8 +31,8 @@
 %% Separators
 \foreach \i in {1,2} {
    \tikzmath{\j = int(\i + 1);}
-   \coordinate (M) at ($(y\i)!0.5!(y\j)$);
-   \draw [style = densely dashed, thin] ($(M)!4.2cm!270:(y\i)$) -- ($(M)!3cm!90:(y\i)$);
+   \coordinate (M) at ($(y\i) !0.5! (y\j)$);
+   \draw [densely dashed] ($(M) !4.2cm!270: (y\i)$) -- ($(M) !3cm!90: (y\i)$);
 }
 
 \end{tikzpicture}
