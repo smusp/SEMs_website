@@ -1,24 +1,26 @@
-\documentclass[tikz, border = 10pt]{standalone}
+\documentclass[border = 10pt]{standalone}
 \input{../SEMstyles.tex}
 
 \begin{document}
 \begin{tikzpicture}
 
 %% Manifest
-\node [manifest] (Anx) {Self\\Efficacy};
-\node [manifest] (SE) [right = 5cm of Anx] {Anxiety};
-\node [manifest] (Att) [above = 4.33cm of $(Anx.north) !0.5! (SE.north)$] {Attitude};
+\node [manifest] (SE) {Self\\Efficacy};
+\node [manifest] (Anx) [right = 5cm of SE] {Anxiety};
+\node [manifest] (Att) [above = 4.5cm of $(SE) !0.5! (Anx)$] {Attitude};
 
 %% Regressions
-\path [regression] (Anx) edge ["c$'$"] (SE);
-\path [regression] (Anx.70) edge ["a"] (Att.250);
-\path [regression] (Att.290) edge ["b"] (SE.110);
+\path [regression] 
+   (SE) edge ["c$'$"] (Anx)
+   (SE.70) edge ["a"] (Att.250)
+   (Att.290) edge ["b"] (Anx.110);
 
 %% Residuals
-\node [residual1] (e2) [above right = 4mm and 4mm of SE] {e$_2$};
-\node [residual1] (e1) [above right = 4mm and 4mm of Att] {e$_1$};
-\path [regression] (e2) edge (SE.north east);
-\path [regression] (e1) edge (Att.north east);
+\node [residual1] (e2) [above right = 4mm of Anx] {e$_2$};
+\node [residual1] (e1) [above right = 4mm of Att] {e$_1$};
+\path [regression] 
+   (e2) edge (Anx.north east)
+   (e1) edge (Att.north east);
 
 \end{tikzpicture}
 \end{document}
