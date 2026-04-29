@@ -5,15 +5,15 @@
 \begin{tikzpicture}
 
 \def \gap {2cm}                     % separation between dependents
-\def \dep {Life\\Satisfaction}      % Dependent variable
-\def \groups {1/No strategy, 2/Discussion, 3/Exercise}
+\def \dep {Life\\Satisfaction}      % dependent variable
+\def \groups {No strategy, Discussion, Exercise}
 
 %% Dependents
 \node [manifest] (y1) {\dep};
 \node [manifest] (y2) [right = \gap of y1] {\dep};
 \node [manifest] (y3) [right = \gap of y2] {\dep};
 
-\foreach \i/\j [remember = \i as \lasti (initially 0)] in \groups {
+\foreach \j [count = \i, remember = \i as \lasti (initially 0)] in \groups {
    %% Residuals
    \node [residual2] (e\i) [below right = 4mm of y\i] {e};
    \path [regression] (e\i) edge (y\i.south east);

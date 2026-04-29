@@ -9,9 +9,9 @@
 \def \gend {{"Male", "Female"}}
 
 %% Dependents
-\node [manifest] (y1) {y};
+\node [manifest] (y1) {Y};
 \foreach \i [remember = \i as \lasti (initially 1)] in {2,...,6} {
-    \node [manifest] (y\i) [right = \gap of y\lasti] {y};
+    \node [manifest] (y\i) [right = \gap of y\lasti] {Y};
 }
 
 \foreach \i [remember = \i as \lasti (initially 0)] in {1,...,6} {

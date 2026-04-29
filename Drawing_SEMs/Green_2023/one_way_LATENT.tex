@@ -4,53 +4,70 @@
 \begin{document}
 \begin{tikzpicture}
 
-%% Dependents and their residuals
-\foreach \i [remember = \x as \lastx (initially 0)] in {1,...,12}{
-   \tikzmath{\labnum = int(mod(\i - 1, 4) + 1);} 
-   \node [manifest] (y\i) at (\lastx, 0) {Y$_{\labnum}$};
+%% Three groups of four variables.
+%% Labels in each group are Y1 to Y4.
+%% Names are y1 to y12.
+
+\def \groups {No strategy, Discussion, Exercise}
+\def \gaps {0.4cm}     % small gap between indicators
+\def \gapb {1cm}       % large gap between indicators
+\def \angles {270/240, 282/253, 294/263, 306/270}  % angles for intercepts and loadings
+                                                   % out of constant and latent
+
+%% Indicators and their residuals
+\node [manifest] (y1) {Y$_1$};
+\node [residual2] (e1) [below = 4mm of y1] {e$_{Y_1}$};
+\path [regression] (e1) edge (y1);
+
+\foreach \i [remember = \i as \lasti (initially 1)] in {2,...,12}{
+   \tikzmath{\labnum = int(mod(\i - 1, 4) + 1);}
+
+   \ifnum \labnum = 1      %% Use label number to determine size of gap with last y
+      \def \gap {\gapb} 
+   \else 
+      \def \gap {\gaps} 
+   \fi   
+
+   \node [manifest] (y\i) [right = \gap of y\lasti] {Y$_{\labnum}$};
    \node [residual2] (e\i) [below = 4mm of y\i] {e$_{Y_\labnum}$};
    \path [regression] (e\i) edge (y\i);  
-   \ifnum \labnum = 4  \def\d{0.85} \else \def\d{0.6} \fi   
-   \tikzmath{\x = \lastx + \d + 1.1;} 
 }
 
-%% Latent
-\def\list{1/No strategy, 2/Discussion, 3/Exercise}
+\foreach \j [count = \i, remember = \i as \lasti (initially 0)] in \groups {
+   \tikzmath{\lasty = int(4*\i);           % label number for last Y in each group
+             \firsty = int(\lasty - 3);}   % label number for first Y in each group
 
-\foreach \i/\j in \list {
-   \tikzmath{\x = int(4*\i);}
-   \node [latent] (latent\i) [above = 3cm of y\x] {LS};
-
-   %% Latent variances
+   %% Latents and their variances (above last y in each group)
+   \node [latent] (latent\i) [above = 3cm of y\lasty] {LS};
    \path [variance] (latent\i.120) edge ["d", bend left = 110, looseness = 3] (latent\i.60);
 
-   %% Means
-   \tikzmath{\x = int(\x - 3);}
-   \node [constant] (const\i) [above = 3.22cm of y\x] {1};
+   %% Means (above first y in each group)
+   \coordinate (cc) at (y\firsty |- latent\i);   % coordinates for the constant
+   \node [constant] (const\i) at (cc) {1};   
    \path[regression] (const\i) edge ["\ifnum \i = 1 {0} \else {a$_\i$} \fi"] (latent\i);
-
-   \foreach \b/\c/\d in {1/270/250, 2/280/260, 3/290/265, 4/305/270} {
+   
+   \foreach \c/\d [count = \k] in \angles {
       %% Intercepts
-      \tikzmath{\e = int((\i - 1)*4 + \b);} 
-      \path [regression] (const\i.\c) edge ["$\uptau_\b$", pos = 0.45 - 0.5/(4.5*(5-\b))] (y\e.90);
+      \tikzmath{\e = int((\i - 1)*4 + \k);} 
+      \path [regression] (const\i.\c) edge ["$\uptau_\k$", pos = 0.5 - 1/(6*(5-\k))] (y\e.90);
 
       %% Loadings
-      \path[regression] (latent\i.\d) edge ["\ifnum \b = 1 {1} \else {$\uplambda_\b$} \fi", 
-      pos = 0.45 - 0.5/(4.5*\b)] (y\e.90);
+      \path[regression] (latent\i.\d) edge ["\ifnum \k = 1 {1} \else {$\uplambda_\k$} \fi", 
+      pos = 0.5 - 1/(6*\k)] (y\e.90);
    }
 
-   %% Groups
-   \tikzmath{\xa = int(\x + 1);}
-   \tikzmath{\xb = int(\x + 2;}
-   \node [group] (gp\i) [above = 5cm of $(y\xa)!0.5!(y\xb)$] {Group \i:\\\j};
+   %% Groups (above middle of each group of variables)
+   \tikzmath{\xa = int(\firsty + 1); \xb = int(\firsty + 2;}
+   \node [group] (gp\i) [above = 5cm of $(y\xa) !0.5! (y\xb)$] {Group \i:\\\j};
+
+   %% Separators
+   \ifnum \i > 1
+      \tikzmath{\prevy = (int(\firsty - 1);}
+      \coordinate (m1) at ($(y\firsty.south) !0.5! (y\prevy.south)$);
+      \coordinate (m2) at ($(gp\i.north) !0.5! (gp\lasti.north)$);   
+      \draw [densely dashed] ($(m1) !0.7cm!90: (y\prevy.south)$) -- ($(m2) !0.2cm!90: (gp\i.north)$);
+   \fi
 }  
-
-%% Separators
-\foreach \i in {4,8} {
-   \tikzmath{\j = int(\i + 1);}
-   \coordinate (M) at ($(y\i)!0.5!(y\j)$);
-   \draw [densely dashed] ($(M)!5.3cm!270:(y\i)$) -- ($(M)!1.3cm!90:(y\i)$);
-}
-
+      
 \end{tikzpicture}
 \end{document}
