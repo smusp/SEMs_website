@@ -4,50 +4,71 @@
 \begin{document}
 \begin{tikzpicture}
 
-%% Dependents and their residuals
-\foreach \i [remember = \x as \lastx (initially 0)] in {1,...,12}{
-   \tikzmath{\labnum = int(mod(\i - 1, 4) + 1);} 
-   \node [manifest] (y\i) at (\lastx, 0) {Y$_{\labnum}$};
+%% Three groups of four variables.
+%% Labels in each group are Y1 to Y4.
+%% Names are y1 to y12.
+
+\def \groups {No strategy, Discussion, Exercise}
+\def \gaps {0.4cm}     % small gap between variables
+\def \gapb {1cm}       % large gap between variables
+\def \angles {240, 260, 280, 300}    % angeles out of constant
+%% Covariances in and out angles and bend
+\def \eout {{0, 340, 320}}     % out angle
+\def \ein {{180, 200, 220}}    % in angle
+\def \bend {{80, 85, 90}}      % bend
+
+%% Indicators and their residuals
+\node [manifest] (y1) {Y$_1$};
+\node [residual2] (e1) [below = 4mm of y1] {e$_{Y_1}$};
+\path [regression] (e1) edge (y1);
+
+\foreach \i [remember = \i as \lasti (initially 1)] in {2,...,12}{
+   \tikzmath{\labnum = int(mod(\i - 1, 4) + 1);}
+
+   \ifnum \labnum = 1      %% Use label number to determine size of gap with last y
+      \def \gap {\gapb} 
+   \else 
+      \def \gap {\gaps} 
+   \fi   
+
+   \node [manifest] (y\i) [right = \gap of y\lasti] {Y$_\labnum$};
    \node [residual2] (e\i) [below = 4mm of y\i] {e$_{Y_\labnum}$};
    \path [regression] (e\i) edge (y\i);  
-   \ifnum \labnum = 4  \def\d{0.5} \else \def\d{0.25} \fi   
-   \tikzmath{\x = \lastx + \d + 1.1;} 
 }
 
-\foreach \i/\j in {1/No strategy, 2/Discussion, 3/Exercise} {
-   %% Means
-   \tikzmath{\ya = int((\i - 1)*4 + 2);} 
-   \tikzmath{\yb = int(\ya + 1);} 
-   \node [constant] (const\i) [above = 3cm of $(y\ya)!0.5!(y\yb)$] {1};
-   \foreach \b/\c in {1/240, 2/260, 3/280, 4/300} {
+\foreach \j [count = \i, remember = \i as \lasti (initially 0)] in \groups {
+   \tikzmath{\lasty = int(4*\i);           % label number for last Y in each group
+             \firsty = int(\lasty - 3);}   % label number for first Y in each group
+
+   %% Means (above the middle of each group)
+   \tikzmath{\xa = int(\firsty + 1); \xb = int(\firsty + 2;}
+   \node [constant] (const\i) [above = 3cm of $(y\xa) !0.5! (y\xb)$] {1};
+   \foreach \c [count = \b] in \angles {
       \tikzmath{\d = int((\i - 1)*4 + \b);} 
       \path [regression] (const\i.\c) edge ["a$_{\i{Y_\b}}$", pos = 0.65] (y\d.90);
    }
 
-   %% Groups
+   %% Groups (above the constant)
    \node [group] (gp\i) [above = 0.5cm of const\i] {Group \i:\\\j};
+
+   %% Separators
+   \ifnum \i > 1 
+      \tikzmath{\prevy = (int(\firsty - 1);}
+      \coordinate (m1) at ($(y\firsty.south) !0.5! (y\prevy.south)$);
+      \coordinate (m2) at ($(gp\i.north) !0.5! (gp\lasti.north)$);   
+      \draw [densely dashed] ($(m1) !1.5cm!90: (y\prevy.south)$) -- ($(m2) !0.2cm!90: (gp\i.north)$);
+  \fi
 }
 
 %% Covariances
-\newcommand{\eout}{{0, 340, 320}}     % out angle
-\newcommand{\ein}{{180, 200, 220}}    % in angle
-\newcommand{\bend}{{80, 85, 90}}      % bend
-
-\foreach \g in {1,5,9}                % three groups of four variables - label for first in each group
-   \foreach \i in {1,2,3}                             
+\foreach \g in {1,5,9} {              % three groups of four variables - label for first in each group
+   \foreach \i in {1,2,3} {                           
       \foreach \j [parse = true] in {\i+1,...,4}{     
         \tikzmath{\idash = int(\g + \i - 1);  \jdash = int(\g + \j - 1);}    % out and in labels for e
         \tikzmath{\index = \j - \i - 1;}                                     % array element
         \tikzmath{\first = \eout[\index]; \second = \ein[\index]; \third = \bend[\index];}
         \path [covariance, black!40] (e\idash.\first) edge [bend right = \third, looseness = 0.55,] (e\jdash.\second); 
-}
-
-%% Separators
-\foreach \i in {4,8} {
-   \tikzmath{\j = int(\i + 1);}
-   \coordinate (M) at ($(y\i)!0.5!(y\j)$);
-   \draw [densely dashed] ($(M)!5.3cm!270:(y\i)$) -- ($(M)!1.8cm!90:(y\i)$);
-}
+}}}
 
 \end{tikzpicture}
 \end{document}
