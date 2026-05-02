@@ -9,9 +9,10 @@
 %% Names are y1 to y12.
 
 \def \groups {No strategy, Discussion, Exercise}
-\def \gaps {0.4cm}     % small gap between variables
-\def \gapb {1cm}       % large gap between variables
+\def \gaps {0.4cm}     % small gap between two variables within groups
+\def \gapb {1cm}       % large gap between two variables between groups
 \def \angles {240, 260, 280, 300}    % angeles out of constant
+
 %% Covariances in and out angles and bend
 \def \eout {{0, 340, 320}}     % out angle
 \def \ein {{180, 200, 220}}    % in angle
@@ -25,7 +26,7 @@
 \foreach \i [remember = \i as \lasti (initially 1)] in {2,...,12}{
    \tikzmath{\labnum = int(mod(\i - 1, 4) + 1);}
 
-   \ifnum \labnum = 1      %% Use label number to determine size of gap with last y
+   \ifnum \labnum = 1      %% Use label number to determine size of gap
       \def \gap {\gapb} 
    \else 
       \def \gap {\gaps} 
@@ -36,7 +37,7 @@
    \path [regression] (e\i) edge (y\i);  
 }
 
-\foreach \j [count = \i, remember = \i as \lasti (initially 0)] in \groups {
+\foreach \j [count = \i, remember = \i as \lasti] in \groups {
    \tikzmath{\lasty = int(4*\i);           % label number for last Y in each group
              \firsty = int(\lasty - 3);}   % label number for first Y in each group
 

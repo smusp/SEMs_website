@@ -3,25 +3,25 @@
 \usepackage{newpxtext,newpxmath}   % upright Greek
 \usepackage{amsmath}               % Maths typesetting
 
-\renewcommand{\familydefault}{\sfdefault}   % sans sarif 
-\usepackage{mathastext}                     % applied to maths mode
+\renewcommand{\familydefault}{\sfdefault}   % sans sarif
+\usepackage{mathastext}                     % and apply it to maths mode
 
 \usetikzlibrary{positioning, quotes, calc, math, arrows.meta, bending, shapes, backgrounds}
 
 \tikzset{
 every edge quotes/.style = {fill = white},
+> = {Stealth[length = 1.5mm]},       % Stealth arrow heads
+shorten > = 1pt,                     % Both ends of the arrows (variances and covariances) ...        
+shorten < = 1pt,                     % ... end 1pt short of the node
 manifest/.style = {draw, inner sep = 3pt, minimum width = 1cm,
    minimum height = .85cm, align = center},
 latent/.style = {ellipse, draw, inner sep = 3pt, minimum width = 1cm,
    minimum height = .85cm},
 residual1/.style = {circle, draw, minimum size = 5mm, inner sep = 1pt},
 residual2/.style = {ellipse, minimum size = 0.5pt, inner sep = 0pt},
-regression/.style = {-{Stealth[length = 1.5mm]}, shorten > = 1pt, 
-   inner sep = 1.5pt},
-covariance/.style={{Stealth[length = 1.5mm]}-{Stealth[length = 1.5mm]}, 
-   shorten > = 1pt, shorten < = 1pt, inner sep = 1.5pt},
-variance/.style={{Stealth[length = 1mm]}-{Stealth[length = 1mm]}, 
-   shorten > = 1pt, shorten < = 1pt, inner sep = 1pt},
+regression/.style = {->, shorten < = 0pt, inner sep = 1.5pt},
+covariance/.style={<->, inner sep = 1.5pt},
+variance/.style={<->, inner sep = 1pt},
 interaction/.style = {-{Stealth[sep = 1pt, length = 1.5mm] . Circle[length = 4pt]},
    shorten > = -2pt},
 constant/.style = {draw, inner sep = 1pt, regular polygon,

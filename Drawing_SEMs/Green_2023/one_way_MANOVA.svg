@@ -2040,7 +2040,7 @@
      stroke-opacity="1"
      stroke-dasharray="2.98883 1.99255"
      stroke-miterlimit="10"
-     d="M 148.797812 -54.765 L 148.864219 148.699844 "
+     d="M 148.797812 -53.768906 L 148.860312 147.70375 "
      transform="matrix(1, 0, 0, -1, 24.335, 158.86)"
      id="path181" />
   <path
@@ -2438,7 +2438,7 @@
      stroke-opacity="1"
      stroke-dasharray="2.98883 1.99255"
      stroke-miterlimit="10"
-     d="M 326.141563 -54.765 L 326.141563 147.680313 "
+     d="M 326.141563 -53.768906 L 326.141563 146.684219 "
      transform="matrix(1, 0, 0, -1, 24.335, 158.86)"
      id="path218" />
   <path

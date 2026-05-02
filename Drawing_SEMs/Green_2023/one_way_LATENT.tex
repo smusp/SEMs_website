@@ -22,7 +22,7 @@
 \foreach \i [remember = \i as \lasti (initially 1)] in {2,...,12}{
    \tikzmath{\labnum = int(mod(\i - 1, 4) + 1);}
 
-   \ifnum \labnum = 1      %% Use label number to determine size of gap with last y
+   \ifnum \labnum = 1      %% Use label number to determine size of gap
       \def \gap {\gapb} 
    \else 
       \def \gap {\gaps} 
@@ -33,7 +33,7 @@
    \path [regression] (e\i) edge (y\i);  
 }
 
-\foreach \j [count = \i, remember = \i as \lasti (initially 0)] in \groups {
+\foreach \j [count = \i, remember = \i as \lasti] in \groups {
    \tikzmath{\lasty = int(4*\i);           % label number for last Y in each group
              \firsty = int(\lasty - 3);}   % label number for first Y in each group
 

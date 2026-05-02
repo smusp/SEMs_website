@@ -13,7 +13,7 @@
 \node [manifest] (y2) [right = \gap of y1] {\dep};
 \node [manifest] (y3) [right = \gap of y2] {\dep};
 
-\foreach \j [count = \i, remember = \i as \lasti (initially 0)] in \groups {
+\foreach \j [count = \i, remember = \i as \lasti] in \groups {
   %% Covariates
    \node [manifest] (pre\i) [below = 1.5cm of y\i] {pre$_C$};
    \path [regression] (pre\i) edge ["b"] (y\i);
@@ -34,7 +34,8 @@
       \coordinate (m1) at ($(pre\i.south) !0.5! (pre\lasti.south)$);
       \coordinate (m2) at ($(gp\i.north) !0.5! (gp\lasti.north)$);      
       \draw [densely dashed] ($(m1) !0.2cm!270: (y\i)$) -- ($(m2) !0.2cm!90: (gp\i)$);
-  \fi
+   \else \relax   
+   \fi
 }
 
 \end{tikzpicture}

@@ -1161,7 +1161,7 @@
      stroke-opacity="1"
      stroke-dasharray="2.98883 1.99255"
      stroke-miterlimit="10"
-     d="M 60.337531 -82.892656 L 56.946906 118.669844 "
+     d="M 60.321906 -81.896562 L 56.962531 117.67375 "
      transform="matrix(1, 0, 0, -1, 37.307, 128.83)"
      id="path138" />
   <path
@@ -1469,7 +1469,7 @@
      stroke-opacity="1"
      stroke-dasharray="2.98883 1.99255"
      stroke-miterlimit="10"
-     d="M 171.720344 -82.892656 L 168.235969 117.669844 "
+     d="M 171.704719 -81.896562 L 168.251594 116.67375 "
      transform="matrix(1, 0, 0, -1, 37.307, 128.83)"
      id="path166" />
 </svg>

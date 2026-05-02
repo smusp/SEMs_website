@@ -868,7 +868,7 @@
      stroke-opacity="1"
      stroke-dasharray="2.98883 1.99255"
      stroke-miterlimit="10"
-     d="M 47.4075 -28.5945 L 44.880156 128.932844 "
+     d="M 47.391875 -27.598406 L 44.895781 127.93675 "
      transform="matrix(1, 0, 0, -1, 35.78, 139.093)"
      id="path98" />
   <g
@@ -1115,7 +1115,7 @@
      stroke-opacity="1"
      stroke-dasharray="2.98883 1.99255"
      stroke-miterlimit="10"
-     d="M 132.845 -28.5945 L 130.317656 128.932844 "
+     d="M 132.829375 -27.598406 L 130.333281 127.93675 "
      transform="matrix(1, 0, 0, -1, 35.78, 139.093)"
      id="path124" />
   <g
@@ -1397,7 +1397,7 @@
      stroke-opacity="1"
      stroke-dasharray="2.98883 1.99255"
      stroke-miterlimit="10"
-     d="M 218.2825 -28.5945 L 215.759062 128.932844 "
+     d="M 218.266875 -27.598406 L 215.774687 127.93675 "
      transform="matrix(1, 0, 0, -1, 35.78, 139.093)"
      id="path154" />
   <g
@@ -1659,7 +1659,7 @@
      stroke-opacity="1"
      stroke-dasharray="2.98883 1.99255"
      stroke-miterlimit="10"
-     d="M 303.723906 -28.5945 L 301.196563 128.932844 "
+     d="M 303.708281 -27.598406 L 301.212188 127.93675 "
      transform="matrix(1, 0, 0, -1, 35.78, 139.093)"
      id="path184" />
   <g
@@ -1921,7 +1921,7 @@
      stroke-opacity="1"
      stroke-dasharray="2.98883 1.99255"
      stroke-miterlimit="10"
-     d="M 389.161406 -28.5945 L 386.634063 128.932844 "
+     d="M 389.145781 -27.598406 L 386.653594 127.93675 "
      transform="matrix(1, 0, 0, -1, 35.78, 139.093)"
      id="path212" />
 </svg>

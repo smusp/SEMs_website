@@ -1,5 +1,4 @@
-\documentclass[tikz, border = 10pt]{standalone}
-
+\documentclass[border = 10pt]{standalone}
 \input{../SEMstyles.tex}
 
 \begin{document}
@@ -8,7 +7,7 @@
 %%%% Grade 7
 %% pos manifest
 \node [manifest] (pos11) {$pos_1$};
-\node [manifest] (pos21) [right = 1.6cm of pos11] {$pos_2$};
+\node [manifest] (pos21) [right = 1.5cm of pos11] {$pos_2$};
 \node [manifest] (pos31) [right = 1.5cm of pos21] {$pos_3$};
 
 %% POS latent
@@ -21,17 +20,17 @@
 
 %% Latent variance
 \path [variance] (POS1.120) edge ["$\upphi_7\!=\!1$", above, outer sep = 1pt,
-   bend left = 110, looseness = 3] (POS1.60);
+   bend left = 100, looseness = 2.5] (POS1.60);
 
 %% Residuals
-\node [residual2] (e11) [above left = .65cm of pos11, xshift = -1mm] {};
-\path [regression] (e11) edge ["$\uptheta_{7,1}$", pos = 0] (pos11.north west);
+\node [residual2] (e11) [above left = 4mm of pos11] {$\uptheta_{7,1}$};
+\path [regression] (e11) edge (pos11.north west);
 
-\node [residual2] (e21) [above left = .65cm of pos21, xshift = -1mm] {};
-\path [regression] (e21) edge ["$\uptheta_{7,2}$", pos = 0] (pos21.north west);
+\node [residual2] (e21) [above left = 4mm of pos21] {$\uptheta_{7,2}$};
+\path [regression] (e21) edge (pos21.north west);
 
-\node [residual2] (e31) [above left = .65cm of pos31, xshift = -1mm] {};
-\path [regression] (e31) edge ["$\uptheta_{7,3}$", pos = 0] (pos31.north west);
+\node [residual2] (e31) [above left = 4mm of pos31] {$\uptheta_{7,3}$};
+\path [regression] (e31) edge (pos31.north west);
 
 %% Latent means
 \node [constant, black!30] (M11) [right = 2cm of POS1] {1};
@@ -47,7 +46,7 @@
 %%%% Grade 8
 %% pos manifest
 \node [manifest] (pos12) [right = 3cm of pos31] {$pos_1$};
-\node [manifest] (pos22) [right = 1.6cm of pos12] {$pos_2$};
+\node [manifest] (pos22) [right = 1.5cm of pos12] {$pos_2$};
 \node [manifest] (pos32) [right = 1.5cm of pos22] {$pos_3$};
 
 %% POS latent
@@ -60,17 +59,17 @@
 
 %% Latent variance
 \path [variance] (POS2.120) edge ["$\upphi_8$", above, outer sep = 1pt,
-   bend left = 110, looseness = 3] (POS2.60);
+   bend left = 100, looseness = 2.5] (POS2.60);
 
 %% Residuals
-\node [residual2] (e12) [above left = .65cm of pos12, xshift = -1mm] {};
-\path [regression] (e12) edge ["$\uptheta_{8,1}$", pos = 0] (pos12.north west);
+\node [residual2] (e12) [above left = 4mm of pos12] {$\uptheta_{8,1}$};
+\path [regression] (e12) edge (pos12.north west);
 
-\node [residual2] (e22) [above left = .65cm of pos22, xshift = -1mm] {};
-\path [regression] (e22) edge ["$\uptheta_{8,2}$", pos = 0] (pos22.north west);
+\node [residual2] (e22) [above left = 4mm of pos22] {$\uptheta_{8,2}$};
+\path [regression] (e22) edge (pos22.north west);
 
-\node [residual2] (e32) [above left = .65cm of pos32, xshift = -1mm] {};
-\path [regression] (e32) edge ["$\uptheta_{8,3}$", pos = 0] (pos32.north west);
+\node [residual2] (e32) [above left = 4mm of pos32] {$\uptheta_{8,3}$};
+\path [regression] (e32) edge (pos32.north west);
 
 %% Latent means
 \node [constant, black!30] (M12) [right = 2cm of POS2] {1};
@@ -86,9 +85,9 @@
 \node (gp1) [above = 1.5cm of POS1] {Grade 7};
 \node (gp2) [above = 1.5cm of POS2] {Grade 8};
 
-\node (C1) at ($(gp1)!0.5!(gp2)$) {};
-\node (C2) at ($(M21)!0.5!(M22)$) {};
-\draw[dashed, thick] ($(C1)!-0.25cm!(C2)$) -- ($(C2)!-0.25cm!(C1)$);
+\node (C1) at ($(gp1) !0.5! (gp2)$) {};
+\node (C2) at ($(M21) !0.5! (M22)$) {};
+\draw[densely dashed] ($(C1) !-0.25cm! (C2)$) -- ($(C2) !-0.25cm! (C1)$);
 
 \end{tikzpicture}
 \end{document}

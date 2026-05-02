@@ -5,8 +5,8 @@
 \begin{tikzpicture}
 
 \def \gap {2cm}            % separation between dependents
-\def \strat {{"No strategy", "Discussion", "Exercise"}}
-\def \gend {{"Male", "Female"}}
+\def \strat {{"No strategy", "Discussion", "Exercise"}}  % strategy groups
+\def \gend {{"Male", "Female"}}                          % gender groups
 
 %% Dependents
 \node [manifest] (y1) {Y};
@@ -14,7 +14,7 @@
     \node [manifest] (y\i) [right = \gap of y\lasti] {Y};
 }
 
-\foreach \i [remember = \i as \lasti (initially 0)] in {1,...,6} {
+\foreach \i [remember = \i as \lasti] in {1,...,6} {
    %% Residuals
    \node [residual2] (e\i) [below right = 4mm of y\i] {e};
    \path [regression] (e\i) edge (y\i.south east) ;

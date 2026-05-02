@@ -1,8 +1,8 @@
-\documentclass[tikz, border = 10pt]{standalone}
+\documentclass[border = 10pt]{standalone}
 \input{SEMstyles.tex}
 
 \begin{document}
-\begin{tikzpicture}[every node/.style = {scale = 1.0}]
+\begin{tikzpicture}
 
 \path [regression] (-0.5, -1) edge (0.5, -1);
 \path [covariance] (-0.5, -2) edge [bend left = 90, looseness = 1.5] (0.5, -2);

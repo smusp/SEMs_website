@@ -4,16 +4,16 @@
 \begin{document}
 \begin{tikzpicture}
 
-\def \gap {2cm}                     % separation between dependents
-\def \dep {Life\\Satisfaction}      % dependent variable
-\def \groups {No strategy, Discussion, Exercise}
+\def \gap {2cm}                                 % separation between dependents
+\def \dep {Life\\Satisfaction}                  % dependent variable
+\def \groups {No strategy, Discussion, Exercise}   % groups
 
 %% Dependents
 \node [manifest] (y1) {\dep};
 \node [manifest] (y2) [right = \gap of y1] {\dep};
 \node [manifest] (y3) [right = \gap of y2] {\dep};
 
-\foreach \j [count = \i, remember = \i as \lasti (initially 0)] in \groups {
+\foreach \j [count = \i, remember = \i as \lasti] in \groups {
    %% Residuals
    \node [residual2] (e\i) [below right = 4mm of y\i] {e};
    \path [regression] (e\i) edge (y\i.south east);
@@ -30,6 +30,7 @@
       \coordinate (m1) at ($(y\i.south) !0.5! (y\lasti.south)$);
       \coordinate (m2) at ($(gp\i.north) !0.5! (gp\lasti.north)$);      
       \draw [densely dashed] ($(m1) !0.6cm!270: (y\i)$) -- ($(m2) !0.2cm!90: (gp\i)$);
+   \else \relax
   \fi
 }
 
