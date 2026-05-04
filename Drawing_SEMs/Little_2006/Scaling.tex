@@ -19,6 +19,18 @@
 \node [latent] (POS) [above = 3cm of pos3] {$POS$};
 \node [latent] (NEG) [above = 3cm of neg1] {$NEG$};
 
+%% Latent variances and covariance
+\path [covariance] (POS.35) edge ["$\upphi_{12}$", bend left = 40] (NEG.145);
+\path [variance] (POS.120) edge ["$\upphi_{11}$", above, outer sep = 1pt,
+   bend left = 100, looseness = 2.5] (POS.60);
+\path [variance] (NEG.120) edge ["$\upphi_{22}$", above, outer sep = 1pt,
+   bend left = 100, looseness = 2.5] (NEG.60);
+
+%% latent means
+\node [constant, black!30] (M) [below = 1.5cm of $(pos3) !0.5! (neg1)$] {1};
+\path [regression, black!30] (M) edge ["$\upkappa_1$", pos = 0.6] (POS);
+\path [regression, black!30] (M) edge ["$\upkappa_2$", pos = 0.6] (NEG);
+
 %% Loadings
 \path [regression] (POS) edge ["$\uplambda_1$"] (pos1.70);
 \path [regression] (POS) edge ["$\uplambda_2$"] (pos2.65);
@@ -27,13 +39,6 @@
 \path [regression] (NEG) edge ["$\uplambda_4$"] (neg1.90);
 \path [regression] (NEG) edge ["$\uplambda_5$"] (neg2.115);
 \path [regression] (NEG) edge ["$\uplambda_6$"] (neg3.110);
-
-%% Latent variances and covariance
-\path [covariance] (POS.35) edge ["$\upphi_{12}$", bend left = 40] (NEG.145);
-\path [variance] (POS.120) edge ["$\upphi_{11}$", above, outer sep = 1pt,
-   bend left = 100, looseness = 2.5] (POS.60);
-\path [variance] (NEG.120) edge ["$\upphi_{22}$", above, outer sep = 1pt,
-   bend left = 100, looseness = 2.5] (NEG.60);
 
 %% Residuals
 \node [residual2] (e1) [above left = 4mm of pos1] {$\uptheta_1$};
@@ -53,11 +58,6 @@
 
 \node [residual2] (e6) [above right = 4mm of neg3] {$\uptheta_6$};
 \path [regression] (e6) edge (neg3.north east);
-
-%% latent means
-\node [constant, black!30] (M) [below = 1.5cm of $(pos3) !0.5! (neg1)$] {1};
-\path [regression, black!30] (M) edge ["$\upkappa_1$", pos = 0.6] (POS);
-\path [regression, black!30] (M) edge ["$\upkappa_2$", pos = 0.6] (NEG);
 
 %% Intercepts
 \path [regression, black!30] (M.175) edge ["$\uptau_1$"] (pos1.south east);

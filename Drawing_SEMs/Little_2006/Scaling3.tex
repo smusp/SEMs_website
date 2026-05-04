@@ -20,6 +20,18 @@
 \node [latent] (POS7) [above = 3cm of pos73] {$POS$};
 \node [latent] (NEG7) [above = 3cm of neg71] {$NEG$};
 
+%% Latent variances and covariance
+\path [covariance] (POS7.35) edge ["$\upphi_{7,12}$", bend left = 40] (NEG7.145);
+\path [variance] (POS7.120) edge ["$\upphi_{7,11}$", above, outer sep = 1pt,
+   bend left = 100, looseness = 2.5] (POS7.60);
+\path [variance] (NEG7.120) edge ["$\upphi_{7,22}$", above, outer sep = 1pt,
+   bend left = 100, looseness = 2.5] (NEG7.60);
+
+%% Latent means
+\node [constant, black!30] (M7) [below = 1.5cm of $(pos73)!0.5!(neg71)$] {1};
+\path [regression, black!30] (M7) edge ["$\upkappa_{7,1}$", pos = .6] (POS7);
+\path [regression, black!30] (M7) edge ["$\upkappa_{7,2}$", pos = .6] (NEG7);
+
 %% Loadings
 \path [regression] (POS7) edge ["$\uplambda_1$"] (pos71.90);
 \path [regression] (POS7) edge ["$\uplambda_2$"] (pos72.90);
@@ -28,13 +40,6 @@
 \path [regression] (NEG7) edge ["$\uplambda_4$"] (neg71.90);
 \path [regression] (NEG7) edge ["$\uplambda_5$"] (neg72.90);
 \path [regression] (NEG7) edge ["$\uplambda_6$"] (neg73.90);
-
-%% Latent variances and covariance
-\path [covariance] (POS7.35) edge ["$\upphi_{7,12}$", bend left = 40] (NEG7.145);
-\path [variance] (POS7.120) edge ["$\upphi_{7,11}$", above, outer sep = 1pt,
-   bend left = 100, looseness = 2.5] (POS7.60);
-\path [variance] (NEG7.120) edge ["$\upphi_{7,22}$", above, outer sep = 1pt,
-   bend left = 100, looseness = 2.5] (NEG7.60);
 
 %% Residuals
 \node [residual2] (e71) [above left = 4mm of pos71, xshift = 1mm] {$\uptheta_{7,1}$};
@@ -54,11 +59,6 @@
 
 \node [residual2] (e76) [above right = 4mm of neg73, xshift = -1mm] {$\uptheta_{7,6}$};
 \path [regression] (e76) edge (neg73.north east);
-
-%% Latent means
-\node [constant, black!30] (M7) [below = 1.5cm of $(pos73)!0.5!(neg71)$] {1};
-\path [regression, black!30] (M7) edge ["$\upkappa_{7,1}$", pos = .6] (POS7);
-\path [regression, black!30] (M7) edge ["$\upkappa_{7,2}$", pos = .6] (NEG7);
 
 %% Intercepts
 \path [regression, black!30] (M7.175) edge ["$\uptau_{1}$"] (pos71.south east);
@@ -85,6 +85,18 @@
 \node [latent] (POS8) [above = 3cm of pos83] {$POS$};
 \node [latent] (NEG8) [above = 3cm of neg81] {$NEG$};
 
+%% Latent variances and covariance
+\path [covariance] (POS8.35) edge ["$\upphi_{8,12}$", bend left = 40] (NEG8.145);
+\path [variance] (POS8.120) edge ["$\upphi_{8,11}$", above, outer sep = 1pt,
+   bend left = 100, looseness = 2.5] (POS8.60);
+\path [variance] (NEG8.120) edge ["$\upphi_{8,22}$", above, outer sep = 1pt,
+   bend left = 100, looseness = 2.5] (NEG8.60);
+
+%% Latent means
+\node [constant, black!30] (M8) [below = 1.5cm of $(pos83) !0.5! (neg81)$] {1};
+\path [regression, black!30] (M8) edge ["$\upkappa_{8,1}$", pos = 0.6] (POS8);
+\path [regression, black!30] (M8) edge ["$\upkappa_{8,2}$", pos = 0.6] (NEG8);
+
 %% Loadings
 \path [regression] (POS8) edge ["$\uplambda_1$"] (pos81.90);
 \path [regression] (POS8) edge ["$\uplambda_2$"] (pos82.90);
@@ -93,13 +105,6 @@
 \path [regression] (NEG8) edge ["$\uplambda_4$"] (neg81.90);
 \path [regression] (NEG8) edge ["$\uplambda_5$"] (neg82.90);
 \path [regression] (NEG8) edge ["$\uplambda_6$"] (neg83.90);
-
-%% Latent variances and covariance
-\path [covariance] (POS8.35) edge ["$\upphi_{8,12}$", bend left = 40] (NEG8.145);
-\path [variance] (POS8.120) edge ["$\upphi_{8,11}$", above, outer sep = 1pt,
-   bend left = 100, looseness = 2.5] (POS8.60);
-\path [variance] (NEG8.120) edge ["$\upphi_{8,22}$", above, outer sep = 1pt,
-   bend left = 100, looseness = 2.5] (NEG8.60);
 
 %% Residuals
 \node [residual2] (e81) [above left = 4mm of pos81, xshift = 1mm] {$\uptheta_{8,1}$};
@@ -119,11 +124,6 @@
 
 \node [residual2] (e86) [above right = 4mm of neg83, xshift = -1mm] {$\uptheta_{8,6}$};
 \path [regression] (e86) edge (neg83.north east);
-
-%% Latent means
-\node [constant, black!30] (M8) [below = 1.5cm of $(pos83) !0.5! (neg81)$] {1};
-\path [regression, black!30] (M8) edge ["$\upkappa_{8,1}$", pos = 0.6] (POS8);
-\path [regression, black!30] (M8) edge ["$\upkappa_{8,2}$", pos = 0.6] (NEG8);
 
 %% Intercepts
 \path [regression, black!30] (M8.175) edge ["$\uptau_{1}$"] (pos81.south east);
@@ -154,8 +154,4 @@
 
 \end{tikzpicture}
 \end{document}
-
-
-
-
 

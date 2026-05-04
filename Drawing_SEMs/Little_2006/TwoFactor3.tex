@@ -26,47 +26,38 @@
 \path [variance] (NEG.120) edge ["$\upphi_{22}$", above, outer sep = 1pt,
    bend left = 100, looseness = 2.5] (NEG.60);
 
-%% Loadings
-\path [regression] (POS) edge ["$\uplambda_1$"] (pos1.70);
-\path [regression] (POS) edge ["$\uplambda_2$"] (pos2.65);
-\path [regression] (POS) edge ["$\uplambda_3$"] (pos3.90);
-
-\path [regression] (NEG) edge ["$\uplambda_4$"] (neg1.90);
-\path [regression] (NEG) edge ["$\uplambda_5$"] (neg2.115);
-\path [regression] (NEG) edge ["$\uplambda_6$"] (neg3.110);
-
-%% Residuals
-\node [residual2] (e1) [above left = 4mm of pos1] {$\uptheta_1$};
-\path [regression] (e1) edge (pos1.north west);
-
-\node [residual2] (e2) [above left = 4mm of pos2] {$\uptheta_2$};
-\path [regression] (e2) edge (pos2.north west);
-
-\node [residual2] (e3) [above left = 4mm of pos3] {$\uptheta_3$};
-\path [regression] (e3) edge (pos3.north west);
-
-\node [residual2] (e4) [above right = 4mm of neg1] {$\uptheta_4$};
-\path [regression] (e4) edge (neg1.north east);
-
-\node [residual2] (e5) [above right = 4mm of neg2] {$\uptheta_5$};
-\path [regression] (e5) edge (neg2.north east);
-
-\node [residual2] (e6) [above right = 4mm of neg3] {$\uptheta_6$};
-\path [regression] (e6) edge (neg3.north east);
-
 %% Latent means
 \node [constant, black!30] (M) [below = 1.5cm of $(pos3) !0.5! (neg1)$] {1};
 \path [regression, black!30] (M) edge ["$\upkappa_1$", pos = 0.6] (POS);
 \path [regression, black!30] (M) edge ["$\upkappa_2$", pos = 0.6] (NEG);
 
-%% Intercepts
-\path [regression, black!30] (M.177) edge ["$\uptau_1$"] (pos1.south east);
-\path [regression, black!30] (M) edge ["$\uptau_2$"] (pos2.south east);
-\path [regression, black!30] (M) edge ["$\uptau_3$"] (pos3.south east);
+%%%% Loadings, Residuals, and Intecepts for POS factor
+\def \angleMean {170, 150, 130}   % angles for intercept out of constant
+\foreach \i [count = \j] in \angleMean {
+%% Loadings
+\path [regression] (POS) edge ["$\uplambda_\j$"] (pos\j.90);
 
-\path [regression, black!30] (M) edge ["$\uptau_4$"] (neg1.south west);
-\path [regression, black!30] (M) edge ["$\uptau_5$"] (neg2.south west);
-\path [regression, black!30] (M.3) edge ["$\uptau_6$"] (neg3.south west);
+%% Residuals
+\node [residual2] (e\j) [above left = 4mm of pos\j] {$\uptheta_\j$};
+\path [regression] (e\j) edge (pos\j.north west);
+
+%% Intercepts
+\path [regression, black!30] (M.\i) edge ["$\uptau_\j$"] (pos\j.south east);
+}
+
+%%%% Loadings, Residuals, and Intecepts for NEG factor
+\def \angleMean {50, 30, 10}   % angles for intercept out of constant
+\foreach \i [count = \j, evaluate = \j as \k using int(\j + 3)] in \angleMean {
+%% Loadings
+\path [regression] (NEG) edge ["$\uplambda_\k$"] (neg\j.90);
+
+%% Residuals
+\node [residual2] (e\k) [above right = 4mm of neg\j] {$\uptheta_\k$};
+\path [regression] (e\k) edge (neg\j.north east);
+
+%% Intercepts
+\path [regression, black!30] (M.\i) edge ["$\uptau_\k$"] (neg\j.south west);
+}
 
 %% Constraints
 \matrix [matrix of nodes, draw, cells = {anchor = west}] at (0, 4) {
@@ -80,4 +71,3 @@
 
 \end{tikzpicture}
 \end{document}
-
