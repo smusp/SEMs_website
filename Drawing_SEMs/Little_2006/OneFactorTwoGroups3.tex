@@ -15,7 +15,7 @@
 \node [latent] (POS1) [above = 3cm of pos21] {$POS$};
 
 %% Latent variance
-\path [variance] (POS1.120) edge ["$\upphi_7$", above, outer sep = 1pt,
+\path [variance] (POS1.120) edge ["$\upphi_7$" {above = 1pt},
    bend left = 100, looseness = 2.5] (POS1.60);
 
 %% Latent means
@@ -45,7 +45,7 @@
 \node [latent] (POS2) [above = 3cm of pos22] {$POS$};
 
 %% Latent variance
-\path [variance] (POS2.120) edge ["$\upphi_8$", above, outer sep = 1pt,
+\path [variance] (POS2.120) edge ["$\upphi_8$" {above = 1pt},
    bend left = 100, looseness = 2.5] (POS2.60);
 
 %% Latent means

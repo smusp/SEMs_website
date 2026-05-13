@@ -22,15 +22,15 @@
 
 %% Latent variances and covariance
 \path [covariance] (POS7.35) edge ["$\upphi_{7,12}$", bend left = 40] (NEG7.145);
-\path [variance] (POS7.120) edge ["$\upphi_{7,11}$", above, outer sep = 1pt,
+\path [variance] (POS7.120) edge ["$\upphi_{7,11}$" {above = 1pt},
    bend left = 100, looseness = 2.5] (POS7.60);
-\path [variance] (NEG7.120) edge ["$\upphi_{7,22}$", above, outer sep = 1pt,
+\path [variance] (NEG7.120) edge ["$\upphi_{7,22}$" {above = 1pt},
    bend left = 100, looseness = 2.5] (NEG7.60);
 
 %% Latent means
 \node [constant, black!30] (M7) [below = 1.5cm of $(pos73)!0.5!(neg71)$] {1};
-\path [regression, black!30] (M7) edge ["$\upkappa_{7,1}$", pos = .6] (POS7);
-\path [regression, black!30] (M7) edge ["$\upkappa_{7,2}$", pos = .6] (NEG7);
+\path [regression, black!30] (M7) edge ["$\upkappa_{7,1}$", pos = 0.6] (POS7);
+\path [regression, black!30] (M7) edge ["$\upkappa_{7,2}$", pos = 0.6] (NEG7);
 
 %%% POS factor
 \foreach \i [count = \j] in {170, 150, 130} {
@@ -74,9 +74,9 @@
 
 %% Latent variances and covariance
 \path [covariance] (POS8.35) edge ["$\upphi_{8,12}$", bend left = 40] (NEG8.145);
-\path [variance] (POS8.120) edge ["$\upphi_{8,11}$" {name = C1}, above, outer sep = 1pt,
+\path [variance] (POS8.120) edge ["$\upphi_{8,11}$" {name = C1, above = 1pt},
    bend left = 100, looseness = 2.5] (POS8.60);
-\path [variance] (NEG8.120) edge ["$\upphi_{8,22}$" {name = C2}, above, outer sep = 1pt,
+\path [variance] (NEG8.120) edge ["$\upphi_{8,22}$" {name = C2, above = 1pt},
    bend left = 100, looseness = 2.5] (NEG8.60);
 
 %% Latent means

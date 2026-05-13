@@ -29,37 +29,37 @@ I use the following **Ti*k*Z** libraries:
 - positioning - positioning relative to a node
 - quotes - labels as strings on paths
 - calc - coordinate calculations
-- math - simple mathematical operations
 - arrows.meta - arrowhead shape
-- bending - bendiness of curved paths
-- shapes - triangle for constant
-- backgrounds - pushing a path behind another path
+- shapes - triangle and ellipse
+- math - simple mathematical operations  
+<p>
 
 and the following **LaTeX** packages:
 
 - mathastext - use text font for math font
 - amsmath - mathematical formulas
-- newpxtext and newpxmath - upright Greek letters
+- newpxtext and newpxmath - upright Greek letters  
+<p>
 
-There is a small set of symbols used in the diagrams. They are shown below.
+There is a standardised set of symbols used in the diagrams. The key symbols are shown below.
 
 ![](Intro.svg){fig-align="left"}
 
-These symbols, common to all the diagrams, are set up as styles in `SEMstyles.tex`, along with a call to the libraries and packages.
+These symbols are defined as styles in `SEMstyles.tex`. As well, `SEMstyles.tex` loads the **Ti*k*Z** libraries and **LaTeX** packages.
 
 
 ```{tikz}
 %| code-summary: "Click to see SEMstyles.tex"
 %| file: "SEMstyles.tex"
 ```    
-</p>
+<p>
 
 All that is left for the individual **Ti*k*Z** scripts to do is to position the symbols on the canvas.
 
 The scripts are rendered as pdf files, then converted to svg files using [inkscape](https://inkscape.org/).
 
 
-#### The publications
+#### The publications and their model diagrams
 
 - Jose, P. (2013). *Doing statistical mediation and moderation*. New York, NY: Guilford Press. <br/> 
 

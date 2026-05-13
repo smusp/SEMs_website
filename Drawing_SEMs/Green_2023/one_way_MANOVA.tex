@@ -1,6 +1,6 @@
 \documentclass[border = 10pt]{standalone}
 \input{../SEMstyles.tex}
-
+%\usetikzlibrary{bending}
 \begin{document}
 \begin{tikzpicture}
 
@@ -14,9 +14,9 @@
 \def \angles {240, 260, 280, 300}    % angeles out of constant
 
 %% Covariances in and out angles and bend
-\def \eout {{0, 340, 320}}     % out angle
-\def \ein {{180, 200, 220}}    % in angle
-\def \bend {{80, 85, 90}}      % bend
+\def \eout {{350, 335, 310}}     % out angle
+\def \ein {{190, 205, 230}}    % in angle
+\def \bend {{40, 55, 60}}      % bend
 
 %% Indicators and their residuals
 \node [manifest] (y1) {Y$_1$};
@@ -68,7 +68,7 @@
         \tikzmath{\idash = int(\g + \i - 1);  \jdash = int(\g + \j - 1);}    % out and in labels for e
         \tikzmath{\index = \j - \i - 1;}                                     % array element
         \tikzmath{\first = \eout[\index]; \second = \ein[\index]; \third = \bend[\index];}
-        \path [covariance, black!40] (e\idash.\first) edge [bend right = \third, looseness = 0.55,] (e\jdash.\second); 
+        \path [covariance, black!40,  bend right = \third, looseness = 0.75] (e\idash.\first) edge (e\jdash.\second); 
 }}}
 
 \end{tikzpicture}

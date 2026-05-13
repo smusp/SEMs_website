@@ -39,7 +39,7 @@
 
    %% Latents and their variances (above last y in each group)
    \node [latent] (latent\i) [above = 3cm of y\lasty] {LS};
-   \path [variance] (latent\i.120) edge ["d", bend left = 110, looseness = 3] (latent\i.60);
+   \path [variance, bend left = 110, looseness = 3] (latent\i.125) edge ["d"] (latent\i.60);
 
    %% Means (above first y in each group)
    \coordinate (cc) at (y\firsty |- latent\i);   % coordinates for the constant

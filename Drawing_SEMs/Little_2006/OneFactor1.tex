@@ -11,7 +11,7 @@
 
 %% POS latent and its variance
 \node [latent] (POS) [above = 3cm of pos2] {$POS$};
-\path [variance] (POS.120) edge ["$\upphi\!=\!1$", above, outer sep = 1pt,
+\path [variance] (POS.120) edge ["$\upphi\!=\!1$" {above = 1pt},
    bend left = 100, looseness = 2.5] (POS.60);
 
 %% Means
