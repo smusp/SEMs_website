@@ -1,0 +1,120 @@
+---
+title: "Repeating whole pictures"
+subtitle: "Factor models"
+---
+
+In many situations, parts of a path diagram can be repeated. Consider the factor model shown below. There are two factors, POS and NEG. Three indicators, pos1, pos2, and pos3 load on the POS factor, and three indicators, neg1, neg2, and neg3 load on the NEG factor. Note that apart from the labels, the two factors are nearly identical. 
+ 
+
+![](Factor4.svg)
+
+
+Certainly the diagram can be constructed by writing code to draw the first factor then writing almost identical code to construct the almost identical second factor. It is more efficient though to write code for a generic factor, then position factors on the canvas. Before attempting to draw a whole factor, I will focus on drawing the two sets of indicators. The idea is to draw the two sets so that within a set, there is a small gap between the indicators, but between one set and the next, there is a bigger gap.
+
+
+![](Factor1.svg)
+
+
+The picture can be constructed using a `\foreach` loop.  A digression follows.
+
+In the code snippet below I use `\def` to define a macro, `\list`, to contain the indicator names, which then becomes the list of values in the `\foreach` loop. It is useful to define macros at the beginning of a script because they are easier to find if they need to change. In the code snippet, the `\foreach` loop contains two options: `remember`, which has been used before; and `count`, which counts 1 to 6 as `\i` cycles through the list of values. The count variable, `\j`, can then be used in the conditional logic of `\ifnum`. There are two instances of `\ifnum` in the `\foreach` loop. First, the first node (when `\j = 1`) is positioned at the default coordinates; all other nodes are positioned 1 cm to the right of the previous node, except the fourth node, `neg1`, which is positioned 2 cm to the right of the previous node, `pos3`. The second `\ifnum` defines the size of the gap according to whether or not `\j` is 4.
+
+
+```{tikz}
+\def \list {pos1, pos2, pos3, neg1, neg2, neg3}
+
+\foreach \i [count = \j, remember = \i as \lasti] in \list {
+  \ifnum \j = 1
+    \node [manifest] (\i) {\i};
+  \else
+    \ifnum \j = 4 \def \gap {2} \else \def \gap {1} \fi
+    \node[manifest] (\i) [right = \gap of \lasti] {\i};
+  \fi
+}
+```
+
+
+Note that `\ifnum` compares integers; I can't compare two strings directly, such as `\ifnum \i = pos1` for instance. An alternative is to use the `\pdfstrcomp` command which compares two strings (`\pdfstrcmp {\i}{pos1}`), and returns 0 if they are identical. Thus I can use the `\ifnum` sequence, and drop the `count` option from the `\foreach` loop. (Beware: `\pdfstrcmp` will fail in other engines - for instance, in XeTeX the command is `\strcmp`.)
+
+
+```{tikz}
+\def \list {pos1, pos2, pos3, neg1, neg2, neg3}
+
+\foreach \i [remember = \i as \lasti] in \list {
+  \ifnum \pdfstrcmp {\i}{pos1} = 0
+    \node [manifest] (\i) {\i};
+  \else
+    \ifnum \pdfstrcmp {\i}{neg1} = 0 \def \gap {2} \else \def \gap {1} \fi
+    \node[manifest] (\i) [right = \gap of \lasti] {\i};
+  \fi
+}
+```
+
+
+This section is concerned with another way to get the two sets of indicators in position: creating a command to draw a generic set of indicators, then in the document body, positioning sets of indicators on the canvas. The `\newcommand` command will create the new command. It also takes arguments, similar to styles though a different syntax, so that some of the detail, such as spacing and variable names, can be filled in when each set is drawn. The following creates a new command, `\drawfactor`, which takes two arguments (`[2]`). The first (`#1`) assigns the prefix of the indicator names (`pos` or `neg`), and the second (`#2`) positions the first indicator.
+
+```{tikz}
+\newcommand {\drawfactor} [2] {    
+                           %  #1 pos or neg indicator
+                           %  #2 position of 1st indicator
+
+  \node [manifest] (#11) [#2] {$#1_1$};
+  \node [manifest] (#12) [right = 1cm of #11] {$#1_2$};
+  \node [manifest] (#13) [right = 1cm of #12] {$#1_3$};
+}
+```
+
+
+The commands to draw the two sets of indicators follow. Note that for the `pos` set, the value for the second argument is blank - the first indicator of the `pos` set in positioned at default coordinates. For the `neg` set, the value for the second argument is set.
+
+
+```{tikz}
+\drawfactor{pos}{}
+\drawfactor{neg}{right = 2cm of pos3}
+```
+
+
+The complete script and rendered picture follow.
+
+
+```{tikz}
+%| file: "Factor2.tex"
+```
+
+![](Factor2.svg)
+
+
+The next step is to complete the drawing of the factor: include the factor, a latent variable, positioned above the middle indicator; include the loadings, which are regressions, and I control the angle for the regression arrow to enter the indicator; and include the indicator residuals. The `\drawfactor` command needs another argument, to take the factor name, `POS` or `NEG`.
+
+
+```{tikz}
+%| file: "Factor3.tex"
+```
+
+![](Factor3.svg)
+
+
+The commands to position the loadings and residuals involve repetition. There might be some benefit to positioning them in a `\foreach` loop.
+
+
+```{tikz}
+%| file: "Factor4.tex"
+```
+
+![](Factor4.svg)
+
+
+The script works when the number of indicators for each factor is the same. When they differ, the approach needs to be modified. First, the `\drawfactor` command takes another argument - the  number of indicators. Then, when positioning the indicators, I use a `\foreach` loop in which the number-of-indicators argument is the last value in the list of values, thus the `\foreach` loop knows how many indicators to position. Also, the factor is positioned above the midpoint of the first and last indicators. 
+
+
+```{tikz}
+%| file: "Factor5.tex"
+```
+
+![](Factor5.svg)
+
+  
+
+
+```{r}
+```

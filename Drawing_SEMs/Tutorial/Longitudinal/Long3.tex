@@ -1,0 +1,13 @@
+\documentclass[border = 10pt]{standalone}
+\input{SEMstyles.tex}
+
+\begin{document}
+\begin{tikzpicture}
+
+\foreach \i in {0, 3, 6, 9, 12, 15} {
+  \tikzmath{\grade = int(\i/3 + 7);} 
+  \node [manifest] (y\grade) at (\i, 0) {$Y_{\grade}$};
+}
+
+\end{tikzpicture}
+\end{document}

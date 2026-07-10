@@ -1,0 +1,26 @@
+\documentclass[border = 10pt]{standalone}
+\input{SEMstyles.tex}
+
+\begin{document}
+\begin{tikzpicture}
+
+%% Manifest
+\node [manifest] (x1) {X$_1$};
+\node [manifest] (x2) [below = 1.5cm of x1] {X$_2$};
+\node [manifest] (y) [right = 3cm of $(x1) !0.5! (x2)$] {Y};
+
+%% Regressions
+\path [regression] (x1.0) edge ["$\upbeta_1$"] (y.177)
+                   (x2.0) edge ["$\upbeta_2$"] (y.183);
+
+%% Residual
+\node [residual = {0}{4mm}{draw, circle}] (e) [above right = 4mm of y] {e};
+\path [regression] (e) edge (y.north east);
+\path [variance = {right}{110}{6}] (e.60) edge ["$\upsigma^2_e$" {above = 2pt}] (e.120);
+
+%% Intercept
+\node [constant] (m) [below = 1.5cm of y] {1};
+\path [regression] (m) edge ["$\upbeta_0$"] (y);
+
+\end{tikzpicture}
+\end{document}

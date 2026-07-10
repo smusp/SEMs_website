@@ -1,0 +1,16 @@
+\documentclass[border = 10pt]{standalone}
+\input{SEMstyles.tex}
+
+\begin{document}
+\begin{tikzpicture}
+
+%% Manifest
+\node [manifest] (y1) {$Y_7$};
+
+\foreach \i [remember = \i as \lasti (initially 1)] in {2, 3, 4, 5, 6} {
+  \tikzmath{\grade = int(\i + 6);} 
+  \node [manifest] (y\i) [right = 2.2cm of y\lasti] {$Y_{\grade}$};
+}
+
+\end{tikzpicture}
+\end{document}

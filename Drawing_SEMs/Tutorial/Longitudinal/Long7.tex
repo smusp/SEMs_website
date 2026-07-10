@@ -1,0 +1,19 @@
+\documentclass[border = 10pt]{standalone}
+\input{SEMstyles.tex}
+
+\begin{document}
+\begin{tikzpicture}
+
+\foreach \i [remember = \i as \lasti)] in {1, 2, 3, 4, 5, 6} {
+  \tikzmath{\grade = int(\i + 6);} 
+
+  \ifnum \i = 1
+    \node [manifest] (y\i) {$Y_{\grade}$};  
+  \else    
+    \node [manifest] (y\i) [right = 2.2cm of y\lasti] {$Y_{\grade}$};
+    \path [regression] (y\lasti) edge ["$b_\lasti$"] (y\i);
+  \fi
+}
+
+\end{tikzpicture}
+\end{document}

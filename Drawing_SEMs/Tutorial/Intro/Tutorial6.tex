@@ -1,0 +1,31 @@
+\documentclass[tikz, border = 10pt]{standalone}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usetikzlibrary{positioning, calc, quotes, arrows.meta}
+
+\tikzset{
+  every edge quotes/.style = {fill = white},
+  regression/.style = {-{Stealth[length = 1.5mm]}, shorten > = 1pt, inner sep = 1.5pt}
+}
+
+\begin{document}
+\begin{tikzpicture}
+
+%% Manifest
+\node (x) [draw] {X};
+\node (y) [right = 5cm of x, draw] {Y};
+\node (m) [above = 4cm of $(x) !0.5! (y)$, draw] {M};
+
+%% Regressions
+\draw [regression] (x)     edge ["c"] (y);
+\draw [regression] (x.70)  edge ["a"] (m.250);
+\draw [regression] (m.290) edge ["b"] (y.110);
+
+%% Residuals
+\node (e1) [above right = 4mm of y] {};
+\node (e2) [above right = 4mm of m] {};
+\draw [regression] (e1) edge (y.north east);
+\draw [regression] (e2) edge (m.north east);
+
+\end{tikzpicture}
+\end{document}

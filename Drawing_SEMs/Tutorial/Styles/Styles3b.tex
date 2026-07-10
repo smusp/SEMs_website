@@ -1,0 +1,45 @@
+\documentclass[tikz, border = 1pt]{standalone}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usetikzlibrary{positioning, calc, quotes, arrows.meta, shapes}
+
+\tikzset{
+  every edge quotes/.style = {fill = white},
+  > = {Stealth[length = 1.5mm]},
+  shorten > = 1pt, 
+  shorten < = 1pt, 
+  manifest/.style = {draw, inner sep = 3pt, align = center, 
+    minimum width = 1cm, minimum height = 0.85cm},
+  latent/.style = {manifest, ellipse},
+  regression/.style = {->, shorten < = 0pt, inner sep = 1.5pt},
+  covariance/.style n args = {3}{<->, inner sep = 1.5pt, bend #1 = #2, looseness = #3},
+  variance/.style n args = {3}{covariance = {#1}{#2}{#3}, inner sep = 0.5pt},
+  residual/.style n args = {3}{inner sep = #1, minimum size = #2, #3},
+  residual/.default = {0}{0}{}
+}
+
+\newcommand {\drawmodel} [1] {
+  \begin{scope} [local bounding box = mybox]
+  %% Manifest
+  \node [manifest] (x) {X};
+  \node [manifest] (y) [right = 2cm of x] {Y};
+
+  %% Regression
+  \path [regression] (x) edge (y);
+  
+  \node [below = 5pt, anchor = north west, inner sep = 0] at (mybox.south west) {#1};
+  \end{scope}
+}
+
+\begin{document}
+\begin{tikzpicture}
+
+%%% b) Arrow and label
+\drawmodel{}
+
+%% Residual
+\node [residual] (e) [above right = 4mm of y] {e};
+\path [regression] (e) edge (y.north east);
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,19 @@
+\documentclass[border = 10pt]{standalone}
+\input{SEMstyles.tex}
+
+\begin{document}
+\begin{tikzpicture}
+  
+\def \list {pos1, pos2, pos3, neg1, neg2, neg3}
+
+\foreach \i [count = \j, remember = \i as \lasti] in \list {
+  \ifnum \j = 1
+    \node [manifest] (\i) {\i};
+  \else
+    \ifnum \j = 4 \def \gap {2} \else \def \gap {1} \fi
+    \node[manifest] (\i) [right = \gap of \lasti] {\i};
+  \fi
+}
+
+\end{tikzpicture} 
+\end{document}

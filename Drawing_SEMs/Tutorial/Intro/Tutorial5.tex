@@ -1,0 +1,24 @@
+\documentclass[tikz, border = 10pt]{standalone}
+
+\usetikzlibrary{positioning, calc, quotes}
+
+\tikzset{every edge quotes/.style = {fill = white}}
+
+\begin{document}
+\begin{tikzpicture}
+
+\node (x) [draw] {X};
+\node (y) [right = 5cm of x, draw] {Y};
+\node (m) [above = 4cm of $(x) !0.5! (y)$, draw] {M};
+
+\draw [->] (x) edge ["c"] (y);
+\draw [->] (x) edge ["a"] (m);
+\draw [->] (m) edge ["b"] (y); 
+
+\node (e1) [above right = 4mm of y] {};
+\node (e2) [above right = 4mm of m] {};
+\draw [->] (e1) edge (y);
+\draw [->] (e2) edge (m);
+
+\end{tikzpicture}
+\end{document}

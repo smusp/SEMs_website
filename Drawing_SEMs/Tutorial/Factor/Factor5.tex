@@ -1,0 +1,39 @@
+\documentclass[border = 10pt]{standalone}
+\input{SEMstyles.tex}
+
+\newcommand {\drawfactor} [4] {    
+                           %  #1 pos or neg indicator
+                           %  #2 POS or NEG factor 
+                           %  #3 number of indicators 
+                           %  #4 position of 1st indicator
+
+  %% Indicators
+  \foreach \i [remember = \i as \lasti] in {1, ..., #3} {
+    \ifnum \i = 1
+      \node [manifest] (#1\i) [#4] {$#1_\i$};
+    \else
+      \node [manifest] (#1\i) [right = 1cm of #1\lasti] {$#1_\i$};
+    \fi
+  }
+
+  %% Factor
+  \node [latent] (#2) [above = 2cm of $(#11) !0.5! (#1#3)$] {#2};
+
+  \foreach \i in {1, ..., #3} {  
+    %% Loadings
+    \path [regression] (#2) edge (#1\i.90);
+    
+    %% Residuals
+    \node [residual] (e\i) [below right = 4mm of #1\i] {};
+    \path [regression] (e\i) edge (#1\i.south east);
+  }
+}
+
+\begin{document}
+\begin{tikzpicture}
+
+\drawfactor{pos}{POS}{3}{}
+\drawfactor{neg}{NEG}{4}{right = 2cm of pos3}
+
+\end{tikzpicture} 
+\end{document}

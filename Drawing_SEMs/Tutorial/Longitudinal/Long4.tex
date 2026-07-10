@@ -1,0 +1,13 @@
+\documentclass[border = 10pt]{standalone}
+\input{SEMstyles.tex}
+
+\begin{document}
+\begin{tikzpicture}
+
+\foreach \i in {7, 8, 9, 10, 11, 12} {
+  \tikzmath{\xcoord = 3 * (\i - 7);}
+  \node [manifest] (y\i) at (\xcoord, 0) {$Y_{\i}$};
+}
+
+\end{tikzpicture}
+\end{document}

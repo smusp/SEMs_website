@@ -1,0 +1,43 @@
+\documentclass[tikz]{standalone}
+\renewcommand{\familydefault}{\sfdefault}
+
+%% Old paper background
+\pgfdeclarelayer{background layer}
+\pgfsetlayers{background layer, main}
+\makeatletter
+\tikzset{old paper/.style = {
+  execute at end picture = {
+  \begin{pgfonlayer}{background layer}
+    \pgfmathsetmacro{\paperwidth}{\pgf@picmaxx - \pgf@picminx + 20pt}
+    \pgfmathsetmacro{\paperheight}{\pgf@picmaxy - \pgf@picminy + 20pt}
+    \node[inner sep = 0pt] (p) at (current bounding box.center)
+    {\includegraphics[width = \paperwidth pt, height = \paperheight pt] {old_paper.jpg}};
+  \end{pgfonlayer}
+}}}
+\makeatother
+
+\usetikzlibrary{positioning, calc, quotes, arrows.meta, shapes}
+
+\tikzset{
+  regression/.style = {-{Stealth[length = 1.5mm]}, shorten > = 1pt, inner sep = 1.5pt}
+}
+
+\begin{document}
+\begin{tikzpicture}[old paper]
+
+%% Manifest
+\node (x) [draw] {X};
+\node (y) [right = 5cm of x, draw] {Y};
+\node (m) [above = 4cm of $(x) !0.5! (y)$, draw] {M};
+
+%% Regressions
+\node (c) at ($(x) !0.5! (y)$) [inner sep = 1.5pt] {c$'$};
+\node (a) at ($(x.70) !0.5! (m.250)$) [inner sep = 1.5pt] {a};
+\node (b) at ($(m.290) !0.5! (y.110)$) [inner sep = 1.5pt] {b};
+
+\draw (x) -- (c);     \draw[regression] (c) -- (y);
+\draw (x.70) -- (a);  \draw[regression] (a) -- (m.250);
+\draw (m.290) -- (b); \draw[regression] (b) -- (y.110);
+                   
+\end{tikzpicture}
+\end{document}

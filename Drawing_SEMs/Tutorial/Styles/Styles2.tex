@@ -1,0 +1,31 @@
+\documentclass[tikz, border = 10pt]{standalone}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usetikzlibrary{positioning, calc, quotes, arrows.meta, shapes}
+
+\tikzset{
+  every edge quotes/.style = {fill = white},
+  > = {Stealth[length = 1.5mm]},
+  shorten > = 1pt, 
+  shorten < = 1pt, 
+  manifest/.style = {draw, inner sep = 3pt, align = center, 
+    minimum width = 1cm, minimum height = 0.85cm},
+  latent/.style = {manifest, ellipse},
+  regression/.style = {->, shorten < = 0pt, inner sep = 1.5pt},
+  covariance/.style n args = {3}{<->, inner sep = 1.5pt, bend #1 = #2, looseness = #3},
+  variance/.style n args = {3}{covariance = {#1}{#2}{#3}, inner sep = 0.5pt}
+}
+
+\begin{document}
+\begin{tikzpicture}
+
+\node [latent] (f1) {Factor 1};
+\node [latent] (f2) [right = 2cm of f1] {Factor 2}; 
+
+\path [covariance = {left}{40}{0.7}] (f1.20) edge ["a"] (f2.160);
+
+\path [variance = {right}{90}{2.5}] (f1.60) edge ["b"] (f1.120);
+\path [variance = {right}{90}{2.5}] (f2.60) edge ["b" {above = 2pt}] (f2.120);
+
+\end{tikzpicture}
+\end{document}

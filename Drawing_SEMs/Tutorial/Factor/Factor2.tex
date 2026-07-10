@@ -1,0 +1,20 @@
+\documentclass[border = 10pt]{standalone}
+\input{SEMstyles.tex}
+
+\newcommand {\drawfactor} [2] {    
+                           %  #1 pos or neg indicator
+                           %  #2 position of 1st indicator
+
+  \node [manifest] (#11) [#2] {$#1_1$};
+  \node [manifest] (#12) [right = 1cm of #11] {$#1_2$};
+  \node [manifest] (#13) [right = 1cm of #12] {$#1_3$};
+}
+
+\begin{document}
+\begin{tikzpicture}
+
+\drawfactor{pos}{}
+\drawfactor{neg}{right = 2cm of pos3}
+
+\end{tikzpicture} 
+\end{document} 

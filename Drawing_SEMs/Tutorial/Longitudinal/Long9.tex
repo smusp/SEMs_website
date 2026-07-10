@@ -1,0 +1,42 @@
+\documentclass[border = 10pt]{standalone}
+\input{SEMstyles.tex}
+
+\begin{document}
+\begin{tikzpicture}
+
+\foreach \i [remember = \i as \lasti] in {1, 2, 3, 4, 5, 6} {
+  \tikzmath{\grade = int(\i + 6);} 
+
+  \ifnum \i = 1
+    %% 1st Manifest
+    \node [manifest] (x\i) {$X_{\grade}$}; 
+    \node [manifest] (y\i) [below = 3cm of x\i] {$Y_{\grade}$};    
+  \else  
+    %% Manifest  
+    \node [manifest] (x\i) [right = 2.2cm of x\lasti] {$X_{\grade}$};
+    \node [manifest] (y\i) [right = 2.2cm of y\lasti] {$Y_{\grade}$}; 
+
+    %% Regressions - stability
+    \path [regression] 
+      (x\lasti) edge ["$b_\lasti$", pos = 0.25] (x\i)
+      (y\lasti) edge ["$c_\lasti$", pos = 0.25] (y\i);     
+
+    %% Regressions - cross-lagged effects
+    \path [regression] 
+      (x\lasti) edge ["$xy_\lasti$", pos = 0.25] (y\i)
+      (y\lasti) edge ["$yx_\lasti$", pos = 0.25] (x\i);  
+
+    %% Residuals ...
+    \node [residual] (e\i) [above right = 4mm of x\i] {};
+    \node [residual] (f\i) [below right = 4mm of y\i] {};
+    \path [regression] 
+      (e\i) edge (x\i.north east)   
+      (f\i) edge (y\i.south east);  
+
+    %% ... and their Covariances
+    \path [covariance = {left}{70}{0.8}] (e\i) edge (f\i);    
+  \fi
+}
+
+\end{tikzpicture}
+\end{document}

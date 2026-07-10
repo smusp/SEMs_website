@@ -1,0 +1,27 @@
+\documentclass[border = 10pt]{standalone}
+\input{SEMstyles.tex}
+
+\begin{document}
+\begin{tikzpicture}
+
+\foreach \i [remember = \i as \lasti] in {1, 2, 3, 4, 5, 6} {
+  \tikzmath{\grade = int(\i + 6);} 
+
+  \ifnum \i = 1
+    %% 1st Manifest
+    \node [manifest] (y\i) {$Y_{\grade}$};  
+  \else 
+    %% Manifest  
+    \node [manifest] (y\i) [right = 2.2cm of y\lasti] {$Y_{\grade}$};
+    
+    %% Regressions
+    \path [regression] (y\lasti) edge ["$b_\lasti$"] (y\i);
+    
+    %% Residuals
+    \node [residual] (e\i) [above right = 4mm of y\i] {};
+    \path [regression] (e\i) edge (y\i.north east); 
+  \fi
+}
+
+\end{tikzpicture}
+\end{document}

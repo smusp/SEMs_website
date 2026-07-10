@@ -1,0 +1,15 @@
+\documentclass[tikz, border = 10pt]{standalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\node [draw] (x) at (0, 0) {X};
+\node [draw] (y) at (5, 0) {Y};
+\node [draw] (m) at (2.5, 4) {M};
+
+\draw [->] (x) -- node [fill = white] {c} (y);
+\draw [->] (x) -- node [fill = white] {a} (m);
+\draw [->] (m) -- node [fill = white] {b} (y);
+
+\end{tikzpicture}
+\end{document}

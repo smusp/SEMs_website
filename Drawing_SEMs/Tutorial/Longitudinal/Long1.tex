@@ -1,0 +1,12 @@
+\documentclass[border = 10pt]{standalone}
+\input{SEMstyles.tex}
+
+\begin{document}
+\begin{tikzpicture}
+
+\foreach \i in {1, 2, 3, 4, 5, 6} {
+  \node [manifest] (y\i) at (\i, 0) {$Y_\i$};
+}
+
+\end{tikzpicture}
+\end{document}

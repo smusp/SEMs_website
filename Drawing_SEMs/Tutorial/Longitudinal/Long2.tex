@@ -1,0 +1,12 @@
+\documentclass[border = 10pt]{standalone}
+\input{SEMstyles.tex}
+
+\begin{document}
+\begin{tikzpicture}
+
+\foreach \i/\j in {7/0, 8/3, 9/6, 10/9, 11/12, 12/15} {
+  \node [manifest] (y\i) at (\j, 0) {$Y_{\i}$};
+  }
+
+\end{tikzpicture}
+\end{document}
