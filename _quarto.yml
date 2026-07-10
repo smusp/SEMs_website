@@ -2,7 +2,7 @@ project:
   type: website
 
 execute:
-  freeze: auto 
+  freeze: auto
 
 website: 
   site-url: "https://smusp.github.io/SEMs_website/"
@@ -60,9 +60,11 @@ website:
 format:
   html:
     theme: styles.scss
+    highlight-style: solarized
+    embed-resources: true    
     code-copy: true
     code-overflow: wrap
     toc: false
-
-
+    execute:
+      eval: false
 

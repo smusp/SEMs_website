@@ -11,6 +11,13 @@ h1, h2, h3, h4 {
   opacity: 1;
 }
 
+
+h5 {
+  padding-left: 1.75rem; 
+  margin-top: 0.75rem; 
+  margin-bottom: 0rem;
+}
+
 p.subtitle {
   color: #CB6015;
   opacity: 1;
@@ -29,4 +36,27 @@ h2 + .level4 > h4 {
       margin-top: 10px;
 }
 
- 
+
+div.sourceCode {
+margin-left: 0.1rem;
+}
+
+.cell-output-display img,
+p img.img-fluid {
+  display: block;
+  margin-left: 2rem;
+  margin-right: auto;
+} 
+
+details > summary {
+  color: black;
+}
+
+details {
+  margin: 0px;
+  padding-left: 1em
+}
+
+.no-indent ul {
+  padding-inline-start: 1em !important;
+}
