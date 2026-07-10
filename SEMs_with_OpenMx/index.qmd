@@ -89,7 +89,7 @@ Three methods of scaling (reference group, marker variable, and effects scaling)
 SEMs approaches for ANOVA and MANOVA type models.
 :::
 
-<h5>The Models</h5>
+<h5 style="padding-left: 1em;">The Models</h5>
 
 <details>
   <summary>one-way ANOVA model</summary>
@@ -116,7 +116,7 @@ SEMs approaches for ANOVA and MANOVA type models.
   <img src="../Drawing_SEMs/Green_2023/one_way_LATENT.svg">  
 </details> 
 
-<h5>The Data</h5>
+<h5 style="padding-left: 1em;">The Data</h5>
 
 ```{r}
 #| code-summary: "satisfactionI.r"
@@ -133,7 +133,7 @@ SEMs approaches for ANOVA and MANOVA type models.
 #| file: "Green_2023/satisfactionII.r"
 ```
 
-<h5>R Scripts</h5>
+<h5 style="padding-left: 1em;">R Scripts</h5>
 
 ```{r}
 #| code-summary: "one_way_ANOVA.r"
