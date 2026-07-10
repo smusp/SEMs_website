@@ -1,11 +1,5 @@
 ---
 title: "One-Way MANOVA"
-highlight-style: solarized
-
-embed-resources: true
-
-execute:
-  eval: false
 ---
 
 ```{r echo = FALSE}
@@ -47,7 +41,7 @@ The variables used in this example are:
 
 The model path diagram for the one-way MANOVA is shown in Fig 21.2 (p. 400), and is reproduced below. The diagram shows the "Less Constrained" model. The means are represented by the labels on the arrows connecting the "1" to the dependent variables. The means for each variable are allowed to differ across the groups. The residual variances and covariances are constrained to equality.
 
-![](../../Drawing_SEMs/Green_2023/one_way_MANOVA.svg){fig-align="center"}
+![](../../Drawing_SEMs/Green_2023/one_way_MANOVA.svg)
 
 The model statements are shown below. The "More Constrained" model constrains the means to equality. The "Less Constrained" model allows the means to differ across the groups. In both cases the residual variances and covariances are constrained to equality. The variancs and covariances can be set up separately - see `vcov` below. Then, `vcov` is added back into each model. Saves a little typing.
 
@@ -92,13 +86,13 @@ models <- list(
 ```{r echo = -2:-1}
 ## Fit the models and get the results
 ## Check means and chi square test in Table 21.5
-# Fit the models 
+## Fit the models 
 fit <- lapply(models, sem, data = df, group = "x")
 
-# Get model summaries
+## Get model summaries
 lapply(fit, summary)
 
-# Contrast model fits
+## Contrast model fits
 Reduce(anova, fit)
 ```
 
@@ -119,12 +113,12 @@ for (i in names(models)) {
       round(2)
    row.names(means[[i]]) = c("Y1", "Y2", "Y3", "Y4")
 }
-means
+means  # Typos among "Less Constrained" means in Table 21.5)
 ```
 
 Compare with the means in Table 21.5.
 
-By way of completeness, get the error SSCP matrices. (LTLG state that, "the error SSCP matrices were perfectly reproduced by multiplying the variances and covariances in the SEM output by the total sample size" p. 398).
+By way of completeness, get the error SSCP matrices. (TLG state that, "the error SSCP matrices were perfectly reproduced by multiplying the variances and covariances in the SEM output by the total sample size" p. 398).
 
 ```{r echo = -1}
 ## Get the error SSCP matrices by hand
@@ -183,7 +177,7 @@ Reduce(anova, fit)
 
 Compare with the $\upchi$^2^ test on page 401.
 
-<br />
+<br>
 
 ```{r}
 #| echo: false

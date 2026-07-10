@@ -46,13 +46,13 @@ models <- list(
 
 ## Fit the models and get the results
 ## Check means and chi square test in Table 21.5
-# Fit the models
+## Fit the models
 fit <- lapply(models, sem, data = df, group = "x")
 
-# Get model summaries
+## Get model summaries
 lapply(fit, summary)
 
-# Contrast model fits
+## Contrast model fits
 Reduce(anova, fit)
 
 ## Extract means from list of estimates
@@ -67,7 +67,7 @@ for (i in names(models)) {
       round(2)
    row.names(means[[i]]) = c("Y1", "Y2", "Y3", "Y4")
 }
-means
+means  # Typos among "Less Constrained" means in Table 21.5)
 
 ## Get the error SSCP matrices by hand
 # Note: In the list of estimates, co/variances are in element "theta"

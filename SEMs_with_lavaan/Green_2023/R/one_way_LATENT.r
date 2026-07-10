@@ -28,7 +28,7 @@ common <- "
    y3 ~~ c(e3,e3,e3)*y3
    y4 ~~ c(e4,e4,e4)*y4
 
-   # Latent error variances
+   # Latent variances
    F ~~ c(d,d,d)*F"
 
 models <- list(
@@ -67,11 +67,11 @@ Reduce(anova, fit)
 d1 <- (0.664 - 0) / sqrt(8.135); d1    # "no strategy" vs "discussion"
 d2 <- (1.945 - 0) / sqrt(8.135); d2    # "no strategy" vs "exercise"
 
-## Extract latent means and error variances from "Less Constrained" model
+## Extract latent means and variances from "Less Constrained" model
 ## Check with "All measures" row in Table 21.6
 estimates <- lavInspect(fit[["Less Constrained"]], "est"); estimates
    # Note: latent means are in element "alpha"
-   #       latent error variances are in element "psi"
+   #       latent variances are in element "psi"
 
 LatentMeans <- sapply(estimates, "[[", "alpha"); LatentMeans
 LatentVar   <- sapply(estimates, "[[", "psi"); LatentVar
@@ -103,7 +103,7 @@ common <-
    y3 ~~ c(e13,e23,e33)*y3
    y4 ~~ c(e14,e24,e34)*y4
 
-   # Latent error variances
+   # Latent variances
    F ~~ c(d1,d2,d3)*F"
 
 models <- list(
@@ -127,19 +127,19 @@ models <- list(
 )
 
 ## Fit the model and get the results
-## Check with means, error variance, and chi square in 2nd row in Table 21.6
-# Fit the models
+## Check with means, variance, and chi square in 2nd row in Table 21.6
+## Fit the models
 fit <- lapply(models, sem, data = df, group = "x")
 
-# Model summaries
+## Model summaries
 lapply(fit, summary)
 
-# Get the latent means and latent error variances for "Less Constrained" model
+## Get the latent means and latent variances for "Less Constrained" model
 estimates <- lavInspect(fit[["Less Constrained"]], "est"); estimates
 LatentMeans <- sapply(estimates, "[[", "alpha"); LatentMeans
 LatentVar   <- sapply(estimates, "[[", "psi"); LatentVar
 
-# Contrast model fits
+## Contrast model fits
 Reduce(anova, fit)
 
 ## Columns of Table 21.6 dealing with means, variances and residual variances of "y1"
@@ -178,10 +178,10 @@ VarY1 <- VarY1[1,]; VarY1  # Compare with 2nd row in Table 21.6
 ResidVarY1 <- sapply(lapply(estimates, "[[", "theta"), diag)
 ResidVarY1 <- ResidVarY1[1,]; ResidVarY1   # Compare with 2nd row in Table 21.6
 
-# Differences between y1 variances and y1 residual variances are latent error variances
+# Differences between y1 variances and y1 residual variances are latent variances
 VarY1 - ResidVarY1
 
-# Compare with the latent error variances
+# Compare with the latent variances
 LatentVar
 
 ## Relaxing some consyraints
@@ -203,7 +203,7 @@ common <-
    y3 ~~ c(e13,e23,e33)*y3
    y4 ~~ c(e14,e24,e34)*y4
 
-   # Latent error variances
+   # Latent variances
    F ~~ c(d1,d2,d3)*F"
 
 models <- list(
@@ -227,14 +227,14 @@ models <- list(
 )
 
 ## Fit the model and get the results
-## Check with means, error variance, and chi square in 3rd row in Table 21.6
+## Check with means, variance, and chi square in 3rd row in Table 21.6
 # Fit the models
 fit <- lapply(models, sem, data = df, group = "x")
 
 # Model summaries
 lapply(fit, summary)
 
-# Get the latent means and latent error variances for "Less Constrained" model
+# Get the latent means and latent variances for "Less Constrained" model
 estimates <- lavInspect(fit[["Less Constrained"]], "est"); estimates
 LatentMeans <- sapply(estimates, "[[", "alpha"); LatentMeans
 LatentVar   <- sapply(estimates, "[[", "psi"); LatentVar
@@ -278,10 +278,10 @@ VarY2 <- VarY2[2,]; VarY2  # Compare with 3rd row in Table 21.6
 ResidVarY2 <- sapply(lapply(estimates, "[[", "theta"), diag)
 ResidVarY2 <- ResidVarY2[2, ]; ResidVarY2  # Compare with 3rd row in Table 21.6
 
-# Differences between y2 variances and y2 residual variances are latent error variances
+# Differences between y2 variances and y2 residual variances are latent variances
 VarY2 - ResidVarY2
 
-# Compare with the latent error variances
+# Compare with the latent variances
 LatentVar
 
 

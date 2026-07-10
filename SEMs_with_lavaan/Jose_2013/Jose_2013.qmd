@@ -1,12 +1,6 @@
 ---
 title: "Mediation"
 subtitle: "Three-variable mediation with cross-sectional data"
-highlight-style: solarized
-
-embed-resources: true
-
-execute:
-  eval: false
 ---
 
 ```{r echo = FALSE}
@@ -57,7 +51,7 @@ The names for the three variables are:
 
 The model path diagram is given in Figure 3.3 (p. 46), reproduced below.
 
-![](../../Drawing_SEMs/Jose_2013/Jose_2013.svg){fig-align="center"}
+![](../../Drawing_SEMs/Jose_2013/Jose_2013.svg)
 
 In **lavaan**, mediation effects can be estimated using the `:=` operator. In the diagram, the effects are labelled a, b, and c$'$; in the model statement, they are labelled a, b, and cpr. The labels can then be used to obtain the indirect and total effects.
 
@@ -109,7 +103,7 @@ summary(fit_boot, standardized = TRUE, ci = TRUE)
 parameterEstimates(fit_boot, boot.ci.type = "perc")
 ```
 
-<br />
+<br>
 
 ```{r}
 #| echo: false

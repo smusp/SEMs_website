@@ -1,11 +1,5 @@
 ---
 title: "One-Way ANCOVA"
-highlight-style: solarized
-
-embed-resources: true
-
-execute:
-  eval: false
 ---
 
 ```{r echo = FALSE}
@@ -45,16 +39,16 @@ The variables used in this example are:
 
  - x - Coping Strategy ("a" - no strategy; "b" - discussion; "c" - exercise)
  - y - dependent variable ("after" Life-Satisfaction scores)
- - preC - pre-Life-Satisfaction grand mean centered
+ - preC - pre-Life-Satisfaction scores grand mean centered
 
 The steps are the same as with the one_way_ANOVA. The only difference is the addition of the covariate, preC.
 
 
 #### The models
 
-The model path diagram for one-way ANCOVA is shown below. The diagram shows the "Less Constrained" model - the three means, represented by the labels on the arrows connecting the "1" to the dependent variable, differ. To be consistent with the ANCOVA assumptions of homogeneity of variances and homogeneity of regression slopes, the residual variances and the coefficients for the covariate (preC) are each constrained to equality.
+The model path diagram for the one-way ANCOVA is shown below. The diagram shows the "Less Constrained" model - the three means, represented by the labels on the arrows connecting the "1" to the dependent variable, differ. To be consistent with the ANCOVA assumptions of homogeneity of variances and homogeneity of regression slopes, the residual variances and the coefficients for the covariate (preC) are each constrained to equality.
 
-![](../../Drawing_SEMs/Green_2023/one_way_ANCOVA.svg){fig-align="center"}
+![](../../Drawing_SEMs/Green_2023/one_way_ANCOVA.svg)
 
 The model statements are shown below. The "More Constrained" model constrains the means to equality. The "Less Constrained" model allows the means to differ across the groups. In both cases the residual variances and the coefficients for the covariate are constrained to equality.
 
@@ -145,7 +139,7 @@ Rsquare <- ErrorVar["a", ] |>
 Rsquare
 ```
 
-<br />
+<br>
 
 ```{r}
 #| echo: false
