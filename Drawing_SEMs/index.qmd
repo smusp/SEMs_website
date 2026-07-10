@@ -1,13 +1,7 @@
 ---
 pagetitle: "Drawing SEMs"
 
-highlight-style: solarized
-embed-resources: true
-css: styles.css
 code-fold: true
-
-execute:
-  eval: false
 ---
 
 :::: {layout="[60, 40]" layout-valign="center"}
@@ -17,14 +11,23 @@ execute:
 :::
 
 ::: {#rightcolumn}
-  <img style = "margin: 0px; padding: 0px;" src="logo/logo.svg">
+  <img style = "margin: 0px; padding: 0px;"  src="logo/logo.svg">
 :::
 
 ::::
 
-This post presents **Ti*k*Z** scripts to draw the model path diagrams presented in this website.
+This section presents **Ti*k*Z** scripts to draw the path diagrams presented here.
 
-I use the following **Ti*k*Z** libraries:
+A very quick introduction on using **Ti*k*Z** to draw SEMS is [here](Tutorial/Intro/Intro.qmd). There are also sections on:
+
+- [Defining styles](Tutorial/Styles/Styles.qmd)
+- [Using mathematical symbols and Greek letters](Tutorial/Symbols/Symbols.qmd)
+- [Repeating using loops](Tutorial/Longitudinal/Long.qmd)
+- [Repeating whole pictures](Tutorial/Factor/Factor.qmd)
+
+<p>
+
+In the scripts to follow, I use the following **Ti*k*Z** libraries:
 
 - positioning - positioning relative to a node
 - quotes - labels as strings on paths
@@ -32,18 +35,20 @@ I use the following **Ti*k*Z** libraries:
 - arrows.meta - arrowhead shape
 - shapes - triangle and ellipse
 - math - simple mathematical operations  
+
 <p>
 
 and the following **LaTeX** packages:
 
+- tikz
 - mathastext - use text font for math font
-- amsmath - mathematical formulas
 - newpxtext and newpxmath - upright Greek letters  
+
 <p>
 
-There is a standardised set of symbols used in the diagrams. The key symbols are shown below.
+There is a standardised set of shapes and symbols used in the diagrams. The key shapes and symbols are shown below.
 
-![](Intro.svg){fig-align="left"}
+![](Intro.svg)
 
 These symbols are defined as styles in `SEMstyles.tex`. As well, `SEMstyles.tex` loads the **Ti*k*Z** libraries and **LaTeX** packages.
 
@@ -59,9 +64,13 @@ All that is left for the individual **Ti*k*Z** scripts to do is to position the 
 The scripts are rendered as pdf files, then converted to svg files using [inkscape](https://inkscape.org/).
 
 
-#### The publications and their model diagrams
+#### The publications and their path diagrams
 
-- Jose, P. (2013). *Doing statistical mediation and moderation*. New York, NY: Guilford Press. <br/> 
+::: {.no-indent}
+- Jose, P. (2013). *Doing statistical mediation and moderation*. New York, NY: Guilford Press.
+:::
+
+<p>
 
 <details>
   <summary>Mediation model diagram</summary>
@@ -73,9 +82,13 @@ The scripts are rendered as pdf files, then converted to svg files using [inksca
 %| file: "Jose_2013/Jose_2013.tex"
 ```
 
-<br/>
+<br>
 
-- Kurbanoglu, N. & Takunyaci, M. (2021). A structural equation modeling on relationship between self-efficacy, physics laboratory anxiety and attitudes. *Journal of Family, Counseling and Education*, 6(1), 47-56. <br/>
+::: {.no-indent}
+- Kurbanoglu, N. & Takunyaci, M. (2021). A structural equation modeling on relationship between self-efficacy, physics laboratory anxiety and attitudes. *Journal of Family, Counseling and Education*, 6(1), 47-56.
+:::
+
+<p>
 
 <details>
   <summary>Mediation model diagram</summary>
@@ -87,11 +100,15 @@ The scripts are rendered as pdf files, then converted to svg files using [inksca
 %| file: "Kurbanoglu_2021/Kurbanoglu_2021.tex"
 ```  
 
-<br/>
- 
-- Little, T., Slegers, D., & Card, N. (2006). A non-arbitrary method of identifying and scaling latent variables in SEM and MACS models. *Structural Equation Modeling*, *13*(1), 59-72. <br/> 
+<br>
 
-<details class="image-fold">
+::: {.no-indent}
+- Little, T., Slegers, D., & Card, N. (2006). A non-arbitrary method of identifying and scaling latent variables in SEM and MACS models. *Structural Equation Modeling*, *13*(1), 59-72.
+:::
+
+<p>
+
+<details>
   <summary>Model diagram for Reference-Group Method</summary>
   <img src="Little_2006/Scaling1.svg">  
 </details> 
@@ -103,7 +120,7 @@ The scripts are rendered as pdf files, then converted to svg files using [inksca
 
 <p>
 
-<details class="image-fold">
+<details>
   <summary>Model diagram for Marker-Variable Method</summary>
   <img src="Little_2006/Scaling2.svg">  
 </details>
@@ -115,19 +132,23 @@ The scripts are rendered as pdf files, then converted to svg files using [inksca
 
 <p>
 
-<details class="image-fold">
+<details>
   <summary>Model diagram for Effects-Scaling Method</summary>
   <img src="Little_2006/Scaling3.svg">  
 </details> 
 
 ```{tikz}
 %| code-summary: "Tikz code"
-%| file: "Little_2006/Scaling3.tex"
+%| file: "Little_2006/Scaling3.tex" 
 ```   
 
-<br/> 
+<br> 
 
-- Thompson, M., Liu, Y. & Green, S. (2023). Flexible structural equation modeling approaches for analyzing means. In R. Hoyle (Ed.), *Handbook of structural equation modeling* (2nd ed., pp. 385-408). New York, NY: Guilford Press. <br/>
+::: {.no-indent}
+- Thompson, M., Liu, Y. & Green, S. (2023). Flexible structural equation modeling approaches for analyzing means. In R. Hoyle (Ed.), *Handbook of structural equation modeling* (2nd ed., pp. 385-408). New York, NY: Guilford Press.
+:::
+
+<p>
 
 <details>
   <summary>one-way ANOVA model diagram</summary>
@@ -187,5 +208,5 @@ The scripts are rendered as pdf files, then converted to svg files using [inksca
 %| file: "Green_2023/one_way_LATENT.tex"
 ```
 
-```{r}
+```{r} 
 ```

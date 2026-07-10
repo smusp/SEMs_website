@@ -1,16 +1,7 @@
 ---
 title: "Methods of scaling applied to easier examples"
-format: 
-  html:
-    css: styles.css
-    code-fold: true
-    embed-resources: true
 
-execute:
-  eval: false
-  echo: true
-
-highlight-style: solarized
+code-fold: true
 ---
 
 <h4>A one-factor model.</h4>
