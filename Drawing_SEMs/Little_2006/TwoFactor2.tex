@@ -1,62 +1,77 @@
 \documentclass[border = 10pt]{standalone}
 \input{../SEMstyles.tex}
+\usepackage{ifthen}               % allows AND OR operations 
+
+\def \gapsmall {1cm}              % small gap between indicators
+\def \gapbig {2cm}                % big gap between factors
+\def \anglec {110, 90, 70}        % angles for intercepts leaving constant
+
+\newcommand {\drawfactor} [3] {    %%   #1  latent: POS, NEG
+                                   %%   #2  indicator: pos neg
+                                   %%   #3  position of 1st indicator
+
+  %% Indicators
+  \node [manifest] (#21) [#3] {$#2_1$};
+  \node [manifest] (#22) [right = \gapsmall of #21] {$#2_2$};
+  \node [manifest] (#23) [right = \gapsmall of #22] {$#2_3$};
+
+  %% What changes between factors:
+  %%    latent variances - phi
+  %%    counts for loadings, residuals, intercepts - count
+  \ifnum \pdfstrcmp{#1}{POS} = 0
+    \def \phi {11}
+    \def \count {{1, 2, 3}}
+  \else
+    \def \phi {22}
+    \def \count {{4, 5, 6}}
+  \fi
+
+  %% Latent
+  \node [latent] (#1) [above = 3cm of #22] {$#1$};
+ 
+  %% Latent variance
+  \path [variance = {left}{100}{2.5}] (#1.120) edge ["$\upphi_{\phi}$" {above = 1pt}] (#1.60);
+  
+  %% Constant for intercepts
+  \node [constant, black!30] (M#2) [below = 2cm of #22] {1};  
+  
+  %%
+  \foreach \i [count = \j] in \anglec {
+    \tikzmath{\num = \count[\j-1];}
+
+    %% What changes between indicators - lambda and tau     
+    \ifthenelse{\(\pdfstrcmp{#1}{POS} = 0 \AND \num = 3\) \OR \(\pdfstrcmp{#1}{NEG} = 0 \AND \num = 4\)}{
+      \def \lablambda {$\uplambda_{\num}\!=\!1$} 
+      \def \labtau {$\uptau_{\num}\!=\!0$} 
+    }{
+      \def \lablambda {$\uplambda_{\num}$}
+      \def \labtau {$\uptau_{\num}$}
+    }
+
+    %% Loadings    
+    \path [regression] (#1) edge ["\lablambda"] (#2\j.90);
+   
+    %% Intercepts
+    \path [regression, black!30] (M#2.\i) edge ["\labtau"] (#2\j.270);
+       
+    %% Residuals
+    \node [residual] (e\j) [above right = 4mm of #2\j] {$\uptheta_\num$};
+    \path [regression] (e\j) edge (#2\j.north east);
+  }
+}
 
 \begin{document}
 \begin{tikzpicture}
 
-%% pos manifest
-\node [manifest] (pos1) {$pos_1$};
-\node [manifest] (pos2) [right = 1.5cm of pos1] {$pos_2$};
-\node [manifest] (pos3) [right = 1.5cm of pos2] {$pos_3$};
+\drawfactor{POS}{pos}{}
+\drawfactor{NEG}{neg}{right = \gapbig of pos3}
 
-%% neg manifest
-\node [manifest] (neg1) [right = 3cm of pos3] {$neg_1$};
-\node [manifest] (neg2) [right = 1.5cm of neg1] {$neg_2$};
-\node [manifest] (neg3) [right = 1.5cm of neg2] {$neg_3$};
+%% Latent means and their covariance
+\node [constant, black!30] (M) at ($(POS) !0.5! (NEG)$) {1};   
+\path [regression, black!30] (M) edge ["$\upkappa_1$"] (POS) 
+                             (M) edge ["$\upkappa_2$"] (NEG); 
 
-%% POS and NEG latents
-\node [latent] (POS) [above = 3cm of pos3] {$POS$};
-\node [latent] (NEG) [above = 3cm of neg1] {$NEG$};
-
-%% Latent variances and covariance
-\path [covariance] (POS.35) edge ["$\upphi_{12}$", bend left = 40] (NEG.145);
-\path [variance] (POS.120) edge ["$\upphi_{11}$" {above = 1pt},
-   bend left = 100, looseness = 2.5] (POS.60);
-\path [variance] (NEG.120) edge ["$\upphi_{22}$" {above = 1pt}, 
-   bend left = 100, looseness = 2.5] (NEG.60);
-
-%% Latent means
-\node [constant, black!30] (M) [below = 1.5cm of $(pos3) !0.5! (neg1)$] {1};
-\path [regression, black!30] (M) edge ["$\upkappa_1$", pos = 0.6] (POS);
-\path [regression, black!30] (M) edge ["$\upkappa_2$", pos = 0.6] (NEG);
-
-%%%% Loadings, Rediausls, and Intercepts for POS factor
-\def \angleMean {170, 150, 130}   % angles for intercept out of constant
-\foreach \i [count = \j] in \angleMean {
-%% Loadings
-\path [regression] (POS) edge ["\ifnum \j = 3 {$\uplambda_\j\!=\!1$} \else {$\uplambda_\j$} \fi"] (pos\j.90);
-
-%% Residuals
-\node [residual2] (e\j) [above left = 4mm of pos\j] {$\uptheta_\j$};
-\path [regression] (e\j) edge (pos\j.north west);
-
-%% Intercepts
-\path [regression, black!30] (M.\i) edge ["\ifnum \j = 3 {$\uptau_\j\!=\!0$} \else {$\uptau_\j$} \fi"] (pos\j.south east);
-}
-
-%%%% Loadings, Residuals, and Intercepts for NEG factor
-\def \angleMean {50, 30, 10}   % angles for intercept out of constant
-\foreach \i [count = \j, evaluate = \j as \k using int(\j + 3)] in \angleMean {
-%% Loadings
-\path [regression] (NEG) edge ["\ifnum \j = 1 {$\uplambda_\k\!=\!1$} \else {$\uplambda_\k$} \fi"] (neg\j.90);
-
-%% Residuals
-\node [residual2] (e\k) [above right = 4mm of neg\j] {$\uptheta_\k$};
-\path [regression] (e\k) edge (neg\j.north east);
-
-%% Intercepts
-\path [regression, black!30] (M.\i) edge ["\ifnum \j = 1 {$\uptau_\k\!=\!0$} \else {$\uptau_\k$} \fi"] (neg\j.south west);
-}
+\path [covariance = {left}{35}{0.7}] (POS.30) edge ["$\upphi_{12}$"] (NEG.150);
 
 \end{tikzpicture}
 \end{document}

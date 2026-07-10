@@ -2,116 +2,96 @@
 \input{../SEMstyles.tex}
 \usetikzlibrary{matrix}
 
+\def \prefac {{"POS", "NEG"}}         % prefix for factors
+\def \preint {{"pos", "neg"}}         % prefix for indicators
+\tikzmath{\fa = \prefac[0]; \fb = \prefac[1];}
+\tikzmath{\ia = \preint[0]; \ib = \preint[1];}
+
+\def \gapsmall {1.5cm}            % small gap between indicators
+\def \gapbig {2.5cm}              % big gap between factors
+\def \anglec {110, 90, 70}        % angles for intercepts leaving constant
+
+%% Macro to draw a one-factor model
+\newcommand{\FactorModel}[4]{     %%   #1  latent: POS, NEG
+                                  %%   #2  indicator: pos, neg
+                                  %%   #3  grade: 7, 8
+                                  %%   #4  position of first indicator  
+                                 
+  %% Indicators
+  \node [manifest] (#2#31) [#4] {$#2_1$};
+  \node [manifest] (#2#32) [right = \gapsmall of #2#31] {$#2_2$};
+  \node [manifest] (#2#33) [right = \gapsmall of #2#32] {$#2_3$};
+
+  %% What changes beween factors:
+  %%    latent variances - phi
+  %%    counts for loadings, residuals, intercepts - count
+  \ifnum\pdfstrcmp{#1}{\fa} = 0
+    \def \phi {11}    \def \count {{1, 2, 3}}
+  \else
+    \def \phi {22}    \def \count {{4, 5, 6}}
+  \fi
+  
+  %% Latent
+  \node [latent] (#1#3) [above = 3cm of #2#32] {$#1$};
+
+  %% Latent variance - differs according to grade
+  \path [variance = {left}{100}{2.5}] (#1#3.120) edge ["$\upphi_{#3,\phi}$" {above = 2pt}] (#1#3.60);
+
+  %% Constant
+  \node [constant, black!30] (M#2#3) [below = 1.5cm of #2#32] {1}; 
+
+  \foreach \i [count = \j] in \anglec {
+    \tikzmath{\num = \count[\j-1];}
+
+    %% Loadings
+    \path [regression] (#1#3) edge ["$\uplambda_{\num}$"] (#2#3\j.90);
+    
+    %% Intercepts
+    \path [regression, black!30] (M#2#3.\i) edge ["$\uptau_\num$"] (#2#3\j.270);
+    
+    %% Residuals
+    \node [residual] (e\j) [above right = 4mm of #2#3\j] {$\uptheta_{#3,\num}$};
+    \path [regression] (e\j.south west) edge (#2#3\j.north east);
+  }  
+}
+
+%% Macro to draw model for grade - two factors side-by-side
+\newcommand{\GradeModel}[2]{            %%   #1  grade: 7, 8
+                                        %%   #2  position eg {below = 9cm of pos71}
+
+  %% Position factor models
+  \FactorModel{\fa}{\ia}{#1}{#2}
+  \FactorModel{\fb}{\ib}{#1}{right = \gapbig of \ia#13}
+  
+  %% Latent covariance
+  \path [covariance = {left}{35}{0.8}] (\fa#1.30) edge ["$\upphi_{#1,12}$" {name = C1}] (\fb#1.150);
+ 
+  %% Latent means - differ according to grade
+  \node [constant, black!30] (M) at ($(\fa#1) !0.5! (\fb#1)$) {1}; 
+  \path [regression, black!30] (M) edge ["$\upkappa_{#1,1}$"] (\fa#1) 
+                               (M) edge ["$\upkappa_{#1,2}$"] (\fb#1); 
+}
+
 \begin{document}
 \begin{tikzpicture}
 
-%%%% Grade 7
-%% pos manifest
-\node [manifest] (pos71) {$pos_1$};
-\node [manifest] (pos72) [right = 1.5cm of pos71] {$pos_2$};
-\node [manifest] (pos73) [right = 1.5cm of pos72] {$pos_3$};
+%% Draw model for two grade - one below the other
+\GradeModel{7}{}
+\GradeModel{8}{below = 9cm of pos71}
 
-%% neg manifest
-\node [manifest] (neg71) [right = 3cm of pos73] {$neg_1$};
-\node [manifest] (neg72) [right = 1.5cm of neg71] {$neg_2$};
-\node [manifest] (neg73) [right = 1.5cm of neg72] {$neg_3$};
+%% Grades
+\coordinate (mid) at ($($(M\ia7) !0.5! (M\ib7)$) !0.5! (C1)$) ;
+\coordinate (C3) at (pos71 |- mid);   
+\coordinate (C4) at (neg73 |- mid);   
 
-%% POS and NEG latents
-\node [latent] (POS7) [above = 3cm of pos73] {$POS$};
-\node [latent] (NEG7) [above = 3cm of neg71] {$NEG$};
+\node [group] [above = 0.5cm of C3] {Grade 7};
+\node [group] [below = 0.5cm of C3] {Grade 8};
 
-%% Latent variances and covariance
-\path [covariance] (POS7.35) edge ["$\upphi_{7,12}$", bend left = 40] (NEG7.145);
-\path [variance] (POS7.120) edge ["$\upphi_{7,11}$" {above = 1pt},
-   bend left = 100, looseness = 2.5] (POS7.60);
-\path [variance] (NEG7.120) edge ["$\upphi_{7,22}$" {above = 1pt},
-   bend left = 100, looseness = 2.5] (NEG7.60);
-
-%% Latent means
-\node [constant, black!30] (M7) [below = 1.5cm of $(pos73)!0.5!(neg71)$] {1};
-\path [regression, black!30] (M7) edge ["$\upkappa_{7,1}$", pos = 0.6] (POS7);
-\path [regression, black!30] (M7) edge ["$\upkappa_{7,2}$", pos = 0.6] (NEG7);
-
-%%% POS factor
-\foreach \i [count = \j] in {170, 150, 130} {
-%% Loadings
-\path [regression] (POS7) edge ["$\uplambda_\j$"] (pos7\j.90);
-
-%% Residuals
-\node [residual2] (e7\j) [above left = 4mm of pos7\j, xshift = 1mm] {$\uptheta_{7,\j}$};
-\path [regression] (e7\j) edge (pos7\j.north west);
-
-%% Intercepts
-\path [regression, black!30] (M7.\i) edge ["$\uptau_\j$"] (pos7\j.south east);
-}
-
-%% NEG factor
-\foreach \i [count = \j, evaluate = \j as \k using int(\j + 3)] in {50, 30, 10} {
-\path [regression] (NEG7) edge ["$\uplambda_\k$"] (neg7\j.90);
-
-%% Residuals
-\node [residual2] (e7\k) [above right = 4mm of neg7\j, xshift = -1mm] {$\uptheta_{7,\k}$};
-\path [regression] (e7\k) edge (neg7\j.north east);
-
-%% Intercepts
-\path [regression, black!30] (M7.\i) edge ["$\uptau_\k$"] (neg7\j.south west);
-}
-
-%%%% Grade 8
-%% pos manifests
-\node [manifest] (pos81) [below = 7.5cm of pos71] {$pos_1$};
-\node [manifest] (pos82) [right = 1.5cm of pos81] {$pos_2$};
-\node [manifest] (pos83) [right = 1.5cm of pos82] {$pos_3$};
-
-%% neg manifests
-\node [manifest] (neg81) [right = 3cm of pos83] {$neg_1$};
-\node [manifest] (neg82) [right = 1.5cm of neg81] {$neg_2$};
-\node [manifest] (neg83) [right = 1.5cm of neg82] {$neg_3$};
-
-%% POS and NEG latents
-\node [latent] (POS8) [above = 3cm of pos83] {$POS$};
-\node [latent] (NEG8) [above = 3cm of neg81] {$NEG$};
-
-%% Latent variances and covariance
-\path [covariance] (POS8.35) edge ["$\upphi_{8,12}$", bend left = 40] (NEG8.145);
-\path [variance] (POS8.120) edge ["$\upphi_{8,11}$" {name = C1, above = 1pt},
-   bend left = 100, looseness = 2.5] (POS8.60);
-\path [variance] (NEG8.120) edge ["$\upphi_{8,22}$" {name = C2, above = 1pt},
-   bend left = 100, looseness = 2.5] (NEG8.60);
-
-%% Latent means
-\node [constant, black!30] (M8) [below = 1.5cm of $(pos83) !0.5! (neg81)$] {1};
-\path [regression, black!30] (M8) edge ["$\upkappa_{8,1}$", pos = 0.6] (POS8);
-\path [regression, black!30] (M8) edge ["$\upkappa_{8,2}$", pos = 0.6] (NEG8);
-
-%%% POS factor
-\foreach \i [count = \j] in {170, 150, 130} {
-%% Loadings
-\path [regression] (POS8) edge ["$\uplambda_\j$"] (pos8\j.90);
-
-%% Residuals
-\node [residual2] (e8\j) [above left = 4mm of pos8\j, xshift = 1mm] {$\uptheta_{8,\j}$};
-\path [regression] (e8\j) edge (pos8\j.north west);
-
-%% Intercepts
-\path [regression, black!30] (M8.\i) edge ["$\uptau_\j$"] (pos8\j.south east);
-}
-
-%%% NEG factor
-\foreach \i [count = \j, evaluate = \j as \k using int(\j + 3)] in {50, 30, 10} {
-%% Loadings
-\path [regression] (NEG8) edge ["$\uplambda_\k$"] (neg8\j.90);
-
-%% Residuals
-\node [residual2] (e8\k) [above right = 4mm of neg8\j, xshift = -1mm] {$\uptheta_{8,\k}$};
-\path [regression] (e8\k) edge (neg8\j.north east);
-
-%% Intercepts
-\path [regression, black!30] (M8.\i) edge ["$\uptau_\k$"] (neg8\j.south west);
-}
+%% Separator
+\draw[densely dashed] ($(C3) !-1.5cm! (C4)$) -- ($(C4) !-1.5cm! (C3)$);
 
 %% Constraints
-\matrix [matrix of nodes, draw, cells = {anchor = west}] at (0, 4) {
+\matrix [matrix of nodes, draw, cells = {anchor = west}, anchor = east] at (\fa7 -| \ia71) {
    \bf{Constraints}\\
    $\uplambda_1 + \uplambda_2 + \uplambda_3 = 3$ \\
    $\uplambda_4 + \uplambda_5 + \uplambda_6 = 3$ \\ [2ex]
@@ -120,16 +100,5 @@
    $\uptau_4 + \uptau_5 + \uptau_6 = 0$ \\
 };
 
-%% Grades
-\coordinate (mid) at ($(M7) !0.5! ($(C1) !0.5! (C2)$)$);
-\coordinate (C3) at (pos81 |- mid);   
-\coordinate (C4) at (neg83 |- mid);   
-
-\node [above = 0.5cm of C3] {Grade 7};
-\node [below = 0.5cm of C3] {Grade 8};
-
-\draw[densely dashed] ($(C3) !-1.5cm! (C4)$) -- ($(C4) !-1.5cm! (C3)$);
-
 \end{tikzpicture}
 \end{document}
-

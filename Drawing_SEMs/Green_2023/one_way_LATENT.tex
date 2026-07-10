@@ -1,73 +1,67 @@
 \documentclass[tikz, border = 10pt]{standalone}
 \input{../SEMstyles.tex}
 
+%% Three groups of four indicators.
+%% Labels in each group are Y1 to Y4.
+%% Names are y11, y12, y13, y14,  y21, ..., y34.
+
+\def \groups {No strategy, Discussion, Exercise}
+\def \gapsmall {0.5cm}           % small gap between indicators
+\def \gapbig {1.5cm}             % big gap between groups
+\def \angles {270/240, 282/253, 294/263, 306/270}  % angles for intercepts and loadings
+                                                   % when leaving constant and latent
+
 \begin{document}
 \begin{tikzpicture}
 
-%% Three groups of four variables.
-%% Labels in each group are Y1 to Y4.
-%% Names are y1 to y12.
+\foreach \i [count = \j, remember = \j as \lastj (initially 1)] in \groups {
 
-\def \groups {No strategy, Discussion, Exercise}
-\def \gaps {0.4cm}     % small gap between indicators
-\def \gapb {1cm}       % large gap between indicators
-\def \angles {270/240, 282/253, 294/263, 306/270}  % angles for intercepts and loadings
-                                                   % out of constant and latent
+  %% Indicators
+  \foreach \k [remember = \k as \lastk (initially 1)] in {1,2,3,4} {
+    \ifnum \k = 1 
+      \ifnum \j = 1 
+        \node [manifest] (y11) {Y$_1$};      % Y1 in Group 1
+      \else 
+        \node [manifest] (y\j1) [right = \gapbig of y\lastj4] {Y$_1$};    % Y1s in Groups 2 and 3
+      \fi  
+    \else 
+      \node [manifest] (y\j\k) [right = \gapsmall of y\j\lastk] {Y$_\k$};   % Remaining Ys
+    \fi
+  }
 
-%% Indicators and their residuals
-\node [manifest] (y1) {Y$_1$};
-\node [residual2] (e1) [below = 4mm of y1] {e$_{Y_1}$};
-\path [regression] (e1) edge (y1);
+  %% Latent and its variance (above last indicator in group)
+  \node [latent] (latent) [above = 3cm of y\j4] {LS};
+  \path [variance = {left}{110}{3}] (latent.120) edge ["d" {above = 2pt, name = D}] (latent.60);
 
-\foreach \i [remember = \i as \lasti (initially 1)] in {2,...,12}{
-   \tikzmath{\labnum = int(mod(\i - 1, 4) + 1);}
+  %% Mean (above first indicator in group)
+  \node [constant] (const) at (y\j1 |- latent) {1};   
+  \path[regression] (const) edge ["\ifnum \j = 1 {0} \else {a$_\j$} \fi"] (latent);
 
-   \ifnum \labnum = 1      %% Use label number to determine size of gap
-      \def \gap {\gapb} 
-   \else 
-      \def \gap {\gaps} 
-   \fi   
+  %% Groups
+  \coordinate (mp) at ($(y\j2) !0.5! (y\j3)$) ;
+  \node [group] (gp\j) [above = 1cm of mp |- D, anchor = north] {Group \j:\\\i};   
 
-   \node [manifest] (y\i) [right = \gap of y\lasti] {Y$_\labnum$};
-   \node [residual2] (e\i) [below = 4mm of y\i] {e$_{Y_\labnum}$};
-   \path [regression] (e\i) edge (y\i);  
-}
+  \foreach \a/\b [count = \c] in \angles {
+    %% Residuals
+    \node [residual={1pt}{0}{}] (e\c) [below = 4mm of y\j\c] {e$_{Y_\c}$};
+    \path [regression] (e\c) edge (y\j\c);  
 
-\foreach \j [count = \i, remember = \i as \lasti] in \groups {
-   \tikzmath{\lasty = int(4*\i);           % label number for last Y in each group
-             \firsty = int(\lasty - 3);}   % label number for first Y in each group
+    %% Intercepts
+    \path [regression] (const.\a) edge ["$\uptau_\c$", 
+      pos = 0.5 - 1/(6*(5-\c))] (y\j\c.90);     %  A little less than .5, moreso for longer lines
 
-   %% Latents and their variances (above last y in each group)
-   \node [latent] (latent\i) [above = 3cm of y\lasty] {LS};
-   \path [variance, bend left = 110, looseness = 3] (latent\i.125) edge ["d"] (latent\i.60);
+    %% Loadings
+    \path[regression] (latent.\b) edge ["\ifnum \c = 1 {1} \else {$\uplambda_\c$} \fi", 
+      pos = 0.5 - 1/(6*\c)] (y\j\c.90);
 
-   %% Means (above first y in each group)
-   \coordinate (cc) at (y\firsty |- latent\i);   % coordinates for the constant
-   \node [constant] (const\i) at (cc) {1};   
-   \path[regression] (const\i) edge ["\ifnum \i = 1 {0} \else {a$_\i$} \fi"] (latent\i);
-   
-   \foreach \c/\d [count = \k] in \angles {
-      %% Intercepts
-      \tikzmath{\e = int((\i - 1)*4 + \k);} 
-      \path [regression] (const\i.\c) edge ["$\uptau_\k$", pos = 0.5 - 1/(6*(5-\k))] (y\e.90);
+  %% Separators
+  \ifnum \j > 1 
+    \coordinate (p1) at ($(y\j1) !0.5! (y\lastj4)$);
+    \coordinate (m1) at (p1 |- e\j.south);
+    \coordinate (m2) at ($(gp\j.north) !0.5! (gp\lastj.north)$); 
+    \draw [densely dashed] ($(m1) !-0.2cm! (m2)$) -- ($(m2) !-0.2cm! (m1)$);
+  \fi
+}}
 
-      %% Loadings
-      \path[regression] (latent\i.\d) edge ["\ifnum \k = 1 {1} \else {$\uplambda_\k$} \fi", 
-      pos = 0.5 - 1/(6*\k)] (y\e.90);
-   }
-
-   %% Groups (above middle of each group of variables)
-   \tikzmath{\xa = int(\firsty + 1); \xb = int(\firsty + 2;}
-   \node [group] (gp\i) [above = 5cm of $(y\xa) !0.5! (y\xb)$] {Group \i:\\\j};
-
-   %% Separators
-   \ifnum \i > 1
-      \tikzmath{\prevy = (int(\firsty - 1);}
-      \coordinate (m1) at ($(y\firsty.south) !0.5! (y\prevy.south)$);
-      \coordinate (m2) at ($(gp\i.north) !0.5! (gp\lasti.north)$);   
-      \draw [densely dashed] ($(m1) !0.7cm!90: (y\prevy.south)$) -- ($(m2) !0.2cm!90: (gp\i.north)$);
-   \fi
-}  
-      
 \end{tikzpicture}
 \end{document}

@@ -1,38 +1,47 @@
 \documentclass[border = 10pt]{standalone}
 \input{../SEMstyles.tex}
+\usepackage{xstring}
+
+\def \gap {2cm}                                      % gap between dependents
+\def \dep {Y}                                        % dependent variable
+\def \strategy {No strategy, Discussion, Exercise}   % strategy groups
+\def \gender {Male, Female}                          % gender groups
+
+\def \groups {}                                      % group names
+\foreach \x in \gender {
+   \foreach \y in \strategy {
+   \xdef\groups{\groups \y\\\x,}
+}}
+\StrGobbleRight{\groups}{1}[\groups]
 
 \begin{document}
 \begin{tikzpicture}
 
-\def \gap {2cm}            % separation between dependents
-\def \strat {{"No strategy", "Discussion", "Exercise"}}  % strategy groups
-\def \gend {{"Male", "Female"}}                          % gender groups
-
-%% Dependents
-\node [manifest] (y1) {Y};
-\foreach \i [remember = \i as \lasti (initially 1)] in {2,...,6} {
-    \node [manifest] (y\i) [right = \gap of y\lasti] {Y};
-}
-
-\foreach \i [remember = \i as \lasti] in {1,...,6} {
-   %% Residuals
-   \node [residual2] (e\i) [below right = 4mm of y\i] {e};
-   \path [regression] (e\i) edge (y\i.south east) ;
-
-   %% Means
-   \node [constant] (const\i) [above = 1.5cm of y\i] {1};
-   \path [regression] (const\i) edge ["a$_\i$"] (y\i);
-
-   %% Groups
-   \tikzmath{\firstrow = \strat[mod((\i-1), 3)]; \secondrow = \gend[int((\i-1)/3)];}
-   \node [group] (gp\i) [above = 0.5cm of const\i] {Group \i:\\\firstrow\\\secondrow};
-   
-   %% Separators
-   \ifnum \i > 1 
-      \coordinate (m1) at ($(y\i.south) !0.5! (y\lasti.south)$);
-      \coordinate (m2) at ($(gp\i.north) !0.5! (gp\lasti.north)$);      
-      \draw [densely dashed] ($(m1) !0.6cm!270: (y\i)$) -- ($(m2) !0.2cm!90: (gp\i)$);
+\node [manifest] (y1) {\dep}; 
+\foreach \j [count = \i, remember = \i as \lasti (initially 1)] in \groups{
+  %% Dependents
+  \ifnum \i > 1 
+    \node [manifest] (y\i) [right = \gap of y\lasti] {\dep};
   \fi
+
+  %% Residuals
+  \node [residual] (e\i) [below right = 4mm of y\i] {e};
+  \path [regression] (e\i) edge (y\i.south east);
+
+  %% Means
+  \node [constant] (const) [above = 1.5cm of y\i] {1};
+  \path [regression] (const) edge ["a$_\i$"] (y\i);
+
+  %% Groups
+  \node [group] (gp\i) [above = 2cm of const, anchor = north] {Group \i:\\\j};
+  
+  %% Separators
+  \ifnum \i > 1
+    \coordinate (p1) at ($(y\i) !0.5! (y\lasti)$);
+    \coordinate (m1) at (p1 |- e\i.south);
+    \coordinate (m2) at ($(gp\i.north) !0.5! (gp\lasti.north)$); 
+    \draw [densely dashed] ($(m1) !-0.2cm! (m2)$) -- ($(m2) !-0.2cm! (m1)$);
+  \fi  
 }
 
 \end{tikzpicture}

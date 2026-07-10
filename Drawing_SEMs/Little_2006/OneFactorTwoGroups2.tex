@@ -1,78 +1,53 @@
 \documentclass[border = 10pt]{standalone}
 \input{../SEMstyles.tex}
 
+\def \anglec {110, 90, 70}        % angles for intercepts leaving constant
+\def \gapsmall {1.5cm}            % small gap between two variables within groups
+\def \gapbig {3cm}                % large gap between two variables between groups
+
+\newcommand {\drawgrade} [2] {    % #1  grade: 7, 8;  #2  position 1st variable
+  %% Indicators
+  \node [manifest] (pos#11) [#2] {$pos_1$};
+  \node [manifest] (pos#12) [right = \gapsmall of pos#11] {$pos_2$};
+  \node [manifest] (pos#13) [right = \gapsmall of pos#12] {$pos_3$};
+
+  %% Latent and its variance
+  \node [latent] (POS#1) [above = 3cm of pos#12] {$POS$};
+  \path [variance = {left}{100}{2.5}] (POS#1.120) edge ["$\upphi_#1$" {above = 2pt}] (POS#1.60);
+
+  %% Constants and latent mean
+  \node [constant, black!30] (M#11) [right = 2cm of POS#1] {1};
+  \node [constant, black!30] (M#12) [below = 2cm of pos#12] {1};
+  \path [regression, black!30] (M#11) edge ["$\upkappa_#1$"] (POS#1);
+
+  %% Grades
+  \node [group] (gp#1) [above = 1.5cm of POS#1] {Grade #1};
+
+  \foreach \i [count = \j] in \anglec {
+  %% Loadings
+  \ifnum \j = 3 \def \lab {$\uplambda_\j\!=\!1$} \else \def \lab {$\uplambda_\j$} \fi
+  \path [regression] (POS#1) edge ["\lab"] (pos#1\j.90);
+
+  %% Residuals
+  \node [residual] (e#1\j) [above left = 4mm of pos#1\j] {$\uptheta_{#1,\j}$};
+  \path [regression] (e#1\j.south east) edge (pos#1\j.north west);
+
+  %% Intercepts
+  \ifnum \j = 3 \def \lab {$\uptau_\j\!=\!0$} \else \def \lab {$\uptau_\j$} \fi
+  \path [regression, black!30] (M#12.\i) edge ["\lab"] (pos#1\j.270);
+  }
+}
+
 \begin{document}
 \begin{tikzpicture}
 
-%%%% Grade 7
-%% pos manifest
-\node [manifest] (pos11) {$pos_1$};
-\node [manifest] (pos21) [right = 1.5cm of pos11] {$pos_2$};
-\node [manifest] (pos31) [right = 1.5cm of pos21] {$pos_3$};
+\drawgrade{7}{}
+\drawgrade{8}{right = \gapbig of pos73}
 
-%% POS latent
-\node [latent] (POS1) [above = 3cm of pos21] {$POS$};
-
-%% Latent variance
-\path [variance] (POS1.120) edge ["$\upphi_7$" {above = 1pt},
-   bend left = 100, looseness = 2.5] (POS1.60);
-
-%% latent means
-\node [constant, black!30] (M11) [right = 2cm of POS1] {1};
-\node [constant, black!30] (M21) [below = 2cm of pos21] {1};
-\path [regression, black!30] (M11) edge ["$\upkappa_7$"] (POS1);
-
-\foreach \i [count = \j] in {110, 90, 70} {
-%% Loadings
-\path [regression] (POS1) edge ["\ifnum \j = 3 {$\uplambda_\j\!=\!1$} \else {$\uplambda_\j$} \fi"] (pos\j1.90);
-
-%% Residuals
-\node [residual2] (e\j1) [above left = 4mm of pos\j1] {$\uptheta_{7,\j}$};
-\path [regression] (e\j1) edge (pos\j1.north west);
-
-%% Intercepts
-\path [regression, black!30] (M21.\i) edge ["\ifnum \j = 3 {$\uptau_\j\!=\!0$} \else {$\uptau_\j$} \fi"] (pos\j1.270);
-}
-
-%%%% Grade 8
-%% pos manifests
-\node [manifest] (pos12) [right = 3cm of pos31] {$pos_1$};
-\node [manifest] (pos22) [right = 1.5cm of pos12] {$pos_2$};
-\node [manifest] (pos32) [right = 1.5cm of pos22] {$pos_3$};
-
-%% POS latent
-\node [latent] (POS2) [above = 3cm of pos22] {$POS$};
-
-%% Latent variance
-\path [variance] (POS2.120) edge ["$\upphi_8$" {above = 1pt},
-   bend left = 100, looseness = 2.5] (POS2.60);
-
-%% latent means
-\node [constant, black!30] (M12) [right = 2cm of POS2] {1};
-\node [constant, black!30] (M22) [below = 2cm of pos22] {1};
-\path [regression, black!30] (M12) edge ["$\upkappa_8$"] (POS2);
-
-\foreach \i [count = \j] in {110, 90, 70} {
-%% Loadings
-\path [regression] (POS2) edge ["\ifnum \j = 3 {$\uplambda_\j\!=\!1$} \else {$\uplambda_\j$} \fi"] (pos\j2.90);
-
-%% Residuals
-\node [residual2] (e\j2) [above left = 4mm of pos\j2] {$\uptheta_{8,\j}$};
-\path [regression] (e\j2) edge (pos\j2.north west);
-
-%% Intercepts
-\path [regression, black!30] (M22.\i) edge ["\ifnum \j = 3 {$\uptau_\j\!=\!0$} \else {$\uptau_\j$} \fi"] (pos\j2.270);
-}
-
-
-%%%% Groups
-\node (gp1) [above = 1.5cm of POS1] {Grade 7};
-\node (gp2) [above = 1.5cm of POS2] {Grade 8};
-
-\node (C1) at ($(gp1)!0.5!(gp2)$) {};
-\node (C2) at ($(M21)!0.5!(M22)$) {};
-\draw[densely dashed] ($(C1) !-0.25cm! (C2)$) -- ($(C2) !-0.25cm! (C1)$);
+%% Separator
+\node (C1) at ($(gp7.north) !0.5! (gp8.north)$) {};
+\node (C2) at ($(M72.south) !0.5! (M82.south)$) {};
+\draw[densely dashed] ($(C1) !-0.2cm! (C2)$) -- ($(C2) !-0.2cm! (C1)$);
 
 \end{tikzpicture}
 \end{document}
-

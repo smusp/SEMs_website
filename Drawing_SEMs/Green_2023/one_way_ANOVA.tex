@@ -1,37 +1,37 @@
 \documentclass[border = 10pt]{standalone}
 \input{../SEMstyles.tex}
 
+\def \gap {2cm}                                     % gap between dependents
+\def \dependent {Life\\Satisfaction}                % dependent variable
+\def \groups {No strategy, Discussion, Exercise}    % group names
+
 \begin{document}
 \begin{tikzpicture}
 
-\def \gap {2cm}                                 % separation between dependents
-\def \dep {Life\\Satisfaction}                  % dependent variable
-\def \groups {No strategy, Discussion, Exercise}   % groups
-
 %% Dependents
-\node [manifest] (y1) {\dep};
-\node [manifest] (y2) [right = \gap of y1] {\dep};
-\node [manifest] (y3) [right = \gap of y2] {\dep};
+\node [manifest] (y1) {\dependent};
+\node [manifest] (y2) [right = \gap of y1] {\dependent};
+\node [manifest] (y3) [right = \gap of y2] {\dependent};
 
-\foreach \j [count = \i, remember = \i as \lasti] in \groups {
-   %% Residuals
-   \node [residual2] (e\i) [below right = 4mm of y\i] {e};
-   \path [regression] (e\i) edge (y\i.south east);
+\foreach \j [count = \i, remember = \i as \lasti] in \groups {  
+  %% Residuals
+  \node [residual] (e\i) [below right = 4mm of y\i] {e};
+  \path [regression] (e\i) edge (y\i.south east);
 
-   %% Means
-   \node [constant] (const\i) [above = 1.5cm of y\i] {1};
-   \path [regression] (const\i) edge ["a$_\i$"] (y\i);
+  %% Means
+  \node [constant] (const) [above = 1.5cm of y\i] {1};
+  \path [regression] (const) edge ["a$_\i$"] (y\i);
 
-   %% Groups
-   \node [group] (gp\i) [above = 0.5cm of const\i] {Group \i:\\\j};
-   
-   %% Separators
-   \ifnum \i > 1 
-      \coordinate (m1) at ($(y\i.south) !0.5! (y\lasti.south)$);
-      \coordinate (m2) at ($(gp\i.north) !0.5! (gp\lasti.north)$);      
-      \draw [densely dashed] ($(m1) !0.6cm!270: (y\i)$) -- ($(m2) !0.2cm!90: (gp\i)$);
-   \else \relax
-  \fi
+  %% Groups
+  \node [group] (gp\i) [above = 1.5cm of const, anchor = north] {Group \i:\\\j};
+  
+  %% Separators
+  \ifnum \i > 1
+    \coordinate (p1) at ($(y\i) !0.5! (y\lasti)$);
+    \coordinate (m1) at (p1 |- e\i.south);
+    \coordinate (m2) at ($(gp\i.north) !0.5! (gp\lasti.north)$); 
+    \draw [densely dashed] ($(m1) !-0.2cm! (m2)$) -- ($(m2) !-0.2cm! (m1)$);
+  \fi  
 }
 
 \end{tikzpicture}

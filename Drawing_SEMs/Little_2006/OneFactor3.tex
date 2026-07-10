@@ -2,38 +2,39 @@
 \input{../SEMstyles.tex}
 \usetikzlibrary{matrix}
 
+\def \anglec {110, 90, 70}         % angles for intercepts leaving constant
+
 \begin{document}
 \begin{tikzpicture}
 
-%% pos manifest
+%% Indicators
 \node [manifest] (pos1) {$pos_1$};
 \node [manifest] (pos2) [right = 1.5cm of pos1] {$pos_2$};
 \node [manifest] (pos3) [right = 1.5cm of pos2] {$pos_3$};
 
-%% POS latent and its variance
-\node [latent] (POS) [above = 3cm of pos2] {$POS$};
-\path [variance] (POS.120) edge ["$\upphi$" {above = 1pt},
-   bend left = 100, looseness = 2.5] (POS.60);
-
-%% Means
-\node [constant, black!30] (M1) [right = 2cm of POS] {1};
+%% Latent and its variance
+\node [latent] (POS) [above = 2.5cm of pos2] {$POS$};
+\path [variance = {left}{100}{2.5}] (POS.120) edge ["$\upphi$" {above = 2pt}] (POS.60);
+ 
+%% Constants and latent mean
+\node [constant, black!30] (M1) [right = 1.5cm of POS] {1};
 \node [constant, black!30] (M2) [below = 2cm of pos2] {1};
 \path [regression, black!30] (M1) edge ["$\upkappa$"] (POS);
 
-\foreach \j [count = \i] in {110, 90, 70}{    %% angles out of constant
+\foreach \j [count = \i] in \anglec {
 %% Loadings
 \path [regression] (POS) edge ["$\uplambda_\i$"] (pos\i.90);
 
 %% Residuals
-\node [residual2] (e\i) [above left = 4mm of pos\i] {$\uptheta_\i$};
-\path [regression] (e\i) edge (pos\i.north west);
+\node [residual] (e\i) [above left = 4mm of pos\i] {$\uptheta_\i$};
+\path [regression] (e\i.south east) edge (pos\i.north west);
 
 %% Intercepts
 \path [regression, black!30] (M2.\j) edge ["$\uptau_\i$"] (pos\i.270);
 }
 
 %% Constraints
-\matrix [matrix of nodes, draw, cells = {anchor = west}] at (-0.5, 4.2) {
+\matrix [matrix of nodes, draw, cells = {anchor = west}] [left = -0.5cm of POS -| pos1] {
    \bf{Constraints}\\
    $\uplambda_1 + \uplambda_2 + \uplambda_3 = 3$ \\ 
    $\uptau_1 + \uptau_2 + \uptau_3 = 0$ \\
