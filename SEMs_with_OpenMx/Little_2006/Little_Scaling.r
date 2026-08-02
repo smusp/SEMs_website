@@ -13,7 +13,7 @@
 ## 3. Effect-scaling method - Constrain sums of loadings and intercepts
 #     for both factors.
 
-## Little et al assume strong metric invariance:
+## Little et al assume strong invariance:
 ## Corresponding loadings and intercepts constrained to equality across groups.
 
 ## Compare with results given in Table 2 (pp. 64-65)

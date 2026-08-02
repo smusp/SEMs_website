@@ -12,13 +12,13 @@ subtitle: "Scaling and identifying latent variables"
 Little, T., Slegers, D., & Card, N. (2006). A non-arbitrary method of identifying and scaling latent variables in SEM and MACS models. *Structural Equation Modeling*, *13*(1), 59-72.
 
 
-This example shows how to set constraints for different methods of identification and scaling in latent variable models, and, though invariance is not a topic of discussion, the example shows how to set constraints for strong metric invariance in a two-group model. Also, the example shows how to use summary data (correlations, standard deviations, and means) in a two-group model.
+This example shows how to set constraints for different methods of identification and scaling in latent variable models, and, though invariance is not a topic of discussion, the example shows how to set constraints for strong invariance in a two-group model. Also, the example shows how to use summary data (correlations, standard deviations, and means) in a two-group model.
 
 The methods of identification and scaling discussed by Little, Slegers, & Card (LS&C) are:
 
-  - Reference Group Method - For each construct, the latent variance is fixed to one and the latent mean is fixed to zero in the first group. With strong metric invariance (invariance of loadings and intercepts), latent means and variances are freely estimated in subsequent groups.
-  - Marker Variable Method - For each construct, the loading of one indicator is fixed to one, and the intercept for the chosen indicator is fixed to zero. With strong metric invariance, these constraints apply in both groups.
-  - Effects Coding Method - For each construct, constrain loadings to add to the number of indicators, and constrain indicator intercepts to add to zero. With strong metric invariance, these constraints apply in both groups.
+  - Reference Group Method - For each construct, the latent variance is fixed to one and the latent mean is fixed to zero in the first group. With strong invariance (invariance of loadings and intercepts), latent means and variances are freely estimated in subsequent groups.
+  - Marker Variable Method - For each construct, the loading of one indicator is fixed to one, and the intercept for the chosen indicator is fixed to zero. With strong invariance, these constraints apply in both groups.
+  - Effects Coding Method - For each construct, constrain loadings to add to the number of indicators, and constrain indicator intercepts to add to zero. With strong invariance, these constraints apply in both groups.
 
 LS&C present a two-group (7th grade and 8th grade), two-construct (positive affect and negative affact) model. Each construct is assessed with three manifest indicators. The path diagram below shows the model as it might apply to the whole sample (i.e., ignoring the groups). This one-group model is presented to explain the symbols used in the paper, and to show how they apply in the model diagrams. First, POS and NEG are the constructs; and pos~1~, ..., neg~3~ are the manifest indicators. The solid lines represent the covariance structure, and the gray lines represent the mean structure (ie, the means and intercepts).
 
@@ -113,9 +113,9 @@ When constructing the model statment, there are some points to be considered.
 
 First, the constraints applied to latent means and variances apply in the first group only. In the model statement, pre-multiply the mean or the variance by a vector containing the constraints; like this: `c(1,NA)` - the `1` forces the parameter in the first group to be constrained to 1; the `NA` forces the parameter in the second group to be estimated.
 
-Second, LS&C state that the data display strong metric invariance (p. 63); that is, the corresponding loadings and intercepts are equal across the groups. There is no need to be concerned with these constraints when constructing the model statement - they will be set up in the next step. (Strictly, the intercepts do not even need to be mentioned in the model statement - **lavaan** will add them automatically when `sample.means` are in the model. But they are left in the statement below because intercepts are implicated in constraints in models to follow.)
+Second, LS&C state that the data display strong invariance (p. 63); that is, the corresponding loadings and intercepts are equal across the groups. There is no need to be concerned with these constraints when constructing the model statement - they will be set up in the next step. (Strictly, the intercepts do not even need to be mentioned in the model statement - **lavaan** will add them automatically when `sample.means` are in the model. But they are left in the statement below because intercepts are implicated in constraints in models to follow.)
 
-Third, strong metric invariance places no constraints on indicator variances - they are freely estimated in each group. But again, there is no need to be concerned with or even to mention them when constructing the model statement - **lavaan** will add them automatically.
+Third, strong invariance places no constraints on indicator variances - they are freely estimated in each group. But again, there is no need to be concerned with or even to mention them when constructing the model statement - **lavaan** will add them automatically.
 
 Finally, **lavaan**'s default marker-variable method has to be explicitely disabled by pre-multiplying the first indicator for both constructs by `NA`.
 
@@ -151,7 +151,7 @@ m1 <- "
 
 #### Fit the model and get the results
 
-To deal with strong metric invariance, set `group.equal = c("loadings", "intercepts")` in the `sem()` function.
+To deal with strong invariance, set `group.equal = c("loadings", "intercepts")` in the `sem()` function.
 
 ```{r echo = -2:-1}
 ## Fit the model and get the summary
@@ -203,9 +203,9 @@ Results for three versions of Method 2 are presented in Table 2 - in each case, 
 
 Some points to be considered.
 
-First, with strong metric invariance in place, the constraints applying to intercepts and loadings apply in both groups. In the model statement, pre-multiply the loadings by `c(1,1)`, and the intercepts by `c(0,0)`.
+First, with strong invariance in place, the constraints applying to intercepts and loadings apply in both groups. In the model statement, pre-multiply the loadings by `c(1,1)`, and the intercepts by `c(0,0)`.
 
-Second, again, the point concerning strong metric invariance - it will be set up in the next step.
+Second, again, the point concerning strong invariance - it will be set up in the next step.
 
 Third, again, there is no need to mention indicator variances - **lavaan** will add them automatically.
 
@@ -260,7 +260,7 @@ Compare the output with "Method 2c" in Table 2 (pp. 64-65).
 
 #### **Lavaan** default
 
-This is not **lavaan**'s default method of scaling. The default method constrains the loadings for the first indicator to one for both constructs and, because of the strong metric invariance, in both groups. When there is a mean structure in the model, **lavaan** sets the latent means to zero (in the first group only). In the `summary()` function set `remove.unused = FALSE` to see the latent means.
+This is not **lavaan**'s default method of scaling. The default method constrains the loadings for the first indicator to one for both constructs and, because of the strong invariance, in both groups. When there is a mean structure in the model, **lavaan** sets the latent means to zero (in the first group only). In the `summary()` function set `remove.unused = FALSE` to see the latent means.
 
 ```{r echo = -1}
 ## Lavaan default method of scaling
@@ -287,7 +287,7 @@ The model path diagram with the equality constraints is shown below.
 
 In the model statement, the loadings and the intercepts are labelled (see the "Measurement Model" and the "Indicator intercepts" sections in the model statement) so that the labels can be used to impose the constraints. Constraints are imposed on the loadings and the intercepts using the `==` operator - see the "Constraints" section in the model statement.
 
-Same points as before: **lavaan** will add indicator variances automatically; constraints concerning strong metric invariance will be attended to in the next step; and the default marker-variable method has to be explicitely disabled.
+Same points as before: **lavaan** will add indicator variances automatically; constraints concerning strong invariance will be attended to in the next step; and the default marker-variable method has to be explicitely disabled.
 
 ```{r echo = -1}
 ## The model - Effects-Scaling Method

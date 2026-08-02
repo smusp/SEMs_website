@@ -8,7 +8,7 @@
 ##    intercept;
 ## 3. Effects-Scaling Method - Constrain sums of loadings and intercepts.
 
-## Following Little et al's lead, assume strong metric invariance:
+## Following Little et al's lead, assume strong invariance:
 ## corresponding loadings and intercepts constrained to equality across groups
 
 ## Compare results from OpenMx with lavaan's results
