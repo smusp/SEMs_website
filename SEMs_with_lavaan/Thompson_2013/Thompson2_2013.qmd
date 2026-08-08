@@ -1,0 +1,427 @@
+---
+subtitle: "SMM under Partial Invariance"
+---
+
+```{r echo = FALSE}
+## Thompson, M. & Green, S. (2013). Evaluating between-group differences
+## in latent variable means. In G. Hancock & R. Mueller (Eds.), *Structural
+## equation modeling: A second course* (2nd ed., pp. 163-218). Charlotte, NC:
+## Information Age Publishing.
+```
+
+Thompson, M. & Green, S. (2013). Evaluating between-group differences in latent variable means. In G. Hancock & R. Mueller (Eds.), *Structural equation modeling: A second course* (2nd ed., pp. 163-218). Charlotte, NC: Information Age Publishing.
+
+To assess differences in latent means under partial invariance, T&G use the Day-care versus Home_care example, but analyse a different data set. Summary data is presented in Table 5.2 (p. 183). 
+
+
+#### Load lavaan package and get the data
+
+```{r echo = c(-4,-1), eval = FALSE}
+## Load package
+library(lavaan)
+
+## Get data from Table 5.2
+# Group 1 - Day-care
+cov1 <- c(
+ 154.54,
+  44.75,  90.23,
+  40.98,  22.77,  78.76,	
+  41.35,   2.83,   7.92, 220.12,
+  23.28,   9.12,   0.75,  61.46, 159.88,
+  47.08,  22.88,  16.05, 125.08,  84.31, 332.26
+) 
+
+means1 <- c(49.14, 82.60, 104.95, 78.58, 54.95, 119.91)
+n1 <- 250
+
+# Group 2 - Home-care
+cov2 <- c(
+ 124.93,
+  52.19,  80.67,
+  64.45,  42.85,  83.56,
+  59.95,  33.10,  38.34, 290.65,
+  32.32,  16.09,  18.29, 124.71, 169.17,
+  87.15,  39.70,  51.82, 174.20, 108.39, 355.22
+)
+
+means2 <- c(55.01, 81.22, 97.01, 72.67, 46.57, 124.28)
+n2 <- 150
+
+# Get the variable names
+names <- c("V1", "V2", "V3", "V4", "V5", "V6")
+
+## Combine into lists
+cov <- list("Day-care" = cov1, "Home-care" = cov2)
+means <- list(means1, means2)
+n <- list(n1, n2)
+
+## Get the co/variance matrices
+cov <- lapply(cov, lav_getcov, names = names)
+```
+
+In Table 5.3 (p. 184-187), T&G present the steps they follow to assess the differences in latent means.
+
+- Step 1: Establish Configural Invariance - Equivalence of forms
+- Step 2: Establish Scalar (or Weak) Invariance - Equivalence of loadings
+- Step 3: Establish Metric (or Strong) Invariance - Equivalence of intercepts
+
+At Steps 2 and 3, they can establish only partial invariance.
+
+T&G use the marker-variable method of identification - one loading for each construct is fixed to one in all groups. I will use the reference-group method - constrain the variance of each construct to one. The parameter estimates for the two methods will differ, but they should give identical fit statistics. 
+
+Why use the reference-group method? Later, when testing whether on not to free loadings constrained to equality, it is easier if pairs of loadings are not constrained to one. 
+
+**Step 1** in Table 5.3 specifies a model with configural invariance - equivalence of forms. I follow the model specification except the latent variances are constrained to one in both groups, and all loadings are freely estimated. Using `std.lv = TRUE` in the `sem()` function takes care of all constraints. 
+
+```{r echo = c(-2,-1), eval = FALSE}
+
+## Step 1 - equivalence of forms - configural invariance
+# Model statement
+m1 <- "
+   # Measurement Model
+   Academic =~ V1 + V2 + V3
+   Social =~ V4 + V5 + V6
+"
+
+# Fit the model to each group separately
+m1_g1_fit <- sem(m1, sample.cov = cov[[1]], sample.nobs = n[[1]], 
+   sample.mean = means[[1]], std.lv = TRUE)
+summary(m1_g1_fit, remove.unused = FALSE)
+
+m1_g2_fit <- sem(m1, sample.cov = cov[[2]], sample.nobs = n[[2]], 
+   sample.mean = means[[2]], std.lv = TRUE)
+summary(m1_g2_fit, remove.unused = FALSE)
+
+# A function to extract fit measure from output
+GetFit <- function(fit, ...) {
+    fitMeasures(fit, ...)}
+measures = c("chisq", "df", "pvalue", "cfi", "srmr", "rmsea")
+
+# Get fit measures for each group
+# Compare with Step 1 in Table 5.4
+GetFit(m1_g1_fit, measures)
+GetFit(m1_g2_fit, measures)
+
+# Fit the two-group model
+# Compare with Step 1 in Table 5.4
+config_fit <- sem(m1, sample.cov = cov, sample.nobs = n, 
+   sample.mean = means, std.lv = TRUE)
+summary(config_fit, remove.unused = FALSE)
+GetFit(config_fit, measures)
+```
+
+
+**Step 2** in Table 5.3 specifies a metric (or weak) invariance model. Use `group.equal = c("loadings")` in the `sem()` function to constrain the loadings to equality across the two groups. The code below follows the sequence of tests in Table 5.4: 
+
+- The metric invariance model is fit and fit measures are obtained
+- The `anova()` function compares the (nested) models - `config_fit` with `metric_fit`
+- (A function to obtain differences in fit statistics)
+- Differences in fit statistics are obtained
+- The `lavTestScore()` function tests for releasing equality constraints (ie, constraints imposed on loadings).
+
+Note that in the summary of the model fit, the latent variances in group 1 are constrained to one, but they are freely estimated in group 2. The latent means remain constrained to zero in both groups.
+
+```{r echo = c(-2,-1), eval = FALSE}
+
+## Step 2 - equivalence of loadings - metric (or weak) invariance
+
+# Fit the model
+# Compare with Step 2 in Table 5.4
+metric_fit <- sem(m1, sample.cov = cov, sample.nobs = n, 
+   sample.mean = means, std.lv = TRUE,
+   group.equal = c("loadings"))
+summary(metric_fit, remove.unused = FALSE)
+GetFit(metric_fit, measures)
+
+# Compare the fits of two models
+anova(config_fit, metric_fit)
+
+# Function to get difference in fit statistics
+FitDiff = function(fit1, fit2) {
+     call <- as.list(match.call())
+     tab = cbind(data.frame(GetFit(fit1, measures), GetFit(fit2, measures)))[4:6, ]  
+     names(tab) = c(call$fit1, call$fit2)
+     tab$diff = tab[, 2] - tab[, 1]
+     return(round(tab, 3))   
+     }
+FitDiff(config_fit, metric_fit)
+
+# lavTestScore() function - test for releasing equality constraints
+lavTestScore(metric_fit)
+
+# Get parameter table
+tab <- parTable(metric_fit)
+# Print the part with loadings and constraints
+tab[tab$op %in% c("=~","=="), ]
+# Allow loadings for V3 to vary across groups
+```
+
+
+Note that `lavTestScore()` suggests that the equality constraint between `.p3.` and `.p26.` should be released first. The `parTable` helps to track down lavaan's labels: `.p3.` is the label for the loading of V3 on Academic in Group 1, and `.p26.` is the loading of V3 on Academic in Group 2. Thus, the loading of V3 on Academic is allowed to vary across the groups. 
+
+In **Step 2a**, the equality constraint for the loadings of V3 on Academic are relaxed using `group.partial = c("Academic =~ V3")` in the `sem()` function. The steps are the same as before: the revised model is fit and fit statistics are obtained; the fit of the model is compared to the fit of the previous model; check for the next best equality constraint to relax.
+
+
+```{r echo = c(-2,-1), eval = FALSE}
+
+## Step 2a - relax equality constraint for V3 loading on Academic
+
+# Fit the model 
+# Compare with Step 2a in Table 5.4
+metric_m2a_fit <- sem(m1, sample.cov = cov, sample.nobs = n, 
+   sample.mean = means, std.lv = TRUE,
+   group.equal = c("loadings"), group.partial = c("Academic =~ V3"))
+summary(metric_m2a_fit, remove.unused = FALSE)
+GetFit(metric_m2a_fit, measures)
+
+anova(metric_fit, metric_m2a_fit)
+FitDiff(metric_fit, metric_m2a_fit)
+
+lavTestScore(metric_m2a_fit)
+tab <- parTable(metric_m2a_fit)
+tab[tab$op %in% c("=~","=="), ]
+# Allow loadings for V6 to vary across groups
+```
+
+Relax the equality constraint between `.p6.` and `.p29.`; that is, in **Step 2b**, the equality constraint for the loadings of V6 on Social are relaexd.
+
+
+```{r echo = c(-2,-1), eval = FALSE}
+
+## Step 2b - relax equality constraint for V6 loading on Social
+
+# Fit the model
+# Compare with Step 2b in Table 5.4
+metric_m2b_fit <- sem(m1, sample.cov = cov, sample.nobs = n, 
+   sample.mean = means, std.lv = TRUE,
+   group.equal = c("loadings"), group.partial = c("Academic =~ V3", "Social =~ V6"))
+summary(metric_m2b_fit, remove.unused = FALSE)
+
+GetFit(metric_m2b_fit, measures)
+anova(metric_m2a_fit, metric_m2b_fit)
+FitDiff(metric_m2a_fit, metric_m2b_fit)
+
+lavTestScore(metric_m2b_fit)
+tab <- parTable(metric_m2a_fit)
+tab[tab$op %in% c("=~","=="), ]
+# Allow loadings for V1 to vary across groups
+```
+
+Relax either the loadings for V1 or for V2 on Academic. T&G choose the constraint on V1. That is, in **Step 2c**, the equality constraints for V1 on Academic are relaxed. 
+
+```{r echo = c(-2,-1), eval = FALSE}
+
+## Step 2c - relax equality constraint for V1 loading on Social
+
+# Fit the model
+# Compare with Step 2c in Table 5.4
+metric_m2c_fit <- sem(m1, sample.cov = cov, sample.nobs = n, 
+   sample.mean = means, std.lv = TRUE,
+   group.equal = c("loadings"), group.partial = c("Academic =~ V3", "Social =~ V6", "Academic =~ V1"))
+summary(metric_m2c_fit, remove.unused = FALSE)
+
+GetFit(metric_m2c_fit, measures)
+anova(metric_m2b_fit, metric_m2c_fit)
+FitDiff(metric_m2b_fit, metric_m2c_fit)
+```
+
+In the model carried forward into **Step 3**, the equality constraints for the loadings of V3 and V6 on their respective constructs are relaxed; and thus only partial scalar invariance has been established.
+
+In **Step 3**, the intercepts are constrained to equality across the groups; that is, the argument for `group.equal` is `c("loadings", "intercepts")`, but with the equality constraints for loadings of V3 and V6 relaxed in the argument for `group.partial`. Because the constraints on the loading for V3 and V6 are relaxed, the equality constraints for the intercepts of V3 and V6 are also relaxed.
+
+Note that in the summary of the model fit, the latent means are fixed to zero in Group 1, but are freely estimated in Group 2.
+
+```{r echo = c(-2,-1), eval = FALSE}
+
+## Step 3 -  equivalence of loadings & intercepts - scalar (strong) invariance
+
+# Fit the model
+# Compare with Step 3 in Table 5.4
+scalar_m3_fit <- sem(m1, sample.cov = cov, sample.nobs = n, 
+   sample.mean = means, std.lv = TRUE,
+   group.equal = c("loadings", "intercepts"), 
+   group.partial = c("Academic =~ V3", "Social =~ V6", "V3 ~ 1", "V6 ~ 1"))
+summary(scalar_m3_fit, remove.unused = FALSE)
+GetFit(scalar_m3_fit, measures)
+
+anova(metric_m2b_fit, scalar_m3_fit)
+FitDiff(metric_m2b_fit, scalar_m3_fit)
+
+lavTestScore(scalar_m3_fit)
+tab <- parTable(scalar_m3_fit)
+tab[tab$op %in% c("=~","~1","=="), ]
+```
+
+Relaxing the intercept for V1 or V2 would improve the fit. T&G select V1. Thus in **Step 3a**, the equality constraint on the intercept for V1 is relaxed.
+
+```{r echo = c(-2,-1), eval = FALSE}
+
+## Step 3a - relax equality constraint for V1 intercept
+
+# Fit the model
+# Compare with Step 3a in Table 5.4
+scalar_m3a_fit <- sem(m1, sample.cov = cov, sample.nobs = n, 
+   sample.mean = means, std.lv = TRUE,
+   group.equal = c("loadings", "intercepts"), 
+   group.partial = c("Academic =~ V3", "Social =~ V6", "V3 ~ 1", "V6 ~ 1", "V1 ~ 1"))
+summary(scalar_m3a_fit, remove.unused = FALSE)
+GetFit(scalar_m3a_fit, measures)
+
+anova(scalar_m3a_fit, scalar_m3_fit)
+FitDiff(scalar_m3_fit, scalar_m3a_fit)
+
+lavTestScore(scalar_m3a_fit)
+tab <- parTable(scalar_m3a_fit)
+tab[tab$op %in% c("=~","~1","=="), ]
+```
+
+Relaxing the intercept for V4 or V5 would improve the fit.  T&G select V4. Thus in **Step 3b**, the equality constraint on the intercept for V4 is relaxed.
+
+```{r echo = c(-2,-1), eval = FALSE}
+
+## Step 3b - relax equality constraint for V1 intercept
+
+# Fit the model
+# Compare with Step 3b in Table 5.4
+scalar_m3b_fit <- sem(m1, sample.cov = cov, sample.nobs = n, 
+   sample.mean = means, std.lv = TRUE,
+   group.equal = c("loadings", "intercepts"), 
+   group.partial = c("Academic =~ V3", "Social =~ V6", "V3 ~ 1", "V6 ~ 1", "V1 ~ 1", "V4 ~ 1"))
+summary(scalar_m3b_fit, remove.unused = FALSE)
+GetFit(scalar_m3b_fit, measures)
+
+anova(scalar_m3a_fit, scalar_m3b_fit)
+FitDiff(scalar_m3a_fit, scalar_m3b_fit)
+```
+
+The model carried forward into **Step 4** has equality constraints on V3 and V6 loadings relaxed, and equality contraints of intercepts for V1, V3, V4, and V6 relaxed.
+
+In Step 4, attention turns to the latent means. In **Step 4a**, the means for the Academic construct are constrained to be equal, then in **Step 4b**, the means for Social are constrained to be equal. In each case, the fit is compared with the fit for the `scalar_m3b_fit`.
+
+
+```{r echo = -1, eval = FALSE}
+
+## Step 4a - constrain Academic mean to zero in Group 2
+#  ie, Academic means constrained to equality
+
+# Model statement
+m4a <- "
+  # Measurement Model
+  Academic =~ V1 + V2 + V3
+  Social =~ V4 + V5 + V6
+  
+  Academic ~ c(0,0)*1
+  Social ~ c(0,NA)*1
+"
+
+scalar_m4a_fit <- sem(m4a, sample.cov = cov, sample.nobs = n, 
+   sample.mean = means, std.lv = TRUE,
+   group.equal = c("loadings", "intercepts"), 
+   group.partial = c("Academic =~ V3", "Social =~ V6", "V3 ~ 1", "V6 ~ 1", "V1 ~ 1", "V4 ~ 1"))
+summary(scalar_m4a_fit, remove.unused = FALSE)
+
+GetFit(scalar_m4a_fit, measures)
+anova(scalar_m3b_fit, scalar_m4a_fit)
+FitDiff(scalar_m3b_fit, scalar_m4a_fit)
+
+
+## Step 4b - constrain Social mean to zero in Group 2
+#  ie, Social means constrained to equality
+
+# Model statement
+m4b <- "
+  # Measurement Model
+  Academic =~ V1 + V2 + V3
+  Social =~ V4 + V5 + V6
+
+  Academic ~ c(0,NA)*1
+  Social ~ c(0,0)*1
+"
+
+scalar_m4b_fit <- sem(m4b, sample.cov = cov, sample.nobs = n, 
+   sample.mean = means, std.lv = TRUE,
+   group.equal = c("loadings", "intercepts"), 
+   group.partial = c("Academic =~ V3", "Social =~ V6", "V3 ~ 1", "V6 ~ 1", "V1 ~ 1", "V4 ~ 1"))
+summary(scalar_m4b_fit, remove.unused = FALSE)
+
+GetFit(scalar_m4b_fit, measures)
+anova(scalar_m3b_fit, scalar_m4b_fit)
+FitDiff(scalar_m3b_fit, scalar_m4b_fit)
+```
+
+Conclusion: The means for both the Academic and the Social constructs differ across groups. 
+
+How big are these differences? Focus turns to effect sizes. The formula for effect size are given on p. 195: difference in means divided by square root of variance. Again, T&G nominate the Day-care group as a reference group, and thus use its variance in the calculation of effect size. 
+
+
+```{r echo = c(-4:-1), eval = FALSE}
+
+## Get effect sizes (Day-care group as reference-group)
+# Get means and variances from summary for scalar_m3b_fit
+# Compare with effect sizes on p. 195
+summary(scalar_m3b_fit)
+
+ES_Acad <- (-0.266 - 0) / sqrt(1); ES_Acad
+ES_Soc <- (-1.348 - 0) / sqrt(1); ES_Soc
+```
+
+Compare with effect sizes given on p. 195.
+
+If the pooled variance is required, then, with unequal group sizes, pooled variance is a weighted average of the two variances.
+
+If $n_1$ is the size of Group 1, and $n_2$ is the size of Group2, then the pooled variance is given by:
+ 
+$$
+ \sigma^2_p = \frac{(n_1 - 1)\sigma^2_1 + (n_2 - 1)\sigma^2_2}{n_1 + n_2 - 2}
+$$
+
+```{r eval = FALSE}
+## Get effect sizes (pooled variance)
+summary(scalar_m3b_fit)
+
+ES_Acad <- (-0.266 - 0) / sqrt(((n1-1)*1 + (n2-1)*1.092)/(n1+n2-2)); ES_Acad
+ES_Soc <- (-1.348 - 0) / sqrt(((n1-1)*1 + (n2-1)*1.986)/(n1+n2-2)); ES_Soc
+```
+
+As before, it might be better to get R to extract the means and variances from a list of estimates. Means are contained in element "alpha", and variances are contained in element "psi". 
+
+```{r echo = -1, eval = FALSE}
+## Extract means and variances from fitted lavaan object
+#  Get estimates in a list
+estimates <- lavInspect(scalar_m3b_fit, "est"); estimates
+
+## Get effect sizes (pooled variances)
+#  Get difference in means
+means <- abs(Reduce('-', lapply(estimates, '[[', 'alpha'))); means
+
+#  Get pooled variance
+var <- lapply(lapply(estimates, '[[', 'psi'), diag); var
+pool <- Reduce(function(x,y) ((n[[1]] - 1)*x + (n[[2]] - 1)*y) / (n[[1]] + n[[2]] - 2), var); pool
+
+#  Get effect sizes
+ES <- means/sqrt(pool)
+colnames(ES) <- "ES"
+ES
+```
+
+<br>
+
+
+```{r}
+#| echo: false
+#| include: false
+#| eval: true
+#| purl: false
+input <- knitr::current_input()
+output <- "R/Thompson2_2013.r"
+knitr::purl(input, output, documentation = 0, quiet = TRUE)
+xfun::gsub_file(output, "^# NA", "")
+xfun::gsub_file(output, "^# ", "")
+```
+
+```{r}
+#| echo: true
+#| code-fold: true 
+#| code-summary: "R code with minimal commenting"
+#| file: !expr "noquote(output)"
+```

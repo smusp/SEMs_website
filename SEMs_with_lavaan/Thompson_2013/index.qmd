@@ -1,0 +1,19 @@
+---
+title: "Latent Means"
+subtitle: "SEM approach to evaluating between-group differences in latent means"
+---
+
+```{r echo = FALSE}
+## Thompson, M. & Green, S. (2013). Evaluating between-group differences
+## in latent variable means. In G. Hancock & R. Mueller (Eds.), *Structural
+## equation modeling: A second course* (2nd ed., pp. 163-218). Charlotte, NC:
+## Information Age Publishing.
+```
+
+Thompson, M. & Green, S. (2013). Evaluating between-group differences in latent variable means. In G. Hancock & R. Mueller (Eds.), *Structural equation modeling: A second course* (2nd ed., pp. 163-218). Charlotte, NC: Information Age Publishing.
+
+
+These examples shows how to assess group differences in latent variable means using Structured Means Modeling (SMM). Thompson & Green (T&G) present a two-group (Day-care and Home-care), two-construct (Academic and Social school readiness) model. Each construct is assessed with three indicators. Comparisons among latent means assume some level of measurement invariance. The first part of this example demonstrates SMM assuming strong invariance (loading and intercepts constrained to equality across groups). The second part of the example demonstrates SMM under partial invariance of loadings and intercepts. T&G also demonstrate a Multiple Indicators Multiple Causes (MIMIC) model. However, MIMIC modelling is not as flexible as SMM. SMM can accommodate different levels of measurement invariance whereas MIMIC assumes strict invariance only (loadings, intercepts, and error variances constrained to equality across groups). These examples how SMM only.
+
+ 1. [Strong invariance](Thompson1_2013.qmd)
+ 2. [Partial invariance](Thompson2_2013.qmd)

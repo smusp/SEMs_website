@@ -33,7 +33,7 @@ This section presents **R** scripts to replicate published Structural Equation M
 [Means:](Green_2023/index.qmd) SEM approaches to ANOVA and MANOVA models.
 
 - Thompson, M. & Green, S. (2013). Evaluating between-group differences in latent variable means. In G. Hancock & R. Mueller (Eds.), *Structural equation modeling: A second course* (2nd ed., pp. 163-218). Charlotte, NC: Information Age Publishing. <br>
-Latent Means: Thompson_2013/index.qmd Assessing group differences in latent variable means.
+[Latent Means:](Thompson_2013/index.qmd) Assessing group differences in latent variable means.
 
 - Berry, D., & Willoughby, M. (2016). On the practical interpretability of cross-lagged panel models: Rethinking a developmental workhorse. *Child Development*, *88*(4), 1186-1206. <br>
 ALT-SR: Berry_2016/index.qmd Autoregressive latent trajectory model with structured residuals

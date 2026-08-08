@@ -208,5 +208,38 @@ The scripts are rendered as pdf files, then converted to svg files using [inksca
 %| file: "Green_2023/one_way_LATENT.tex"
 ```
 
+<br> 
+
+::: {.no-indent}
+- Thompson, M. & Green, S. (2013). Evaluating between-group differences in latent variable means. In G. Hancock & R. Mueller (Eds.), *Structural equation modeling: A second course* (2nd ed., pp. 163-218). Charlotte, NC: Information Age Publishing.
+:::
+
+<p>
+
+<details>
+  <summary>One-Group model diagram</summary>
+  <img src="Thompson_2013/One_Group.svg">  
+</details> 
+
+```{tikz}
+%| code-summary: "Tikz code"
+%| file: "Thompson_2013/One_Group.tex"
+```
+
+<p>
+
+<details>
+  <summary>Two-Group model diagram</summary>
+  <img src="Thompson_2013/Two_Groups.svg">  
+</details> 
+
+```{tikz}
+%| code-summary: "Tikz code"
+%| file: "Thompson_2013/Two_Groups.tex"
+```
+
+
+
+
 ```{r} 
 ```

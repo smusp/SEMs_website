@@ -1,0 +1,76 @@
+\documentclass[border = 10pt]{standalone}
+\input{../SEMstyles.tex}
+
+\def \gapsmall {1.5cm}              % small gap between indicators
+\def \gapbig {2.5cm}                % big gap between factors
+\def \anglec {110, 90, 70}          % angles for intercepts leaving constant
+
+%% Macro to draw a one-factor model 
+\newcommand {\drawfactor} [2] {     %%   #1  latent: F1 F2
+                                    %%   #2  position of 1st indicator
+
+  %% What changes between factors:
+  %%    latent variances - phi
+  %%    factor names - labfac
+  %%    counts for indicators, loadings, residuals, intercepts - count
+  \ifnum \pdfstrcmp{#1}{F1} = 0
+    \def \phi {F1}    \def \labfac {F1\\Academic}    \def \mycount {{1, 2, 3}}
+  \else
+    \def \phi {F2}    \def \labfac {F2\\Social}    \def \mycount {{4, 5, 6}}
+  \fi
+
+  %% Indicators
+  \tikzmath{\num1 = \mycount[0]; \num2 = \mycount[1]; \num3 = \mycount[2];}
+  \node [manifest] (V1) [#2] {$V_{\num1}$};
+  \node [manifest] (V2) [right = \gapsmall of V1] {$V_{\num2}$};
+  \node [manifest] (V3) [right = \gapsmall of V2] {$V_{\num3}$};
+
+  %% Latent
+  \node [latent] (#1) [above = 3cm of V2] {\labfac};
+ 
+  %% Latent variance
+  \path [variance = {left}{100}{2.5}] (#1.120) edge ["$c_{\phi}$" {above = 2pt}] (#1.60);
+  
+  %% Constant for intercepts
+  \node [constant, black!30] (M) [below = 1.5cm of V2] {1};  
+  
+  %%
+  \foreach \i [count = \j] in \anglec {
+    \tikzmath{\num = \mycount[\j-1];}
+
+    %% What changes among indicators - loadings
+    \ifthenelse{\(\pdfstrcmp{#1}{F1} = 0 \AND \num = 1\) \OR \(\pdfstrcmp{#1}{F2} = 0 \AND \num = 6\)}{
+      \def \labload {$b_{\num}\!=\!1$} 
+    }{
+      \def \labload {$b_{\num}$}
+    } 
+
+    %% Loadings
+    \path [regression] (#1) edge ["\labload"] (V\j.90);
+
+    %% Residuals
+    \node [residual] (e\j) [above right = 4mm of V\j] {$c_\num$};
+    \path [regression] (e\j.south west) edge (V\j.north east);
+    
+    %% Intercepts
+    \path [regression, black!30] (M.\i) edge ["$a_{V\num}$"] (V\j.270);   
+  }
+}
+
+\begin{document}
+\begin{tikzpicture}
+
+%% Two factors side-by-side
+\drawfactor{F1}{}
+\drawfactor{F2}{right = \gapbig of V3}
+
+%% Latent means
+\node [constant, black!30] (M) at ($(F1) !0.5! (F2)$) {1};   
+\path [regression, black!30] (M) edge ["$a_{F1}\!=\!0$"] (F1) 
+                             (M) edge ["$a_{F2}\!=\!0$"] (F2); 
+
+%% Latent covariance
+\path [covariance = {left}{35}{0.8}] (F1.30) edge ["$c_{F1,F2}$"] (F2.150);
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,105 @@
+\documentclass[border = 10pt]{standalone}
+\input{../SEMstyles.tex}
+\usepackage{ifthen}               % allows AND OR operations 
+
+\def \prefac {{"F1", "F2"}}         % prefix for factors
+\def \preint {{"V1", "V2"}}         % prefix for indicators
+\tikzmath{\fa = \prefac[0]; \fb = \prefac[1];}
+\tikzmath{\ia = \preint[0]; \ib = \preint[1];}
+
+\def \gapsmall {1.5cm}            % small gap between indicators
+\def \gapbig {2.5cm}              % big gap between factors
+\def \anglec {110, 90, 70}        % angles for intercepts leaving constant
+
+%% Macro to draw a one-factor model
+\newcommand{\FactorModel}[4]{     %%   #1  latent: F1, F2
+                                  %%   #2  indicator: V1, V2
+                                  %%   #3  groups: 1, 2
+                                  %%   #4  position of first indicator  
+
+  %% What changes beween factors:
+  %%    latent variances - phi
+  %%    factor names - labfac
+  %%    counts for indicators, loadings, residuals, intercepts - mycount
+  \ifnum\pdfstrcmp{#1}{\fa} = 0
+    \def \phi {11}    \def \labfac {F1\\Academic}    \def \mycount {{1, 2, 3}}
+  \else
+    \def \phi {22}    \def \labfac {F2\\Social}      \def \mycount {{4, 5, 6}}
+  \fi
+
+  %% Indicators
+  \tikzmath{\num1 = \mycount[0]; \num2 = \mycount[1]; \num3 = \mycount[2];}
+  \node [manifest] (#2#31) [#4] {$V_\num1$};
+  \node [manifest] (#2#32) [right = \gapsmall of #2#31] {$V_\num2$};
+  \node [manifest] (#2#33) [right = \gapsmall of #2#32] {$V_\num3$};
+  
+  %% Latent
+  \node [latent] (#1#3) [above = 3cm of #2#32] {\labfac};
+
+  %% Latent variance
+  \path [variance = {left}{100}{2.5}] (#1#3.120) edge ["$c_{#1}$" {above = 2pt}] (#1#3.60);
+
+  %% Constant
+  \node [constant, black!30] (M#2#3) [below = 1.5cm of #2#32] {1}; 
+
+  \foreach \i [count = \j] in \anglec {
+    \tikzmath{\num = \mycount[\j-1];}
+
+    %% What changes between indicators - lambda and tau     
+    \ifthenelse{\(\pdfstrcmp{#1}{\fa} = 0 \AND \num = 1\) \OR \(\pdfstrcmp{#1}{\fb} = 0 \AND \num = 6\)}{
+      \def \lablambda {$b_{\num}\!=\!1$} 
+    }{
+      \def \lablambda {$b_{\num}$}
+    }
+
+    %% Loadings
+    \path [regression] (#1#3) edge ["\lablambda"] (#2#3\j.90);
+    
+    %% Intercepts
+    \path [regression, black!30] (M#2#3.\i) edge ["$a_{V\num}$"] (#2#3\j.270);
+    
+    %% Residuals
+    \node [residual] (e\j) [above right = 4mm of #2#3\j] {$c_{#3,\num}$};
+    \path [regression] (e\j.south west) edge (#2#3\j.north east);
+  }  
+}
+
+%% Macro to draw model for grade - two factors side-by-side
+\newcommand{\GradeModel}[2]{            %%   #1  groups: 1, 2
+                                        %%   #2  position eg {below = 9cm of V111}
+
+  %% Position factor models
+  \FactorModel{\fa}{\ia}{#1}{#2}
+  \FactorModel{\fb}{\ib}{#1}{right = \gapbig of \ia#13}
+  
+  %% Latent covariance
+  \path [covariance = {left}{35}{0.8}] (\fa#1.30) edge ["$c_{\fa,\fb}$" {name = C1}] (\fb#1.150);
+  
+  %% Latent means
+  \ifnum #1 = 1  \def \laba {$a_{#1,\fa}\!=\!0$}   \def \labb {$a_{#1,\fb}\!=\!0$} 
+    \else \def \laba {$a_{#1,\fa}$}   \def \labb {$a_{#1,\fb}$}   \fi
+  \node [constant, black!30] (M) at ($(\fa#1) !0.5! (\fb#1)$) {1}; 
+  \path [regression, black!30] (M) edge ["\laba"] (\fa#1) 
+                               (M) edge ["\labb"] (\fb#1); 
+}
+
+\begin{document}
+\begin{tikzpicture}
+
+%% Draw model for two grade - one below the other
+\GradeModel{1}{}
+\GradeModel{2}{below = 9cm of \ia11}
+
+%% Grades
+\coordinate (mid) at ($($(M\ia1) !0.5! (M\ib1)$) !0.5! (C1)$) ;
+\coordinate (C3) at (\ia11 |- mid);   
+\coordinate (C4) at (\ib13 |- mid);   
+
+\node [group] [above = 0.5cm of C3] {Day-Care};
+\node [group] [below = 0.5cm of C3] {Home-Care};
+
+%% Separator
+\draw[densely dashed] ($(C3) !-1.5cm! (C4)$) -- ($(C4) !-1.5cm! (C3)$);
+
+\end{tikzpicture}
+\end{document}
