@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Mediation</title>
+<title>thompson2_2013</title>
 <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -4179,7 +4179,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../SEMs_with_lavaan/index.html">SEMs with lavaan</a></li><li class="breadcrumb-item"><a href="../../SEMs_with_lavaan/Kurbanoglu_2021/Kurbanoglu_2021.html">Mediation II</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../SEMs_with_lavaan/index.html">SEMs with lavaan</a></li><li class="breadcrumb-item"><a href="../../SEMs_with_lavaan/Thompson_2013/index.html">Latent Means</a></li><li class="breadcrumb-item"><a href="../../SEMs_with_lavaan/Thompson_2013/Thompson2_2013.html">Partial invariance</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -4217,7 +4217,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../SEMs_with_lavaan/Kurbanoglu_2021/Kurbanoglu_2021.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../SEMs_with_lavaan/Kurbanoglu_2021/Kurbanoglu_2021.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Mediation II</span></a>
   </div>
 </li>
@@ -4272,11 +4272,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../SEMs_with_lavaan/Thompson_2013/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Latent Means</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../SEMs_with_lavaan/Thompson_2013/Thompson1_2013.html" class="sidebar-item-text sidebar-link">
@@ -4285,7 +4285,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../SEMs_with_lavaan/Thompson_2013/Thompson2_2013.html" class="sidebar-item-text sidebar-link">
+  <a href="../../SEMs_with_lavaan/Thompson_2013/Thompson2_2013.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Partial invariance</span></a>
   </div>
 </li>
@@ -4320,10 +4320,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../SEMs_with_lavaan/index.html">SEMs with lavaan</a></li><li class="breadcrumb-item"><a href="../../SEMs_with_lavaan/Kurbanoglu_2021/Kurbanoglu_2021.html">Mediation II</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../SEMs_with_lavaan/index.html">SEMs with lavaan</a></li><li class="breadcrumb-item"><a href="../../SEMs_with_lavaan/Thompson_2013/index.html">Latent Means</a></li><li class="breadcrumb-item"><a href="../../SEMs_with_lavaan/Thompson_2013/Thompson2_2013.html">Partial invariance</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Mediation</h1>
-<p class="subtitle lead">Three-variable mediation with summary data</p>
+<p class="subtitle lead">SMM under Partial Invariance</p>
 </div>
 
 
@@ -4340,138 +4339,627 @@ window.Quarto = {
 </header>
 
 
-<p>Kurbanoglu, N. &amp; Takunyaci, M. (2021). A structural equation modeling on relationship between self-efficacy, physics laboratory anxiety and attitudes. <em>Journal of Family, Counseling and Education</em>, <em>6</em>(1), 47-56.</p>
-<p>This example shows how to obtain a basic three-variable mediation analysis using <strong>lavaan</strong>, and how to obtain indirect and total effects. The three variables are: Self-Efficacy; Physics Laboratory Attitudes; and Physics Laboratory Anxiety. Self-Efficacy has a direct effect on Anxiety, but also Self-Efficacy has an indirect effect on Anxiety via Attitudes. This example also shows how to use summary data when the raw sample data are not available; in particular, how to obtain a matrix of variances and covariances from the summary data (correlations and standard deviations), and then how to use the co/variance matrix to replicate the analysis.</p>
-<p>Except in this case, the analysis cannot be replicated (see below). There are problems with the paper. Rather than being an examplar, this example is included to show how to run SEM using summary data in order to check published results.</p>
-<section id="load-relevant-packages" class="level4">
-<h4 class="anchored" data-anchor-id="load-relevant-packages">Load relevant packages</h4>
-<p>Load the <strong>lavaan</strong> and <strong>semmcci</strong> packages.</p>
+<p>Thompson, M. &amp; Green, S. (2013). Evaluating between-group differences in latent variable means. In G. Hancock &amp; R. Mueller (Eds.), <em>Structural equation modeling: A second course</em> (2nd ed., pp. 163-218). Charlotte, NC: Information Age Publishing.</p>
+<p>To assess differences in latent means under partial invariance, T&amp;G use the Day-care versus Home_care example, but analyse a different data set. Summary data is presented in Table 5.2 (p. 183).</p>
+<section id="load-lavaan-package-and-get-the-data" class="level4">
+<h4 class="anchored" data-anchor-id="load-lavaan-package-and-get-the-data">Load lavaan package and get the data</h4>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(semmcci)  <span class="co"># For Monte Carlo CIs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Group 1 - Day-care</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>cov1 <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="fl">154.54</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fl">44.75</span>,  <span class="fl">90.23</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fl">40.98</span>,  <span class="fl">22.77</span>,  <span class="fl">78.76</span>,    </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fl">41.35</span>,   <span class="fl">2.83</span>,   <span class="fl">7.92</span>, <span class="fl">220.12</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fl">23.28</span>,   <span class="fl">9.12</span>,   <span class="fl">0.75</span>,  <span class="fl">61.46</span>, <span class="fl">159.88</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fl">47.08</span>,  <span class="fl">22.88</span>,  <span class="fl">16.05</span>, <span class="fl">125.08</span>,  <span class="fl">84.31</span>, <span class="fl">332.26</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>means1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">49.14</span>, <span class="fl">82.60</span>, <span class="fl">104.95</span>, <span class="fl">78.58</span>, <span class="fl">54.95</span>, <span class="fl">119.91</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">250</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Group 2 - Home-care</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>cov2 <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> <span class="fl">124.93</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fl">52.19</span>,  <span class="fl">80.67</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fl">64.45</span>,  <span class="fl">42.85</span>,  <span class="fl">83.56</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fl">59.95</span>,  <span class="fl">33.10</span>,  <span class="fl">38.34</span>, <span class="fl">290.65</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fl">32.32</span>,  <span class="fl">16.09</span>,  <span class="fl">18.29</span>, <span class="fl">124.71</span>, <span class="fl">169.17</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="fl">87.15</span>,  <span class="fl">39.70</span>,  <span class="fl">51.82</span>, <span class="fl">174.20</span>, <span class="fl">108.39</span>, <span class="fl">355.22</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>means2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">55.01</span>, <span class="fl">81.22</span>, <span class="fl">97.01</span>, <span class="fl">72.67</span>, <span class="fl">46.57</span>, <span class="fl">124.28</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">150</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the variable names</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;V1&quot;</span>, <span class="st">&quot;V2&quot;</span>, <span class="st">&quot;V3&quot;</span>, <span class="st">&quot;V4&quot;</span>, <span class="st">&quot;V5&quot;</span>, <span class="st">&quot;V6&quot;</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="do">## Combine into lists</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>cov <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;Day-care&quot;</span> <span class="ot">=</span> cov1, <span class="st">&quot;Home-care&quot;</span> <span class="ot">=</span> cov2)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">list</span>(means1, means2)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">list</span>(n1, n2)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Get the co/variance matrices</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>cov <span class="ot">&lt;-</span> <span class="fu">lapply</span>(cov, lav_getcov, <span class="at">names =</span> names)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section>
-<section id="get-the-data" class="level4">
-<h4 class="anchored" data-anchor-id="get-the-data">Get the data</h4>
-<p>Sample data are not available, but Table 1 (p. 50) gives correlations, means, and standard deviations, and the sample size is given on page 49. From these, the co/variance matrix can be obtained. The correlations do not need to be in the form of a matrix. All that is required is a vector of the lower triangle of correlations with ones along the diagonal.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cor <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>   <span class="dv">1</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>   <span class="fl">0.30</span>,  <span class="dv">1</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fl">0.42</span>, <span class="sc">-</span><span class="fl">0.32</span>,  <span class="dv">1</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>sds <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">8.81</span>, <span class="fl">7.95</span>, <span class="fl">18.30</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">56.57</span>, <span class="fl">40.39</span>, <span class="fl">68.22</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">513</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>The three variables need names, making sure the order is the same as in Table 1. The names used here are:</p>
+<p>In Table 5.3 (p. 184-187), T&amp;G present the steps they follow to assess the differences in latent means.</p>
 <ul>
-<li>SE - Self-Efficacy</li>
-<li>Att - Physics Laboratory Attitudes</li>
-<li>Anx - Physics Laboratory Anxiety</li>
+<li>Step 1: Establish Configural Invariance - Equivalence of forms</li>
+<li>Step 2: Establish Scalar (or Weak) Invariance - Equivalence of loadings</li>
+<li>Step 3: Establish Metric (or Strong) Invariance - Equivalence of intercepts</li>
 </ul>
+<p>At Steps 2 and 3, they can establish only partial invariance.</p>
+<p>T&amp;G use the marker-variable method of identification - one loading for each construct is fixed to one in all groups. I will use the reference-group method - constrain the variance of each construct to one. The parameter estimates for the two methods will differ, but they should give identical fit statistics.</p>
+<p>Why use the reference-group method? Later, when testing whether on not to free loadings constrained to equality, it is easier if pairs of loadings are not constrained to one.</p>
+<p><strong>Step 1</strong> in Table 5.3 specifies a model with configural invariance - equivalence of forms. I follow the model specification except the latent variances are constrained to one in both groups, and all loadings are freely estimated. Using <code>std.lv = TRUE</code> in the <code>sem()</code> function takes care of all constraints.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Att&quot;</span>, <span class="st">&quot;SE&quot;</span>, <span class="st">&quot;Anx&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model statement</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="st">&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">   # Measurement Model</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">   Academic =~ V1 + V2 + V3</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">   Social =~ V4 + V5 + V6</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model to each group separately</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>m1_g1_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov[[<span class="dv">1</span>]], <span class="at">sample.nobs =</span> n[[<span class="dv">1</span>]], </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means[[<span class="dv">1</span>]], <span class="at">std.lv =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1_g1_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>m1_g2_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov[[<span class="dv">2</span>]], <span class="at">sample.nobs =</span> n[[<span class="dv">2</span>]], </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means[[<span class="dv">2</span>]], <span class="at">std.lv =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1_g2_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># A function to extract fit measure from output</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>GetFit <span class="ot">&lt;-</span> <span class="cf">function</span>(fit, ...) {</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fitMeasures</span>(fit, ...)}</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>measures <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;chisq&quot;</span>, <span class="st">&quot;df&quot;</span>, <span class="st">&quot;pvalue&quot;</span>, <span class="st">&quot;cfi&quot;</span>, <span class="st">&quot;srmr&quot;</span>, <span class="st">&quot;rmsea&quot;</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Get fit measures for each group</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 1 in Table 5.4</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(m1_g1_fit, measures)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(m1_g2_fit, measures)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the two-group model</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 1 in Table 5.4</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>config_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n, </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(config_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(config_fit, measures)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>The <code>lav_getcov()</code> function from the <strong>lavaan</strong> package is used to get the co/variance matrix.</p>
+<p><strong>Step 2</strong> in Table 5.3 specifies a metric (or weak) invariance model. Use <code>group.equal = c(&quot;loadings&quot;)</code> in the <code>sem()</code> function to constrain the loadings to equality across the two groups. The code below follows the sequence of tests in Table 5.4:</p>
+<ul>
+<li>The metric invariance model is fit and fit measures are obtained</li>
+<li>The <code>anova()</code> function compares the (nested) models - <code>config_fit</code> with <code>metric_fit</code></li>
+<li>(A function to obtain differences in fit statistics)</li>
+<li>Differences in fit statistics are obtained</li>
+<li>The <code>lavTestScore()</code> function tests for releasing equality constraints (ie, constraints imposed on loadings).</li>
+</ul>
+<p>Note that in the summary of the model fit, the latent variances in group 1 are constrained to one, but they are freely estimated in group 2. The latent means remain constrained to zero in both groups.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cov <span class="ot">&lt;-</span> lavaan<span class="sc">::</span><span class="fu">lav_getcov</span>(cor, <span class="at">sds =</span> sds, <span class="at">names =</span> names)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 2 in Table 5.4</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>metric_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(metric_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(metric_fit, measures)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the fits of two models</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(config_fit, metric_fit)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to get difference in fit statistics</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>FitDiff <span class="ot">=</span> <span class="cf">function</span>(fit1, fit2) {</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>     call <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="fu">match.call</span>())</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>     tab <span class="ot">=</span> <span class="fu">cbind</span>(<span class="fu">data.frame</span>(<span class="fu">GetFit</span>(fit1, measures), <span class="fu">GetFit</span>(fit2, measures)))[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, ]  </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>     <span class="fu">names</span>(tab) <span class="ot">=</span> <span class="fu">c</span>(call<span class="sc">$</span>fit1, call<span class="sc">$</span>fit2)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>     tab<span class="sc">$</span>diff <span class="ot">=</span> tab[, <span class="dv">2</span>] <span class="sc">-</span> tab[, <span class="dv">1</span>]</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>     <span class="fu">return</span>(<span class="fu">round</span>(tab, <span class="dv">3</span>))   </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>     }</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(config_fit, metric_fit)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># lavTestScore() function - test for releasing equality constraints</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu">lavTestScore</span>(metric_fit)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Get parameter table</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">parTable</span>(metric_fit)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the part with loadings and constraints</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>tab[tab<span class="sc">$</span>op <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;=~&quot;</span>,<span class="st">&quot;==&quot;</span>), ]</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow loadings for V3 to vary across groups</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section>
-<section id="the-model" class="level4">
-<h4 class="anchored" data-anchor-id="the-model">The model</h4>
-<p>The model path diagram is given in Figure 1 (p. 51), reproduced below.</p>
-<p><img role="img" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgd2lkdGg9IjI1NS43MXB0IgogICBoZWlnaHQ9IjIwMC42NjlwdCIKICAgdmlld0JveD0iMCAwIDI1NS43MSAyMDAuNjY5IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmc2MCIKICAgc29kaXBvZGk6ZG9jbmFtZT0iS3VyYmFub2dsdV8yMDIxLnBkZiIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlkPSJuYW1lZHZpZXc2MCIKICAgICBwYWdlY29sb3I9IiNmZmZmZmYiCiAgICAgYm9yZGVyY29sb3I9IiMwMDAwMDAiCiAgICAgYm9yZGVyb3BhY2l0eT0iMC4yNSIKICAgICBpbmtzY2FwZTpzaG93cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VjaGVja2VyYm9hcmQ9IjAiCiAgICAgaW5rc2NhcGU6ZGVza2NvbG9yPSIjZDFkMWQxIgogICAgIGlua3NjYXBlOmRvY3VtZW50LXVuaXRzPSJwdCIgLz4KICA8ZGVmcwogICAgIGlkPSJkZWZzMjAiPgogICAgPGcKICAgICAgIGlkPSJnMjAiPgogICAgICA8ZwogICAgICAgICBpZD0iZ2x5cGgtMC0wIj4KICAgICAgICA8cGF0aAogICAgICAgICAgIGQ9Ik0gNS44MTI1IC0xLjg3NSBDIDUuODEyNSAtMi43MTg3NSA1LjI4MTI1IC0zLjMyODEyNSA0LjM1OTM3NSAtMy41NzgxMjUgTCAyLjY1NjI1IC00LjA0Njg3NSBDIDEuODI4MTI1IC00LjI2NTYyNSAxLjUzMTI1IC00LjUzMTI1IDEuNTMxMjUgLTUuMDQ2ODc1IEMgMS41MzEyNSAtNS43NSAyLjE0MDYyNSAtNi4yNjU2MjUgMy4wNDY4NzUgLTYuMjY1NjI1IEMgNC4xNDA2MjUgLTYuMjY1NjI1IDQuNzUgLTUuNzY1NjI1IDQuNzUgLTQuODc1IEwgNS41NzgxMjUgLTQuODc1IEMgNS41NzgxMjUgLTYuMjE4NzUgNC42NTYyNSAtNi45ODQzNzUgMy4wNzgxMjUgLTYuOTg0Mzc1IEMgMS41NzgxMjUgLTYuOTg0Mzc1IDAuNjU2MjUgLTYuMTcxODc1IDAuNjU2MjUgLTQuOTM3NSBDIDAuNjU2MjUgLTQuMDkzNzUgMS4wOTM3NSAtMy41NzgxMjUgMiAtMy4zNDM3NSBMIDMuNjg3NSAtMi44OTA2MjUgQyA0LjU0Njg3NSAtMi42NzE4NzUgNC45Mzc1IC0yLjMyODEyNSA0LjkzNzUgLTEuNzgxMjUgQyA0LjkzNzUgLTEuMDMxMjUgNC4zNzUgLTAuNTkzNzUgMy4yMDMxMjUgLTAuNTkzNzUgQyAxLjkwNjI1IC0wLjU5Mzc1IDEuMjY1NjI1IC0xLjI1IDEuMjY1NjI1IC0yLjIxODc1IEwgMC40NTMxMjUgLTIuMjE4NzUgQyAwLjQ1MzEyNSAtMC42MDkzNzUgMS41MzEyNSAwLjE3MTg3NSAzLjE0MDYyNSAwLjE3MTg3NSBDIDQuODc1IDAuMTcxODc1IDUuODEyNSAtMC42NTYyNSA1LjgxMjUgLTEuODc1IFogTSA1LjgxMjUgLTEuODc1ICIKICAgICAgICAgICBpZD0icGF0aDEiIC8+CiAgICAgIDwvZz4KICAgICAgPGcKICAgICAgICAgaWQ9ImdseXBoLTAtMSI+CiAgICAgICAgPHBhdGgKICAgICAgICAgICBkPSJNIDQuNzk2ODc1IC0yLjIzNDM3NSBDIDQuNzk2ODc1IC0yLjkzNzUgNC43NSAtMy4zOTA2MjUgNC42MDkzNzUgLTMuNzUgQyA0LjI4MTI1IC00LjU2MjUgMy41MzEyNSAtNS4wNDY4NzUgMi42MjUgLTUuMDQ2ODc1IEMgMS4yNSAtNS4wNDY4NzUgMC4zNzUgLTQuMDMxMjUgMC4zNzUgLTIuNDIxODc1IEMgMC4zNzUgLTAuODEyNSAxLjIxODc1IDAuMTQwNjI1IDIuNjA5Mzc1IDAuMTQwNjI1IEMgMy43MTg3NSAwLjE0MDYyNSA0LjUgLTAuNSA0LjcwMzEyNSAtMS40ODQzNzUgTCAzLjkwNjI1IC0xLjQ4NDM3NSBDIDMuNzAzMTI1IC0wLjg0Mzc1IDMuMjUgLTAuNTc4MTI1IDIuNjI1IC0wLjU3ODEyNSBDIDEuODEyNSAtMC41NzgxMjUgMS4yMDMxMjUgLTEuMTA5Mzc1IDEuMTg3NSAtMi4yMzQzNzUgWiBNIDMuOTY4NzUgLTIuOTIxODc1IEMgMy45Njg3NSAtMi45MjE4NzUgMy45Njg3NSAtMi44NzUgMy45NTMxMjUgLTIuODU5Mzc1IEwgMS4yMDMxMjUgLTIuODU5Mzc1IEMgMS4yNjU2MjUgLTMuNzM0Mzc1IDEuODI4MTI1IC00LjMyODEyNSAyLjYwOTM3NSAtNC4zMjgxMjUgQyAzLjM3NSAtNC4zMjgxMjUgMy45Njg3NSAtMy42ODc1IDMuOTY4NzUgLTIuOTIxODc1IFogTSAzLjk2ODc1IC0yLjkyMTg3NSAiCiAgICAgICAgICAgaWQ9InBhdGgyIiAvPgogICAgICA8L2c+CiAgICAgIDxnCiAgICAgICAgIGlkPSJnbHlwaC0wLTIiPgogICAgICAgIDxwYXRoCiAgICAgICAgICAgZD0iTSAxLjQwNjI1IDAgTCAxLjQwNjI1IC02LjgyODEyNSBMIDAuNjQwNjI1IC02LjgyODEyNSBMIDAuNjQwNjI1IDAgWiBNIDEuNDA2MjUgMCAiCiAgICAgICAgICAgaWQ9InBhdGgzIiAvPgogICAgICA8L2c+CiAgICAgIDxnCiAgICAgICAgIGlkPSJnbHlwaC0wLTMiPgogICAgICAgIDxwYXRoCiAgICAgICAgICAgZD0iTSAyLjQyMTg3NSAtNC4yNjU2MjUgTCAyLjQyMTg3NSAtNC45MDYyNSBMIDEuNTkzNzUgLTQuOTA2MjUgTCAxLjU5Mzc1IC01LjY3MTg3NSBDIDEuNTkzNzUgLTYgMS43ODEyNSAtNi4xNzE4NzUgMi4xNDA2MjUgLTYuMTcxODc1IEMgMi4yMDMxMjUgLTYuMTcxODc1IDIuMjM0Mzc1IC02LjE3MTg3NSAyLjQyMTg3NSAtNi4xNTYyNSBMIDIuNDIxODc1IC02Ljc5Njg3NSBDIDIuMjM0Mzc1IC02Ljg0Mzc1IDIuMTQwNjI1IC02Ljg0Mzc1IDEuOTY4NzUgLTYuODQzNzUgQyAxLjI1IC02Ljg0Mzc1IDAuODI4MTI1IC02LjQzNzUgMC44MjgxMjUgLTUuNzM0Mzc1IEwgMC44MjgxMjUgLTQuOTA2MjUgTCAwLjE3MTg3NSAtNC45MDYyNSBMIDAuMTcxODc1IC00LjI2NTYyNSBMIDAuODI4MTI1IC00LjI2NTYyNSBMIDAuODI4MTI1IDAgTCAxLjU5Mzc1IDAgTCAxLjU5Mzc1IC00LjI2NTYyNSBaIE0gMi40MjE4NzUgLTQuMjY1NjI1ICIKICAgICAgICAgICBpZD0icGF0aDQiIC8+CiAgICAgIDwvZz4KICAgICAgPGcKICAgICAgICAgaWQ9ImdseXBoLTAtNCI+CiAgICAgICAgPHBhdGgKICAgICAgICAgICBkPSJNIDUuNzM0Mzc1IDAgTCA1LjczNDM3NSAtMC43NjU2MjUgTCAxLjcxODc1IC0wLjc2NTYyNSBMIDEuNzE4NzUgLTMuMTA5Mzc1IEwgNS40MjE4NzUgLTMuMTA5Mzc1IEwgNS40MjE4NzUgLTMuODc1IEwgMS43MTg3NSAtMy44NzUgTCAxLjcxODc1IC02LjA2MjUgTCA1LjU2MjUgLTYuMDYyNSBMIDUuNTYyNSAtNi44MjgxMjUgTCAwLjg0Mzc1IC02LjgyODEyNSBMIDAuODQzNzUgMCBaIE0gNS43MzQzNzUgMCAiCiAgICAgICAgICAgaWQ9InBhdGg1IiAvPgogICAgICA8L2c+CiAgICAgIDxnCiAgICAgICAgIGlkPSJnbHlwaC0wLTUiPgogICAgICAgIDxwYXRoCiAgICAgICAgICAgZD0iTSA0LjgyODEyNSAtNC4yNjU2MjUgTCA0LjgyODEyNSAtNC45MDYyNSBMIDQuMDE1NjI1IC00LjkwNjI1IEwgNC4wMTU2MjUgLTUuNjcxODc1IEMgNC4wMTU2MjUgLTYgNC4yMDMxMjUgLTYuMTcxODc1IDQuNTYyNSAtNi4xNzE4NzUgQyA0LjYyNSAtNi4xNzE4NzUgNC42NTYyNSAtNi4xNzE4NzUgNC44MjgxMjUgLTYuMTU2MjUgTCA0LjgyODEyNSAtNi43OTY4NzUgQyA0LjY1NjI1IC02Ljg0Mzc1IDQuNTQ2ODc1IC02Ljg0Mzc1IDQuMzkwNjI1IC02Ljg0Mzc1IEMgMy42NzE4NzUgLTYuODQzNzUgMy4yMzQzNzUgLTYuNDM3NSAzLjIzNDM3NSAtNS43MzQzNzUgTCAzLjIzNDM3NSAtNC45MDYyNSBMIDEuNTkzNzUgLTQuOTA2MjUgTCAxLjU5Mzc1IC01LjY3MTg3NSBDIDEuNTkzNzUgLTYgMS43ODEyNSAtNi4xNzE4NzUgMi4xNDA2MjUgLTYuMTcxODc1IEMgMi4yMDMxMjUgLTYuMTcxODc1IDIuMjM0Mzc1IC02LjE3MTg3NSAyLjQyMTg3NSAtNi4xNTYyNSBMIDIuNDIxODc1IC02Ljc5Njg3NSBDIDIuMjM0Mzc1IC02Ljg0Mzc1IDIuMTQwNjI1IC02Ljg0Mzc1IDEuOTY4NzUgLTYuODQzNzUgQyAxLjI1IC02Ljg0Mzc1IDAuODI4MTI1IC02LjQzNzUgMC44MjgxMjUgLTUuNzM0Mzc1IEwgMC44MjgxMjUgLTQuOTA2MjUgTCAwLjE3MTg3NSAtNC45MDYyNSBMIDAuMTcxODc1IC00LjI2NTYyNSBMIDAuODI4MTI1IC00LjI2NTYyNSBMIDAuODI4MTI1IDAgTCAxLjU5Mzc1IDAgTCAxLjU5Mzc1IC00LjI2NTYyNSBMIDMuMjM0Mzc1IC00LjI2NTYyNSBMIDMuMjM0Mzc1IDAgTCA0LjAxNTYyNSAwIEwgNC4wMTU2MjUgLTQuMjY1NjI1IFogTSA2LjQzNzUgMCBMIDYuNDM3NSAtNC45MDYyNSBMIDUuNjU2MjUgLTQuOTA2MjUgTCA1LjY1NjI1IDAgWiBNIDYuNTMxMjUgLTUuNjQwNjI1IEwgNi41MzEyNSAtNi42MDkzNzUgTCA1LjU2MjUgLTYuNjA5Mzc1IEwgNS41NjI1IC01LjY0MDYyNSBaIE0gNi41MzEyNSAtNS42NDA2MjUgIgogICAgICAgICAgIGlkPSJwYXRoNiIgLz4KICAgICAgPC9nPgogICAgICA8ZwogICAgICAgICBpZD0iZ2x5cGgtMC02Ij4KICAgICAgICA8cGF0aAogICAgICAgICAgIGQ9Ik0gNC40Njg3NSAtMS42ODc1IEwgMy42NzE4NzUgLTEuNjg3NSBDIDMuNTQ2ODc1IC0wLjkwNjI1IDMuMTQwNjI1IC0wLjU3ODEyNSAyLjQ4NDM3NSAtMC41NzgxMjUgQyAxLjYyNSAtMC41NzgxMjUgMS4xMDkzNzUgLTEuMjUgMS4xMDkzNzUgLTIuNDA2MjUgQyAxLjEwOTM3NSAtMy42MjUgMS42MDkzNzUgLTQuMzI4MTI1IDIuNDY4NzUgLTQuMzI4MTI1IEMgMy4xMDkzNzUgLTQuMzI4MTI1IDMuNTMxMjUgLTMuOTM3NSAzLjYyNSAtMy4yNSBMIDQuNDA2MjUgLTMuMjUgQyA0LjMxMjUgLTQuNDUzMTI1IDMuNTYyNSAtNS4wNDY4NzUgMi40Njg3NSAtNS4wNDY4NzUgQyAxLjE1NjI1IC01LjA0Njg3NSAwLjI5Njg3NSAtNC4wMzEyNSAwLjI5Njg3NSAtMi40MDYyNSBDIDAuMjk2ODc1IC0wLjgyODEyNSAxLjEyNSAwLjE0MDYyNSAyLjQ2ODc1IDAuMTQwNjI1IEMgMy42MjUgMC4xNDA2MjUgNC4zNzUgLTAuNTYyNSA0LjQ2ODc1IC0xLjY4NzUgWiBNIDQuNDY4NzUgLTEuNjg3NSAiCiAgICAgICAgICAgaWQ9InBhdGg3IiAvPgogICAgICA8L2c+CiAgICAgIDxnCiAgICAgICAgIGlkPSJnbHlwaC0wLTciPgogICAgICAgIDxwYXRoCiAgICAgICAgICAgZD0iTSA1IC0wLjAxNTYyNSBMIDUgLTAuNjA5Mzc1IEMgNC45MjE4NzUgLTAuNTkzNzUgNC44OTA2MjUgLTAuNTkzNzUgNC44NDM3NSAtMC41OTM3NSBDIDQuNTYyNSAtMC41OTM3NSA0LjQyMTg3NSAtMC43MzQzNzUgNC40MjE4NzUgLTAuOTY4NzUgTCA0LjQyMTg3NSAtMy43MDMxMjUgQyA0LjQyMTg3NSAtNC41NzgxMjUgMy43ODEyNSAtNS4wNDY4NzUgMi41NzgxMjUgLTUuMDQ2ODc1IEMgMS4zOTA2MjUgLTUuMDQ2ODc1IDAuNjU2MjUgLTQuNTkzNzUgMC42MDkzNzUgLTMuNDUzMTI1IEwgMS4zOTA2MjUgLTMuNDUzMTI1IEMgMS40NTMxMjUgLTQuMDQ2ODc1IDEuODEyNSAtNC4zMjgxMjUgMi41NDY4NzUgLTQuMzI4MTI1IEMgMy4yNSAtNC4zMjgxMjUgMy42NDA2MjUgLTQuMDYyNSAzLjY0MDYyNSAtMy41OTM3NSBMIDMuNjQwNjI1IC0zLjM5MDYyNSBDIDMuNjQwNjI1IC0zLjA2MjUgMy40Mzc1IC0yLjkyMTg3NSAyLjgyODEyNSAtMi44NDM3NSBDIDEuNzE4NzUgLTIuNzAzMTI1IDEuNTQ2ODc1IC0yLjY3MTg3NSAxLjI1IC0yLjU0Njg3NSBDIDAuNjg3NSAtMi4zMTI1IDAuMzkwNjI1IC0xLjg3NSAwLjM5MDYyNSAtMS4yNjU2MjUgQyAwLjM5MDYyNSAtMC4zOTA2MjUgMS4wMTU2MjUgMC4xNDA2MjUgMiAwLjE0MDYyNSBDIDIuNjI1IDAuMTQwNjI1IDMuMjM0Mzc1IC0wLjEyNSAzLjY3MTg3NSAtMC41NzgxMjUgQyAzLjc1IC0wLjIwMzEyNSA0LjA5Mzc1IDAuMDYyNSA0LjQ2ODc1IDAuMDYyNSBDIDQuNjQwNjI1IDAuMDYyNSA0Ljc1IDAuMDQ2ODc1IDUgLTAuMDE1NjI1IFogTSAzLjY0MDYyNSAtMS42ODc1IEMgMy42NDA2MjUgLTAuOTg0Mzc1IDIuOTIxODc1IC0wLjU0Njg3NSAyLjE3MTg3NSAtMC41NDY4NzUgQyAxLjU2MjUgLTAuNTQ2ODc1IDEuMjAzMTI1IC0wLjc2NTYyNSAxLjIwMzEyNSAtMS4yOTY4NzUgQyAxLjIwMzEyNSAtMS44MTI1IDEuNTQ2ODc1IC0yLjAzMTI1IDIuMzkwNjI1IC0yLjE1NjI1IEMgMy4yMDMxMjUgLTIuMjY1NjI1IDMuMzc1IC0yLjI5Njg3NSAzLjY0MDYyNSAtMi40MjE4NzUgWiBNIDMuNjQwNjI1IC0xLjY4NzUgIgogICAgICAgICAgIGlkPSJwYXRoOCIgLz4KICAgICAgPC9nPgogICAgICA8ZwogICAgICAgICBpZD0iZ2x5cGgtMC04Ij4KICAgICAgICA8cGF0aAogICAgICAgICAgIGQ9Ik0gNC40Njg3NSAtNC45MDYyNSBMIDMuNjI1IC00LjkwNjI1IEwgMi4yODEyNSAtMS4wNzgxMjUgTCAxLjAxNTYyNSAtNC45MDYyNSBMIDAuMTg3NSAtNC45MDYyNSBMIDEuODQzNzUgMC4wMTU2MjUgTCAxLjU0Njg3NSAwLjc5Njg3NSBDIDEuNDA2MjUgMS4xNDA2MjUgMS4yNSAxLjI2NTYyNSAwLjkyMTg3NSAxLjI2NTYyNSBDIDAuODEyNSAxLjI2NTYyNSAwLjY3MTg3NSAxLjI1IDAuNSAxLjIxODc1IEwgMC41IDEuOTIxODc1IEMgMC42NzE4NzUgMiAwLjgyODEyNSAyLjA0Njg3NSAxLjAzMTI1IDIuMDQ2ODc1IEMgMS41NzgxMjUgMi4wNDY4NzUgMi4wMzEyNSAxLjczNDM3NSAyLjI5Njg3NSAxLjAzMTI1IFogTSA0LjQ2ODc1IC00LjkwNjI1ICIKICAgICAgICAgICBpZD0icGF0aDkiIC8+CiAgICAgIDwvZz4KICAgICAgPGcKICAgICAgICAgaWQ9ImdseXBoLTAtOSI+CiAgICAgICAgPHBhdGgKICAgICAgICAgICBkPSJNIDYuMTA5Mzc1IDAgTCAzLjcxODc1IC02LjgyODEyNSBMIDIuNTkzNzUgLTYuODI4MTI1IEwgMC4xNTYyNSAwIEwgMS4wNzgxMjUgMCBMIDEuODEyNSAtMi4wNDY4NzUgTCA0LjQzNzUgLTIuMDQ2ODc1IEwgNS4xNDA2MjUgMCBaIE0gNC4xODc1IC0yLjc4MTI1IEwgMi4wMTU2MjUgLTIuNzgxMjUgTCAzLjE0MDYyNSAtNS44OTA2MjUgWiBNIDQuMTg3NSAtMi43ODEyNSAiCiAgICAgICAgICAgaWQ9InBhdGgxMCIgLz4KICAgICAgPC9nPgogICAgICA8ZwogICAgICAgICBpZD0iZ2x5cGgtMC0xMCI+CiAgICAgICAgPHBhdGgKICAgICAgICAgICBkPSJNIDQuNTYyNSAwIEwgNC41NjI1IC0zLjcwMzEyNSBDIDQuNTYyNSAtNC41MTU2MjUgMy45NTMxMjUgLTUuMDQ2ODc1IDMgLTUuMDQ2ODc1IEMgMi4yODEyNSAtNS4wNDY4NzUgMS44MTI1IC00Ljc2NTYyNSAxLjM3NSAtNC4wNzgxMjUgTCAxLjM3NSAtNC45MDYyNSBMIDAuNjU2MjUgLTQuOTA2MjUgTCAwLjY1NjI1IDAgTCAxLjQzNzUgMCBMIDEuNDM3NSAtMi43MDMxMjUgQyAxLjQzNzUgLTMuNzAzMTI1IDEuOTY4NzUgLTQuMzU5Mzc1IDIuNzY1NjI1IC00LjM1OTM3NSBDIDMuMzkwNjI1IC00LjM1OTM3NSAzLjc4MTI1IC0zLjk4NDM3NSAzLjc4MTI1IC0zLjM5MDYyNSBMIDMuNzgxMjUgMCBaIE0gNC41NjI1IDAgIgogICAgICAgICAgIGlkPSJwYXRoMTEiIC8+CiAgICAgIDwvZz4KICAgICAgPGcKICAgICAgICAgaWQ9ImdseXBoLTAtMTEiPgogICAgICAgIDxwYXRoCiAgICAgICAgICAgZD0iTSA0LjQyMTg3NSAwIEwgMi43MzQzNzUgLTIuNTMxMjUgTCA0LjM3NSAtNC45MDYyNSBMIDMuNSAtNC45MDYyNSBMIDIuMzI4MTI1IC0zLjEyNSBMIDEuMTQwNjI1IC00LjkwNjI1IEwgMC4yNSAtNC45MDYyNSBMIDEuODkwNjI1IC0yLjUgTCAwLjE1NjI1IDAgTCAxLjA0Njg3NSAwIEwgMi4yOTY4NzUgLTEuODc1IEwgMy41MTU2MjUgMCBaIE0gNC40MjE4NzUgMCAiCiAgICAgICAgICAgaWQ9InBhdGgxMiIgLz4KICAgICAgPC9nPgogICAgICA8ZwogICAgICAgICBpZD0iZ2x5cGgtMC0xMiI+CiAgICAgICAgPHBhdGgKICAgICAgICAgICBkPSJNIDEuNDM3NSAwIEwgMS40Mzc1IC00LjkwNjI1IEwgMC42NTYyNSAtNC45MDYyNSBMIDAuNjU2MjUgMCBaIE0gMS41MzEyNSAtNS42NDA2MjUgTCAxLjUzMTI1IC02LjYwOTM3NSBMIDAuNTYyNSAtNi42MDkzNzUgTCAwLjU2MjUgLTUuNjQwNjI1IFogTSAxLjUzMTI1IC01LjY0MDYyNSAiCiAgICAgICAgICAgaWQ9InBhdGgxMyIgLz4KICAgICAgPC9nPgogICAgICA8ZwogICAgICAgICBpZD0iZ2x5cGgtMC0xMyI+CiAgICAgICAgPHBhdGgKICAgICAgICAgICBkPSJNIDIuMzc1IDAgTCAyLjM3NSAtMC42NTYyNSBDIDIuMjgxMjUgLTAuNjI1IDIuMTU2MjUgLTAuNjI1IDIgLTAuNjI1IEMgMS42NzE4NzUgLTAuNjI1IDEuNTc4MTI1IC0wLjcxODc1IDEuNTc4MTI1IC0xLjA2MjUgTCAxLjU3ODEyNSAtNC4yNjU2MjUgTCAyLjM3NSAtNC4yNjU2MjUgTCAyLjM3NSAtNC45MDYyNSBMIDEuNTc4MTI1IC00LjkwNjI1IEwgMS41NzgxMjUgLTYuMjUgTCAwLjc5Njg3NSAtNi4yNSBMIDAuNzk2ODc1IC00LjkwNjI1IEwgMC4xMjUgLTQuOTA2MjUgTCAwLjEyNSAtNC4yNjU2MjUgTCAwLjc5Njg3NSAtNC4yNjU2MjUgTCAwLjc5Njg3NSAtMC43MTg3NSBDIDAuNzk2ODc1IC0wLjIxODc1IDEuMTI1IDAuMDYyNSAxLjczNDM3NSAwLjA2MjUgQyAxLjkyMTg3NSAwLjA2MjUgMi4xMDkzNzUgMC4wNDY4NzUgMi4zNzUgMCBaIE0gMi4zNzUgMCAiCiAgICAgICAgICAgaWQ9InBhdGgxNCIgLz4KICAgICAgPC9nPgogICAgICA8ZwogICAgICAgICBpZD0iZ2x5cGgtMC0xNCI+CiAgICAgICAgPHBhdGgKICAgICAgICAgICBkPSJNIDQuNTE1NjI1IDAgTCA0LjUxNTYyNSAtNC45MDYyNSBMIDMuNzM0Mzc1IC00LjkwNjI1IEwgMy43MzQzNzUgLTIuMjAzMTI1IEMgMy43MzQzNzUgLTEuMjAzMTI1IDMuMjAzMTI1IC0wLjU0Njg3NSAyLjM5MDYyNSAtMC41NDY4NzUgQyAxLjc4MTI1IC0wLjU0Njg3NSAxLjM5MDYyNSAtMC45MjE4NzUgMS4zOTA2MjUgLTEuNSBMIDEuMzkwNjI1IC00LjkwNjI1IEwgMC42MDkzNzUgLTQuOTA2MjUgTCAwLjYwOTM3NSAtMS4yMDMxMjUgQyAwLjYwOTM3NSAtMC4zOTA2MjUgMS4yMTg3NSAwLjE0MDYyNSAyLjE3MTg3NSAwLjE0MDYyNSBDIDIuODkwNjI1IDAuMTQwNjI1IDMuMzQzNzUgLTAuMTA5Mzc1IDMuODEyNSAtMC43NjU2MjUgTCAzLjgxMjUgMCBaIE0gNC41MTU2MjUgMCAiCiAgICAgICAgICAgaWQ9InBhdGgxNSIgLz4KICAgICAgPC9nPgogICAgICA8ZwogICAgICAgICBpZD0iZ2x5cGgtMC0xNSI+CiAgICAgICAgPHBhdGgKICAgICAgICAgICBkPSJNIDQuNjQwNjI1IDAgTCA0LjY0MDYyNSAtNi44MjgxMjUgTCAzLjg1OTM3NSAtNi44MjgxMjUgTCAzLjg1OTM3NSAtNC4yODEyNSBDIDMuNTMxMjUgLTQuNzgxMjUgMyAtNS4wNDY4NzUgMi4zNDM3NSAtNS4wNDY4NzUgQyAxLjA3ODEyNSAtNS4wNDY4NzUgMC4yNSAtNC4wNjI1IDAuMjUgLTIuNSBDIDAuMjUgLTAuODQzNzUgMS4wNjI1IDAuMTQwNjI1IDIuMzc1IDAuMTQwNjI1IEMgMy4wNDY4NzUgMC4xNDA2MjUgMy41MTU2MjUgLTAuMTA5Mzc1IDMuOTM3NSAtMC43MTg3NSBMIDMuOTM3NSAwIFogTSAzLjg1OTM3NSAtMi40Mzc1IEMgMy44NTkzNzUgLTEuMjk2ODc1IDMuMzEyNSAtMC41OTM3NSAyLjQ4NDM3NSAtMC41OTM3NSBDIDEuNjI1IC0wLjU5Mzc1IDEuMDYyNSAtMS4zMTI1IDEuMDYyNSAtMi40NTMxMjUgQyAxLjA2MjUgLTMuNTkzNzUgMS42MjUgLTQuMzEyNSAyLjQ4NDM3NSAtNC4zMTI1IEMgMy4zMjgxMjUgLTQuMzEyNSAzLjg1OTM3NSAtMy41NjI1IDMuODU5Mzc1IC0yLjQzNzUgWiBNIDMuODU5Mzc1IC0yLjQzNzUgIgogICAgICAgICAgIGlkPSJwYXRoMTYiIC8+CiAgICAgIDwvZz4KICAgICAgPGcKICAgICAgICAgaWQ9ImdseXBoLTAtMTYiPgogICAgICAgIDxwYXRoCiAgICAgICAgICAgZD0iTSA0Ljg5MDYyNSAtMi41MTU2MjUgQyA0Ljg5MDYyNSAtNC4wOTM3NSA0LjA5Mzc1IC01LjA0Njg3NSAyLjc5Njg3NSAtNS4wNDY4NzUgQyAyLjEyNSAtNS4wNDY4NzUgMS42NDA2MjUgLTQuNzk2ODc1IDEuMjgxMjUgLTQuMjM0Mzc1IEwgMS4yODEyNSAtNi44MjgxMjUgTCAwLjUgLTYuODI4MTI1IEwgMC41IDAgTCAxLjIwMzEyNSAwIEwgMS4yMDMxMjUgLTAuNzAzMTI1IEMgMS41NzgxMjUgLTAuMTI1IDIuMDc4MTI1IDAuMTQwNjI1IDIuNzY1NjI1IDAuMTQwNjI1IEMgNC4wNDY4NzUgMC4xNDA2MjUgNC44OTA2MjUgLTAuOTIxODc1IDQuODkwNjI1IC0yLjUxNTYyNSBaIE0gNC4wNzgxMjUgLTIuNDY4NzUgQyA0LjA3ODEyNSAtMS4zNDM3NSAzLjUgLTAuNTkzNzUgMi42NTYyNSAtMC41OTM3NSBDIDEuODI4MTI1IC0wLjU5Mzc1IDEuMjgxMjUgLTEuMzQzNzUgMS4yODEyNSAtMi40NTMxMjUgQyAxLjI4MTI1IC0zLjYwOTM3NSAxLjgyODEyNSAtNC4zNTkzNzUgMi42NTYyNSAtNC4zMTI1IEMgMy41MTU2MjUgLTQuMzEyNSA0LjA3ODEyNSAtMy41NjI1IDQuMDc4MTI1IC0yLjQ2ODc1IFogTSA0LjA3ODEyNSAtMi40Njg3NSAiCiAgICAgICAgICAgaWQ9InBhdGgxNyIgLz4KICAgICAgPC9nPgogICAgICA8ZwogICAgICAgICBpZD0iZ2x5cGgtMS0wIj4KICAgICAgICA8cGF0aAogICAgICAgICAgIGQ9Ik0gMi41IC0zLjQ1MzEyNSBDIDIuNSAtMy43MzQzNzUgMi4xODc1IC0zLjkzNzUgMS45MjE4NzUgLTMuOTM3NSBDIDEuNjA5Mzc1IC0zLjkzNzUgMS40Njg3NSAtMy42NDA2MjUgMS4zNzUgLTMuMzkwNjI1IEwgMC41IC0wLjg0Mzc1IEMgMC40ODQzNzUgLTAuNzgxMjUgMC40MjE4NzUgLTAuNjI1IDAuNDIxODc1IC0wLjU0Njg3NSBDIDAuNDIxODc1IC0wLjQ4NDM3NSAwLjQ2ODc1IC0wLjM3NSAwLjU0Njg3NSAtMC4zNzUgQyAwLjY3MTg3NSAtMC4zNzUgMC44MjgxMjUgLTAuNTQ2ODc1IDAuODkwNjI1IC0wLjY0MDYyNSBMIDIuMjUgLTIuODI4MTI1IEMgMi4zNTkzNzUgLTMgMi41IC0zLjIzNDM3NSAyLjUgLTMuNDUzMTI1IFogTSAyLjUgLTMuNDUzMTI1ICIKICAgICAgICAgICBpZD0icGF0aDE4IiAvPgogICAgICA8L2c+CiAgICAgIDxnCiAgICAgICAgIGlkPSJnbHlwaC0yLTAiPgogICAgICAgIDxwYXRoCiAgICAgICAgICAgZD0iTSAzLjgyODEyNSAtMy43NSBDIDMuODI4MTI1IC00LjY0MDYyNSAzLjEyNSAtNS4zMTI1IDIuMTI1IC01LjMxMjUgQyAxLjA0Njg3NSAtNS4zMTI1IDAuNDA2MjUgLTQuNzUgMC4zNzUgLTMuNDY4NzUgTCAxLjAzMTI1IC0zLjQ2ODc1IEMgMS4wNzgxMjUgLTQuMzU5Mzc1IDEuNDUzMTI1IC00LjczNDM3NSAyLjEwOTM3NSAtNC43MzQzNzUgQyAyLjcwMzEyNSAtNC43MzQzNzUgMy4xNTYyNSAtNC4yOTY4NzUgMy4xNTYyNSAtMy43MzQzNzUgQyAzLjE1NjI1IC0zLjMxMjUgMi45MDYyNSAtMi45NTMxMjUgMi40Mzc1IC0yLjY4NzUgTCAxLjc1IC0yLjI5Njg3NSBDIDAuNjQwNjI1IC0xLjY3MTg3NSAwLjMxMjUgLTEuMTcxODc1IDAuMjUgMCBMIDMuNzgxMjUgMCBMIDMuNzgxMjUgLTAuNjU2MjUgTCAxIC0wLjY1NjI1IEMgMS4wNjI1IC0xLjA3ODEyNSAxLjI5Njg3NSAtMS4zNTkzNzUgMS45NTMxMjUgLTEuNzUgTCAyLjcwMzEyNSAtMi4xNDA2MjUgQyAzLjQzNzUgLTIuNTQ2ODc1IDMuODI4MTI1IC0zLjA5Mzc1IDMuODI4MTI1IC0zLjc1IFogTSAzLjgyODEyNSAtMy43NSAiCiAgICAgICAgICAgaWQ9InBhdGgxOSIgLz4KICAgICAgPC9nPgogICAgICA8ZwogICAgICAgICBpZD0iZ2x5cGgtMi0xIj4KICAgICAgICA8cGF0aAogICAgICAgICAgIGQ9Ik0gMi41OTM3NSAwIEwgMi41OTM3NSAtNS4zMTI1IEwgMi4xNTYyNSAtNS4zMTI1IEMgMS45Mzc1IC00LjQ4NDM3NSAxLjc4MTI1IC00LjM3NSAwLjc2NTYyNSAtNC4yNSBMIDAuNzY1NjI1IC0zLjc4MTI1IEwgMS45Mzc1IC0zLjc4MTI1IEwgMS45Mzc1IDAgWiBNIDIuNTkzNzUgMCAiCiAgICAgICAgICAgaWQ9InBhdGgyMCIgLz4KICAgICAgPC9nPgogICAgPC9nPgogIDwvZGVmcz4KICA8cGF0aAogICAgIGZpbGw9Im5vbmUiCiAgICAgc3Ryb2tlLXdpZHRoPSIwLjM5ODUiCiAgICAgc3Ryb2tlLWxpbmVjYXA9ImJ1dHQiCiAgICAgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIKICAgICBzdHJva2U9InJnYigwJSwgMCUsIDAlKSIKICAgICBzdHJva2Utb3BhY2l0eT0iMSIKICAgICBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiCiAgICAgZD0iTSAtMTkuMjg5ODQ0IC0xMy40NTI4MTMgTCAxOS4yODgyODEgLTEzLjQ1MjgxMyBMIDE5LjI4ODI4MSAxMy40NTM0MzcgTCAtMTkuMjg5ODQ0IDEzLjQ1MzQzNyBaIE0gLTE5LjI4OTg0NCAtMTMuNDUyODEzICIKICAgICB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAtMSwgMjkuNDUsIDE3Ny4wNTUpIgogICAgIGlkPSJwYXRoMjEiIC8+CiAgPGcKICAgICBmaWxsPSJyZ2IoMCUsIDAlLCAwJSkiCiAgICAgZmlsbC1vcGFjaXR5PSIxIgogICAgIGlkPSJnMjQiPgogICAgPHVzZQogICAgICAgeGxpbms6aHJlZj0iI2dseXBoLTAtMCIKICAgICAgIHg9IjIxLjM4MiIKICAgICAgIHk9IjE3My41MjIiCiAgICAgICBpZD0idXNlMjEiIC8+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC0xIgogICAgICAgeD0iMjcuNjI4Mzg4IgogICAgICAgeT0iMTczLjUyMiIKICAgICAgIGlkPSJ1c2UyMiIgLz4KICAgIDx1c2UKICAgICAgIHhsaW5rOmhyZWY9IiNnbHlwaC0wLTIiCiAgICAgICB4PSIzMi44MzUyNzMiCiAgICAgICB5PSIxNzMuNTIyIgogICAgICAgaWQ9InVzZTIzIiAvPgogICAgPHVzZQogICAgICAgeGxpbms6aHJlZj0iI2dseXBoLTAtMyIKICAgICAgIHg9IjM0LjkxNDI4IgogICAgICAgeT0iMTczLjUyMiIKICAgICAgIGlkPSJ1c2UyNCIgLz4KICA8L2c+CiAgPGcKICAgICBmaWxsPSJyZ2IoMCUsIDAlLCAwJSkiCiAgICAgZmlsbC1vcGFjaXR5PSIxIgogICAgIGlkPSJnMzAiPgogICAgPHVzZQogICAgICAgeGxpbms6aHJlZj0iI2dseXBoLTAtNCIKICAgICAgIHg9IjEzLjE1MSIKICAgICAgIHk9IjE4NS40NzciCiAgICAgICBpZD0idXNlMjUiIC8+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC01IgogICAgICAgeD0iMTkuMzk3Mzg4IgogICAgICAgeT0iMTg1LjQ3NyIKICAgICAgIGlkPSJ1c2UyNiIgLz4KICAgIDx1c2UKICAgICAgIHhsaW5rOmhyZWY9IiNnbHlwaC0wLTYiCiAgICAgICB4PSIyNi40OTU5ODMiCiAgICAgICB5PSIxODUuNDc3IgogICAgICAgaWQ9InVzZTI3IiAvPgogICAgPHVzZQogICAgICAgeGxpbms6aHJlZj0iI2dseXBoLTAtNyIKICAgICAgIHg9IjMxLjE3ODQzMiIKICAgICAgIHk9IjE4NS40NzciCiAgICAgICBpZD0idXNlMjgiIC8+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC02IgogICAgICAgeD0iMzYuMzg1MzE3IgogICAgICAgeT0iMTg1LjQ3NyIKICAgICAgIGlkPSJ1c2UyOSIgLz4KICAgIDx1c2UKICAgICAgIHhsaW5rOmhyZWY9IiNnbHlwaC0wLTgiCiAgICAgICB4PSI0MS4wNjc3NjciCiAgICAgICB5PSIxODUuNDc3IgogICAgICAgaWQ9InVzZTMwIiAvPgogIDwvZz4KICA8cGF0aAogICAgIGZpbGw9Im5vbmUiCiAgICAgc3Ryb2tlLXdpZHRoPSIwLjM5ODUiCiAgICAgc3Ryb2tlLWxpbmVjYXA9ImJ1dHQiCiAgICAgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIKICAgICBzdHJva2U9InJnYigwJSwgMCUsIDAlKSIKICAgICBzdHJva2Utb3BhY2l0eT0iMSIKICAgICBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiCiAgICAgZD0iTSAxNjEuNDIxMDk0IC0xMi4wNDY1NjMgTCAxOTguMDE0ODQ0IC0xMi4wNDY1NjMgTCAxOTguMDE0ODQ0IDEyLjA0NzE4NyBMIDE2MS40MjEwOTQgMTIuMDQ3MTg3IFogTSAxNjEuNDIxMDk0IC0xMi4wNDY1NjMgIgogICAgIHRyYW5zZm9ybT0ibWF0cml4KDEsIDAsIDAsIC0xLCAyOS40NSwgMTc3LjA1NSkiCiAgICAgaWQ9InBhdGgzMCIgLz4KICA8ZwogICAgIGZpbGw9InJnYigwJSwgMCUsIDAlKSIKICAgICBmaWxsLW9wYWNpdHk9IjEiCiAgICAgaWQ9ImczNSI+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC05IgogICAgICAgeD0iMTkzLjg1OCIKICAgICAgIHk9IjE3OS40OTkiCiAgICAgICBpZD0idXNlMzEiIC8+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC0xMCIKICAgICAgIHg9IjIwMC4xMDQzODgiCiAgICAgICB5PSIxNzkuNDk5IgogICAgICAgaWQ9InVzZTMyIiAvPgogICAgPHVzZQogICAgICAgeGxpbms6aHJlZj0iI2dseXBoLTAtMTEiCiAgICAgICB4PSIyMDUuMzExMjczIgogICAgICAgeT0iMTc5LjQ5OSIKICAgICAgIGlkPSJ1c2UzMyIgLz4KICAgIDx1c2UKICAgICAgIHhsaW5rOmhyZWY9IiNnbHlwaC0wLTEyIgogICAgICAgeD0iMjA5Ljk5MzcyMyIKICAgICAgIHk9IjE3OS40OTkiCiAgICAgICBpZD0idXNlMzQiIC8+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC0xIgogICAgICAgeD0iMjEyLjA3MjczMSIKICAgICAgIHk9IjE3OS40OTkiCiAgICAgICBpZD0idXNlMzUiIC8+CiAgPC9nPgogIDxnCiAgICAgZmlsbD0icmdiKDAlLCAwJSwgMCUpIgogICAgIGZpbGwtb3BhY2l0eT0iMSIKICAgICBpZD0iZzM3Ij4KICAgIDx1c2UKICAgICAgIHhsaW5rOmhyZWY9IiNnbHlwaC0wLTEzIgogICAgICAgeD0iMjE3LjE4NTk2NiIKICAgICAgIHk9IjE3OS40OTkiCiAgICAgICBpZD0idXNlMzYiIC8+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC04IgogICAgICAgeD0iMjE5Ljc4OTQwOCIKICAgICAgIHk9IjE3OS40OTkiCiAgICAgICBpZD0idXNlMzciIC8+CiAgPC9nPgogIDxwYXRoCiAgICAgZmlsbD0ibm9uZSIKICAgICBzdHJva2Utd2lkdGg9IjAuMzk4NSIKICAgICBzdHJva2UtbGluZWNhcD0iYnV0dCIKICAgICBzdHJva2UtbGluZWpvaW49Im1pdGVyIgogICAgIHN0cm9rZT0icmdiKDAlLCAwJSwgMCUpIgogICAgIHN0cm9rZS1vcGFjaXR5PSIxIgogICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICBkPSJNIDcxLjA2MTcxOSAxMjcuNzU4MTI1IEwgMTA4LjY1NTQ2OSAxMjcuNzU4MTI1IEwgMTA4LjY1NTQ2OSAxNTEuODU1NzgxIEwgNzEuMDYxNzE5IDE1MS44NTU3ODEgWiBNIDcxLjA2MTcxOSAxMjcuNzU4MTI1ICIKICAgICB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAtMSwgMjkuNDUsIDE3Ny4wNTUpIgogICAgIGlkPSJwYXRoMzciIC8+CiAgPGcKICAgICBmaWxsPSJyZ2IoMCUsIDAlLCAwJSkiCiAgICAgZmlsbC1vcGFjaXR5PSIxIgogICAgIGlkPSJnMzgiPgogICAgPHVzZQogICAgICAgeGxpbms6aHJlZj0iI2dseXBoLTAtOSIKICAgICAgIHg9IjEwMy41IgogICAgICAgeT0iNDAuNzE0IgogICAgICAgaWQ9InVzZTM4IiAvPgogIDwvZz4KICA8ZwogICAgIGZpbGw9InJnYigwJSwgMCUsIDAlKSIKICAgICBmaWxsLW9wYWNpdHk9IjEiCiAgICAgaWQ9Imc0NSI+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC0xMyIKICAgICAgIHg9IjEwOS42MDU5MTUiCiAgICAgICB5PSI0MC43MTQiCiAgICAgICBpZD0idXNlMzkiIC8+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC0xMyIKICAgICAgIHg9IjExMi4yMDkzNTciCiAgICAgICB5PSI0MC43MTQiCiAgICAgICBpZD0idXNlNDAiIC8+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC0xMiIKICAgICAgIHg9IjExNC44MTI3OTkiCiAgICAgICB5PSI0MC43MTQiCiAgICAgICBpZD0idXNlNDEiIC8+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC0xMyIKICAgICAgIHg9IjExNi44OTE4MDciCiAgICAgICB5PSI0MC43MTQiCiAgICAgICBpZD0idXNlNDIiIC8+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC0xNCIKICAgICAgIHg9IjExOS40OTUyNDkiCiAgICAgICB5PSI0MC43MTQiCiAgICAgICBpZD0idXNlNDMiIC8+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC0xNSIKICAgICAgIHg9IjEyNC43MDIxMzQiCiAgICAgICB5PSI0MC43MTQiCiAgICAgICBpZD0idXNlNDQiIC8+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC0xIgogICAgICAgeD0iMTI5LjkwOTAxOCIKICAgICAgIHk9IjQwLjcxNCIKICAgICAgIGlkPSJ1c2U0NSIgLz4KICA8L2c+CiAgPHBhdGgKICAgICBmaWxsPSJub25lIgogICAgIHN0cm9rZS13aWR0aD0iMC4zOTg1IgogICAgIHN0cm9rZS1saW5lY2FwPSJidXR0IgogICAgIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiCiAgICAgc3Ryb2tlPSJyZ2IoMCUsIDAlLCAwJSkiCiAgICAgc3Ryb2tlLW9wYWNpdHk9IjEiCiAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgIGQ9Ik0gMTkuNDg3NSAwLjAwMDMxMjUgTCAxNTcuNTE4NzUgMC4wMDAzMTI1ICIKICAgICB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAtMSwgMjkuNDUsIDE3Ny4wNTUpIgogICAgIGlkPSJwYXRoNDUiIC8+CiAgPHBhdGgKICAgICBmaWxsLXJ1bGU9Im5vbnplcm8iCiAgICAgZmlsbD0icmdiKDAlLCAwJSwgMCUpIgogICAgIGZpbGwtb3BhY2l0eT0iMSIKICAgICBzdHJva2Utd2lkdGg9IjAuMzk4NSIKICAgICBzdHJva2UtbGluZWNhcD0iYnV0dCIKICAgICBzdHJva2UtbGluZWpvaW49Im1pdGVyIgogICAgIHN0cm9rZT0icmdiKDAlLCAwJSwgMCUpIgogICAgIHN0cm9rZS1vcGFjaXR5PSIxIgogICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICBkPSJNIDMuNjg1NjU1IDAuMDAwMzEyNSBMIDAuNjQyNjg2IDEuMTQ4NzUgTCAxLjY0NjU5MyAwLjAwMDMxMjUgTCAwLjY0MjY4NiAtMS4xNDgxMjUgWiBNIDMuNjg1NjU1IDAuMDAwMzEyNSAiCiAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMSwgMCwgMCwgLTEsIDE4NS40MjM3MiwgMTc3LjA1NSkiCiAgICAgaWQ9InBhdGg0NiIgLz4KICA8cGF0aAogICAgIGZpbGwtcnVsZT0ibm9uemVybyIKICAgICBmaWxsPSJyZ2IoMTAwJSwgMTAwJSwgMTAwJSkiCiAgICAgZmlsbC1vcGFjaXR5PSIxIgogICAgIGQ9Ik0gMTE0LjE1NjI1IDE4Mi4yNjU2MjUgTCAxMjUuNDUzMTI1IDE4Mi4yNjU2MjUgTCAxMjUuNDUzMTI1IDE3MS44NDM3NSBMIDExNC4xNTYyNSAxNzEuODQzNzUgWiBNIDExNC4xNTYyNSAxODIuMjY1NjI1ICIKICAgICBpZD0icGF0aDQ3IiAvPgogIDxnCiAgICAgZmlsbD0icmdiKDAlLCAwJSwgMCUpIgogICAgIGZpbGwtb3BhY2l0eT0iMSIKICAgICBpZD0iZzQ3Ij4KICAgIDx1c2UKICAgICAgIHhsaW5rOmhyZWY9IiNnbHlwaC0wLTYiCiAgICAgICB4PSIxMTUuNjQ5IgogICAgICAgeT0iMTgwLjc3IgogICAgICAgaWQ9InVzZTQ3IiAvPgogIDwvZz4KICA8ZwogICAgIGZpbGw9InJnYigwJSwgMCUsIDAlKSIKICAgICBmaWxsLW9wYWNpdHk9IjEiCiAgICAgaWQ9Imc0OCI+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMS0wIgogICAgICAgeD0iMTIwLjU1MiIKICAgICAgIHk9IjE3Ny4xNTQiCiAgICAgICBpZD0idXNlNDgiIC8+CiAgPC9nPgogIDxwYXRoCiAgICAgZmlsbD0ibm9uZSIKICAgICBzdHJva2Utd2lkdGg9IjAuMzk4NSIKICAgICBzdHJva2UtbGluZWNhcD0iYnV0dCIKICAgICBzdHJva2UtbGluZWpvaW49Im1pdGVyIgogICAgIHN0cm9rZT0icmdiKDAlLCAwJSwgMCUpIgogICAgIHN0cm9rZS1vcGFjaXR5PSIxIgogICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICBkPSJNIDQuOTY3OTY5IDEzLjY1MjY1NiBMIDgzLjI2NDg0NCAxMjQuNTM1NDY5ICIKICAgICB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAtMSwgMjkuNDUsIDE3Ny4wNTUpIgogICAgIGlkPSJwYXRoNDgiIC8+CiAgPHBhdGgKICAgICBmaWxsLXJ1bGU9Im5vbnplcm8iCiAgICAgZmlsbD0icmdiKDAlLCAwJSwgMCUpIgogICAgIGZpbGwtb3BhY2l0eT0iMSIKICAgICBzdHJva2Utd2lkdGg9IjAuMzk4NSIKICAgICBzdHJva2UtbGluZWNhcD0iYnV0dCIKICAgICBzdHJva2UtbGluZWpvaW49Im1pdGVyIgogICAgIHN0cm9rZT0icmdiKDAlLCAwJSwgMCUpIgogICAgIHN0cm9rZS1vcGFjaXR5PSIxIgogICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICBkPSJNIDMuNjgzMDU3IC0wLjAwMTAxMDEzIEwgMC42NDM1NCAxLjE0NzYzOCBMIDEuNjQ1NDM2IC0wLjAwMDM3MTEzMyBMIDAuNjQzMzE0IC0xLjE0NzkyNCBaIE0gMy42ODMwNTcgLTAuMDAxMDEwMTMgIgogICAgIHRyYW5zZm9ybT0ibWF0cml4KDAuNTc2NzgsIC0wLjgxNjg1LCAtMC44MTY4NSwgLTAuNTc2NzgsIDExMS44MjQwOCwgNTMuNzgxMzYpIgogICAgIGlkPSJwYXRoNDkiIC8+CiAgPHBhdGgKICAgICBmaWxsLXJ1bGU9Im5vbnplcm8iCiAgICAgZmlsbD0icmdiKDEwMCUsIDEwMCUsIDEwMCUpIgogICAgIGZpbGwtb3BhY2l0eT0iMSIKICAgICBkPSJNIDcwLjUzNTE1NiAxMTAuNDMzNTk0IEwgNzguNzM0Mzc1IDExMC40MzM1OTQgTCA3OC43MzQzNzUgMTAyLjQ2NDg0NCBMIDcwLjUzNTE1NiAxMDIuNDY0ODQ0IFogTSA3MC41MzUxNTYgMTEwLjQzMzU5NCAiCiAgICAgaWQ9InBhdGg1MCIgLz4KICA8ZwogICAgIGZpbGw9InJnYigwJSwgMCUsIDAlKSIKICAgICBmaWxsLW9wYWNpdHk9IjEiCiAgICAgaWQ9Imc1MCI+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC03IgogICAgICAgeD0iNzIuMDMxIgogICAgICAgeT0iMTA4LjkzOCIKICAgICAgIGlkPSJ1c2U1MCIgLz4KICA8L2c+CiAgPHBhdGgKICAgICBmaWxsPSJub25lIgogICAgIHN0cm9rZS13aWR0aD0iMC4zOTg1IgogICAgIHN0cm9rZS1saW5lY2FwPSJidXR0IgogICAgIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiCiAgICAgc3Ryb2tlPSJyZ2IoMCUsIDAlLCAwJSkiCiAgICAgc3Ryb2tlLW9wYWNpdHk9IjEiCiAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgIGQ9Ik0gOTQuMzE1NjI1IDEyNy41NTg5MDYgTCAxNzMuMTMyMDMxIDE1LjI3NzY1NiAiCiAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMSwgMCwgMCwgLTEsIDI5LjQ1LCAxNzcuMDU1KSIKICAgICBpZD0icGF0aDUxIiAvPgogIDxwYXRoCiAgICAgZmlsbC1ydWxlPSJub256ZXJvIgogICAgIGZpbGw9InJnYigwJSwgMCUsIDAlKSIKICAgICBmaWxsLW9wYWNpdHk9IjEiCiAgICAgc3Ryb2tlLXdpZHRoPSIwLjM5ODUiCiAgICAgc3Ryb2tlLWxpbmVjYXA9ImJ1dHQiCiAgICAgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIKICAgICBzdHJva2U9InJnYigwJSwgMCUsIDAlKSIKICAgICBzdHJva2Utb3BhY2l0eT0iMSIKICAgICBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiCiAgICAgZD0iTSAzLjY4NDI1OCAwLjAwMTQ5ODg3IEwgMC42NDI2NzQgMS4xNDg1NSBMIDEuNjQ1NzMgMC4wMDA2MTkwMjcgTCAwLjY0Mzg2IC0xLjE0NzkxNSBaIE0gMy42ODQyNTggMC4wMDE0OTg4NyAiCiAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMC41NzQ1MSwgMC44MTg0NywgMC44MTg0NywgLTAuNTc0NTEsIDIwMS42OTQ2MywgMTYwLjUxMjc1KSIKICAgICBpZD0icGF0aDUyIiAvPgogIDxwYXRoCiAgICAgZmlsbC1ydWxlPSJub256ZXJvIgogICAgIGZpbGw9InJnYigxMDAlLCAxMDAlLCAxMDAlKSIKICAgICBmaWxsLW9wYWNpdHk9IjEiCiAgICAgZD0iTSAxNjAuMTQwNjI1IDExMi4xMDkzNzUgTCAxNjguMzM1OTM4IDExMi4xMDkzNzUgTCAxNjguMzM1OTM4IDEwMi4xOTE0MDYgTCAxNjAuMTQwNjI1IDEwMi4xOTE0MDYgWiBNIDE2MC4xNDA2MjUgMTEyLjEwOTM3NSAiCiAgICAgaWQ9InBhdGg1MyIgLz4KICA8ZwogICAgIGZpbGw9InJnYigwJSwgMCUsIDAlKSIKICAgICBmaWxsLW9wYWNpdHk9IjEiCiAgICAgaWQ9Imc1MyI+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC0xNiIKICAgICAgIHg9IjE2MS42MzMiCiAgICAgICB5PSIxMTAuNjE3IgogICAgICAgaWQ9InVzZTUzIiAvPgogIDwvZz4KICA8ZwogICAgIGZpbGw9InJnYigwJSwgMCUsIDAlKSIKICAgICBmaWxsLW9wYWNpdHk9IjEiCiAgICAgaWQ9Imc1NCI+CiAgICA8dXNlCiAgICAgICB4bGluazpocmVmPSIjZ2x5cGgtMC0xIgogICAgICAgeD0iMjM1Ljg3NyIKICAgICAgIHk9IjE1NC43NDYiCiAgICAgICBpZD0idXNlNTQiIC8+CiAgPC9nPgogIDxnCiAgICAgZmlsbD0icmdiKDAlLCAwJSwgMCUpIgogICAgIGZpbGwtb3BhY2l0eT0iMSIKICAgICBpZD0iZzU1Ij4KICAgIDx1c2UKICAgICAgIHhsaW5rOmhyZWY9IiNnbHlwaC0yLTAiCiAgICAgICB4PSIyNDEuMDg0IgogICAgICAgeT0iMTU2LjU5MiIKICAgICAgIGlkPSJ1c2U1NSIgLz4KICA8L2c+CiAgPGcKICAgICBmaWxsPSJyZ2IoMCUsIDAlLCAwJSkiCiAgICAgZmlsbC1vcGFjaXR5PSIxIgogICAgIGlkPSJnNTYiPgogICAgPHVzZQogICAgICAgeGxpbms6aHJlZj0iI2dseXBoLTAtMSIKICAgICAgIHg9IjE0Ni41MjEiCiAgICAgICB5PSIxNC45NCIKICAgICAgIGlkPSJ1c2U1NiIgLz4KICA8L2c+CiAgPGcKICAgICBmaWxsPSJyZ2IoMCUsIDAlLCAwJSkiCiAgICAgZmlsbC1vcGFjaXR5PSIxIgogICAgIGlkPSJnNTciPgogICAgPHVzZQogICAgICAgeGxpbms6aHJlZj0iI2dseXBoLTItMSIKICAgICAgIHg9IjE1MS43MjciCiAgICAgICB5PSIxNi43ODYiCiAgICAgICBpZD0idXNlNTciIC8+CiAgPC9nPgogIDxwYXRoCiAgICAgZmlsbD0ibm9uZSIKICAgICBzdHJva2Utd2lkdGg9IjAuMzk4NSIKICAgICBzdHJva2UtbGluZWNhcD0iYnV0dCIKICAgICBzdHJva2UtbGluZWpvaW49Im1pdGVyIgogICAgIHN0cm9rZT0icmdiKDAlLCAwJSwgMCUpIgogICAgIHN0cm9rZS1vcGFjaXR5PSIxIgogICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICBkPSJNIDIwNy4yODA0NjkgMjAuMjY1OTM3IEwgMjAwLjk4NzUgMTQuNjk5NTMxICIKICAgICB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAtMSwgMjkuNDUsIDE3Ny4wNTUpIgogICAgIGlkPSJwYXRoNTciIC8+CiAgPHBhdGgKICAgICBmaWxsLXJ1bGU9Im5vbnplcm8iCiAgICAgZmlsbD0icmdiKDAlLCAwJSwgMCUpIgogICAgIGZpbGwtb3BhY2l0eT0iMSIKICAgICBzdHJva2Utd2lkdGg9IjAuMzk4NSIKICAgICBzdHJva2UtbGluZWNhcD0iYnV0dCIKICAgICBzdHJva2UtbGluZWpvaW49Im1pdGVyIgogICAgIHN0cm9rZT0icmdiKDAlLCAwJSwgMCUpIgogICAgIHN0cm9rZS1vcGFjaXR5PSIxIgogICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICBkPSJNIDMuNjg2NDc5IC0wLjAwMDU0ODU4OSBMIDAuNjQzNjMzIDEuMTQ2MjAxIEwgMS42NDM5NTggMC4wMDExMDYwNCBMIDAuNjQzNjI4IC0xLjE0ODA2MSBaIE0gMy42ODY0NzkgLTAuMDAwNTQ4NTg5ICIKICAgICB0cmFuc2Zvcm09Im1hdHJpeCgtMC43NDkxNSwgMC42NjIzMiwgMC42NjIzMiwgMC43NDkxNSwgMjMxLjU5NDEyLCAxNjEuMzMyMjIpIgogICAgIGlkPSJwYXRoNTgiIC8+CiAgPHBhdGgKICAgICBmaWxsPSJub25lIgogICAgIHN0cm9rZS13aWR0aD0iMC4zOTg1IgogICAgIHN0cm9rZS1saW5lY2FwPSJidXR0IgogICAgIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiCiAgICAgc3Ryb2tlPSJyZ2IoMCUsIDAlLCAwJSkiCiAgICAgc3Ryb2tlLW9wYWNpdHk9IjEiCiAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIgogICAgIGQ9Ik0gMTE3LjkyNSAxNjAuMDcwNjI1IEwgMTExLjYyODEyNSAxNTQuNTA4MTI1ICIKICAgICB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAtMSwgMjkuNDUsIDE3Ny4wNTUpIgogICAgIGlkPSJwYXRoNTkiIC8+CiAgPHBhdGgKICAgICBmaWxsLXJ1bGU9Im5vbnplcm8iCiAgICAgZmlsbD0icmdiKDAlLCAwJSwgMCUpIgogICAgIGZpbGwtb3BhY2l0eT0iMSIKICAgICBzdHJva2Utd2lkdGg9IjAuMzk4NSIKICAgICBzdHJva2UtbGluZWNhcD0iYnV0dCIKICAgICBzdHJva2UtbGluZWpvaW49Im1pdGVyIgogICAgIHN0cm9rZT0icmdiKDAlLCAwJSwgMCUpIgogICAgIHN0cm9rZS1vcGFjaXR5PSIxIgogICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIKICAgICBkPSJNIDMuNjg0MTE5IC0wLjAwMDAyOTUyNTYgTCAwLjY0MTI3NCAxLjE0NjcyIEwgMS42NDQ1MjYgLTAuMDAwOTYyMzU5IEwgMC42NDEyNjggLTEuMTQ3NTQyIFogTSAzLjY4NDExOSAtMC4wMDAwMjk1MjU2ICIKICAgICB0cmFuc2Zvcm09Im1hdHJpeCgtMC43NDkxNSwgMC42NjIzMiwgMC42NjIzMiwgMC43NDkxNSwgMTQyLjIzNjU0LCAyMS41MjQ4KSIKICAgICBpZD0icGF0aDYwIiAvPgo8L3N2Zz4K" class="img-fluid"></p>
-<p>Kurbanoglu &amp; Takunyaci (K&amp;T) do not estimate the indirect effect; only the “a” and “b” paths. In <strong>lavaan</strong>, indirect effects can be estimated using the <code>:=</code> operator. In the diagram, the effects are labelled a, b, and c<span class="math inline">\(&#39;\)</span>; in the model statement, they are labelled a, b, and cpr. The labels can then be used to obtain the indirect and total effects.</p>
+<p>Note that <code>lavTestScore()</code> suggests that the equality constraint between <code>.p3.</code> and <code>.p26.</code> should be released first. The <code>parTable</code> helps to track down lavaan’s labels: <code>.p3.</code> is the label for the loading of V3 on Academic in Group 1, and <code>.p26.</code> is the loading of V3 on Academic in Group 2. Thus, the loading of V3 on Academic is allowed to vary across the groups.</p>
+<p>In <strong>Step 2a</strong>, the equality constraint for the loadings of V3 on Academic are relaxed using <code>group.partial = c(&quot;Academic =~ V3&quot;)</code> in the <code>sem()</code> function. The steps are the same as before: the revised model is fit and fit statistics are obtained; the fit of the model is compared to the fit of the previous model; check for the next best equality constraint to relax.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="st">&quot;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">  # direct effect</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="st">  Anx ~ cpr * SE</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">  # effects via the mediator</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">  Att ~ a * SE</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">  Anx ~ b * Att</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="st">  # indirect effect (a * b)</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="st">  ab := a * b</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 2a in Table 5.4</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>metric_m2a_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>), <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(metric_m2a_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(metric_m2a_fit, measures)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(metric_fit, metric_m2a_fit)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(metric_fit, metric_m2a_fit)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lavTestScore</span>(metric_m2a_fit)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">parTable</span>(metric_m2a_fit)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>tab[tab<span class="sc">$</span>op <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;=~&quot;</span>,<span class="st">&quot;==&quot;</span>), ]</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow loadings for V6 to vary across groups</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Relax the equality constraint between <code>.p6.</code> and <code>.p29.</code>; that is, in <strong>Step 2b</strong>, the equality constraint for the loadings of V6 on Social are relaexd.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 2b in Table 5.4</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>metric_m2b_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n, </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>), <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>, <span class="st">&quot;Social =~ V6&quot;</span>))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(metric_m2b_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(metric_m2b_fit, measures)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(metric_m2a_fit, metric_m2b_fit)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(metric_m2a_fit, metric_m2b_fit)</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="st">  # total effect</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="st">  total := cpr + (a * b)</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lavTestScore</span>(metric_m2b_fit)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">parTable</span>(metric_m2a_fit)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>tab[tab<span class="sc">$</span>op <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;=~&quot;</span>,<span class="st">&quot;==&quot;</span>), ]</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow loadings for V1 to vary across groups</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section>
-<section id="fit-the-model-and-get-the-results" class="level4">
-<h4 class="anchored" data-anchor-id="fit-the-model-and-get-the-results">Fit the model and get the results</h4>
-<p>In Figure 1, K&amp;T present standardised estimates and R<sup>2</sup> values; so they are requested here (for standardised estimates, see “std.all” column in the output).</p>
+<p>Relax either the loadings for V1 or for V2 on Academic. T&amp;G choose the constraint on V1. That is, in <strong>Step 2c</strong>, the equality constraints for V1 on Academic are relaxed.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(model, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit, <span class="at">rsquare =</span> <span class="cn">TRUE</span>, <span class="at">standardized =</span> <span class="cn">TRUE</span>, <span class="at">fit.measures =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 2c in Table 5.4</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>metric_m2c_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n, </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>), <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>, <span class="st">&quot;Social =~ V6&quot;</span>, <span class="st">&quot;Academic =~ V1&quot;</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(metric_m2c_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(metric_m2c_fit, measures)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(metric_m2b_fit, metric_m2c_fit)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(metric_m2b_fit, metric_m2c_fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>I’ve requested a selection of fit measures. Why fit measures? Afterall, the model is saturated, and all fit measures should indicate a perfect fit. Something has gone awry for K&amp;T. At the bottom of page 50, they state that the model is saturated. As a consequence, <span class="math inline">\(\upchi\)</span><sup>2</sup> and RMSEA should be zero, and GFI, AGF, CFI, NFI, RFI, and IFI should all be one; yet values are given (p. 50) to indicate a less than perfect fit. I’m not sure how this could have come about, or why the error was not picked up during review.</p>
-<p>If the intercepts are required, include <code>sample.mean = means</code> in the <code>sem()</code> function.</p>
+<p>In the model carried forward into <strong>Step 3</strong>, the equality constraints for the loadings of V3 and V6 on their respective constructs are relaxed; and thus only partial scalar invariance has been established.</p>
+<p>In <strong>Step 3</strong>, the intercepts are constrained to equality across the groups; that is, the argument for <code>group.equal</code> is <code>c(&quot;loadings&quot;, &quot;intercepts&quot;)</code>, but with the equality constraints for loadings of V3 and V6 relaxed in the argument for <code>group.partial</code>. Because the constraints on the loading for V3 and V6 are relaxed, the equality constraints for the intercepts of V3 and V6 are also relaxed.</p>
+<p>Note that in the summary of the model fit, the latent means are fixed to zero in Group 1, but are freely estimated in Group 2.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fit_intercepts <span class="ot">&lt;-</span> <span class="fu">sem</span>(model, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n, <span class="at">sample.mean =</span> means)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_intercepts, <span class="at">rsquare =</span> <span class="cn">TRUE</span>, <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 3 in Table 5.4</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>scalar_m3_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n, </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>, <span class="st">&quot;intercepts&quot;</span>), </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>, <span class="st">&quot;Social =~ V6&quot;</span>, <span class="st">&quot;V3 ~ 1&quot;</span>, <span class="st">&quot;V6 ~ 1&quot;</span>))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(scalar_m3_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(scalar_m3_fit, measures)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(metric_m2b_fit, scalar_m3_fit)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(metric_m2b_fit, scalar_m3_fit)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">lavTestScore</span>(scalar_m3_fit)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">parTable</span>(scalar_m3_fit)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>tab[tab<span class="sc">$</span>op <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;=~&quot;</span>,<span class="st">&quot;~1&quot;</span>,<span class="st">&quot;==&quot;</span>), ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Do not rely on the t-tests, especially for indirect effects. Often bootstrap confidence intervals are calculated, but bootstrapping requires the raw sample data. Instead of bootstrap CIs, Monte Carlo CIs can be calculated using the <code>MC()</code> function from the <strong>semmcci</strong> package.</p>
+<p>Relaxing the intercept for V1 or V2 would improve the fit. T&amp;G select V1. Thus in <strong>Step 3a</strong>, the equality constraint on the intercept for V1 is relaxed.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>semmcci<span class="sc">::</span><span class="fu">MC</span>(fit, <span class="at">R =</span> <span class="dv">50000</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 3a in Table 5.4</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>scalar_m3a_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>, <span class="st">&quot;intercepts&quot;</span>), </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>, <span class="st">&quot;Social =~ V6&quot;</span>, <span class="st">&quot;V3 ~ 1&quot;</span>, <span class="st">&quot;V6 ~ 1&quot;</span>, <span class="st">&quot;V1 ~ 1&quot;</span>))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(scalar_m3a_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(scalar_m3a_fit, measures)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(scalar_m3a_fit, scalar_m3_fit)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(scalar_m3_fit, scalar_m3a_fit)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">lavTestScore</span>(scalar_m3a_fit)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">parTable</span>(scalar_m3a_fit)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>tab[tab<span class="sc">$</span>op <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;=~&quot;</span>,<span class="st">&quot;~1&quot;</span>,<span class="st">&quot;==&quot;</span>), ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Relaxing the intercept for V4 or V5 would improve the fit. T&amp;G select V4. Thus in <strong>Step 3b</strong>, the equality constraint on the intercept for V4 is relaxed.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 3b in Table 5.4</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>scalar_m3b_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>, <span class="st">&quot;intercepts&quot;</span>), </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>, <span class="st">&quot;Social =~ V6&quot;</span>, <span class="st">&quot;V3 ~ 1&quot;</span>, <span class="st">&quot;V6 ~ 1&quot;</span>, <span class="st">&quot;V1 ~ 1&quot;</span>, <span class="st">&quot;V4 ~ 1&quot;</span>))</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(scalar_m3b_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(scalar_m3b_fit, measures)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(scalar_m3a_fit, scalar_m3b_fit)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(scalar_m3a_fit, scalar_m3b_fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The model carried forward into <strong>Step 4</strong> has equality constraints on V3 and V6 loadings relaxed, and equality contraints of intercepts for V1, V3, V4, and V6 relaxed.</p>
+<p>In Step 4, attention turns to the latent means. In <strong>Step 4a</strong>, the means for the Academic construct are constrained to be equal, then in <strong>Step 4b</strong>, the means for Social are constrained to be equal. In each case, the fit is compared with the fit for the <code>scalar_m3b_fit</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 4a - constrain Academic mean to zero in Group 2</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  ie, Academic means constrained to equality</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Model statement</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>m4a <span class="ot">&lt;-</span> <span class="st">&quot;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="st">  # Measurement Model</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="st">  Academic =~ V1 + V2 + V3</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="st">  Social =~ V4 + V5 + V6</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="st">  Academic ~ c(0,0)*1</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="st">  Social ~ c(0,NA)*1</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>scalar_m4a_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m4a, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n, </span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>, <span class="st">&quot;intercepts&quot;</span>), </span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>, <span class="st">&quot;Social =~ V6&quot;</span>, <span class="st">&quot;V3 ~ 1&quot;</span>, <span class="st">&quot;V6 ~ 1&quot;</span>, <span class="st">&quot;V1 ~ 1&quot;</span>, <span class="st">&quot;V4 ~ 1&quot;</span>))</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(scalar_m4a_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(scalar_m4a_fit, measures)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(scalar_m3b_fit, scalar_m4a_fit)</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(scalar_m3b_fit, scalar_m4a_fit)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 4b - constrain Social mean to zero in Group 2</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co">#  ie, Social means constrained to equality</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Model statement</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>m4b <span class="ot">&lt;-</span> <span class="st">&quot;</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="st">  # Measurement Model</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="st">  Academic =~ V1 + V2 + V3</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="st">  Social =~ V4 + V5 + V6</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="st">  Academic ~ c(0,NA)*1</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="st">  Social ~ c(0,0)*1</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>scalar_m4b_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m4b, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n, </span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>, <span class="st">&quot;intercepts&quot;</span>), </span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>, <span class="st">&quot;Social =~ V6&quot;</span>, <span class="st">&quot;V3 ~ 1&quot;</span>, <span class="st">&quot;V6 ~ 1&quot;</span>, <span class="st">&quot;V1 ~ 1&quot;</span>, <span class="st">&quot;V4 ~ 1&quot;</span>))</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(scalar_m4b_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(scalar_m4b_fit, measures)</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(scalar_m3b_fit, scalar_m4b_fit)</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(scalar_m3b_fit, scalar_m4b_fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Conclusion: The means for both the Academic and the Social constructs differ across groups.</p>
+<p>How big are these differences? Focus turns to effect sizes. The formula for effect size are given on p. 195: difference in means divided by square root of variance. Again, T&amp;G nominate the Day-care group as a reference group, and thus use its variance in the calculation of effect size.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(scalar_m3b_fit)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ES_Acad <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="fl">0.266</span> <span class="sc">-</span> <span class="dv">0</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span>); ES_Acad</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>ES_Soc <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="fl">1.348</span> <span class="sc">-</span> <span class="dv">0</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span>); ES_Soc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Compare with effect sizes given on p. 195.</p>
+<p>If the pooled variance is required, then, with unequal group sizes, pooled variance is a weighted average of the two variances.</p>
+<p>If <span class="math inline">\(n_1\)</span> is the size of Group 1, and <span class="math inline">\(n_2\)</span> is the size of Group2, then the pooled variance is given by:</p>
+<p><span class="math display">\[
+\sigma^2_p = \frac{(n_1 - 1)\sigma^2_1 + (n_2 - 1)\sigma^2_2}{n_1 + n_2 - 2}
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Get effect sizes (pooled variance)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(scalar_m3b_fit)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ES_Acad <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="fl">0.266</span> <span class="sc">-</span> <span class="dv">0</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(((n1<span class="dv">-1</span>)<span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> (n2<span class="dv">-1</span>)<span class="sc">*</span><span class="fl">1.092</span>)<span class="sc">/</span>(n1<span class="sc">+</span>n2<span class="dv">-2</span>)); ES_Acad</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ES_Soc <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="fl">1.348</span> <span class="sc">-</span> <span class="dv">0</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(((n1<span class="dv">-1</span>)<span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> (n2<span class="dv">-1</span>)<span class="sc">*</span><span class="fl">1.986</span>)<span class="sc">/</span>(n1<span class="sc">+</span>n2<span class="dv">-2</span>)); ES_Soc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>As before, it might be better to get R to extract the means and variances from a list of estimates. Means are contained in element “alpha”, and variances are contained in element “psi”.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Get estimates in a list</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>estimates <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(scalar_m3b_fit, <span class="st">&quot;est&quot;</span>); estimates</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Get effect sizes (pooled variances)</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  Get difference in means</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">abs</span>(<span class="fu">Reduce</span>(<span class="st">&#39;-&#39;</span>, <span class="fu">lapply</span>(estimates, <span class="st">&#39;[[&#39;</span>, <span class="st">&#39;alpha&#39;</span>))); means</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  Get pooled variance</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>var <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">lapply</span>(estimates, <span class="st">&#39;[[&#39;</span>, <span class="st">&#39;psi&#39;</span>), diag); var</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>pool <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(<span class="cf">function</span>(x,y) ((n[[<span class="dv">1</span>]] <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span>x <span class="sc">+</span> (n[[<span class="dv">2</span>]] <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span>y) <span class="sc">/</span> (n[[<span class="dv">1</span>]] <span class="sc">+</span> n[[<span class="dv">2</span>]] <span class="sc">-</span> <span class="dv">2</span>), var); pool</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#  Get effect sizes</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>ES <span class="ot">&lt;-</span> means<span class="sc">/</span><span class="fu">sqrt</span>(pool)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(ES) <span class="ot">&lt;-</span> <span class="st">&quot;ES&quot;</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>ES</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><br></p>
 <div class="cell">
 <details class="code-fold">
 <summary>R code with minimal commenting</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Kurbanoglu, N. &amp; Takunyaci, M. (2021). A structural equation modeling</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">## on relationship between self-efficacy, physics laboratory anxiety</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="do">## and attitudes. Journal of Family, Counseling and Education, 6(1), 47-56.</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Load packages</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(semmcci)  <span class="co"># For Monte Carlo CIs</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Get the data from Table 1</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>cor <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>   <span class="dv">1</span>,</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>   <span class="fl">0.30</span>,  <span class="dv">1</span>,</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fl">0.42</span>, <span class="sc">-</span><span class="fl">0.32</span>,  <span class="dv">1</span>)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>sds <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">8.81</span>, <span class="fl">7.95</span>, <span class="fl">18.30</span>)</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">56.57</span>, <span class="fl">40.39</span>, <span class="fl">68.22</span>)</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">513</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Get the variable names</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Att&quot;</span>, <span class="st">&quot;SE&quot;</span>, <span class="st">&quot;Anx&quot;</span>)</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Get the co/variance matrix</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>cov <span class="ot">&lt;-</span> lavaan<span class="sc">::</span><span class="fu">lav_getcov</span>(cor, <span class="at">sds =</span> sds, <span class="at">names =</span> names)</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="do">## The model</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="st">&quot;</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="st">  # direct effect</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="st">  Anx ~ cpr * SE</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="st">  # effects via the mediator</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="st">  Att ~ a * SE</span></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="st">  Anx ~ b * Att</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="st">  # indirect effect (a * b)</span></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="st">  ab := a * b</span></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="st">  # total effect</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="st">  total := cpr + (a * b)</span></span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="do">## Fit the model and get the summary</span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="co">#  Compare with Figure 1</span></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(model, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n)</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit, <span class="at">rsquare =</span> <span class="cn">TRUE</span>, <span class="at">standardized =</span> <span class="cn">TRUE</span>, <span class="at">fit.measures =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="do">## To get intercepts</span></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>fit_intercepts <span class="ot">&lt;-</span> <span class="fu">sem</span>(model, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n, <span class="at">sample.mean =</span> means)</span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_intercepts, <span class="at">rsquare =</span> <span class="cn">TRUE</span>, <span class="at">standardized =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="do">## To get Monte Carlo CIs</span></span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>semmcci<span class="sc">::</span><span class="fu">MC</span>(fit, <span class="at">R =</span> <span class="dv">50000</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Thompson, M. &amp; Green, S. (2013). Evaluating between-group differences</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## in latent variable means. In G. Hancock &amp; R. Mueller (Eds.), *Structural</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">## equation modeling: A second course* (2nd ed., pp. 163-218). Charlotte, NC:</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Information Age Publishing.</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Load package</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lavaan)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Get data from Table 5.2</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Group 1 - Day-care</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>cov1 <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a> <span class="fl">154.54</span>,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fl">44.75</span>,  <span class="fl">90.23</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fl">40.98</span>,  <span class="fl">22.77</span>,  <span class="fl">78.76</span>,    </span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fl">41.35</span>,   <span class="fl">2.83</span>,   <span class="fl">7.92</span>, <span class="fl">220.12</span>,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fl">23.28</span>,   <span class="fl">9.12</span>,   <span class="fl">0.75</span>,  <span class="fl">61.46</span>, <span class="fl">159.88</span>,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="fl">47.08</span>,  <span class="fl">22.88</span>,  <span class="fl">16.05</span>, <span class="fl">125.08</span>,  <span class="fl">84.31</span>, <span class="fl">332.26</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>means1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">49.14</span>, <span class="fl">82.60</span>, <span class="fl">104.95</span>, <span class="fl">78.58</span>, <span class="fl">54.95</span>, <span class="fl">119.91</span>)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">250</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Group 2 - Home-care</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>cov2 <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a> <span class="fl">124.93</span>,</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  <span class="fl">52.19</span>,  <span class="fl">80.67</span>,</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  <span class="fl">64.45</span>,  <span class="fl">42.85</span>,  <span class="fl">83.56</span>,</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  <span class="fl">59.95</span>,  <span class="fl">33.10</span>,  <span class="fl">38.34</span>, <span class="fl">290.65</span>,</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  <span class="fl">32.32</span>,  <span class="fl">16.09</span>,  <span class="fl">18.29</span>, <span class="fl">124.71</span>, <span class="fl">169.17</span>,</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  <span class="fl">87.15</span>,  <span class="fl">39.70</span>,  <span class="fl">51.82</span>, <span class="fl">174.20</span>, <span class="fl">108.39</span>, <span class="fl">355.22</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>means2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">55.01</span>, <span class="fl">81.22</span>, <span class="fl">97.01</span>, <span class="fl">72.67</span>, <span class="fl">46.57</span>, <span class="fl">124.28</span>)</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">150</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the variable names</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;V1&quot;</span>, <span class="st">&quot;V2&quot;</span>, <span class="st">&quot;V3&quot;</span>, <span class="st">&quot;V4&quot;</span>, <span class="st">&quot;V5&quot;</span>, <span class="st">&quot;V6&quot;</span>)</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="do">## Combine into lists</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>cov <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;Day-care&quot;</span> <span class="ot">=</span> cov1, <span class="st">&quot;Home-care&quot;</span> <span class="ot">=</span> cov2)</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">list</span>(means1, means2)</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">list</span>(n1, n2)</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="do">## Get the co/variance matrices</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>cov <span class="ot">&lt;-</span> <span class="fu">lapply</span>(cov, lav_getcov, <span class="at">names =</span> names)</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 1 - equivalence of forms - configural invariance</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Model statement</span></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="st">&quot;</span></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a><span class="st">   # Measurement Model</span></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a><span class="st">   Academic =~ V1 + V2 + V3</span></span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a><span class="st">   Social =~ V4 + V5 + V6</span></span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model to each group separately</span></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>m1_g1_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov[[<span class="dv">1</span>]], <span class="at">sample.nobs =</span> n[[<span class="dv">1</span>]],</span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means[[<span class="dv">1</span>]], <span class="at">std.lv =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1_g1_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>m1_g2_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov[[<span class="dv">2</span>]], <span class="at">sample.nobs =</span> n[[<span class="dv">2</span>]],</span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means[[<span class="dv">2</span>]], <span class="at">std.lv =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1_g2_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a><span class="co"># A function to extract fit measure from output</span></span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>GetFit <span class="ot">&lt;-</span> <span class="cf">function</span>(fit, ...) {</span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fitMeasures</span>(fit, ...)}</span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>measures <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;chisq&quot;</span>, <span class="st">&quot;df&quot;</span>, <span class="st">&quot;pvalue&quot;</span>, <span class="st">&quot;cfi&quot;</span>, <span class="st">&quot;srmr&quot;</span>, <span class="st">&quot;rmsea&quot;</span>)</span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Get fit measures for each group</span></span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 1 in Table 5.4</span></span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(m1_g1_fit, measures)</span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(m1_g2_fit, measures)</span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the two-group model</span></span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 1 in Table 5.4</span></span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>config_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n,</span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(config_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(config_fit, measures)</span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 2 - equivalence of loadings - metric (or weak) invariance</span></span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 2 in Table 5.4</span></span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>metric_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n,</span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>))</span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(metric_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(metric_fit, measures)</span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the fits of two models</span></span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(config_fit, metric_fit)</span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to get difference in fit statistics</span></span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a>FitDiff <span class="ot">=</span> <span class="cf">function</span>(fit1, fit2) {</span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a>     call <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="fu">match.call</span>())</span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a>     tab <span class="ot">=</span> <span class="fu">cbind</span>(<span class="fu">data.frame</span>(<span class="fu">GetFit</span>(fit1, measures), <span class="fu">GetFit</span>(fit2, measures)))[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, ]</span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a>     <span class="fu">names</span>(tab) <span class="ot">=</span> <span class="fu">c</span>(call<span class="sc">$</span>fit1, call<span class="sc">$</span>fit2)</span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a>     tab<span class="sc">$</span>diff <span class="ot">=</span> tab[, <span class="dv">2</span>] <span class="sc">-</span> tab[, <span class="dv">1</span>]</span>
+<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a>     <span class="fu">return</span>(<span class="fu">round</span>(tab, <span class="dv">3</span>))</span>
+<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a>     }</span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(config_fit, metric_fit)</span>
+<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a><span class="co"># lavTestScore() function - test for releasing equality constraints</span></span>
+<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a><span class="fu">lavTestScore</span>(metric_fit)</span>
+<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a><span class="co"># Get parameter table</span></span>
+<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">parTable</span>(metric_fit)</span>
+<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the part with loadings and constraints</span></span>
+<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a>tab[tab<span class="sc">$</span>op <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;=~&quot;</span>,<span class="st">&quot;==&quot;</span>), ]</span>
+<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow loadings for V3 to vary across groups</span></span>
+<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 2a - relax equality constraint for V3 loading on Academic</span></span>
+<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 2a in Table 5.4</span></span>
+<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a>metric_m2a_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n,</span>
+<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>), <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>))</span>
+<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(metric_m2a_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(metric_m2a_fit, measures)</span>
+<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(metric_fit, metric_m2a_fit)</span>
+<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(metric_fit, metric_m2a_fit)</span>
+<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a><span class="fu">lavTestScore</span>(metric_m2a_fit)</span>
+<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">parTable</span>(metric_m2a_fit)</span>
+<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a>tab[tab<span class="sc">$</span>op <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;=~&quot;</span>,<span class="st">&quot;==&quot;</span>), ]</span>
+<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow loadings for V6 to vary across groups</span></span>
+<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 2b - relax equality constraint for V6 loading on Social</span></span>
+<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 2b in Table 5.4</span></span>
+<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a>metric_m2b_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n,</span>
+<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>), <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>, <span class="st">&quot;Social =~ V6&quot;</span>))</span>
+<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(metric_m2b_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(metric_m2b_fit, measures)</span>
+<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(metric_m2a_fit, metric_m2b_fit)</span>
+<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(metric_m2a_fit, metric_m2b_fit)</span>
+<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a><span class="fu">lavTestScore</span>(metric_m2b_fit)</span>
+<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">parTable</span>(metric_m2a_fit)</span>
+<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a>tab[tab<span class="sc">$</span>op <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;=~&quot;</span>,<span class="st">&quot;==&quot;</span>), ]</span>
+<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow loadings for V1 to vary across groups</span></span>
+<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 2c - relax equality constraint for V1 loading on Social</span></span>
+<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb14-157"><a href="#cb14-157" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 2c in Table 5.4</span></span>
+<span id="cb14-158"><a href="#cb14-158" aria-hidden="true" tabindex="-1"></a>metric_m2c_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n,</span>
+<span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-160"><a href="#cb14-160" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>), <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>, <span class="st">&quot;Social =~ V6&quot;</span>, <span class="st">&quot;Academic =~ V1&quot;</span>))</span>
+<span id="cb14-161"><a href="#cb14-161" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(metric_m2c_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(metric_m2c_fit, measures)</span>
+<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(metric_m2b_fit, metric_m2c_fit)</span>
+<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(metric_m2b_fit, metric_m2c_fit)</span>
+<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 3 -  equivalence of loadings &amp; intercepts - scalar (strong) invariance</span></span>
+<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 3 in Table 5.4</span></span>
+<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a>scalar_m3_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n,</span>
+<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>, <span class="st">&quot;intercepts&quot;</span>),</span>
+<span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>, <span class="st">&quot;Social =~ V6&quot;</span>, <span class="st">&quot;V3 ~ 1&quot;</span>, <span class="st">&quot;V6 ~ 1&quot;</span>))</span>
+<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(scalar_m3_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(scalar_m3_fit, measures)</span>
+<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(metric_m2b_fit, scalar_m3_fit)</span>
+<span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(metric_m2b_fit, scalar_m3_fit)</span>
+<span id="cb14-181"><a href="#cb14-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-182"><a href="#cb14-182" aria-hidden="true" tabindex="-1"></a><span class="fu">lavTestScore</span>(scalar_m3_fit)</span>
+<span id="cb14-183"><a href="#cb14-183" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">parTable</span>(scalar_m3_fit)</span>
+<span id="cb14-184"><a href="#cb14-184" aria-hidden="true" tabindex="-1"></a>tab[tab<span class="sc">$</span>op <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;=~&quot;</span>,<span class="st">&quot;~1&quot;</span>,<span class="st">&quot;==&quot;</span>), ]</span>
+<span id="cb14-185"><a href="#cb14-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 3a - relax equality constraint for V1 intercept</span></span>
+<span id="cb14-188"><a href="#cb14-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-189"><a href="#cb14-189" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb14-190"><a href="#cb14-190" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 3a in Table 5.4</span></span>
+<span id="cb14-191"><a href="#cb14-191" aria-hidden="true" tabindex="-1"></a>scalar_m3a_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n,</span>
+<span id="cb14-192"><a href="#cb14-192" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-193"><a href="#cb14-193" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>, <span class="st">&quot;intercepts&quot;</span>),</span>
+<span id="cb14-194"><a href="#cb14-194" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>, <span class="st">&quot;Social =~ V6&quot;</span>, <span class="st">&quot;V3 ~ 1&quot;</span>, <span class="st">&quot;V6 ~ 1&quot;</span>, <span class="st">&quot;V1 ~ 1&quot;</span>))</span>
+<span id="cb14-195"><a href="#cb14-195" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(scalar_m3a_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-196"><a href="#cb14-196" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(scalar_m3a_fit, measures)</span>
+<span id="cb14-197"><a href="#cb14-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-198"><a href="#cb14-198" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(scalar_m3a_fit, scalar_m3_fit)</span>
+<span id="cb14-199"><a href="#cb14-199" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(scalar_m3_fit, scalar_m3a_fit)</span>
+<span id="cb14-200"><a href="#cb14-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-201"><a href="#cb14-201" aria-hidden="true" tabindex="-1"></a><span class="fu">lavTestScore</span>(scalar_m3a_fit)</span>
+<span id="cb14-202"><a href="#cb14-202" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">parTable</span>(scalar_m3a_fit)</span>
+<span id="cb14-203"><a href="#cb14-203" aria-hidden="true" tabindex="-1"></a>tab[tab<span class="sc">$</span>op <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;=~&quot;</span>,<span class="st">&quot;~1&quot;</span>,<span class="st">&quot;==&quot;</span>), ]</span>
+<span id="cb14-204"><a href="#cb14-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-205"><a href="#cb14-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-206"><a href="#cb14-206" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 3b - relax equality constraint for V1 intercept</span></span>
+<span id="cb14-207"><a href="#cb14-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-208"><a href="#cb14-208" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb14-209"><a href="#cb14-209" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with Step 3b in Table 5.4</span></span>
+<span id="cb14-210"><a href="#cb14-210" aria-hidden="true" tabindex="-1"></a>scalar_m3b_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m1, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n,</span>
+<span id="cb14-211"><a href="#cb14-211" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-212"><a href="#cb14-212" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>, <span class="st">&quot;intercepts&quot;</span>),</span>
+<span id="cb14-213"><a href="#cb14-213" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>, <span class="st">&quot;Social =~ V6&quot;</span>, <span class="st">&quot;V3 ~ 1&quot;</span>, <span class="st">&quot;V6 ~ 1&quot;</span>, <span class="st">&quot;V1 ~ 1&quot;</span>, <span class="st">&quot;V4 ~ 1&quot;</span>))</span>
+<span id="cb14-214"><a href="#cb14-214" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(scalar_m3b_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-215"><a href="#cb14-215" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(scalar_m3b_fit, measures)</span>
+<span id="cb14-216"><a href="#cb14-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-217"><a href="#cb14-217" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(scalar_m3a_fit, scalar_m3b_fit)</span>
+<span id="cb14-218"><a href="#cb14-218" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(scalar_m3a_fit, scalar_m3b_fit)</span>
+<span id="cb14-219"><a href="#cb14-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-220"><a href="#cb14-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-221"><a href="#cb14-221" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 4a - constrain Academic mean to zero in Group 2</span></span>
+<span id="cb14-222"><a href="#cb14-222" aria-hidden="true" tabindex="-1"></a><span class="co">#  ie, Academic means constrained to equality</span></span>
+<span id="cb14-223"><a href="#cb14-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-224"><a href="#cb14-224" aria-hidden="true" tabindex="-1"></a><span class="co"># Model statement</span></span>
+<span id="cb14-225"><a href="#cb14-225" aria-hidden="true" tabindex="-1"></a>m4a <span class="ot">&lt;-</span> <span class="st">&quot;</span></span>
+<span id="cb14-226"><a href="#cb14-226" aria-hidden="true" tabindex="-1"></a><span class="st">  # Measurement Model</span></span>
+<span id="cb14-227"><a href="#cb14-227" aria-hidden="true" tabindex="-1"></a><span class="st">  Academic =~ V1 + V2 + V3</span></span>
+<span id="cb14-228"><a href="#cb14-228" aria-hidden="true" tabindex="-1"></a><span class="st">  Social =~ V4 + V5 + V6</span></span>
+<span id="cb14-229"><a href="#cb14-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-230"><a href="#cb14-230" aria-hidden="true" tabindex="-1"></a><span class="st">  Academic ~ c(0,0)*1</span></span>
+<span id="cb14-231"><a href="#cb14-231" aria-hidden="true" tabindex="-1"></a><span class="st">  Social ~ c(0,NA)*1</span></span>
+<span id="cb14-232"><a href="#cb14-232" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb14-233"><a href="#cb14-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-234"><a href="#cb14-234" aria-hidden="true" tabindex="-1"></a>scalar_m4a_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m4a, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n,</span>
+<span id="cb14-235"><a href="#cb14-235" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-236"><a href="#cb14-236" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>, <span class="st">&quot;intercepts&quot;</span>),</span>
+<span id="cb14-237"><a href="#cb14-237" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>, <span class="st">&quot;Social =~ V6&quot;</span>, <span class="st">&quot;V3 ~ 1&quot;</span>, <span class="st">&quot;V6 ~ 1&quot;</span>, <span class="st">&quot;V1 ~ 1&quot;</span>, <span class="st">&quot;V4 ~ 1&quot;</span>))</span>
+<span id="cb14-238"><a href="#cb14-238" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(scalar_m4a_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-239"><a href="#cb14-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-240"><a href="#cb14-240" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(scalar_m4a_fit, measures)</span>
+<span id="cb14-241"><a href="#cb14-241" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(scalar_m3b_fit, scalar_m4a_fit)</span>
+<span id="cb14-242"><a href="#cb14-242" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(scalar_m3b_fit, scalar_m4a_fit)</span>
+<span id="cb14-243"><a href="#cb14-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-244"><a href="#cb14-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-245"><a href="#cb14-245" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 4b - constrain Social mean to zero in Group 2</span></span>
+<span id="cb14-246"><a href="#cb14-246" aria-hidden="true" tabindex="-1"></a><span class="co">#  ie, Social means constrained to equality</span></span>
+<span id="cb14-247"><a href="#cb14-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-248"><a href="#cb14-248" aria-hidden="true" tabindex="-1"></a><span class="co"># Model statement</span></span>
+<span id="cb14-249"><a href="#cb14-249" aria-hidden="true" tabindex="-1"></a>m4b <span class="ot">&lt;-</span> <span class="st">&quot;</span></span>
+<span id="cb14-250"><a href="#cb14-250" aria-hidden="true" tabindex="-1"></a><span class="st">  # Measurement Model</span></span>
+<span id="cb14-251"><a href="#cb14-251" aria-hidden="true" tabindex="-1"></a><span class="st">  Academic =~ V1 + V2 + V3</span></span>
+<span id="cb14-252"><a href="#cb14-252" aria-hidden="true" tabindex="-1"></a><span class="st">  Social =~ V4 + V5 + V6</span></span>
+<span id="cb14-253"><a href="#cb14-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-254"><a href="#cb14-254" aria-hidden="true" tabindex="-1"></a><span class="st">  Academic ~ c(0,NA)*1</span></span>
+<span id="cb14-255"><a href="#cb14-255" aria-hidden="true" tabindex="-1"></a><span class="st">  Social ~ c(0,0)*1</span></span>
+<span id="cb14-256"><a href="#cb14-256" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb14-257"><a href="#cb14-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-258"><a href="#cb14-258" aria-hidden="true" tabindex="-1"></a>scalar_m4b_fit <span class="ot">&lt;-</span> <span class="fu">sem</span>(m4b, <span class="at">sample.cov =</span> cov, <span class="at">sample.nobs =</span> n,</span>
+<span id="cb14-259"><a href="#cb14-259" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample.mean =</span> means, <span class="at">std.lv =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-260"><a href="#cb14-260" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.equal =</span> <span class="fu">c</span>(<span class="st">&quot;loadings&quot;</span>, <span class="st">&quot;intercepts&quot;</span>),</span>
+<span id="cb14-261"><a href="#cb14-261" aria-hidden="true" tabindex="-1"></a>   <span class="at">group.partial =</span> <span class="fu">c</span>(<span class="st">&quot;Academic =~ V3&quot;</span>, <span class="st">&quot;Social =~ V6&quot;</span>, <span class="st">&quot;V3 ~ 1&quot;</span>, <span class="st">&quot;V6 ~ 1&quot;</span>, <span class="st">&quot;V1 ~ 1&quot;</span>, <span class="st">&quot;V4 ~ 1&quot;</span>))</span>
+<span id="cb14-262"><a href="#cb14-262" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(scalar_m4b_fit, <span class="at">remove.unused =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-263"><a href="#cb14-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-264"><a href="#cb14-264" aria-hidden="true" tabindex="-1"></a><span class="fu">GetFit</span>(scalar_m4b_fit, measures)</span>
+<span id="cb14-265"><a href="#cb14-265" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(scalar_m3b_fit, scalar_m4b_fit)</span>
+<span id="cb14-266"><a href="#cb14-266" aria-hidden="true" tabindex="-1"></a><span class="fu">FitDiff</span>(scalar_m3b_fit, scalar_m4b_fit)</span>
+<span id="cb14-267"><a href="#cb14-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-268"><a href="#cb14-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-269"><a href="#cb14-269" aria-hidden="true" tabindex="-1"></a><span class="do">## Get effect sizes (Day-care group as reference-group)</span></span>
+<span id="cb14-270"><a href="#cb14-270" aria-hidden="true" tabindex="-1"></a><span class="co"># Get means and variances from summary for scalar_m3b_fit</span></span>
+<span id="cb14-271"><a href="#cb14-271" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with effect sizes on p. 195</span></span>
+<span id="cb14-272"><a href="#cb14-272" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(scalar_m3b_fit)</span>
+<span id="cb14-273"><a href="#cb14-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-274"><a href="#cb14-274" aria-hidden="true" tabindex="-1"></a>ES_Acad <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="fl">0.266</span> <span class="sc">-</span> <span class="dv">0</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span>); ES_Acad</span>
+<span id="cb14-275"><a href="#cb14-275" aria-hidden="true" tabindex="-1"></a>ES_Soc <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="fl">1.348</span> <span class="sc">-</span> <span class="dv">0</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span>); ES_Soc</span>
+<span id="cb14-276"><a href="#cb14-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-277"><a href="#cb14-277" aria-hidden="true" tabindex="-1"></a><span class="do">## Get effect sizes (pooled variance)</span></span>
+<span id="cb14-278"><a href="#cb14-278" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(scalar_m3b_fit)</span>
+<span id="cb14-279"><a href="#cb14-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-280"><a href="#cb14-280" aria-hidden="true" tabindex="-1"></a>ES_Acad <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="fl">0.266</span> <span class="sc">-</span> <span class="dv">0</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(((n1<span class="dv">-1</span>)<span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> (n2<span class="dv">-1</span>)<span class="sc">*</span><span class="fl">1.092</span>)<span class="sc">/</span>(n1<span class="sc">+</span>n2<span class="dv">-2</span>)); ES_Acad</span>
+<span id="cb14-281"><a href="#cb14-281" aria-hidden="true" tabindex="-1"></a>ES_Soc <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="fl">1.348</span> <span class="sc">-</span> <span class="dv">0</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(((n1<span class="dv">-1</span>)<span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> (n2<span class="dv">-1</span>)<span class="sc">*</span><span class="fl">1.986</span>)<span class="sc">/</span>(n1<span class="sc">+</span>n2<span class="dv">-2</span>)); ES_Soc</span>
+<span id="cb14-282"><a href="#cb14-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-283"><a href="#cb14-283" aria-hidden="true" tabindex="-1"></a><span class="do">## Extract means and variances from fitted lavaan object</span></span>
+<span id="cb14-284"><a href="#cb14-284" aria-hidden="true" tabindex="-1"></a><span class="co">#  Get estimates in a list</span></span>
+<span id="cb14-285"><a href="#cb14-285" aria-hidden="true" tabindex="-1"></a>estimates <span class="ot">&lt;-</span> <span class="fu">lavInspect</span>(scalar_m3b_fit, <span class="st">&quot;est&quot;</span>); estimates</span>
+<span id="cb14-286"><a href="#cb14-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-287"><a href="#cb14-287" aria-hidden="true" tabindex="-1"></a><span class="do">## Get effect sizes (pooled variances)</span></span>
+<span id="cb14-288"><a href="#cb14-288" aria-hidden="true" tabindex="-1"></a><span class="co">#  Get difference in means</span></span>
+<span id="cb14-289"><a href="#cb14-289" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">abs</span>(<span class="fu">Reduce</span>(<span class="st">&#39;-&#39;</span>, <span class="fu">lapply</span>(estimates, <span class="st">&#39;[[&#39;</span>, <span class="st">&#39;alpha&#39;</span>))); means</span>
+<span id="cb14-290"><a href="#cb14-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-291"><a href="#cb14-291" aria-hidden="true" tabindex="-1"></a><span class="co">#  Get pooled variance</span></span>
+<span id="cb14-292"><a href="#cb14-292" aria-hidden="true" tabindex="-1"></a>var <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">lapply</span>(estimates, <span class="st">&#39;[[&#39;</span>, <span class="st">&#39;psi&#39;</span>), diag); var</span>
+<span id="cb14-293"><a href="#cb14-293" aria-hidden="true" tabindex="-1"></a>pool <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(<span class="cf">function</span>(x,y) ((n[[<span class="dv">1</span>]] <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span>x <span class="sc">+</span> (n[[<span class="dv">2</span>]] <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span>y) <span class="sc">/</span> (n[[<span class="dv">1</span>]] <span class="sc">+</span> n[[<span class="dv">2</span>]] <span class="sc">-</span> <span class="dv">2</span>), var); pool</span>
+<span id="cb14-294"><a href="#cb14-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-295"><a href="#cb14-295" aria-hidden="true" tabindex="-1"></a><span class="co">#  Get effect sizes</span></span>
+<span id="cb14-296"><a href="#cb14-296" aria-hidden="true" tabindex="-1"></a>ES <span class="ot">&lt;-</span> means<span class="sc">/</span><span class="fu">sqrt</span>(pool)</span>
+<span id="cb14-297"><a href="#cb14-297" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(ES) <span class="ot">&lt;-</span> <span class="st">&quot;ES&quot;</span></span>
+<span id="cb14-298"><a href="#cb14-298" aria-hidden="true" tabindex="-1"></a>ES</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 
