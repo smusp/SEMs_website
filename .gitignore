@@ -1,9 +1,11 @@
 rjavaenv/
 aux/
 
+/Publications
 /.quarto/
 *_cache/
 /_site/
+/_freeze/
 
 *.pdf
 *.aux
