@@ -85,7 +85,7 @@ The scripts are rendered as pdf files, then converted to svg files using [inksca
 <br>
 
 ::: {.no-indent}
-- Kurbanoglu, N. & Takunyaci, M. (2021). A structural equation modeling on relationship between self-efficacy, physics laboratory anxiety and attitudes. *Journal of Family, Counseling and Education*, 6(1), 47-56.
+- Kurbanoglu, N. & Takunyaci, M. (2021). A structural equation modeling on relationship between self-efficacy, physics laboratory anxiety and attitudes. *Journal of Family, Counseling and Education*, *6*(1), 47-56.
 :::
 
 <p>
@@ -238,8 +238,47 @@ The scripts are rendered as pdf files, then converted to svg files using [inksca
 %| file: "Thompson_2013/Two_Groups.tex"
 ```
 
+<br> 
 
+::: {.no-indent}
+- Berry, D., & Willoughby, M. (2016). On the practical interpretability of cross-lagged panel models: Rethinking a developmental workhorse. *Child Development*, *88*(4), 1186-1206.
+:::
 
+<p>
+
+<details>
+  <summary>Lansford - ARCL model diagram</summary>
+  <img src="Berry_2016/ARCL_Lansford.svg">  
+</details> 
+
+```{tikz}
+%| code-summary: "Tikz code"
+%| file: "Berry_2016/ARCL_Lansford.tex"
+```
+
+<p>
+
+<details>
+  <summary>ARCL model diagram</summary>
+  <img src="Berry_2016/ARCL.svg">  
+</details> 
+
+```{tikz}
+%| code-summary: "Tikz code"
+%| file: "Berry_2016/ARCL.tex"
+```
+
+<p>
+
+<details>
+  <summary>ALT_SR model diagram</summary>
+  <img src="Berry_2016/ALT_SR.svg">  
+</details> 
+
+```{tikz}
+%| code-summary: "Tikz code"
+%| file: "Berry_2016/ALT_SR.tex"
+```
 
 ```{r} 
 ```
