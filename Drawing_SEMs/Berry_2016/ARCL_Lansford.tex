@@ -1,0 +1,49 @@
+\documentclass[border = 10pt]{standalone}
+\input{../SEMstyles.tex}
+
+\def \age {10, 11, 12, 15}
+
+\begin{document}
+\begin{tikzpicture}
+
+\foreach \i [count = \j, remember = \j as \lastj (initially 1)] in \age {
+
+  \ifnum \j = 1
+    %% 1st Manifest ...
+    \node [manifest] (x1) {$PD_{\i}$}; 
+    \node [manifest] (y1) [below = 3cm of x\j] {$AB_{\i}$};   
+
+    %% ... and their Variances and Covariance
+    \path [variance = {left}{120}{4.5}, black!30] (x1.105) edge (x1.75)
+                                                  (y1.285) edge (y1.255);
+    \path [covariance = {right}{80}{0.5}, black!30] (x1.180) edge (y1.180);
+    
+  \else  
+    %% Manifest  
+    \node [manifest] (x\j) [right = 3cm of x\lastj] {$PD_{\i}$};
+    \node [manifest] (y\j) [right = 3cm of y\lastj] {$AB_{\i}$}; 
+
+    %% Regressions - stability
+    \path [regression] 
+      (x\lastj) edge ["$b_1$", pos = 0.7] (x\j)
+      (y\lastj) edge ["$b_2$", pos = 0.7] (y\j);     
+
+    %% Regressions - cross-lagged effects
+    \path [regression] 
+      (x\lastj.south east) edge ["$b_3$", pos = 0.7] (y\j.north west)
+      (y\lastj.north east) edge ["$b_4$", pos = 0.7] (x\j.south west);  
+
+    %% Residuals ...
+    \node [residual, black!30] (e\j) [above right = 4mm and 3mm of x\j] {};
+    \node [residual, black!30] (f\j) [below right = 4mm and 3mm of y\j] {};
+    \path [regression, black!30] 
+      (e\j) edge (x\j.north east)   
+      (f\j) edge (y\j.south east);  
+
+    %% ... and their Covariances
+    \path [covariance = {left}{75}{0.4}, black!30] (e\j.260) edge (f\j.80);    
+  \fi
+}
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,107 @@
+\documentclass[tikz, border = 10pt]{standalone}
+\input{../SEMstyles.tex}
+
+\def \age {10, 11, 12, 15}
+
+\begin{document}
+\begin{tikzpicture}
+
+\foreach \i [count = \j, remember = \j as \lastj (initially 1)] in \age {
+
+  \ifnum \j = 1
+    %% 1st Manifest
+    \node [manifest, minimum width = 1.5cm] (x1) {$PD_{\i}$}; 
+    \node [manifest, minimum width = 1.5cm] (y1) [below = 6cm of x1] {$AB_{\i}$};   
+
+    %% 1st Structured Residuals ...
+    \node [latent, circle] (xr1) [below = 1cm of x1] {{\large$\upepsilon$}$_{PD_{\i}}$};
+    \node [latent, circle] (yr1) [above = 1cm of y1] {{\large$\upepsilon$}$_{AB_{\i}}$};
+    
+    \path [regression] (xr1) edge ["1"] (x1)
+                       (yr1) edge ["1"] (y1);
+    
+    %% ... and their Variances and Covariance
+    \path [variance = {left}{100}{3}, black!30] (xr1.160) edge (xr1.130)
+                                                (yr1.230) edge (yr1.200);
+    \path [covariance = {right}{50}{0.8}, black!30] (xr1.200) edge (yr1.160);
+    
+  \else
+    %% Manifest
+    \node [manifest, minimum width = 1.5cm] (x\j) [right = 2.5cm of x\lastj] {$PD_{\i}$};
+    \node [manifest, minimum width = 1.5cm] (y\j) [right = 2.5cm of y\lastj] {$AB_{\i}$};
+    
+    %% Structured Residuals ...
+    \node [latent, circle] (xr\j) [below = 1cm of x\j] {{\large$\upepsilon$}$_{PD_{\i}}$};
+    \node [latent, circle] (yr\j) [above = 1cm of y\j] {{\large$\upepsilon$}$_{AB_{\i}}$};
+    
+    \path [regression] (xr\j) edge ["1"] (x\j)
+                       (yr\j) edge ["1"] (y\j);    
+      
+    %% Regressions - Stability
+    \path [regression] (xr\lastj) edge ["$b_{1}$", pos = 0.7] (xr\j); 
+    \path [regression] (yr\lastj) edge ["$b_{2}$", pos = 0.7] (yr\j); 
+
+    %% Regressions - Cross-lagged effects
+    \path [regression] (xr\lastj.350) edge ["$b_{3}$", pos = 0.7] (yr\j.170); 
+    \path [regression] (yr\lastj.10) edge ["$b_{4}$", pos = 0.7] (xr\j.190); 
+
+    %% Residuals ...
+    \node [residual] (epd\j) [above right = 5mm of xr\j] {};
+    \node [residual] (eab\j) [below right = 5mm of yr\j] {};
+    \path [regression, black!30] (epd\j) edge (xr\j.north east);
+    \path [regression, black!30] (eab\j) edge (yr\j.south east);
+
+    %% ... and their covariances
+    \path [covariance = {left}{75}{0.4}, black!30] (epd\j.260) edge (eab\j.80);
+  \fi
+}
+
+%% Intercepts and slopes
+\coordinate (m1) at ($(x1)!0.5!(x2)$);
+\coordinate (m2) at ($(x3)!0.5!(x4)$);
+\coordinate (m3) at ($(y1)!0.5!(y2)$);
+\coordinate (m4) at ($(y3)!0.5!(y4)$);
+
+\node [latent, minimum width = 2cm] (pdi) [above = 2.5cm of m1] {$PD_{~i}$};
+\node [latent, minimum width = 2cm] (pds) [above = 2.5cm of m2] {$PD_{~s}$};
+\node [latent, minimum width = 2cm] (abi) [below = 2.5cm of m3] {$AB_{~i}$};
+\node [latent, minimum width = 2cm] (abs) [below = 2.5cm of m4] {$AB_{~s}$};
+
+\path [regression] (pdi.260) edge ["1", pos = 0.25] (x1.40) 
+                   (pdi.280) edge ["1", pos = 0.25] (x2.90)
+                   (pdi.300) edge ["1", pos = 0.25] (x3.150) 
+                   (pdi.320) edge ["1", pos = 0.2] (x4.150); 
+
+\path [regression] (pds.220) edge ["0", pos = 0.2] (x1.30) 
+                   (pds.240) edge ["1", pos = 0.25] (x2.30) 
+                   (pds.260) edge ["2", pos = 0.25] (x3.90) 
+                   (pds.280) edge ["3", pos = 0.25] (x4.140); 
+
+\path [regression] (abi.100) edge ["1", pos = 0.25] (y1.320) 
+                   (abi.80) edge ["1", pos = 0.25] (y2.270) 
+                   (abi.60) edge ["1", pos = 0.25] (y3.210) 
+                   (abi.40) edge ["1", pos = 0.2] (y4.210); 
+
+\path [regression] (abs.140) edge ["0", pos = 0.2] (y1.330) 
+                   (abs.120) edge ["1", pos = 0.25] (y2.330) 
+                   (abs.100) edge ["2", pos = 0.25] (y3.270) 
+                   (abs.80) edge ["3", pos = 0.25] (y4.220); 
+
+%% Their variances constrained to zero
+\path [variance = {left}{100}{3}, black!30] (pdi.160) edge ["0" {above left = 2pt}] (pdi.130)
+                                            (pds.50) edge ["0" {above right = 2pt}] (pds.20)
+                                            (abi.230) edge ["0" {below left = 2pt}] (abi.200)
+                                            (abs.340) edge ["0" {below right = 2pt}] (abs.310);
+
+% Their means
+\node [constant] (const1) [above = 0.5cm of $(pdi)!0.5!(pds)$] {1};
+\node [constant] (const2) [below = 0.5cm of $(abi)!0.5!(abs)$] {1};
+
+\path [regression] (const1) edge (pdi) 
+                   (const1) edge (pds); 
+
+\path [regression] (const2) edge (abi) 
+                   (const2) edge (abs); 
+ 
+\end{tikzpicture}
+\end{document}
