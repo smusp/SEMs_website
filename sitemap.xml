@@ -1,95 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://smusp.github.io/SEMs_website/index.html</loc>
-    <lastmod>2026-08-12T07:09:30.034Z</lastmod>
-  </url>
-  <url>
-    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Thompson_2013/Thompson1_2013.html</loc>
-    <lastmod>2026-08-12T07:09:30.034Z</lastmod>
-  </url>
-  <url>
-    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/index.html</loc>
-    <lastmod>2026-08-12T07:09:30.034Z</lastmod>
-  </url>
-  <url>
-    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Jose_2013/Jose_2013.html</loc>
-    <lastmod>2026-08-12T07:09:30.032Z</lastmod>
-  </url>
-  <url>
-    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Green_2023/one_way_LATENT.html</loc>
-    <lastmod>2026-08-12T07:09:30.032Z</lastmod>
-  </url>
-  <url>
-    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Green_2023/two_way_ANOVA.html</loc>
-    <lastmod>2026-08-12T07:09:30.032Z</lastmod>
-  </url>
-  <url>
-    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Green_2023/one_way_ANCOVA.html</loc>
-    <lastmod>2026-08-12T07:09:30.032Z</lastmod>
-  </url>
-  <url>
-    <loc>https://smusp.github.io/SEMs_website/Data_from_PDFs/index.html</loc>
-    <lastmod>2026-08-12T07:09:29.945Z</lastmod>
-  </url>
-  <url>
     <loc>https://smusp.github.io/SEMs_website/SEMs_with_OpenMx/EasierExamples.html</loc>
-    <lastmod>2026-08-12T07:09:30.029Z</lastmod>
+    <lastmod>2026-08-12T07:15:25.621Z</lastmod>
   </url>
   <url>
-    <loc>https://smusp.github.io/SEMs_website/Drawing_SEMs/Tutorial/Factor/Factor.html</loc>
-    <lastmod>2026-08-12T07:09:29.953Z</lastmod>
-  </url>
-  <url>
-    <loc>https://smusp.github.io/SEMs_website/Drawing_SEMs/Tutorial/Symbols/Symbols.html</loc>
-    <lastmod>2026-08-12T07:09:30.026Z</lastmod>
+    <loc>https://smusp.github.io/SEMs_website/index.html</loc>
+    <lastmod>2026-08-12T07:15:25.625Z</lastmod>
   </url>
   <url>
     <loc>https://smusp.github.io/SEMs_website/Drawing_SEMs/Tutorial/Longitudinal/Long.html</loc>
-    <lastmod>2026-08-12T07:09:30.022Z</lastmod>
-  </url>
-  <url>
-    <loc>https://smusp.github.io/SEMs_website/Drawing_SEMs/Tutorial/Styles/Styles.html</loc>
-    <lastmod>2026-08-12T07:09:30.024Z</lastmod>
+    <lastmod>2026-08-12T07:15:25.614Z</lastmod>
   </url>
   <url>
     <loc>https://smusp.github.io/SEMs_website/Drawing_SEMs/Tutorial/Intro/Intro.html</loc>
-    <lastmod>2026-08-12T07:09:29.953Z</lastmod>
+    <lastmod>2026-08-12T07:15:25.546Z</lastmod>
   </url>
   <url>
     <loc>https://smusp.github.io/SEMs_website/Drawing_SEMs/index.html</loc>
-    <lastmod>2026-08-12T07:09:30.026Z</lastmod>
-  </url>
-  <url>
-    <loc>https://smusp.github.io/SEMs_website/SEMs_with_OpenMx/index.html</loc>
-    <lastmod>2026-08-12T07:09:30.032Z</lastmod>
+    <lastmod>2026-08-12T07:15:25.617Z</lastmod>
   </url>
   <url>
     <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Kurbanoglu_2021/Kurbanoglu_2021.html</loc>
-    <lastmod>2026-08-12T07:09:30.033Z</lastmod>
-  </url>
-  <url>
-    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Green_2023/one_way_MANOVA.html</loc>
-    <lastmod>2026-08-12T07:09:30.032Z</lastmod>
-  </url>
-  <url>
-    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Green_2023/index.html</loc>
-    <lastmod>2026-08-12T07:09:30.032Z</lastmod>
+    <lastmod>2026-08-12T07:15:25.623Z</lastmod>
   </url>
   <url>
     <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Green_2023/one_way_ANOVA.html</loc>
-    <lastmod>2026-08-12T07:09:30.032Z</lastmod>
+    <lastmod>2026-08-12T07:15:25.623Z</lastmod>
+  </url>
+  <url>
+    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Green_2023/index.html</loc>
+    <lastmod>2026-08-12T07:15:25.623Z</lastmod>
+  </url>
+  <url>
+    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Green_2023/one_way_ANCOVA.html</loc>
+    <lastmod>2026-08-12T07:15:25.623Z</lastmod>
+  </url>
+  <url>
+    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Thompson_2013/Thompson1_2013.html</loc>
+    <lastmod>2026-08-12T07:15:25.624Z</lastmod>
+  </url>
+  <url>
+    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/index.html</loc>
+    <lastmod>2026-08-12T07:15:25.624Z</lastmod>
+  </url>
+  <url>
+    <loc>https://smusp.github.io/SEMs_website/Data_from_PDFs/index.html</loc>
+    <lastmod>2026-08-12T07:15:25.537Z</lastmod>
   </url>
   <url>
     <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Little_2006/Little_2006.html</loc>
-    <lastmod>2026-08-12T07:09:30.033Z</lastmod>
+    <lastmod>2026-08-12T07:15:25.624Z</lastmod>
   </url>
   <url>
     <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Thompson_2013/Thompson2_2013.html</loc>
-    <lastmod>2026-08-12T07:09:30.034Z</lastmod>
+    <lastmod>2026-08-12T07:15:25.624Z</lastmod>
   </url>
   <url>
     <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Thompson_2013/index.html</loc>
-    <lastmod>2026-08-12T07:09:30.034Z</lastmod>
+    <lastmod>2026-08-12T07:15:25.624Z</lastmod>
+  </url>
+  <url>
+    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Green_2023/one_way_LATENT.html</loc>
+    <lastmod>2026-08-12T07:15:25.623Z</lastmod>
+  </url>
+  <url>
+    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Green_2023/one_way_MANOVA.html</loc>
+    <lastmod>2026-08-12T07:15:25.623Z</lastmod>
+  </url>
+  <url>
+    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Green_2023/two_way_ANOVA.html</loc>
+    <lastmod>2026-08-12T07:15:25.623Z</lastmod>
+  </url>
+  <url>
+    <loc>https://smusp.github.io/SEMs_website/SEMs_with_lavaan/Jose_2013/Jose_2013.html</loc>
+    <lastmod>2026-08-12T07:15:25.623Z</lastmod>
+  </url>
+  <url>
+    <loc>https://smusp.github.io/SEMs_website/Drawing_SEMs/Tutorial/Symbols/Symbols.html</loc>
+    <lastmod>2026-08-12T07:15:25.616Z</lastmod>
+  </url>
+  <url>
+    <loc>https://smusp.github.io/SEMs_website/Drawing_SEMs/Tutorial/Styles/Styles.html</loc>
+    <lastmod>2026-08-12T07:15:25.615Z</lastmod>
+  </url>
+  <url>
+    <loc>https://smusp.github.io/SEMs_website/Drawing_SEMs/Tutorial/Factor/Factor.html</loc>
+    <lastmod>2026-08-12T07:15:25.545Z</lastmod>
+  </url>
+  <url>
+    <loc>https://smusp.github.io/SEMs_website/SEMs_with_OpenMx/index.html</loc>
+    <lastmod>2026-08-12T07:15:25.622Z</lastmod>
   </url>
 </urlset>
