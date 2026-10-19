@@ -8,9 +8,9 @@ SEM diagrams use a standardised set of shapes and symbols, and in this section, 
 * Ellipses (or circles) to represent latent variables (unobserved variables, factors) - variables that are not directly measured. Included are small circles to represent residuals, errors, and disturbances, although, to reduce clutter in complex diagrams, the circles are often omitted.
 * Single-headed arrows to represent regression paths. 
 * Double-headed arrows on curved lines to represent variances and covariances.
-* Triangles to represent the constant so that intercepts and means can be represented. Often, means and intercepts are not modelled, and even when they are, the triangle can be dropped from the model diagram to reduce clutter. 
+* Triangles to represent the constant so that intercepts and means can be represented. Often, means and intercepts are not modelled, and even when they are, the triangle can be dropped from the path diagram to reduce clutter. 
  
-The rectangle and the single-headed arrow were used in the mediation model diagram (see Introduction). In that diagram, two features were set globally: the white fill for edge quotes; and a style for the regression arrow. The `\tikzset{}` command, containing the styles, looked like this:
+The rectangle and the single-headed arrow were used in the mediation model path diagram (see Introduction). In that diagram, two features were set globally: the white fill for edge quotes; and a style for the regression arrow. The `\tikzset{}` command, containing the styles, looked like this:
 
 
 ```{tikz}
@@ -170,7 +170,7 @@ The complete code and diagram follow. Note that the variances and the covariance
 #### Residuals
 
 
-In many model diagrams, a plain arrow angled into the variable representes a residual. In other diagrams, a small circle represents the residual, perhaps with a variance, and again, with the arrow angled into the variable. The first requires a node, but nothing to be drawn, and it takes no space. The second requires a circle to be drawn with `minimum size` or `inner sep` or both set. The style for residuals is defined with arguments, then in a separate statement, it is given a set of default values so that the more usual residual can be drawn without any values being given. Of course, values are required for the second type of residual. The `residual` style becomes:
+In many path diagrams, a plain arrow angled into the variable representes a residual. In other diagrams, a small circle represents the residual, perhaps with a variance, and again, with the arrow angled into the variable. The first requires a node, but nothing to be drawn, and it takes no space. The second requires a circle to be drawn with `minimum size` or `inner sep` or both set. The style for residuals is defined with arguments, then in a separate statement, it is given a set of default values so that the more usual residual can be drawn without any values being given. Of course, values are required for the second type of residual. The `residual` style becomes:
 
 
 ```{tikz}
@@ -213,7 +213,7 @@ The argument `#3` can take the value `circle, draw`, but it is left blank in the
 
 :::: {.columns .d-flex .align-items-end}
 ::: {.column width = "71%"}
-3\. Arrow and circle (note `draw` is the value set to #3) - implied variance
+3\. Arrow and circle (note `draw, circle` is the value set to #3) - implied variance
 ```{tikz}
 \node [residual = {0}{4mm}{draw, circle}] (e) [above right = 4mm of y] {};
 \path [regression] (e) edge (y.north east);

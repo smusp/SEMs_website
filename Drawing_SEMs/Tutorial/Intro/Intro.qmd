@@ -65,7 +65,7 @@ This is beginning to look like a three-variable mediation model. All that is nee
 ![](Tutorial3.svg)
 
 
-Residuals for M and Y can be included in the model diagram. There are alternatives for representing residuals. Here, a residual is represented by an arrow angled into the variable (the variance of the residual is implied). Two nodes (no rectangles and no labels, just names - e1 and e2) are positioned above and to the right of m and y, then arrows are drawn from these nodes to y and m (`(e1) -- (y)` and `(e2) -- (m)`). 
+Residuals for M and Y can be included in the path diagram. There are alternatives for representing residuals. Here, a residual is represented by an arrow angled into the variable (the variance of the residual is implied). Two nodes (no rectangles and no labels, just names - e1 and e2) are positioned above and to the right of m and y, then arrows are drawn from these nodes to y and m (`(e1) -- (y)` and `(e2) -- (m)`). 
 
 
 ```{tikz}
@@ -87,7 +87,7 @@ Third, consider the position of node m in the diagram: it is above the midpoint 
 
 Fourth, `edge` syntax will be used to draw lines; that is, `(x) edge (y)` is used in place of `(x) -- (y)`. Edges can take labels just as lines did, but the `quotes` library offers a simpler syntax: `(x) edge ["c"] (y)` will add the label c to the edge. However, the labels now need two options to get the labels into the lines as before: `(x) edge ["c" {anchor = center, fill = white}] (y)`. 
 
-Fifth, to avoid having to repeat the options in each of the edge quotes, a global change to apply to all edge quotes is made, using styles. (There is the additional benefit of needing only one option: `fill = white` - I don't know why `anchor = center` is no longer needed.) The syntax is `every edge quotes/.style = {fill = white}`. For now, styles are defined in `\tikzset{}` command in the preamble.
+Fifth, to avoid having to repeat the options in each of the edge quotes, a global change to apply to all edge quotes is made, using styles. (There is the additional benefit of needing only one option: `fill = white` - I don't know why `anchor = center` is no longer needed.) The syntax is `every edge quotes/.style = {fill = white}`. For now, styles are defined in a `\tikzset{}` command in the preamble.
 
 
 ```{tikz}

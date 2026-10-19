@@ -62,7 +62,7 @@ and then the script to draw the multiple regression diagram, with its call to SE
 ![](Symbols2.svg)
 
 
-Suppose I want to constrain the intercept to zero. An easy way to represent that in the path diagram is to replace the edge quote `$\upbeta_0$` with `$0$`. There are times though when I want to write it as an expression, $\mathsf{\upbeta_0}$ = 0, but it is often the case that in maths mode the spacing around the equal sign in too generous. I reduce the spacing to half using `\!`, and the edge quote becomes `$\upbeta_0 \! = \! 0$`.
+Suppose I want to constrain the intercept to zero. An easy way to represent that in the path diagram is to replace the edge quote `$\upbeta_0$` with `$0$`. There are times though when I want to write it as an expression, $\mathsf{\upbeta_0}$ = 0, but it is often the case that in maths mode the spacing around the equal sign is too generous. I reduce the spacing to half using `\!`, and the edge quote becomes `$\upbeta_0 \! = \! 0$`.
 
 
 ```{tikz}

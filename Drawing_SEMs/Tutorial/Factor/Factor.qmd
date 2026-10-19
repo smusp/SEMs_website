@@ -1,6 +1,6 @@
 ---
-title: "Repeating whole pictures"
-subtitle: "Factor models"
+title: "Repeating Whole Pictures"
+subtitle: "Factor Models"
 ---
 
 In many situations, parts of a path diagram can be repeated. Consider the factor model shown below. There are two factors, POS and NEG. Three indicators, pos1, pos2, and pos3 load on the POS factor, and three indicators, neg1, neg2, and neg3 load on the NEG factor. Note that apart from the labels, the two factors are nearly identical. 
