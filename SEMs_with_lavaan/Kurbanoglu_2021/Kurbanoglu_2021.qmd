@@ -111,10 +111,18 @@ fit_intercepts <- sem(model, sample.cov = cov, sample.nobs = n, sample.mean = me
 summary(fit_intercepts, rsquare = TRUE, standardized = TRUE)
 ```
 
-Do not rely on the t-tests, especially for indirect effects. Often bootstrap confidence intervals are calculated, but bootstrapping requires the raw sample data.  Instead of bootstrap CIs, Monte Carlo CIs can be calculated using the `MC()` function from the **semmcci** package.
+Do not rely on the t-tests, especially for indirect effects. Often bootstrap confidence intervals are calculated, but bootstrapping requires the raw sample data. Instead of bootstrap CIs, Monte Carlo CIs can be calculated.
 
 ```{r echo = -1}
 ## To get Monte Carlo CIs
+fit_mc <- sem(model, sample.cov = cov, sample.nobs = n, se.def = "mc", monte.carlo = list(R = 50000))
+summary(fit_mc, rsquare = TRUE, ci = TRUE)
+```
+
+An alternative for Monte Carlo CIs is to use the `MC()` function from the **semmcci** package.
+
+```{r echo = -1}
+## An alternative for getting Monte Carlo CIs
 semmcci::MC(fit, R = 50000, alpha = 0.05)
 ```
 

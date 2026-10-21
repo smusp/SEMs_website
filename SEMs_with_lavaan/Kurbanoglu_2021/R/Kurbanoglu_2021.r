@@ -48,6 +48,10 @@ fit_intercepts <- sem(model, sample.cov = cov, sample.nobs = n, sample.mean = me
 summary(fit_intercepts, rsquare = TRUE, standardized = TRUE)
 
 ## To get Monte Carlo CIs
+fit_mc <- sem(model, sample.cov = cov, sample.nobs = n, se.def = "mc", monte.carlo = list(R = 50000))
+summary(fit_mc, rsquare = TRUE, ci = TRUE)
+
+## An alternative for getting Monte Carlo CIs
 semmcci::MC(fit, R = 50000, alpha = 0.05)
 
 

@@ -17,7 +17,7 @@ code-fold: true
 :::: 
 
 
-This post contains **R** scripts to extract data from PDFs of published papers and books. The aim is to get summary data (means, standard deviations, correlations, variances, covariances) from tables or table-like formats so that analyses can be reproduced. 
+This section presents **R** scripts to extract data from PDFs of published papers and books. The aim is to get summary data (means, standard deviations, correlations, variances, covariances) from tables or table-like formats so that analyses can be reproduced. 
 
 Two approaches are demonstrated. The first uses the `pdf_text()` function from the **pdftools** package. It is good at extracting text, but that means it will extract all text, whether contained in a table or not.  My approach is to get each line of text into a vector, then select the relevant lines. The data still needs tidying up - for that I use regular expressions. 
 

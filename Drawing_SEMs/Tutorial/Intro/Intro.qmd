@@ -1,12 +1,12 @@
 ---
 title: "An Introduction to Ti*k*Z"
-subtitle: "Drawing mediation model path diagrams"
+subtitle: "Drawing Mediation Model Path Diagrams"
 ---
 
 
 This section provides a quick introduction to the drawing of SEM path diagrams using **Ti*k*Z**, a $\mathsf{\LaTeX}$ package. But first, a warning: I am not an expert, and I am self-taught - I wouldn't be taking advice from me.
 
-To reproduce the diagrams in this tutorial, a LaTeX distribution and a LaTeX editor and compiler need to be installed. I use the [MiKTeX](https://miktex.org) distribution, a Windows distribution, but others include [MacTeX](https:tuh.org/mactex) for Apple and [TeX Live](httpe://tug.org/texlive) for Linux. For editing and compiling, I use a simple text editor, [Notepad++](https://notepad-plus-plus.org/), and compile using the `pdflatex` command in [Git Bash](https://gitforwindows.org/); but I have used both [TeXworks](https://tug.org/texworks/) and [TexStudio]( https://texstudio.org/), editors and compilers in one. All diagrams were compiled using the pdfLaTeX engine. 
+To reproduce the diagrams in this tutorial, a LaTeX distribution and a LaTeX editor and compiler need to be installed. I use the [MiKTeX](https://miktex.org) distribution, a Windows distribution, but others include [MacTeX](https:tuh.org/mactex) for Apple and [TeX Live](httpe://tug.org/texlive) for Linux. For writing and editing scripts, I use a simple text editor, [Notepad++](https://notepad-plus-plus.org/), and for compiling, I use the `pdflatex` command in [Git Bash](https://gitforwindows.org/); but I have used both [TeXworks](https://tug.org/texworks/) and [TexStudio]( https://texstudio.org/), editors and compilers in one. All diagrams were compiled using the pdfLaTeX engine. 
 
 Alternatively, [Overleaf](https://overleaf.com), an online LaTeX editor and compiler, can be used. 
 

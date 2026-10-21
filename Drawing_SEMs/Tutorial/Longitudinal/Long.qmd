@@ -52,7 +52,7 @@ However, all of these scripts use absolate coordinates to position the nodes. I 
 \foreach \i [remember = \i as \lasti (initially 1)] {2, 3, 4, 5, 6} {<commands>}
 ```
 
-The command instructs the compiler to remember `\i` from the previous time through the loop but to give it its own variable, here, `\lasti`; that is, `\lasti` has the value of `\i` from the previous time through the loop. Also, the initial value is set for the first time through the loop. Note that the list of values begins with 2. The first node is pulled out of the loop (and positioned at default coordinated). In the loop in the code below, node names are y2 through to y6, `\grade` is calculated (8 through to 12) then used in the node label, and coordinates are no longer needed.
+The command instructs the compiler to remember `\i` from the previous time through the loop but to give it its own variable, here, `\lasti`; that is, `\lasti` has the value of `\i` from the previous time through the loop. Also, the initial value is set for the first time through the loop. Note that the list of values begins with 2. The first node is pulled out of the loop (and positioned at default coordinates). In the loop in the code below, node names are y2 through to y6, `\grade` is calculated (8 through to 12) then used in the node label, and coordinates are no longer needed.
 
 
 ```{tikz}
