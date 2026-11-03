@@ -71,18 +71,18 @@ ARCL <- "
   r.PD5 ~ b1*r.PD4
   r.PD4 ~ b1*r.PD3
 
-  r.AB7 ~ b2*r.PD5
-  r.AB5 ~ b2*r.PD4
-  r.AB4 ~ b2*r.PD3
+  r.AB7 ~ b2*r.AB5
+  r.AB5 ~ b2*r.AB4
+  r.AB4 ~ b2*r.AB3
 
   # Cross-lagged effects
-  r.PD7 ~ b3*r.AB5
-  r.PD5 ~ b3*r.AB4
-  r.PD4 ~ b3*r.AB3
+  r.AB7 ~ b3*r.PD5
+  r.AB5 ~ b3*r.PD4
+  r.AB4 ~ b3*r.PD3
 
-  r.AB7 ~ b4*r.AB5
-  r.AB5 ~ b4*r.AB4
-  r.AB4 ~ b4*r.AB3
+  r.PD7 ~ b4*r.AB5
+  r.PD5 ~ b4*r.AB4
+  r.PD4 ~ b4*r.AB3
 
 # Variances of observed intercepts are not estimated 
 # but variances of latent structured residuals are estimaed.

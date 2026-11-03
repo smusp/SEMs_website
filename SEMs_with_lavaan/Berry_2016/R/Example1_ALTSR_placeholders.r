@@ -56,17 +56,17 @@ EqualLags<- "
   r.AB11 ~ b2*r.AB10
 
   # Cross-lagged paths
-  r.PD15 ~ b3*r.AB14
-  r.PD14 ~ b3*r.AB13
-  r.PD13 ~ b3*r.AB12
-  r.PD12 ~ b3*r.AB11
-  r.PD11 ~ b3*r.AB10
+  r.AB15 ~ b3*r.PD14
+  r.AB14 ~ b3*r.PD13
+  r.AB13 ~ b3*r.PD12
+  r.AB12 ~ b3*r.PD11
+  r.AB11 ~ b3*r.PD10
 
-  r.AB15 ~ b4*r.PD14
-  r.AB14 ~ b4*r.PD13
-  r.AB13 ~ b4*r.PD12
-  r.AB12 ~ b4*r.PD11
-  r.AB11 ~ b4*r.PD10
+  r.PD15 ~ b4*r.AB14
+  r.PD14 ~ b4*r.AB13
+  r.PD13 ~ b4*r.AB12
+  r.PD12 ~ b4*r.AB11
+  r.PD11 ~ b4*r.AB10
 
   # Variances - structured residuals
   r.PD10 ~~ r.PD10

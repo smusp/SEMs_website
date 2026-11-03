@@ -33,13 +33,14 @@ ARCL <- "
   r.AB11 ~ b2*r.AB10
 
   # Cross-lagged paths
-  r.PD15 ~ b3*r.AB12
-  r.PD12 ~ b3*r.AB11
-  r.PD11 ~ b3*r.AB10
+  r.AB15 ~ b3*r.PD12
+  r.AB12 ~ b3*r.PD11
+  r.AB11 ~ b3*r.PD10
 
-  r.AB15 ~ b2*r.PD12
-  r.AB12 ~ b2*r.PD11
-  r.AB11 ~ b2*r.PD10
+  r.PD15 ~ b4*r.AB12
+  r.PD12 ~ b4*r.AB11
+  r.PD11 ~ b4*r.AB10
+
 
   # Variances
   r.PD10 ~~ r.PD10
