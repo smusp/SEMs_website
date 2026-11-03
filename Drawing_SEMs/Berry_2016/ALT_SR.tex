@@ -62,10 +62,10 @@
 \coordinate (m3) at ($(y1)!0.5!(y2)$);
 \coordinate (m4) at ($(y3)!0.5!(y4)$);
 
-\node [latent, minimum width = 2cm] (pdi) [above = 2.5cm of m1] {$PD_{~i}$};
-\node [latent, minimum width = 2cm] (pds) [above = 2.5cm of m2] {$PD_{~s}$};
-\node [latent, minimum width = 2cm] (abi) [below = 2.5cm of m3] {$AB_{~i}$};
-\node [latent, minimum width = 2cm] (abs) [below = 2.5cm of m4] {$AB_{~s}$};
+\node [latent, minimum width = 1.5cm, minimum height = 1cm] (pdi) [above = 2.5cm of m1] {$PD_{~i}$};
+\node [latent, minimum width = 1.5cm, minimum height = 1cm] (pds) [above = 2.5cm of m2] {$PD_{~s}$};
+\node [latent, minimum width = 1.5cm, minimum height = 1cm] (abi) [below = 2.5cm of m3] {$AB_{~i}$};
+\node [latent, minimum width = 1.5cm, minimum height = 1cm] (abs) [below = 2.5cm of m4] {$AB_{~s}$};
 
 \path [regression] (pdi.260) edge ["1", pos = 0.25] (x1.40) 
                    (pdi.280) edge ["1", pos = 0.25] (x2.90)

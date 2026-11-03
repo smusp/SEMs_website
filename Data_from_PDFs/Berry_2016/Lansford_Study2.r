@@ -5,7 +5,7 @@
 ## Lansford, E., Criss, M., Laird, R., Shaw, D., Pettit, G., Bates, J., 
 ## & Dodge, K. (2011). Reciprocal relations between parents' physical 
 ## discipline and children's externalizing behavior during middle childhood
-## and adolescence. Development and Psychopathology, 23, 225–238.
+## and adolescence. Development and Psychopathology, 23(1), 225–238.
 ##
 ## These are the data used in:
 ##

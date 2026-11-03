@@ -29,8 +29,9 @@ The **tabulapdf** package requires **rJava** which implies a requirement for Jav
 #### The publications
 
 ::: {.no-indent}
-- Kurbanoglu, N. & Takunyaci, M. (2021). A structural equation modeling on relationship between self-efficacy, physics laboratory anxiety and attitudes. *Journal of Family, Counseling and Education*, *6*(1), 47-56. </p>
+- Kurbanoglu, N., & Takunyaci, M. (2021). A structural equation modeling on relationship between self-efficacy, physics laboratory anxiety and attitudes. *Journal of Family, Counseling and Education*, *6*(1), 47-56. </p>
 The paper presents a basic three-variable mediation analysis. The R scripts extract means, standard deviations, and correlations for the three variables. The data are contained in Table 1 (p. 50). Arguably, it would be quicker and simpler to cut-and-paste the means, standard deviations, and correlations into R. The purpose is to outline the process for a simple case. 
+:::
 
 ```{r}
 #| code-summary: "Kurbanoglu_pdftools.r"
@@ -41,7 +42,7 @@ The paper presents a basic three-variable mediation analysis. The R scripts extr
 #| code-summary: "Kurbanoglu_tabulapdf.r"
 #| file: "Kurbanoglu_2021/Kurbanoglu_tabulapdf.r"
 ``` 
-:::
+
  
 <br>
 
@@ -49,7 +50,6 @@ The paper presents a basic three-variable mediation analysis. The R scripts extr
 - Little, T., Slegers, D., & Card, N. (2006). A non-arbitrary method of identifying and scaling latent variables in SEM and MACS models. *Structural Equation Modeling*, *13*(1), 59-72.  </p>
 The paper presents a two-group, two-construct factor model. Each construct is assessed with three manifest indicators. The R scripts extract means, standard deviations, and correlations for each group, not from a table but from LISREL script (Appendix A, pp. 71-72). 
 :::
-
 
 ```{r}
 #| code-summary: "Little_pdftools.r"
@@ -62,11 +62,10 @@ The paper presents a two-group, two-construct factor model. Each construct is as
 ``` 
 
 
-
 <br>
 
 ::: {.no-indent}
-- Thompson, M. & Green, S. (2013). Evaluating between-group differences in latent variable means. In G. Hancock & R. Mueller (Eds.), *Structural equation modeling: A second course* (2nd ed., pp. 163-218). Charlotte, NC: Information Age Publishing.  </p>
+- Thompson, M., & Green, S. (2013). Evaluating between-group differences in latent variable means. In G. Hancock & R. Mueller (Eds.), *Structural equation modeling: A second course* (2nd ed., pp. 163-218). Charlotte, NC: Information Age Publishing.  </p>
 The chapter presents two analyses assessing group differences in latent means using a two-group, two-construct factor model. Each construct is assessed with three manifest indicators. The data are contained in Table 5.1 (p. 169) and Table 5.2 (p. 183). The R scripts extract means and (co)variances for each group. There is also a MIMIC model with the data in the lower part of the relevant tables. I am not concerned with the MIMIC models, but I attempt to extract the data from Table 5.2 using **tabulapdf** only to show that **tabulapdf** struggles to extract the data cleanly.
 :::
 
@@ -93,7 +92,6 @@ In Example 1 (commencing on page 14), the paper presents an Autoregressive Laten
 Lansford, E., Criss, M., Laird, R., Shaw, D., Pettit, G., Bates, J., & Dodge, K. (2011). Reciprocal relations between parents' physical discipline and children's externalizing behavior during middle childhood and adolescence. *Development and Psychopathology*, *23*(1), 225–238.  </p>
 The means and standard deviations are contained in Table 4 (p. 232), and the correlations are contained in Table 5 (p. 232).
 :::
-
 
 ```{r}
 #| code-summary: "Lansford_Study2.r"

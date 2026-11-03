@@ -37,7 +37,8 @@ website:
             text: "Mediation I"
           - href: "SEMs_with_lavaan/Kurbanoglu_2021/Kurbanoglu_2021.qmd"
             text: "Mediation II"
-          - SEMs_with_lavaan/Little_2006/Little_2006.qmd
+          - href: "SEMs_with_lavaan/Little_2006/Little_2006.qmd"
+            text: "Scaling"
 
           - section: SEMs_with_lavaan/Green_2023/index.qmd
             text: "Means"
@@ -56,6 +57,9 @@ website:
                 text: "Strong invariance"
               - href: "SEMs_with_lavaan/Thompson_2013/Thompson2_2013.qmd"
                 text: "Partial invariance"
+
+          - href: "SEMs_with_lavaan/Berry_2016/Berry.qmd"
+            text: "ALT-SR"
 
       - href: SEMs_with_OpenMx/index.qmd
         text: "SEMs with OpenMx"

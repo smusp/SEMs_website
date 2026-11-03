@@ -4,12 +4,12 @@ subtitle: "Three-variable mediation with summary data"
 ---
 
 ```{r echo = FALSE}
-## Kurbanoglu, N. & Takunyaci, M. (2021). A structural equation modeling
+## Kurbanoglu, N., & Takunyaci, M. (2021). A structural equation modeling
 ## on relationship between self-efficacy, physics laboratory anxiety
 ## and attitudes. Journal of Family, Counseling and Education, 6(1), 47-56.
 ```
 
-Kurbanoglu, N. & Takunyaci, M. (2021). A structural equation modeling on relationship between self-efficacy, physics laboratory anxiety and attitudes. *Journal of Family, Counseling and Education*, *6*(1), 47-56.
+Kurbanoglu, N., & Takunyaci, M. (2021). A structural equation modeling on relationship between self-efficacy, physics laboratory anxiety and attitudes. *Journal of Family, Counseling and Education*, *6*(1), 47-56.
 
 
 This example shows how to obtain a basic three-variable mediation analysis using **lavaan**, and how to obtain indirect and total effects. The three variables are: Self-Efficacy; Physics Laboratory Attitudes; and Physics Laboratory Anxiety. Self-Efficacy has a direct effect on Anxiety, but also Self-Efficacy has an indirect effect on Anxiety via Attitudes. This example also shows how to use summary data when the raw sample data are not available; in particular, how to obtain a matrix of variances and covariances from the summary data (correlations and standard deviations), and then how to use the co/variance matrix to replicate the analysis.

@@ -1,6 +1,6 @@
 ## One-way ANOVA of latent variable
 ##
-## Thompson, M., Liu, Y. & Green, S. (2023). Flexible structural equation modeling
+## Thompson, M., Liu, Y., & Green, S. (2023). Flexible structural equation modeling
 ## approaches for analyzing means. In R. Hoyle (Ed.), Handbook of structural
 ## equation modeling (2nd ed., pp. 385-408). New York, NY: Guilford Press.
 
@@ -184,7 +184,7 @@ VarY1 - ResidVarY1
 # Compare with the latent variances
 LatentVar
 
-## Relaxing some consyraints
+## Relaxing some constraints
 ## ANOVA model for 3rd row in Table 21.6
 # Model statements
 common <-

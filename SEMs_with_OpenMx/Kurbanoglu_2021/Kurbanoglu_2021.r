@@ -1,5 +1,5 @@
 
-## Kurbanoglu, N. & Takunyaci, M. (2021). A structural equation modeling
+## Kurbanoglu, N., & Takunyaci, M. (2021). A structural equation modeling
 ## on relationship between self-efficacy, physics laboratory anxiety
 ## and attitudes. Journal of Family, Counseling and Education, 6(1), 47-56.
 

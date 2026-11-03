@@ -2,7 +2,7 @@
 ## Getting summary data (covariances, variances, and means) for each of two groups
 ## from Table 5.2 (p. 183) of:
 
-## Thompson, M. & Green, S. (2013). Evaluating between-group differences
+## Thompson, M., & Green, S. (2013). Evaluating between-group differences
 ## in latent variable means. In G. Hancock & R. Mueller (Eds.), Structural
 ## equation modeling: A second course (2nd Ed., pp. 163-218). Charlotte, NC:
 ## Information Age Publishing.
